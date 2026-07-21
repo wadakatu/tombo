@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KEISOKU — 深化版デザイン言語</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;900&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#141412; color:#e8e4dc; font-family:'IBM Plex Sans JP',sans-serif; padding:48px 24px 96px; }
+  .wrap { max-width:1080px; margin:0 auto; }
+  .intro h1 { font-size:24px; font-weight:700; }
+  .intro p { margin-top:10px; color:#a9a49a; font-size:14px; line-height:1.9; max-width:66ch; }
+  .seclabel { font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.16em; color:#8a857b; margin:56px 0 14px; }
+  .seclabel b { color:#e8e4dc; font-weight:500; }
+  .sheet { border:1px solid #35332e; border-radius:10px; overflow:hidden; }
+
+  /* ==== design tokens (light) ==== */
+  .L { --paper:#F2F4EF; --surface:#FAFBF8; --ink:#1A211D; --sub:#4C5650; --faint:#8B968F;
+       --hair:rgba(26,33,29,.16); --grid:rgba(26,33,29,.07);
+       --green:#0E5A47; --shu:#D8442B; }
+  /* ==== design tokens (dark) ==== */
+  .D { --paper:#131714; --surface:#1A201C; --ink:#E5EBE6; --sub:#9AA69F; --faint:#66716A;
+       --hair:rgba(229,235,230,.16); --grid:rgba(229,235,230,.055);
+       --green:#4FC2A2; --shu:#E5654C; }
+
+  .mono { font-family:'IBM Plex Mono',monospace; }
+
+  /* ==== §1 原則 ==== */
+  .rules { background:var(--paper); color:var(--ink); padding:40px 44px; background-image: repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 24px), repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 24px); }
+  .rules .name { font-family:'Archivo',sans-serif; font-weight:900; font-size:40px; letter-spacing:-.01em; }
+  .rules .name small { font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:400; letter-spacing:.14em; color:var(--sub); margin-left:14px; }
+  .rules ol { margin-top:26px; list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .rules li { border-top:2px solid var(--ink); padding-top:14px; }
+  .rules li .n { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--green); letter-spacing:.14em; }
+  .rules li h3 { font-size:17px; margin-top:6px; font-weight:700; }
+  .rules li p { margin-top:8px; font-size:12.5px; line-height:1.95; color:var(--sub); }
+  .rules li:nth-child(3) h3 { }
+  .rules li:nth-child(3) .n { color:var(--shu); }
+
+  /* ==== §2 署名要素 ==== */
+  .anat { background:var(--paper); color:var(--ink); display:grid; grid-template-columns:1fr 1fr; }
+  .tile { padding:30px 32px 26px; border-top:1px solid var(--hair); min-height:150px; position:relative; }
+  .tile:nth-child(odd) { border-right:1px solid var(--hair); }
+  .tile:nth-child(-n+2) { border-top:none; }
+  .tile .cap { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.12em; color:var(--sub); }
+  .tile .cap b { color:var(--ink); font-weight:500; }
+  .tile .demo { margin-top:18px; }
+
+  /* トンボ */
+  .tombo { position:relative; padding:18px 20px; background:var(--surface); }
+  .tombo i { position:absolute; width:12px; height:12px; border:0 solid var(--ink); }
+  .tombo .tl { top:-1px; left:-1px; border-top-width:1.5px; border-left-width:1.5px; }
+  .tombo .tr { top:-1px; right:-1px; border-top-width:1.5px; border-right-width:1.5px; }
+  .tombo .bl { bottom:-1px; left:-1px; border-bottom-width:1.5px; border-left-width:1.5px; }
+  .tombo .br { bottom:-1px; right:-1px; border-bottom-width:1.5px; border-right-width:1.5px; }
+  .tombo .fig { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--faint); position:absolute; top:-18px; left:0; letter-spacing:.1em; }
+  .tombo p { font-size:12.5px; color:var(--sub); }
+
+  /* 寸法線 */
+  .dim { position:relative; height:10px; border-left:1px solid var(--ink); border-right:1px solid var(--ink); }
+  .dim::after { content:""; position:absolute; left:0; right:0; top:4.5px; border-top:1px solid var(--ink); }
+  .dimlab { font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--faint); margin-top:7px; }
+
+  /* 目盛リスト */
+  .ticklist { list-style:none; font-size:13px; }
+  .ticklist li { padding:5px 0 5px 22px; position:relative; color:var(--ink); }
+  .ticklist li::before { content:""; position:absolute; left:0; top:50%; width:12px; border-top:1.5px solid var(--green); }
+  .ruler { margin-top:14px; position:relative; height:22px; background-image:repeating-linear-gradient(90deg, var(--hair) 0 1px, transparent 1px 10%); border-bottom:1.5px solid var(--ink); }
+  .ruler .fill { position:absolute; bottom:0; left:0; height:6px; width:62%; background:var(--green); }
+  .ruler .now { position:absolute; left:62%; top:0; bottom:-5px; border-left:1.5px solid var(--shu); }
+  .ruler .nowlab { position:absolute; left:64%; top:-2px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--shu); }
+
+  /* 通し番号 */
+  .idxdemo h4 { font-size:18px; font-weight:700; }
+  .idxdemo h4 .idx { font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:13px; color:var(--green); margin-right:10px; }
+  .idxdemo .sub { font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--faint); margin-top:10px; letter-spacing:.08em; }
+
+  /* 朱の現在地 */
+  .tabs { display:flex; gap:22px; border-bottom:1px solid var(--hair); }
+  .tabs span { font-size:13px; padding:6px 2px 9px; color:var(--sub); position:relative; }
+  .tabs .on { color:var(--ink); font-weight:500; }
+  .tabs .on::after { content:""; position:absolute; left:0; bottom:-1px; width:100%; border-bottom:2px solid var(--shu); }
+  .ng { margin-top:16px; display:flex; align-items:center; gap:10px; }
+  .ng .badbtn { background:var(--shu); color:#fff; font-size:12.5px; padding:8px 18px; opacity:.9; position:relative; }
+  .ng .badbtn::after { content:""; position:absolute; inset:-4px; background:linear-gradient(to top right, transparent 47%, var(--ink) 47% 53%, transparent 53%); }
+  .ng .why { font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--faint); }
+
+  /* 方眼濃度 */
+  .grids { display:flex; gap:14px; }
+  .grids .g { flex:1; height:74px; background:var(--surface); border:1px solid var(--hair); position:relative; }
+  .grids .g span { position:absolute; bottom:6px; left:8px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--faint); letter-spacing:.1em; }
+  .g-lp { background-image: repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 16px), repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 16px); }
+  .g-docs { background-image: repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 16px); background-size: 28px 100%; background-repeat:no-repeat; }
+  .g-app { }
+
+  /* ==== §3 色 ==== */
+  .pal { color:var(--ink); background:var(--paper); padding:30px 32px 34px; }
+  .pal .row { display:flex; gap:12px; margin-top:16px; }
+  .pal .modelab { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:var(--sub); }
+  .sw { flex:1; }
+  .sw .c { height:56px; border:1px solid var(--hair); position:relative; }
+  .sw .c .tick { position:absolute; left:0; top:0; bottom:0; width:0; border-left:2px solid var(--shu); }
+  .sw .n { font-family:'IBM Plex Mono',monospace; font-size:10px; margin-top:7px; color:var(--sub); line-height:1.7; }
+  .lawnote { margin-top:22px; border-top:1px solid var(--hair); padding-top:14px; font-size:12.5px; color:var(--sub); line-height:1.9; }
+  .lawnote b { color:var(--shu); font-weight:500; }
+
+  /* ==== §4 タイポグラフィ ==== */
+  .type { background:var(--paper); color:var(--ink); padding:34px 36px 36px; }
+  .type .spec { border-top:1px solid var(--hair); padding:20px 0; display:grid; grid-template-columns:220px 1fr; gap:20px; align-items:baseline; }
+  .type .spec:first-child { border-top:none; padding-top:0; }
+  .type .who { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--sub); letter-spacing:.08em; line-height:1.9; }
+  .type .who b { color:var(--green); font-weight:500; }
+  .t-display { font-family:'Archivo',sans-serif; font-weight:900; font-size:44px; letter-spacing:-.015em; line-height:1.05; }
+  .t-display .jp { font-family:'IBM Plex Sans JP',sans-serif; font-weight:700; font-size:34px; letter-spacing:.01em; display:block; margin-top:6px; }
+  .t-body { font-size:14px; line-height:2.1; color:var(--ink); max-width:56ch; }
+  .t-mono { font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--ink); line-height:2; }
+  .t-mono .cm { color:var(--faint); }
+  .scale { margin-top:8px; display:flex; align-items:flex-end; gap:26px; border-top:1px solid var(--hair); padding-top:22px; }
+  .scale .s { text-align:center; }
+  .scale .s div { font-family:'Archivo',sans-serif; font-weight:700; line-height:1; }
+  .scale .s span { font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--faint); display:block; margin-top:8px; }
+
+  /* ==== §5 デモ ==== */
+  .demo-note { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.12em; color:#8a857b; padding:10px 24px; border-bottom:1px solid #35332e; background:#1b1a17;}
+
+  /* docs demo */
+  .docs { background:var(--surface); color:var(--ink); display:grid; grid-template-columns:210px 1fr; }
+  .docs .side { border-right:1px solid var(--hair); padding:26px 0 30px; background:var(--paper); }
+  .docs .side .logo { font-family:'Archivo',sans-serif; font-weight:900; font-size:15px; padding:0 22px 18px; letter-spacing:.01em; }
+  .docs .side .logo small { font-family:'IBM Plex Mono',monospace; font-weight:400; font-size:9.5px; color:var(--faint); display:block; margin-top:3px; letter-spacing:.12em;}
+  .docs .side nav div { font-size:12.5px; color:var(--sub); padding:7px 22px; position:relative; }
+  .docs .side nav .on { color:var(--ink); font-weight:500; }
+  .docs .side nav .on::before { content:""; position:absolute; left:0; top:50%; width:12px; border-top:2px solid var(--shu); }
+  .docs .side nav .idx { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--faint); margin-right:8px; }
+  .docs .main { padding:30px 38px 36px; }
+  .docs .crumb { font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--faint); letter-spacing:.1em; }
+  .docs h4 { font-size:24px; font-weight:700; margin-top:10px; }
+  .docs h4 .idx { font-family:'IBM Plex Mono',monospace; font-size:15px; font-weight:500; color:var(--green); margin-right:12px; }
+  .docs p { font-size:13.5px; line-height:2.15; color:#39423C; margin-top:12px; max-width:62ch; }
+  .docs a { color:var(--green); text-decoration:underline; text-underline-offset:4px; text-decoration-thickness:1px; }
+  .docs .code { margin-top:18px; background:#161B18; color:#DDE5DF; border-radius:6px; overflow:hidden; }
+  .docs .code .bar { display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:10px; color:#7d8a82; padding:8px 14px; border-bottom:1px solid rgba(229,235,230,.09); letter-spacing:.1em; }
+  .docs .code pre { font-family:'IBM Plex Mono',monospace; font-size:12px; line-height:1.9; padding:14px 0; }
+  .docs .code .ln { display:inline-block; width:44px; text-align:right; padding-right:14px; color:#5b665f; user-select:none; }
+  .docs .code .g { color:#4FC2A2; }
+  .docs .callout { margin-top:18px; border:1px solid var(--hair); border-left:2px solid var(--shu); padding:12px 16px; font-size:12.5px; color:var(--sub); }
+  .docs .callout .lab { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--shu); letter-spacing:.14em; margin-right:10px; }
+
+  /* app demo (dark) */
+  .app { background:var(--paper); color:var(--ink); }
+  .app .top { display:flex; align-items:center; gap:26px; padding:14px 26px; border-bottom:1px solid var(--hair); }
+  .app .top .logo { font-family:'Archivo',sans-serif; font-weight:900; font-size:14px; }
+  .app .top nav { display:flex; gap:20px; font-size:12.5px; color:var(--sub); }
+  .app .top nav .on { color:var(--ink); position:relative; }
+  .app .top nav .on::after { content:""; position:absolute; left:0; bottom:-15px; width:100%; border-bottom:2px solid var(--shu); }
+  .app .top .me { margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--faint); }
+  .metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--hair); border-bottom:1px solid var(--hair); }
+  .metric { background:var(--paper); padding:20px 26px 22px; }
+  .metric .k { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:var(--sub); }
+  .metric .v { font-family:'IBM Plex Mono',monospace; font-size:30px; font-weight:600; margin-top:8px; }
+  .metric .v small { font-size:12px; color:var(--faint); font-weight:400; }
+  .metric .ruler { margin-top:12px; height:14px; }
+  .app table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  .app th { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; color:var(--sub); text-align:left; font-weight:500; padding:12px 26px; border-bottom:1px solid var(--hair); }
+  .app td { padding:11px 26px; border-bottom:1px solid var(--grid); }
+  .app td.mono { font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--sub); }
+  .chip { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; padding:3px 9px; border:1px solid var(--hair); border-radius:99px; }
+  .chip::before { content:"● "; font-size:8px; }
+  .chip.ok::before { color:var(--green); }
+  .chip.err::before { color:#C86A57; }
+
+  /* LP demo (light) */
+  .lp { background:var(--paper); color:var(--ink); position:relative; padding:64px 48px 56px; background-image: repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 20px), repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 20px); }
+  .lp i.fm { position:absolute; width:14px; height:14px; border:0 solid var(--ink); opacity:.85; }
+  .lp .fm1 { top:16px; left:16px; border-top-width:1.5px; border-left-width:1.5px; }
+  .lp .fm2 { top:16px; right:16px; border-top-width:1.5px; border-right-width:1.5px; }
+  .lp .fm3 { bottom:16px; left:16px; border-bottom-width:1.5px; border-left-width:1.5px; }
+  .lp .fm4 { bottom:16px; right:16px; border-bottom-width:1.5px; border-right-width:1.5px; }
+  .lp .kick { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:var(--green); }
+  .lp .kick::before { content:""; display:inline-block; width:12px; border-top:2px solid var(--shu); vertical-align:4px; margin-right:10px; }
+  .lp h4 { font-family:'Archivo','IBM Plex Sans JP',sans-serif; font-weight:900; font-size:56px; line-height:1.12; letter-spacing:-.015em; margin-top:18px; }
+  .lp .dim { width:300px; margin-top:20px; }
+  .lp p.lead { margin-top:18px; font-size:14px; line-height:2.05; color:var(--sub); max-width:48ch; }
+  .lp .cta { margin-top:28px; display:flex; gap:14px; align-items:center; }
+  .lp .b1 { background:var(--green); color:#F2F4EF; border:none; padding:13px 28px; font-size:13.5px; font-weight:500; font-family:inherit; }
+  .lp .b2 { background:transparent; color:var(--ink); border:1px solid var(--ink); padding:13px 28px; font-size:13.5px; font-family:inherit; }
+  .lp .ver { font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--faint); margin-left:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="intro">
+    <h1>案 B「計測」— 深化版</h1>
+    <p>選ばれた B に、没だった A 案の魂 = 朱を一滴だけ移植しました。「<b>朱は"現在地"を指す 1px の線にだけ宿る</b>」という掟がこのシステム最大の指紋です。§1 から §5 まで順に見て、各セクションへの感想をターミナルでください。</p>
+  </div>
+
+  <div class="seclabel">§1 — <b>原則</b> システムの憲法(3ヶ条)</div>
+  <div class="sheet L">
+    <div class="rules">
+      <div class="name">KEISOKU<small>WADAKATU DESIGN SYSTEM / 仮称</small></div>
+      <ol>
+        <li><span class="n">RULE 01</span><h3>すべてを測る</h3><p>要素は寸法線・目盛・通し番号とともに置かれる。「測られた上でそこにある」精度の気配が紙面の空気を作る。</p></li>
+        <li><span class="n">RULE 02</span><h3>銘は等幅</h3><p>数字・ラベル・索引・単位はすべてモノスペース。本文は静かなサンセリフで組み、計器の部分だけが等幅で光る。</p></li>
+        <li><span class="n">RULE 03</span><h3>朱は現在地</h3><p>赤は「いまここ」を指す 1px の線にだけ許される。面に塗った瞬間、それは朱ではなくただの赤になる。</p></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="seclabel">§2 — <b>署名要素</b> 6つの指紋(これを全プロダクトで反復する)</div>
+  <div class="sheet L">
+    <div class="anat">
+      <div class="tile">
+        <div class="cap">S-01 <b>トンボ</b> — 図版・カード・セクションの四隅</div>
+        <div class="demo" style="padding-top:16px;">
+          <div class="tombo"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><span class="fig">FIG. 02 — CARD</span><p>カード・画像・図版はトンボ付きの「版面」として置かれる</p></div>
+        </div>
+      </div>
+      <div class="tile">
+        <div class="cap">S-02 <b>寸法線</b> — 区切り・見出し下・図版の注記</div>
+        <div class="demo">
+          <div class="dim"></div>
+          <div class="dimlab">section — 02 / margin: 96px</div>
+        </div>
+      </div>
+      <div class="tile">
+        <div class="cap">S-03 <b>目盛</b> — 箇条書き・進捗・グラフの軸</div>
+        <div class="demo">
+          <ul class="ticklist"><li>リストの点は「目盛」で打つ</li><li>進捗はルーラーで示す</li></ul>
+          <div class="ruler"><div class="fill"></div><div class="now"></div><span class="nowlab">62%</span></div>
+        </div>
+      </div>
+      <div class="tile">
+        <div class="cap">S-04 <b>通し番号</b> — 見出し・図版・脚注・リリース</div>
+        <div class="demo idxdemo">
+          <h4><span class="idx">04 —</span>導入</h4>
+          <div class="sub">FIG. 04-1 / NOTE 002 / REV 2026.07.20</div>
+        </div>
+      </div>
+      <div class="tile">
+        <div class="cap">S-05 <b>朱の現在地</b> — アクティブ・現在値・注意 のみ</div>
+        <div class="demo">
+          <div class="tabs"><span>概要</span><span class="on">導入</span><span>API</span></div>
+          <div class="ng"><span class="badbtn">朱のボタン</span><span class="why">NG — 朱を面に塗らない</span></div>
+        </div>
+      </div>
+      <div class="tile">
+        <div class="cap">S-06 <b>方眼</b> — 音量で濃度が変わる背景</div>
+        <div class="demo grids">
+          <div class="g g-lp"><span>LP: 全面</span></div>
+          <div class="g g-docs"><span>DOCS: 余白のみ</span></div>
+          <div class="g g-app"><span>APP: なし</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seclabel">§3 — <b>色</b> 昼の図面 / 夜の図面</div>
+  <div class="sheet">
+    <div class="pal L">
+      <div class="modelab">LIGHT — 昼の図面</div>
+      <div class="row">
+        <div class="sw"><div class="c" style="background:#F2F4EF;"></div><div class="n">paper<br>#F2F4EF</div></div>
+        <div class="sw"><div class="c" style="background:#FAFBF8;"></div><div class="n">surface<br>#FAFBF8</div></div>
+        <div class="sw"><div class="c" style="background:#1A211D;"></div><div class="n">ink<br>#1A211D</div></div>
+        <div class="sw"><div class="c" style="background:#4C5650;"></div><div class="n">ink-sub<br>#4C5650</div></div>
+        <div class="sw"><div class="c" style="background:#0E5A47;"></div><div class="n">green ★<br>#0E5A47</div></div>
+        <div class="sw"><div class="c" style="background:#F2F4EF;"><div class="tick"></div></div><div class="n">shu(線のみ)★<br>#D8442B</div></div>
+      </div>
+    </div>
+    <div class="pal D" style="border-top:1px solid #35332e;">
+      <div class="modelab">DARK — 夜の図面</div>
+      <div class="row">
+        <div class="sw"><div class="c" style="background:#131714;"></div><div class="n">paper<br>#131714</div></div>
+        <div class="sw"><div class="c" style="background:#1A201C;"></div><div class="n">surface<br>#1A201C</div></div>
+        <div class="sw"><div class="c" style="background:#E5EBE6;"></div><div class="n">ink<br>#E5EBE6</div></div>
+        <div class="sw"><div class="c" style="background:#9AA69F;"></div><div class="n">ink-sub<br>#9AA69F</div></div>
+        <div class="sw"><div class="c" style="background:#4FC2A2;"></div><div class="n">green ★<br>#4FC2A2</div></div>
+        <div class="sw"><div class="c" style="background:#131714;"><div class="tick"></div></div><div class="n">shu(線のみ)★<br>#E5654C</div></div>
+      </div>
+      <div class="lawnote">状態色(success / warn / error)はアプリ音量でのみ解禁。<b>error の面塗りは臙脂(#A6301C 系)</b>を使い、朱(1px 線)とは太さと役割で区別する — 朱=現在地、臙脂=失敗。</div>
+    </div>
+  </div>
+
+  <div class="seclabel">§4 — <b>タイポグラフィ</b> 三種の書体と役割</div>
+  <div class="sheet L">
+    <div class="type">
+      <div class="spec">
+        <div class="who"><b>DISPLAY</b><br>Archivo 900<br>見出し・ロゴ・数字の主役</div>
+        <div class="t-display">MEASURED.<span class="jp">測って、飾らない。</span></div>
+      </div>
+      <div class="spec">
+        <div class="who"><b>BODY</b><br>IBM Plex Sans JP 400/500<br>本文・UI テキスト</div>
+        <div class="t-body">本文は静かに組む。行間はゆったり(1.9〜2.1)、字間はいじらない。読み手の速度を邪魔しないことが本文の唯一の仕事で、個性は計器(mono とトンボ)が担当する。</div>
+      </div>
+      <div class="spec">
+        <div class="who"><b>INSTRUMENT</b><br>IBM Plex Mono 400-600<br>数値・ラベル・コード・索引</div>
+        <div class="t-mono"><span class="cm">// 計器の文字は必ず等幅</span><br>coverage: 96.2% / rev: 2026.07.20 / FIG. 04</div>
+      </div>
+      <div class="scale">
+        <div class="s"><div style="font-size:44px;">Aa</div><span>display<br>44/900</span></div>
+        <div class="s"><div style="font-size:28px;">Aa</div><span>h1<br>28/700</span></div>
+        <div class="s"><div style="font-size:20px;">Aa</div><span>h2<br>20/700</span></div>
+        <div class="s"><div style="font-size:15px;">Aa</div><span>h3<br>15/700</span></div>
+        <div class="s"><div style="font-size:14px; font-family:'IBM Plex Sans JP';font-weight:400;">あア</div><span>body<br>14/400</span></div>
+        <div class="s"><div style="font-size:11px; font-family:'IBM Plex Mono';font-weight:500;">01</div><span>label<br>11/mono</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seclabel">§5 — <b>三音量デモ</b> 同じ言語を docs / app / LP で</div>
+  <div class="sheet L" style="margin-bottom:28px;">
+    <div class="demo-note">VOL.1 — DOCS(昼): laravel-spectrum のドキュメントを想定</div>
+    <div class="docs">
+      <div class="side">
+        <div class="logo">SPECTRUM<small>BY WADAKATU / KEISOKU</small></div>
+        <nav>
+          <div><span class="idx">01</span>はじめに</div>
+          <div class="on"><span class="idx">02</span>インストール</div>
+          <div><span class="idx">03</span>設定</div>
+          <div><span class="idx">04</span>アノテーション不要の理由</div>
+        </nav>
+      </div>
+      <div class="main">
+        <div class="crumb">DOCS / GETTING-STARTED / 02</div>
+        <h4><span class="idx">02 —</span>インストール</h4>
+        <p>Composer で導入する。<a href="#">Laravel 11 以降</a>に対応し、設定ファイルの公開は任意。導入後は <a href="#">ルート定義から自動で</a> OpenAPI ドキュメントが生成される。</p>
+        <div class="code">
+          <div class="bar"><span>SHELL — INSTALL</span><span>COPY ⧉</span></div>
+          <pre><span class="ln">001</span><span class="g">$</span> composer require wadakatu/laravel-spectrum
+<span class="ln">002</span><span class="g">$</span> php artisan spectrum:generate</pre>
+        </div>
+        <div class="callout"><span class="lab">NOTE — 001</span>Lumen で使う場合はサービスプロバイダの手動登録が必要。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet D" style="margin-bottom:28px;">
+    <div class="demo-note">VOL.2 — APP(夜): ダッシュボードを想定 / 方眼なし・トンボなし・計器のみ</div>
+    <div class="app">
+      <div class="top">
+        <span class="logo">SCREENBOOK</span>
+        <nav><span class="on">画面一覧</span><span>依存グラフ</span><span>変更影響</span></nav>
+        <span class="me">wadakatu@prod / REV 4.2.1</span>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="k">SCREENS</div><div class="v">128</div><div class="ruler"><div class="fill" style="width:78%"></div><div class="now" style="left:78%"></div></div></div>
+        <div class="metric"><div class="k">COVERAGE</div><div class="v">96.2<small>%</small></div><div class="ruler"><div class="fill" style="width:96%"></div><div class="now" style="left:96%"></div></div></div>
+        <div class="metric"><div class="k">BROKEN LINKS</div><div class="v">3</div><div class="ruler"><div class="fill" style="width:4%"></div><div class="now" style="left:4%"></div></div></div>
+      </div>
+      <table>
+        <tr><th>SCREEN</th><th>ROUTE</th><th>UPDATED</th><th>STATUS</th></tr>
+        <tr><td>ログイン</td><td class="mono">/login</td><td class="mono">2026-07-18</td><td><span class="chip ok">OK</span></td></tr>
+        <tr><td>ダッシュボード</td><td class="mono">/dashboard</td><td class="mono">2026-07-20</td><td><span class="chip ok">OK</span></td></tr>
+        <tr><td>設定 / 通知</td><td class="mono">/settings/notify</td><td class="mono">2026-07-11</td><td><span class="chip err">MISSING</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="sheet L">
+    <div class="demo-note">VOL.3 — LP(昼・最大音量): 方眼全面 + トンボ + 寸法線</div>
+    <div class="lp">
+      <i class="fm fm1"></i><i class="fm fm2"></i><i class="fm fm3"></i><i class="fm fm4"></i>
+      <div class="kick">KEISOKU DESIGN SYSTEM — FIG. 00</div>
+      <h4>作って、測って、<br>出す。</h4>
+      <div class="dim"></div>
+      <div class="dimlab">headline: 2 lines — measured</div>
+      <p class="lead">wadakatu の作るものは、すべてこの言語で書かれる。ドキュメントでもアプリでも LP でも、同じ目盛、同じ番号、同じ朱。</p>
+      <div class="cta"><button class="b1">はじめる</button><button class="b2">仕様書を読む</button><span class="ver">v0.1.0 / MIT</span></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

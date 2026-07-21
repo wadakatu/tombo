@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TOMBO / HOTARU — 昼夜の銘板</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#141412; color:#e8e4dc; font-family:'IBM Plex Sans JP',sans-serif; padding:48px 24px 96px; }
+  .wrap { max-width:1080px; margin:0 auto; }
+  .intro h1 { font-size:24px; font-weight:700; }
+  .intro p { margin-top:10px; color:#a9a49a; font-size:14px; line-height:1.9; max-width:66ch; }
+  .sheet { border:1px solid #35332e; border-radius:10px; overflow:hidden; margin-top:32px; }
+  .duo { display:grid; grid-template-columns:1fr 1fr; min-height:420px; }
+
+  .day { background:#F2F4EF; color:#1A211D; padding:48px 44px; position:relative;
+    background-image: repeating-linear-gradient(0deg, rgba(26,33,29,.07) 0 1px, transparent 1px 22px), repeating-linear-gradient(90deg, rgba(26,33,29,.07) 0 1px, transparent 1px 22px); }
+  .night { background:#131714; color:#E5EBE6; padding:48px 44px; position:relative; border-left:1px solid #35332e;
+    background-image: repeating-linear-gradient(0deg, rgba(229,235,230,.05) 0 1px, transparent 1px 22px), repeating-linear-gradient(90deg, rgba(229,235,230,.05) 0 1px, transparent 1px 22px); }
+
+  .mode { font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.16em; }
+  .day .mode { color:#4C5650; }
+  .night .mode { color:#9AA69F; }
+
+  .mark { position:relative; width:64px; height:64px; margin-top:30px; }
+  /* tombo mark (day) */
+  .t-body { position:absolute; left:50%; top:2px; bottom:2px; border-left:1.5px solid #0E5A47; }
+  .t-w1 { position:absolute; top:18px; left:0; right:0; border-top:1.5px solid #0E5A47; }
+  .t-w2 { position:absolute; top:28px; left:9px; right:9px; border-top:1.5px solid #0E5A47; }
+  .t-head { position:absolute; top:2px; left:50%; transform:translateX(-50%); width:8px; height:8px; border:1.5px solid #0E5A47; border-radius:50%; background:#F2F4EF; }
+  .t-tail { position:absolute; bottom:-2px; left:50%; transform:translateX(-50%); height:11px; border-left:2px solid #D8442B; }
+  /* hotaru mark (night) — same insect grammar, abdomen glows */
+  .h-body { position:absolute; left:50%; top:2px; bottom:2px; border-left:1.5px solid #4FC2A2; }
+  .h-w1 { position:absolute; top:18px; left:0; right:0; border-top:1.5px solid #4FC2A2; }
+  .h-w2 { position:absolute; top:28px; left:9px; right:9px; border-top:1.5px solid #4FC2A2; }
+  .h-head { position:absolute; top:2px; left:50%; transform:translateX(-50%); width:8px; height:8px; border:1.5px solid #4FC2A2; border-radius:50%; background:#131714; }
+  .h-glow { position:absolute; bottom:-4px; left:50%; transform:translateX(-50%); width:10px; height:10px; border-radius:50%; background:#B8F0DD;
+    box-shadow: 0 0 10px 3px rgba(79,194,162,.75), 0 0 26px 10px rgba(79,194,162,.30); }
+
+  h2 { font-family:'Archivo',sans-serif; font-weight:900; font-size:44px; letter-spacing:-.01em; margin-top:22px; }
+  .kana { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.2em; margin-top:8px; }
+  .day .kana { color:#0E5A47; }
+  .night .kana { color:#4FC2A2; }
+  .desc { margin-top:18px; font-size:13px; line-height:2.05; max-width:36ch; }
+  .day .desc { color:#4C5650; }
+  .night .desc { color:#9AA69F; }
+  .code { font-family:'IBM Plex Mono',monospace; font-size:11px; margin-top:22px; padding:10px 14px; border:1px solid; display:inline-block; }
+  .day .code { border-color:rgba(26,33,29,.16); color:#1A211D; background:#FAFBF8; }
+  .night .code { border-color:rgba(229,235,230,.14); color:#E5EBE6; background:#1A201C; }
+  .code .k { color:#0E5A47; }
+  .night .code .k { color:#4FC2A2; }
+
+  .foot { background:#1b1a17; border-top:1px solid #35332e; padding:18px 26px; font-size:12.5px; color:#a9a49a; line-height:1.95; }
+  .foot b { color:#e8e4dc; font-weight:500; }
+  .foot .mono { font-family:'IBM Plex Mono',monospace; font-size:11px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="intro">
+    <h1>銘板 — 昼は蜻蛉、夜は蛍。</h1>
+    <p>システムの傘は <b>TOMBO</b> ひとつ(認知を分散させない)。その下にテーマが二つ — 昼の <b>tombo</b> と夜の <b>hotaru</b>。ロゴは同じ虫の文法で、昼は尾が朱(現在地)、夜は尾が発光(蛍光の green)。</p>
+  </div>
+
+  <div class="sheet">
+    <div class="duo">
+      <div class="day">
+        <div class="mode">THEME 01 — DAY</div>
+        <div class="mark"><i class="t-body"></i><i class="t-w1"></i><i class="t-w2"></i><i class="t-head"></i><i class="t-tail"></i></div>
+        <h2>TOMBO</h2>
+        <div class="kana">蜻蛉 — 勝ち虫 / 見当合わせの印</div>
+        <p class="desc">前にしか飛ばない勝ち虫。版を合わせる見当のマーク。昼の図面は紙の白、計器は深緑、現在地は朱。</p>
+        <div class="code"><span class="k">data-theme</span>="tombo" <span style="opacity:.5">/* default */</span></div>
+      </div>
+      <div class="night">
+        <div class="mode">THEME 02 — NIGHT</div>
+        <div class="mark"><i class="h-body"></i><i class="h-w1"></i><i class="h-w2"></i><i class="h-head"></i><i class="h-glow"></i></div>
+        <h2>HOTARU</h2>
+        <div class="kana">蛍 — 夜、計器は蛍になる</div>
+        <p class="desc">夜の図面では計器だけが光る。green の増光(#4FC2A2)は文字通りの蛍光。文法は昼と同一、インクの明度だけが変わる。</p>
+        <div class="code"><span class="k">data-theme</span>="hotaru"</div>
+      </div>
+    </div>
+    <div class="foot">構造は catppuccin の flavors と同じ: <b>システム名 = TOMBO</b>(リポジトリ・npm・呼称)/ <b>テーマ名 = tombo(昼)・hotaru(夜)</b>。<span class="mono">--tombo-*</span> トークンの値だけがテーマで入れ替わる。唯一の例外としてロゴの尾: 昼 = 朱の線、夜 = 蛍の発光(ブランドの遊びとしてヒーロー音量でのみ許可)。</div>
+  </div>
+</div>
+</body>
+</html>

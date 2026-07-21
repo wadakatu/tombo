@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TOMBO — LP volume example</title>
+<link rel="stylesheet" href="../tombo.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  .shell { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  .hero { padding: 76px 0 64px; }
+  .hero .cols { display: grid; grid-template-columns: 1.25fr .75fr; gap: 56px; align-items: center; margin-top: 24px; }
+  .hero h1 small { display: block; font-family: var(--tombo-font-body); font-weight: 700;
+    font-size: clamp(18px, 2vw, 22px); color: var(--tombo-green); margin-top: 14px; letter-spacing: -.005em; }
+  .hero .tombo-dim { width: 320px; margin-top: 22px; }
+  .tagline { margin-top: 18px; font-size: 14.5px; line-height: 2.05; color: var(--tombo-ink-sub); max-width: 50ch; }
+  .cta { margin-top: 26px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .inst .tombo-fig { position: absolute; top: -20px; left: 0; }
+  .inst .v small { font-size: 14px; color: var(--tombo-ink-faint); font-weight: 400; }
+  .inst .rows { margin-top: 16px; border-top: 1px solid var(--tombo-hairline); }
+  .inst .row { display: flex; justify-content: space-between; gap: 14px; font-family: var(--tombo-font-mono);
+    font-size: 10.5px; padding: 8px 0; border-bottom: 1px solid var(--tombo-hairline); color: var(--tombo-ink-sub); }
+  .inst .row b { color: var(--tombo-ink); font-weight: 500; }
+  .inst .row .miss { color: var(--tombo-error); }
+  .inst .cfoot { margin-top: 14px; }
+  .feat-sec { padding: 56px 0 8px; }
+  .feat { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .fcard { display: flex; flex-direction: column; }
+  .fcard h3 { margin-top: 8px; }
+  .fcard p { margin-top: 10px; font-size: 12.5px; line-height: 1.95; color: var(--tombo-ink-sub); }
+  .fcard .meta { margin-top: auto; padding-top: 14px; }
+  .fcard .meta div { border-top: 1px solid var(--tombo-hairline); padding-top: 10px; min-height: 55px; }
+  @media (max-width: 720px) {
+    .hero .cols, .feat { grid-template-columns: 1fr; }
+  }
+  .tombo-themectl button { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: inherit; }
+  .tombo-themectl button[aria-pressed="true"] { border-bottom: 2px solid var(--tombo-shu); }
+</style>
+</head>
+<body>
+
+  <section class="hero tombo-vol-lp tombo-corners">
+    <b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
+    <div class="shell">
+      <p class="tombo-kicker">GESSO — FIG. 00 / CONTRACTS, MEASURED</p>
+      <div class="cols">
+        <div>
+          <h1 class="tombo-display">OpenAPI contract<br>testing for PHP.<small>Validate. Measure. Ship.</small></h1>
+          <div class="tombo-dim"></div>
+          <div class="tombo-dimlab">headline: 2 lines — measured / spec: OpenAPI 3.0 · 3.1 · 3.2</div>
+          <p class="tagline">PHPUnit coverage, request and response validation, fuzzing, and drift detection for Laravel, Symfony, Pest, PSR-7, or plain PHP.</p>
+          <div class="cta">
+            <button class="tombo-btn tombo-btn--primary">Choose a quickstart</button>
+            <button class="tombo-btn tombo-btn--secondary">View on GitHub</button>
+            <span class="tombo-label">MIT / PHP &ge; 8.3</span>
+          </div>
+        </div>
+        <div class="inst tombo-metric tombo-corners">
+          <b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
+          <p class="tombo-fig">FIG. 01 — ENDPOINT COVERAGE</p>
+          <div class="k">OPERATIONS COVERED</div>
+          <div class="v">96.2<small>%</small></div>
+          <div class="tombo-ruler" style="--tombo-ruler-value:96.2%"></div>
+          <div class="rows">
+            <div class="row"><span>GET /users/{id} · 200 · json</span><b>covered</b></div>
+            <div class="row"><span>POST /orders · 201 · json</span><b>covered</b></div>
+            <div class="row"><span>PATCH /users/{id} · 422</span><b>covered</b></div>
+            <div class="row"><span>DELETE /orders/{id} · 204</span><span class="miss">untested</span></div>
+          </div>
+          <div class="cfoot tombo-label">SIDECAR .gesso/coverage.json — MERGED 4 SHARDS</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feat-sec shell">
+    <div class="tombo-dim"></div>
+    <div class="tombo-dimlab">section — 01 / features</div>
+    <h2 class="tombo-sec">Why Gesso</h2>
+    <div class="feat">
+      <div class="fcard tombo-metric tombo-corners">
+        <p class="tombo-fig">F-01</p>
+        <h3>Contract enforcement</h3>
+        <p>Validate requests and responses with OpenAPI 3.0, 3.1, and 3.2 semantics.</p>
+        <div class="meta"><div class="tombo-label">SPEC: OPENAPI 3.0 · 3.1 · 3.2</div></div>
+      </div>
+      <div class="fcard tombo-metric tombo-corners">
+        <p class="tombo-fig">F-02</p>
+        <h3>Visible coverage</h3>
+        <p>See untested operations, statuses, and content types in PHPUnit and CI.</p>
+        <div class="meta"><div class="tombo-label">GRANULARITY: METHOD · PATH · STATUS · CONTENT-TYPE</div></div>
+      </div>
+      <div class="fcard tombo-metric tombo-corners">
+        <p class="tombo-fig">F-03</p>
+        <h3>Framework choice</h3>
+        <p>Use dedicated adapters or the framework-independent core.</p>
+        <div class="meta"><div class="tombo-label">ADAPTERS: LARAVEL · SYMFONY · PEST · PSR-7 · CORE</div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="tombo-footer">
+    <div class="shell">
+      TOMBO — WADAKATU DESIGN SYSTEM · LP VOLUME EXAMPLE — EXAMPLES/LP.HTML
+      <div class="tombo-themectl tombo-label" hidden>
+        <button type="button" data-t="tombo">tombo</button>
+        <button type="button" data-t="hotaru">hotaru</button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const ctl = document.querySelector('.tombo-themectl');
+    ctl.hidden = false;
+    const ctlBtns = ctl.querySelectorAll('button');
+    const syncCtl = () => {
+      const t = document.documentElement.dataset.theme || 'tombo';
+      ctlBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.t === t));
+    };
+    syncCtl();
+    ctl.addEventListener('click', e => {
+      const t = e.target.dataset.t;
+      if (t) { document.documentElement.dataset.theme = t; syncCtl(); }
+    });
+  </script>
+</body>
+</html>

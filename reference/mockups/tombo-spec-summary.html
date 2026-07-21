@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TOMBO — 仕様サマリ REV 2026.07.20</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:#F2F4EF; --surface:#FAFBF8; --ink:#1A211D; --sub:#4C5650; --faint:#8B968F;
+    --hair:rgba(26,33,29,.16); --grid:rgba(26,33,29,.07); --green:#0E5A47; --shu:#D8442B;
+    --n-paper:#131714; --n-surface:#1A201C; --n-ink:#E5EBE6; --n-sub:#9AA69F; --n-faint:#66716A;
+    --n-hair:rgba(229,235,230,.14); --n-grid:rgba(229,235,230,.05); --n-green:#4FC2A2; --n-shu:#E5654C;
+  }
+  :root { --code-bg:#161B18; --code-border:transparent; }
+  body[data-theme="hotaru"] {
+    --paper:#131714; --surface:#1A201C; --ink:#E5EBE6; --sub:#9AA69F; --faint:#66716A;
+    --hair:rgba(229,235,230,.14); --grid:rgba(229,235,230,.05); --green:#4FC2A2; --shu:#E5654C;
+    --code-bg:#1A201C; --code-border:rgba(229,235,230,.14);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans JP',sans-serif; transition:background .15s ease-out, color .15s ease-out; }
+  .themectl { position:fixed; bottom:16px; right:16px; z-index:50; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:var(--faint); background:var(--surface); border:1px solid var(--hair); padding:8px 14px; cursor:pointer; display:flex; gap:12px; align-items:center; }
+  .themectl span[data-t] { color:var(--sub); position:relative; padding-bottom:3px; }
+  .themectl span.on { color:var(--ink); }
+  .themectl span.on::after { content:""; position:absolute; left:0; bottom:-1px; width:100%; border-bottom:2px solid var(--shu); }
+  .docbody { position:relative; }
+  .docbody::before, .docbody::after { content:""; position:absolute; top:0; bottom:0; width:max(24px, calc((100vw - 1100px) / 2)); pointer-events:none;
+    background-image: repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 24px), repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 24px); }
+  .docbody::before { left:0; } .docbody::after { right:0; }
+  .mono { font-family:'IBM Plex Mono',monospace; }
+  .wrap { max-width:960px; margin:0 auto; padding:0 32px; }
+
+  /* ============ hero (LP volume) ============ */
+  .hero { position:relative; padding:72px 0 64px;
+    background-image: repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 24px), repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 24px); }
+  .hero .fm { position:absolute; width:14px; height:14px; border:0 solid var(--ink); opacity:.8; }
+  .fm1 { top:18px; left:18px; border-top-width:1.5px; border-left-width:1.5px; }
+  .fm2 { top:18px; right:18px; border-top-width:1.5px; border-right-width:1.5px; }
+  .fm3 { bottom:18px; left:18px; border-bottom-width:1.5px; border-left-width:1.5px; }
+  .fm4 { bottom:18px; right:18px; border-bottom-width:1.5px; border-right-width:1.5px; }
+  .kick { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:var(--green); }
+  .kick::before { content:""; display:inline-block; width:12px; border-top:2px solid var(--shu); vertical-align:4px; margin-right:10px; }
+  .hero .row { display:flex; align-items:center; gap:30px; margin-top:26px; }
+  .logo { position:relative; width:72px; height:72px; flex:none; }
+  .logo .b { position:absolute; left:50%; top:2px; bottom:2px; border-left:1.5px solid var(--green); }
+  .logo .w1 { position:absolute; top:20px; left:0; right:0; border-top:1.5px solid var(--green); }
+  .logo .w2 { position:absolute; top:31px; left:10px; right:10px; border-top:1.5px solid var(--green); }
+  .logo .h { position:absolute; top:2px; left:50%; transform:translateX(-50%); width:9px; height:9px; border:1.5px solid var(--green); border-radius:50%; background:var(--paper); }
+  .logo .t { position:absolute; bottom:-2px; left:50%; transform:translateX(-50%); height:12px; border-left:2px solid var(--shu); }
+  .hero h1 { font-family:'Archivo',sans-serif; font-weight:900; font-size:64px; letter-spacing:-.015em; line-height:1; }
+  .hero .sub { font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:.14em; color:var(--sub); margin-top:10px; }
+  .rules3 { margin-top:44px; display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .rules3 > div { background:var(--surface); border:1px solid var(--hair); border-top:2px solid var(--ink); padding:14px 14px 16px; }
+  .rules3 .n { font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:var(--green); }
+  .rules3 > div:last-child .n { color:var(--shu); }
+  .rules3 h3 { font-size:16.5px; margin-top:6px; }
+  .rules3 p { margin-top:7px; font-size:12.5px; line-height:1.95; color:var(--sub); }
+
+  /* ============ section chrome (docs volume) ============ */
+  section { padding:56px 0 8px; }
+  .dim { position:relative; height:10px; border-left:1px solid var(--ink); border-right:1px solid var(--ink); }
+  .dim::after { content:""; position:absolute; left:0; right:0; top:4.5px; border-top:1px solid var(--ink); }
+  .dimlab { font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--faint); margin-top:7px; letter-spacing:.08em; }
+  h2.sec { font-size:26px; font-weight:700; margin-top:26px; }
+  h2.sec .idx { font-family:'IBM Plex Mono',monospace; font-size:16px; font-weight:500; color:var(--green); margin-right:12px; }
+  .lead { margin-top:12px; font-size:13.5px; line-height:2.1; color:var(--sub); max-width:62ch; }
+  .lead b { color:var(--ink); font-weight:700; }
+  .lead a { color:var(--green); }
+
+  /* naming duo */
+  .duo { margin-top:24px; display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--hair); }
+  .duo .d1 { background:#FAFBF8; color:#1A211D; padding:26px 28px; --green:#0E5A47; --sub:#4C5650; }
+  .duo .d2 { background:var(--n-paper); color:var(--n-ink); padding:26px 28px; }
+  .duo h4 { font-family:'Archivo',sans-serif; font-weight:900; font-size:26px; }
+  .duo .k { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; }
+  .d1 .k { color:var(--green); } .d2 .k { color:var(--n-green); }
+  .duo p { font-size:12.5px; line-height:1.95; margin-top:10px; }
+  .d1 p { color:var(--sub); } .d2 p { color:var(--n-sub); }
+  .duo code { font-family:'IBM Plex Mono',monospace; font-size:10.5px; }
+
+  /* signature tiles */
+  .sig { margin-top:24px; display:grid; grid-template-columns:1fr 1fr 1fr; border:1px solid var(--hair); background:var(--hair); gap:1px; }
+  .sig > div { background:var(--surface); padding:20px 22px 22px; min-height:118px; }
+  .sig .id { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:var(--faint); }
+  .sig h5 { font-size:14.5px; margin-top:5px; }
+  .sig p { font-size:11.5px; line-height:1.85; color:var(--sub); margin-top:6px; }
+  .sig .demo { margin-top:12px; }
+
+  .mtombo { position:relative; background:var(--paper); border:1px solid var(--hair); padding:8px 12px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--faint); }
+  .mtombo i { position:absolute; width:9px; height:9px; border:0 solid var(--ink); opacity:.8; }
+  .mtombo .tl { top:-1px; left:-1px; border-top-width:1.5px; border-left-width:1.5px; }
+  .mtombo .br { bottom:-1px; right:-1px; border-bottom-width:1.5px; border-right-width:1.5px; }
+  .mdim { position:relative; height:8px; border-left:1px solid var(--ink); border-right:1px solid var(--ink); }
+  .mdim::after { content:""; position:absolute; left:0; right:0; top:3.5px; border-top:1px solid var(--ink); }
+  .ticks li { list-style:none; font-size:11.5px; padding:3px 0 3px 18px; position:relative; color:var(--ink); }
+  .ticks li::before { content:""; position:absolute; left:0; top:50%; width:11px; border-top:1.5px solid var(--green); }
+  .mruler { position:relative; height:16px; background-image:repeating-linear-gradient(90deg, var(--hair) 0 1px, transparent 1px 10%); border-bottom:1.5px solid var(--ink); }
+  .mruler .f { position:absolute; bottom:0; left:0; height:5px; width:62%; background:var(--green); }
+  .mruler .n { position:absolute; left:62%; top:0; bottom:-4px; border-left:1.5px solid var(--shu); }
+  .mtabs { display:flex; gap:14px; border-bottom:1px solid var(--hair); font-size:11.5px; }
+  .mtabs span { padding:2px 1px 6px; color:var(--sub); position:relative; }
+  .mtabs .on { color:var(--ink); font-weight:500; }
+  .mtabs .on::after { content:""; position:absolute; left:0; bottom:-1px; width:100%; border-bottom:2px solid var(--shu); }
+  .mgrids { display:flex; gap:8px; }
+  .mgrids div { flex:1; height:40px; border:1px solid var(--hair); background:var(--surface); }
+  .mg1 { background-image: repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 12px), repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 12px) !important; }
+  .mg2 { background-image: repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 12px) !important; background-size:22px 100% !important; background-repeat:no-repeat !important; }
+
+  /* palette */
+  .pal { margin-top:24px; display:flex; gap:10px; }
+  .pal .sw { flex:1; }
+  .pal .c { height:48px; border:1px solid var(--hair); position:relative; }
+  .pal .c .tick { position:absolute; left:0; top:0; bottom:0; border-left:2px solid var(--shu); }
+  .pal .c .ntick { position:absolute; left:0; top:0; bottom:0; border-left:2px solid var(--n-shu); }
+  .pal .l { font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--sub); margin-top:6px; line-height:1.7; }
+  .palwrap-n { background:var(--n-paper); border:1px solid var(--hair); padding:18px 20px 20px; margin-top:14px; }
+  .palwrap-n .l { color:var(--n-sub); }
+  .palwrap-l { background:#FAFBF8; color:#1A211D; padding:18px 20px 20px; margin-top:22px;
+    --hair:rgba(26,33,29,.16); --sub:#4C5650; --shu:#D8442B; --ink:#1A211D; border:1px solid var(--hair); }
+  .palcap { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; }
+  .palwrap-l .palcap { color:var(--sub); } .palwrap-n .palcap { color:var(--n-sub); }
+  .stchips { margin-top:14px; display:flex; gap:8px; flex-wrap:wrap; }
+  .stchips span { font-family:'IBM Plex Mono',monospace; font-size:10px; padding:4px 10px; border:1px solid var(--hair); border-radius:99px; color:var(--sub); }
+  .stchips i { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; vertical-align:-1px; }
+
+  /* contrast table */
+  table.ct { margin-top:22px; width:100%; border-collapse:collapse; font-family:'IBM Plex Mono',monospace; font-size:11px; }
+  .ct th { text-align:left; font-size:9.5px; letter-spacing:.14em; color:var(--sub); font-weight:500; padding:8px 10px; border-bottom:1.5px solid var(--ink); }
+  .ct td { padding:7px 10px; border-bottom:1px solid var(--hair); }
+  .ct .ok { color:var(--green); }
+
+  /* typography */
+  .typ { margin-top:24px; border:1px solid var(--hair); background:var(--surface); }
+  .typ .r { display:grid; grid-template-columns:200px 1fr; gap:20px; padding:20px 26px; border-top:1px solid var(--hair); align-items:baseline; }
+  .typ .r:first-child { border-top:none; }
+  .typ .who { font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--sub); line-height:1.9; }
+  .typ .who b { color:var(--green); font-weight:500; }
+  .typ .t1 { font-family:'Archivo',sans-serif; font-weight:900; font-size:34px; letter-spacing:-.015em; }
+  .typ .t2 { font-size:13.5px; line-height:2.05; }
+  .typ .t3 { font-family:'IBM Plex Mono',monospace; font-size:12.5px; }
+
+  /* volume dial table */
+  table.vol { margin-top:24px; width:100%; border-collapse:collapse; font-size:12px; }
+  .vol th { font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.14em; color:var(--sub); text-align:left; font-weight:500; padding:9px 12px; border-bottom:1.5px solid var(--ink); }
+  .vol td { padding:8px 12px; border-bottom:1px solid var(--hair); color:var(--sub); }
+  .vol td:first-child { color:var(--ink); font-weight:500; }
+
+  /* night sheet */
+  .night { margin-top:24px; background:var(--n-paper); color:var(--n-ink); border:1px solid var(--hair); padding:28px 30px 30px; }
+  .night .palcap { color:var(--n-green); }
+  .night ol { margin-top:16px; list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:14px 26px; }
+  .night li { font-size:12.5px; line-height:1.9; color:var(--n-sub); padding-left:20px; position:relative; }
+  .night li::before { content:""; position:absolute; left:0; top:.75em; width:11px; border-top:1.5px solid var(--n-green); }
+  .night li b { color:var(--n-ink); font-weight:500; }
+
+  /* components + impl */
+  .chips { margin-top:20px; display:flex; flex-wrap:wrap; gap:8px; }
+  .chips span { font-family:'IBM Plex Mono',monospace; font-size:10.5px; padding:5px 12px; border:1px solid var(--hair); background:var(--surface); color:var(--sub); }
+  .code { margin-top:22px; background:var(--code-bg); color:#DDE5DF; border:1px solid var(--code-border); border-radius:6px; overflow:hidden; }
+  .code .bar { display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:10px; color:#7d8a82; padding:8px 14px; border-bottom:1px solid rgba(229,235,230,.09); letter-spacing:.1em; }
+  .code pre { font-family:'IBM Plex Mono',monospace; font-size:11.5px; line-height:1.85; padding:14px 18px; }
+  .code .g { color:#4FC2A2; } .code .d { color:#5b665f; }
+
+  /* record + footer */
+  .rec { margin-top:22px; border-left:2px solid var(--shu); padding:4px 0 4px 18px; }
+  .rec p { font-size:12.5px; line-height:2; color:var(--sub); }
+  .rec p b { color:var(--ink); }
+  footer { margin-top:64px; border-top:1px solid var(--hair); padding:22px 0 48px; display:flex; align-items:center; gap:18px; }
+  .flogo { position:relative; width:26px; height:26px; }
+  .flogo .b { position:absolute; left:50%; top:1px; bottom:1px; border-left:1.5px solid var(--green); }
+  .flogo .w1 { position:absolute; top:7px; left:0; right:0; border-top:1.5px solid var(--green); }
+  .flogo .w2 { position:absolute; top:11px; left:4px; right:4px; border-top:1.5px solid var(--green); }
+  .flogo .t { position:absolute; bottom:-1px; left:50%; height:5px; border-left:1.5px solid var(--shu); }
+  footer .m { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; color:var(--faint); line-height:1.9; }
+</style>
+</head>
+<body>
+
+  <div class="themectl"><span style="color:var(--faint)">THEME</span><span data-t="tombo" class="on" onclick="setTombo(event)">TOMBO</span><span data-t="hotaru" onclick="setTombo(event)">HOTARU</span></div>
+
+  <div class="hero">
+    <i class="fm fm1"></i><i class="fm fm2"></i><i class="fm fm3"></i><i class="fm fm4"></i>
+    <div class="wrap">
+      <div class="kick">WADAKATU DESIGN SYSTEM — SPEC SUMMARY / REV 2026.07.20</div>
+      <div class="row">
+        <div class="logo"><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="h"></i><i class="t"></i></div>
+        <div>
+          <h1>TOMBO</h1>
+          <div class="sub">蜻蛉 — 勝ち虫 / 見当合わせの印。このページ自体が TOMBO で組まれている。</div>
+        </div>
+      </div>
+      <div class="rules3">
+        <div><div class="n">RULE 01</div><h3>すべてを測る</h3><p>要素は寸法線・目盛・通し番号とともに置かれる。「測られた上でそこにある」精度の気配。</p></div>
+        <div><div class="n">RULE 02</div><h3>銘は等幅</h3><p>数字・ラベル・索引はすべてモノスペース。本文は静かに、計器だけが等幅で光る。</p></div>
+        <div><div class="n">RULE 03</div><h3>朱は現在地</h3><p>赤は「いまここ」を指す線にだけ許される。面に塗った瞬間、それは朱ではなくただの赤。</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="docbody">
+  <div class="wrap">
+
+    <section>
+      <div class="dim"></div><div class="dimlab">section — 01 / naming</div>
+      <h2 class="sec"><span class="idx">01 —</span>命名</h2>
+      <p class="lead">傘は <b>TOMBO</b> ひとつ(リポジトリ・呼称・<span class="mono" style="font-size:12px">--tombo-*</span>)。テーマは二つ — 構造は catppuccin の flavors と同型。</p>
+      <div class="duo">
+        <div class="d1"><div class="k">THEME 01 — DAY / DEFAULT</div><h4>tombo</h4><p>昼の図面。紙の白、深緑の計器、朱の現在地。蜻蛉は前にしか飛ばない勝ち虫 — wadakatu の「katu」が名前に埋まる。</p><code>data-theme="tombo"</code></div>
+        <div class="d2"><div class="k">THEME 02 — NIGHT</div><h4>hotaru</h4><p>夜の図面。計器だけが増光する = 蛍光。文法は昼と同一、インクの明度だけが変わる。</p><code>data-theme="hotaru"</code></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="dim"></div><div class="dimlab">section — 02 / signatures</div>
+      <h2 class="sec"><span class="idx">02 —</span>署名要素(6 つの指紋)</h2>
+      <p class="lead">全プロダクトで執拗に反復する。これが「wadakatu 製」の認知を作る本体。</p>
+      <div class="sig">
+        <div><div class="id">S-01</div><h5>トンボ</h5><p>カード・図版・ヒーローの四隅マーク。</p><div class="demo"><div class="mtombo"><i class="tl"></i><i class="br"></i>FIG. 02 — CARD</div></div></div>
+        <div><div class="id">S-02</div><h5>寸法線</h5><p>区切り・見出し下・図版注記。</p><div class="demo"><div class="mdim"></div><div class="dimlab" style="margin-top:5px">margin: 96px</div></div></div>
+        <div><div class="id">S-03</div><h5>目盛</h5><p>箇条書き・進捗・グラフ軸。</p><div class="demo"><ul class="ticks"><li>目盛で打つ</li></ul><div class="mruler" style="margin-top:6px"><div class="f"></div><div class="n"></div></div></div></div>
+        <div><div class="id">S-04</div><h5>通し番号</h5><p>見出し・図版・注記・リリース。</p><div class="demo mono" style="font-size:11px; color:var(--green);">02 — / FIG. 04-1 / NOTE 001<br><span style="color:var(--faint)">REV 2026.07.20</span></div></div>
+        <div><div class="id">S-05</div><h5>朱の現在地</h5><p>アクティブ・現在値・注意。面塗り禁止。</p><div class="demo"><div class="mtabs"><span>概要</span><span class="on">導入</span><span>API</span></div></div></div>
+        <div><div class="id">S-06</div><h5>方眼</h5><p>音量で濃度が変わる背景。夜は半減。</p><div class="demo mgrids"><div class="mg1"></div><div class="mg2"></div><div></div></div></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="dim"></div><div class="dimlab">section — 03 / color</div>
+      <h2 class="sec"><span class="idx">03 —</span>色</h2>
+      <p class="lead">緑がかった図面紙 × 墨 × 深緑 × 朱の線。<b>#000 / #FFF / 影 / 朱の面塗りは禁止。</b>状態色はアプリ音量でのみ解禁され、error は臙脂(面塗り可)で朱と役割分離。</p>
+      <div class="palwrap-l">
+        <div class="palcap">TOMBO — 昼の図面</div>
+        <div class="pal">
+          <div class="sw"><div class="c" style="background:#F2F4EF"></div><div class="l">paper<br>#F2F4EF</div></div>
+          <div class="sw"><div class="c" style="background:#FAFBF8"></div><div class="l">surface<br>#FAFBF8</div></div>
+          <div class="sw"><div class="c" style="background:#1A211D"></div><div class="l">ink<br>#1A211D</div></div>
+          <div class="sw"><div class="c" style="background:#4C5650"></div><div class="l">ink-sub<br>#4C5650</div></div>
+          <div class="sw"><div class="c" style="background:#0E5A47"></div><div class="l">green ★<br>#0E5A47</div></div>
+          <div class="sw"><div class="c" style="background:#F2F4EF"><div class="tick"></div></div><div class="l">shu(線のみ)★<br>#D8442B</div></div>
+        </div>
+        <div class="stchips">
+          <span><i style="background:#2C7A4B"></i>success #2C7A4B</span>
+          <span><i style="background:#B07818"></i>warn #B07818</span>
+          <span><i style="background:#A6301C"></i>error(臙脂・面塗り可) #A6301C</span>
+        </div>
+      </div>
+      <div class="palwrap-n">
+        <div class="palcap">HOTARU — 夜の図面</div>
+        <div class="pal">
+          <div class="sw"><div class="c" style="background:#131714"></div><div class="l">paper<br>#131714</div></div>
+          <div class="sw"><div class="c" style="background:#1A201C"></div><div class="l">surface<br>#1A201C</div></div>
+          <div class="sw"><div class="c" style="background:#212824"></div><div class="l">raised<br>#212824</div></div>
+          <div class="sw"><div class="c" style="background:#E5EBE6"></div><div class="l">ink<br>#E5EBE6</div></div>
+          <div class="sw"><div class="c" style="background:#4FC2A2"></div><div class="l">green ★(蛍光)<br>#4FC2A2</div></div>
+          <div class="sw"><div class="c" style="background:#131714"><div class="ntick"></div></div><div class="l">shu(線のみ)★<br>#E5654C</div></div>
+        </div>
+      </div>
+      <table class="ct">
+        <tr><th>PAIR(実測 / WCAG 2.1)</th><th>RATIO</th><th>GRADE</th></tr>
+        <tr><td>ink / paper — 昼・夜</td><td>14.82 / 14.96</td><td class="ok">AAA</td></tr>
+        <tr><td>green / paper — 昼・夜</td><td>7.37 / 8.25</td><td class="ok">AAA</td></tr>
+        <tr><td>ink-sub / paper — 昼・夜</td><td>6.88 / 7.18</td><td class="ok">AA / AAA</td></tr>
+        <tr><td>shu / paper — 昼(線専用)</td><td>3.97</td><td class="ok">非テキスト 3:1 PASS</td></tr>
+        <tr><td>shu / paper — 夜(小ラベル可)</td><td>5.43</td><td class="ok">AA</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <div class="dim"></div><div class="dimlab">section — 04 / typography</div>
+      <h2 class="sec"><span class="idx">04 —</span>タイポグラフィ</h2>
+      <div class="typ">
+        <div class="r"><div class="who"><b>DISPLAY</b><br>Archivo 700/900<br>字間 -.015em</div><div class="t1">MEASURED, NOT DECORATED.</div></div>
+        <div class="r"><div class="who"><b>BODY</b><br>IBM Plex Sans JP 400-700<br>行間 1.9-2.1 / 字間そのまま</div><div class="t2">本文は静かに組む。読み手の速度を邪魔しないことが本文の唯一の仕事で、個性は計器が担当する。</div></div>
+        <div class="r"><div class="who"><b>INSTRUMENT</b><br>IBM Plex Mono 400-600<br>ラベルは大文字 + 字間 .12-.16em</div><div class="t3">coverage: 96.2% / rev: 2026.07.20 / FIG. 04</div></div>
+      </div>
+      <p class="lead" style="margin-top:14px">スケール: display 44-64 / h1 28 / h2 20 / h3 15 / body 14 / small 12.5 / label 10-11(mono)</p>
+    </section>
+
+    <section>
+      <div class="dim"></div><div class="dimlab">section — 05 / layout &amp; motion</div>
+      <h2 class="sec"><span class="idx">05 —</span>レイアウト・モーション</h2>
+      <ul class="ticks" style="margin-top:18px; max-width:62ch;">
+        <li>基本単位 4px / 方眼セル 24px 固定 / セクション律動 docs 64px・LP 96px / 本文最大幅 62ch</li>
+        <li>角丸は原則 0(図面に丸はない)。例外: 大型パネル 6px・チップ 99px</li>
+        <li>罫線: 通常 1px hairline / 強調 1.5px ink / 現在地 2px shu</li>
+        <li>モーション =「計器の動き」: 120-180ms・ease-out。針の伸縮と明度遷移のみ。バウンス・パララックス禁止。prefers-reduced-motion 対応</li>
+        <li>階層は面の明度 1 段 + 罫線(昼は surface まで。+2 段は 1.5px ink 罫で代替)</li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="dim"></div><div class="dimlab">section — 06 / volume dial</div>
+      <h2 class="sec"><span class="idx">06 —</span>音量ダイヤル</h2>
+      <p class="lead">同じ言語を、置く場所で音量だけ変える。ドキュメントは静かに、LP は最大音量で。</p>
+      <table class="vol">
+        <tr><th>SIGNATURE</th><th>DOCS</th><th>APP</th><th>LP</th></tr>
+        <tr><td>方眼</td><td>余白のみ</td><td>なし</td><td>全面</td></tr>
+        <tr><td>トンボ</td><td>図版のみ</td><td>計器カードのみ</td><td>ヒーロー枠 + 図版</td></tr>
+        <tr><td>寸法線</td><td>hr 代替</td><td>なし</td><td>見出し下 + 注記</td></tr>
+        <tr><td>通し番号</td><td>見出し・注記</td><td>REV 表記</td><td>FIG. 番号</td></tr>
+        <tr><td>朱の現在地</td><td>TOC・タブ</td><td>ナビ・計器</td><td>キッカー先頭の一画</td></tr>
+        <tr><td>ロゴ尾部の発光(hotaru)</td><td>なし</td><td>なし</td><td>ヒーローのみ</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <div class="dim"></div><div class="dimlab">section — 07 / hotaru rules</div>
+      <h2 class="sec"><span class="idx">07 —</span>hotaru の掟(6 ヶ条)</h2>
+      <div class="night">
+        <div class="palcap">NIGHT — 夜、計器は蛍になる</div>
+        <ol>
+          <li><b>影を使わない</b> — 階層は明度 1 段(paper → surface → raised)と罫線</li>
+          <li><b>方眼は半減</b> — 発光する画面では物理量を下げて同じ「気配」に</li>
+          <li><b>計器は増光</b> — green #0E5A47 → #4FC2A2。夜のコックピット</li>
+          <li><b>朱は変わらず線</b> — 役割は昼と完全に同一</li>
+          <li><b>コードは沈めない</b> — 夜は罫線の枠のみ。「黒の上の黒」を作らない</li>
+          <li><b>純黒・純白の禁止</b> — 図面はあくまで紙である</li>
+        </ol>
+      </div>
+      <p class="lead" style="margin-top:14px">切替: <span class="mono" style="font-size:12px">prefers-color-scheme</span> をデフォルトに、<span class="mono" style="font-size:12px">[data-theme]</span> で明示上書き。</p>
+    </section>
+
+    <section>
+      <div class="dim"></div><div class="dimlab">section — 08 / components &amp; implementation</div>
+      <h2 class="sec"><span class="idx">08 —</span>コンポーネント(v1)と実装</h2>
+      <div class="chips">
+        <span>button ×3</span><span>link</span><span>tabs</span><span>sidebar-nav / TOC</span><span>code block</span><span>callout</span><span>table</span><span>chip / status</span><span>metric card</span><span>寸法線 hr</span><span>目盛リスト</span><span>footer(REV)</span>
+      </div>
+      <p class="lead" style="margin-top:16px"><b>純 CSS・ゼロ JS・ゼロ依存の `tombo.css` 一枚。</b>Astro / Laravel Blade / Vue のどれにも <span class="mono" style="font-size:12px">&lt;link&gt;</span> 一発で導入。配布は GitHub + jsDelivr、npm は follow-up。</p>
+      <div class="code">
+        <div class="bar"><span>REPO — ~/tombo</span><span>v0.1 PLAN</span></div>
+        <pre>tombo/
+├── tombo.css              <span class="d"># @layer tokens, base, components, utilities</span>
+├── examples/              <span class="d"># docs / app / LP の三音量サンプル(昼夜 = 6 状態)</span>
+├── scripts/check-contrast.py   <span class="d"># WCAG 検証・しきい値未満で exit 1(CI 可)</span>
+├── docs/superpowers/specs/     <span class="d"># 本仕様書(コミット済み 44d9e41)</span>
+└── README.md</pre>
+      </div>
+    </section>
+
+    <section>
+      <div class="dim"></div><div class="dimlab">section — 09 / decision record</div>
+      <h2 class="sec"><span class="idx">09 —</span>決定記録</h2>
+      <div class="rec">
+        <p>3 方向案(朱筆 / 計測 / 一色)から <b>B「計測」をユーザーが選択</b>。没案 A の魂(朱)を「朱は現在地」の掟として移植 — <b>深緑の計器 UI + 朱の 1px 線</b>は既存システムに存在しない組み合わせ。名前 <b>TOMBO・HOTARU はともにユーザー発案</b>。趣味モチーフ(写真・HHKB)とターミナル風の単独継承は不採用、mono は「計器」の文法として昇華。スコープ外(v1): Figma・JS コンポーネント・npm 公開。</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="flogo"><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></div>
+      <div class="m">TOMBO — WADAKATU DESIGN SYSTEM<br>SPEC REV 2026.07.20 / docs/superpowers/specs/2026-07-20-tombo-design-system-design.md</div>
+    </footer>
+
+  </div>
+  </div>
+
+<script>
+function setTombo(e) {
+  const t = e.currentTarget.dataset.t;
+  if (t === 'hotaru') document.body.setAttribute('data-theme', 'hotaru');
+  else document.body.removeAttribute('data-theme');
+  document.querySelectorAll('.themectl [data-t]').forEach(function (s) {
+    s.classList.toggle('on', s.dataset.t === t);
+  });
+}
+</script>
+</body>
+</html>
