@@ -32,6 +32,8 @@
     --tombo-code-border: light-dark(transparent, rgba(229,235,230,.14));
     --tombo-code-faint:    #7D8A82;              /* captions on code-bg — the panel is dark in both themes */
     --tombo-code-hairline: rgba(229,235,230,.09);
+    --tombo-code-green:    #4FC2A2;              /* syntax accent — night-side constant, panel is always dark */
+    --tombo-code-shu:      #E5654C;
     /* type — three voices (spec 2026-07-21) */
     --tombo-font-display: "Instrument Sans", "M PLUS 2", system-ui, sans-serif; /* Latin display only */
     --tombo-font-body: "M PLUS 2", system-ui, sans-serif;
