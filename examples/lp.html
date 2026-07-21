@@ -35,8 +35,8 @@
   @media (max-width: 720px) {
     .hero .cols, .feat { grid-template-columns: 1fr; }
   }
-  .tombo-themectl button { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: inherit; }
-  .tombo-themectl button[aria-pressed="true"] { border-bottom: 2px solid var(--tombo-shu); }
+  .tombo-themectl button { background: none; border: 0; border-bottom: 2px solid transparent; padding: 0; cursor: pointer; font: inherit; color: inherit; }
+  .tombo-themectl button[aria-pressed="true"] { border-bottom-color: var(--tombo-shu); }
 </style>
 </head>
 <body>
@@ -116,7 +116,8 @@
     ctl.hidden = false;
     const ctlBtns = ctl.querySelectorAll('button');
     const syncCtl = () => {
-      const t = document.documentElement.dataset.theme || 'tombo';
+      const t = document.documentElement.dataset.theme ||
+        (matchMedia('(prefers-color-scheme: dark)').matches ? 'hotaru' : 'tombo');
       ctlBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.t === t));
     };
     syncCtl();
