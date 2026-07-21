@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TOMBO — component catalog</title>
+<link rel="stylesheet" href="../tombo.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  .shell { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  .layout { display: grid; grid-template-columns: 220px 1fr; gap: 56px; padding: 48px 0 64px; align-items: start; }
+  .side { position: sticky; top: 48px; }
+  .brand { font-family: var(--tombo-font-display); font-weight: 900; font-size: 16px; }
+  .brand small { display: block; font-family: var(--tombo-font-mono); font-weight: 400; font-size: 9.5px; color: var(--tombo-ink-faint); letter-spacing: .12em; margin-top: 4px; }
+  .side .tombo-toc { margin-top: 22px; }
+  main > p.lead { font-size: 13.5px; line-height: 2.15; color: var(--tombo-ink-sub); margin-top: 14px; max-width: 62ch; }
+  section { margin-top: 52px; max-width: 720px; }
+  section .note { font-size: 13px; line-height: 2.1; color: var(--tombo-ink-sub); margin-top: 10px; max-width: 62ch; }
+  .demo { border: 1px solid var(--tombo-hairline); padding: 24px; margin-top: 16px; }
+  .demo + .tombo-code { margin-top: 12px; }
+  .row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .cornerbox { height: 90px; }
+  .demo .tombo-dim { max-width: 320px; }
+  .demo .tombo-ruler { max-width: 320px; }
+  .metric-demo { max-width: 280px; }
+  .tombo-metric .tombo-ruler { margin-top: 12px; height: 14px; }
+  .griddemo { height: 96px; border: 1px solid var(--tombo-hairline); }
+  @media (max-width: 680px) {
+    .layout { grid-template-columns: 1fr; gap: 28px; }
+    .side { position: static; }
+  }
+  .tombo-themectl button { background: none; border: 0; border-bottom: 2px solid transparent; padding: 0; cursor: pointer; font: inherit; color: inherit; }
+  .tombo-themectl button[aria-pressed="true"] { border-bottom-color: var(--tombo-shu); }
+  .foot { display: flex; align-items: center; gap: 18px; }
+</style>
+</head>
+<body class="tombo-gutters">
+
+  <div class="shell layout">
+    <aside class="side">
+      <div class="brand">TOMBO<small>COMPONENT CATALOG</small></div>
+      <nav class="tombo-toc">
+        <a href="#c01">01 — 見当マーク</a>
+        <a href="#c02">02 — 寸法線</a>
+        <a href="#c03">03 — 目盛リスト</a>
+        <a href="#c04">04 — ルーラー</a>
+        <a href="#c05">05 — 通し番号</a>
+        <a href="#c06">06 — 朱の現在地</a>
+        <a href="#c07">07 — ボタン</a>
+        <a href="#c08">08 — コードブロック</a>
+        <a href="#c09">09 — コールアウト</a>
+        <a href="#c10">10 — テーブル</a>
+        <a href="#c11">11 — チップ</a>
+        <a href="#c12">12 — メトリクス</a>
+        <a href="#c13">13 — ロゴ刻印</a>
+        <a href="#c14">14 — ユーティリティ</a>
+      </nav>
+    </aside>
+
+    <main class="tombo-sections">
+      <p class="tombo-fig">CATALOG / ALL COMPONENTS / DOCS VOLUME</p>
+      <p class="lead">tombo.css の全コンポーネント。各項は実物とコピペ用マークアップの対。このページ自体が docs 音量の実演になっている — 余白だけの方眼、hr 代替の寸法線、見出しの通し番号。</p>
+
+      <section id="c01">
+        <h2 class="tombo-sec">見当マーク</h2>
+        <p class="note">S-01。カード・図版・ヒーロー枠の四隅に置く 12px のブラケット。::before / ::after が左上・右下を描くので、四隅に出すときだけ &lt;b&gt; を 2 つ足す。</p>
+        <div class="demo">
+          <div class="tombo-corners cornerbox">
+            <b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
+          </div>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-CORNERS</span></figcaption>
+          <pre>&lt;div class="tombo-corners"&gt;
+  &lt;b class="tombo-corner-tr"&gt;&lt;/b&gt;&lt;b class="tombo-corner-bl"&gt;&lt;/b&gt;
+  …
+&lt;/div&gt;</pre>
+        </figure>
+      </section>
+
+      <section id="c02">
+        <h2 class="tombo-sec">寸法線</h2>
+        <p class="note">S-02。hr の代替。端の立ち上がりと中央の線、その下に等幅のキャプション。docs 音量ではセクションの区切りに使う。</p>
+        <div class="demo">
+          <div class="tombo-dim"></div>
+          <div class="tombo-dimlab">section — 02.1 / requirements</div>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-DIM</span></figcaption>
+          <pre>&lt;div class="tombo-dim"&gt;&lt;/div&gt;
+&lt;div class="tombo-dimlab"&gt;section — 02.1 / requirements&lt;/div&gt;</pre>
+        </figure>
+      </section>
+
+      <section id="c03">
+        <h2 class="tombo-sec">目盛リスト</h2>
+        <p class="note">S-03。箇条書きの黒丸を green の目盛線に置き換えるリスト。</p>
+        <div class="demo">
+          <ul class="tombo-ticks">
+            <li>リクエストとレスポンスを OpenAPI 定義で検証する</li>
+            <li>カバレッジを操作 × ステータス × content-type で数える</li>
+            <li>ドリフトを CI で検出する</li>
+          </ul>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-TICKS</span></figcaption>
+          <pre>&lt;ul class="tombo-ticks"&gt;
+  &lt;li&gt;リクエストとレスポンスを OpenAPI 定義で検証する&lt;/li&gt;
+&lt;/ul&gt;</pre>
+        </figure>
+      </section>
+
+      <section id="c04">
+        <h2 class="tombo-sec">ルーラー</h2>
+        <p class="note">S-03。10% 刻みの目盛トラックに green の充填、朱の縦線が現在値。値はインライン custom property で渡す(システム唯一の許可インラインスタイル)。</p>
+        <div class="demo">
+          <div class="tombo-ruler" style="--tombo-ruler-value:62%"></div>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-RULER</span></figcaption>
+          <pre>&lt;div class="tombo-ruler" style="--tombo-ruler-value:62%"&gt;&lt;/div&gt;</pre>
+        </figure>
+      </section>
+
+      <section id="c05">
+        <h2 class="tombo-sec">通し番号</h2>
+        <p class="note">S-04。.tombo-sections 配下の .tombo-sec 見出しに「01 — 」を自動採番する。このページの見出しがそのまま実演。図版の銘は .tombo-fig。</p>
+        <div class="demo">
+          <p class="tombo-fig">FIG. 01 — ENDPOINT COVERAGE</p>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-SEC / .TOMBO-FIG</span></figcaption>
+          <pre>&lt;main class="tombo-sections"&gt;
+  &lt;h2 class="tombo-sec"&gt;インストール&lt;/h2&gt;   &lt;!-- 01 — インストール --&gt;
+&lt;/main&gt;
+&lt;p class="tombo-fig"&gt;FIG. 01 — ENDPOINT COVERAGE&lt;/p&gt;</pre>
+        </figure>
+      </section>
+
+      <section id="c06">
+        <h2 class="tombo-sec">朱の現在地</h2>
+        <p class="note">S-05。朱は 2px の線でだけ「ここ」を指す。キッカーの先頭・タブの下線・目次の左線。現在状態は aria-current 属性で宣言する(クラスではなく)。</p>
+        <div class="demo">
+          <p class="tombo-kicker">GESSO — FIG. 00 / CONTRACTS, MEASURED</p>
+          <nav class="tombo-tabs" style="margin-top:18px">
+            <a href="#c06" aria-current="page">画面一覧</a>
+            <a href="#c06">依存グラフ</a>
+            <a href="#c06">変更影響</a>
+          </nav>
+          <nav class="tombo-toc" style="margin-top:18px;max-width:220px">
+            <a href="#c06">01 — はじめに</a>
+            <a href="#c06" aria-current="page">02 — インストール</a>
+          </nav>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-KICKER / .TOMBO-TABS / .TOMBO-TOC</span></figcaption>
+          <pre>&lt;p class="tombo-kicker"&gt;GESSO — FIG. 00&lt;/p&gt;
+
+&lt;nav class="tombo-tabs"&gt;
+  &lt;a href="#" aria-current="page"&gt;画面一覧&lt;/a&gt;
+  &lt;a href="#"&gt;依存グラフ&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;nav class="tombo-toc"&gt;
+  &lt;a href="#" aria-current="page"&gt;02 — インストール&lt;/a&gt;
+&lt;/nav&gt;</pre>
+        </figure>
+      </section>
+
+      <section id="c07">
+        <h2 class="tombo-sec">ボタン</h2>
+        <p class="note">primary は唯一の green 面塗り。secondary は ink の罫線、ghost は下線リンク型。角丸なし。</p>
+        <div class="demo">
+          <div class="row">
+            <button class="tombo-btn tombo-btn--primary">Choose a quickstart</button>
+            <button class="tombo-btn tombo-btn--secondary">View on GitHub</button>
+            <button class="tombo-btn tombo-btn--ghost">Read the spec</button>
+          </div>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-BTN</span></figcaption>
+          <pre>&lt;button class="tombo-btn tombo-btn--primary"&gt;Choose a quickstart&lt;/button&gt;
+&lt;button class="tombo-btn tombo-btn--secondary"&gt;View on GitHub&lt;/button&gt;
+&lt;button class="tombo-btn tombo-btn--ghost"&gt;Read the spec&lt;/button&gt;</pre>
+        </figure>
+      </section>
+
+      <section id="c08">
+        <h2 class="tombo-sec">コードブロック</h2>
+        <p class="note">昼は夜の面、夜は罫線 — コードは沈めない。figcaption の左右にラベルを振り分ける。</p>
+        <div class="demo">
+          <figure class="tombo-code">
+            <figcaption><span>SHELL — INSTALL</span><span>COPY ⧉</span></figcaption>
+            <pre>1  $ composer require wadakatu/laravel-spectrum
+2  $ php artisan spectrum:generate</pre>
+          </figure>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-CODE</span></figcaption>
+          <pre>&lt;figure class="tombo-code"&gt;
+  &lt;figcaption&gt;&lt;span&gt;SHELL — INSTALL&lt;/span&gt;&lt;span&gt;COPY ⧉&lt;/span&gt;&lt;/figcaption&gt;
+  &lt;pre&gt;$ composer require wadakatu/laravel-spectrum&lt;/pre&gt;
+&lt;/figure&gt;</pre>
+        </figure>
+      </section>
+
+      <section id="c09">
+        <h2 class="tombo-sec">コールアウト</h2>
+        <p class="note">左の 2px が既定は朱(位置の印)、--warn で警告色。先頭の &lt;b&gt; が等幅の銘になる。</p>
+        <div class="demo">
+          <div class="tombo-callout"><b>NOTE — 001</b>Lumen で使う場合はサービスプロバイダの手動登録が必要。</div>
+          <div class="tombo-callout tombo-callout--warn" style="margin-top:12px"><b>WARN — 002</b>キャッシュを有効にすると再生成が必要になる。</div>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-CALLOUT</span></figcaption>
+          <pre>&lt;div class="tombo-callout"&gt;&lt;b&gt;NOTE — 001&lt;/b&gt;本文。&lt;/div&gt;
+&lt;div class="tombo-callout tombo-callout--warn"&gt;&lt;b&gt;WARN — 002&lt;/b&gt;本文。&lt;/div&gt;</pre>
+        </figure>
+      </section>
+
+      <section id="c10">
+        <h2 class="tombo-sec">テーブル</h2>
+        <p class="note">ヘッダは等幅の大文字 + ink の 1.5px 罫、行は hairline。数値セルには .tombo-mono を併用する。</p>
+        <div class="demo">
+          <table class="tombo-table">
+            <thead>
+              <tr><th>Requirement</th><th>Version</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>PHP</td><td class="tombo-mono">&ge; 8.2</td><td>OpenSSL, mbstring</td></tr>
+              <tr><td>Laravel</td><td class="tombo-mono">&ge; 11.0</td><td>optional, for adapter</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-TABLE</span></figcaption>
+          <pre>&lt;table class="tombo-table"&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Requirement&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PHP&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+&lt;/table&gt;</pre>
+        </figure>
+      </section>
+
+      <section id="c11">
+        <h2 class="tombo-sec">チップ</h2>
+        <p class="note">app 音量のステータス表示。data-status が点の色を決める(ok / warn / err)。点は装飾なので読み上げ対象外。</p>
+        <div class="demo">
+          <div class="row">
+            <span class="tombo-chip" data-status="ok">OK</span>
+            <span class="tombo-chip" data-status="warn">STALE</span>
+            <span class="tombo-chip" data-status="err">MISSING</span>
+            <span class="tombo-chip">DRAFT</span>
+          </div>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-CHIP</span></figcaption>
+          <pre>&lt;span class="tombo-chip" data-status="ok"&gt;OK&lt;/span&gt;
+&lt;span class="tombo-chip" data-status="warn"&gt;STALE&lt;/span&gt;
+&lt;span class="tombo-chip" data-status="err"&gt;MISSING&lt;/span&gt;</pre>
+        </figure>
+      </section>
+
+      <section id="c12">
+        <h2 class="tombo-sec">メトリクス</h2>
+        <p class="note">計器カード。銘(.k)・値(.v)・ルーラーの積み。見当マークと組み合わせるのが定形。</p>
+        <div class="demo">
+          <div class="tombo-metric tombo-corners metric-demo">
+            <b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
+            <div class="k">COVERAGE</div>
+            <div class="v">96.2</div>
+            <div class="tombo-ruler" style="--tombo-ruler-value:96%"></div>
+          </div>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-METRIC</span></figcaption>
+          <pre>&lt;div class="tombo-metric tombo-corners"&gt;
+  &lt;b class="tombo-corner-tr"&gt;&lt;/b&gt;&lt;b class="tombo-corner-bl"&gt;&lt;/b&gt;
+  &lt;div class="k"&gt;COVERAGE&lt;/div&gt;
+  &lt;div class="v"&gt;96.2&lt;/div&gt;
+  &lt;div class="tombo-ruler" style="--tombo-ruler-value:96%"&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </figure>
+      </section>
+
+      <section id="c13">
+        <h2 class="tombo-sec">ロゴ刻印</h2>
+        <p class="note">C-01 見当マークの CSS 化。フッターに刻印する。--glow は LP ヒーロー専用で、hotaru のとき尾が蛍光 green に発光する(spec §9 唯一の発光例外)。装飾なので aria-hidden を付ける。</p>
+        <div class="demo">
+          <div class="row">
+            <span class="tombo-logo" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
+            <span class="tombo-logo tombo-logo--glow" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
+            <span class="tombo-label">左: 刻印 / 右: --glow(発光は夜のみ)</span>
+          </div>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-LOGO</span></figcaption>
+          <pre>&lt;span class="tombo-logo" aria-hidden="true"&gt;
+  &lt;i class="h"&gt;&lt;/i&gt;&lt;i class="b"&gt;&lt;/i&gt;&lt;i class="w1"&gt;&lt;/i&gt;&lt;i class="w2"&gt;&lt;/i&gt;&lt;i class="t"&gt;&lt;/i&gt;
+&lt;/span&gt;</pre>
+        </figure>
+      </section>
+
+      <section id="c14">
+        <h2 class="tombo-sec">ユーティリティ</h2>
+        <p class="note">.tombo-display は Archivo 900 の見出し、.tombo-label は等幅の大文字銘、.tombo-mono は等幅化。方眼は音量クラスで敷く — .tombo-vol-lp が全面、.tombo-gutters が余白のみ(このページが実演)、app は敷かない。</p>
+        <div class="demo">
+          <p class="tombo-display">TOMBO</p>
+          <p class="tombo-label" style="margin-top:10px">MEASURED / SET IN PLEX MONO</p>
+          <div class="tombo-vol-lp griddemo" style="margin-top:16px"></div>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>UTILITIES</span></figcaption>
+          <pre>&lt;h1 class="tombo-display"&gt;TOMBO&lt;/h1&gt;
+&lt;p class="tombo-label"&gt;MEASURED / SET IN PLEX MONO&lt;/p&gt;
+
+&lt;body class="tombo-gutters"&gt;      &lt;!-- docs: 方眼は余白のみ --&gt;
+&lt;section class="tombo-vol-lp"&gt;    &lt;!-- LP: ヒーロー全面 --&gt;</pre>
+        </figure>
+      </section>
+    </main>
+  </div>
+
+  <footer class="tombo-footer">
+    <div class="shell foot">
+      <span class="tombo-logo" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
+      <div>
+      TOMBO — WADAKATU DESIGN SYSTEM<br>COMPONENT CATALOG — EXAMPLES/COMPONENTS.HTML
+      <div class="tombo-themectl tombo-label" hidden>
+        <button type="button" data-t="tombo">tombo</button>
+        <button type="button" data-t="hotaru">hotaru</button>
+      </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const ctl = document.querySelector('.tombo-themectl');
+    ctl.hidden = false;
+    const ctlBtns = ctl.querySelectorAll('button');
+    const syncCtl = () => {
+      const t = document.documentElement.dataset.theme ||
+        (matchMedia('(prefers-color-scheme: dark)').matches ? 'hotaru' : 'tombo');
+      ctlBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.t === t));
+    };
+    syncCtl();
+    ctl.addEventListener('click', e => {
+      const t = e.target.dataset.t;
+      if (t) { document.documentElement.dataset.theme = t; syncCtl(); }
+    });
+  </script>
+</body>
+</html>

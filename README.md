@@ -148,6 +148,7 @@ Three volumes of the same language, side by side:
 - `examples/docs.html` — documentation site
 - `examples/app.html` — web application
 - `examples/lp.html` — landing page
+- `examples/components.html` — the component catalog: every component as a live demo + copy-paste markup, dogfooded at docs volume
 
 Each toggles `tombo` / `hotaru` live and can be opened directly in a browser (no build step).
 
