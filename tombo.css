@@ -179,7 +179,7 @@
 
   .tombo-chip { font-family: var(--tombo-font-mono); font-size: 10px; letter-spacing: .08em;
     padding: 3px 10px; border: 1px solid var(--tombo-hairline); border-radius: 99px; }
-  .tombo-chip::before { content: "● "; font-size: 8px; color: var(--tombo-ink-faint); }
+  .tombo-chip::before { content: "● " / ""; font-size: 8px; color: var(--tombo-ink-faint); }
   .tombo-chip[data-status="ok"]::before   { color: var(--tombo-success); }
   .tombo-chip[data-status="warn"]::before { color: var(--tombo-warn); }
   .tombo-chip[data-status="err"]::before  { color: var(--tombo-error); }
