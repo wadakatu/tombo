@@ -77,7 +77,7 @@
   .tombo-display { font-family: var(--tombo-font-display); font-weight: 700; /* Instrument Sans has no 900 */
     font-size: var(--tombo-text-display); line-height: 1.1; letter-spacing: -.015em; }
   a { color: var(--tombo-green); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
-  code, kbd, samp, pre { font-family: var(--tombo-font-mono); }
+  code, kbd, samp, pre { font-family: var(--tombo-font-mono); font-weight: 400; }
   hr { border: 0; border-top: 1px solid var(--tombo-hairline); }
   ::selection { background: var(--tombo-green); color: var(--tombo-on-green); }
   :focus-visible { outline: 2px solid var(--tombo-green); outline-offset: 2px; }
@@ -126,7 +126,7 @@
   /* S-02 寸法線 */
   .tombo-dim { position: relative; height: 10px; border-left: 1px solid var(--tombo-ink); border-right: 1px solid var(--tombo-ink); }
   .tombo-dim::after { content: ""; position: absolute; inset: 4.5px 0 auto; border-top: 1px solid var(--tombo-ink); }
-  .tombo-dimlab { font-family: var(--tombo-font-mono); font-size: var(--tombo-text-note); line-height: var(--tombo-lh-note); letter-spacing: .08em; color: var(--tombo-ink-faint); margin-top: 7px; }
+  .tombo-dimlab { font-family: var(--tombo-font-mono); font-size: var(--tombo-text-note); line-height: var(--tombo-lh-note); font-weight: 400; letter-spacing: .08em; color: var(--tombo-ink-faint); margin-top: 7px; }
 
   /* S-03 目盛 */
   .tombo-ticks { list-style: none; padding: 0; }
@@ -146,7 +146,7 @@
   .tombo-sec { counter-increment: tombo-section; }
   .tombo-sec::before { content: counter(tombo-section, decimal-leading-zero) " — ";
     font-family: var(--tombo-font-mono); font-weight: 500; font-size: .72em; color: var(--tombo-green); }
-  .tombo-fig { font-family: var(--tombo-font-mono); font-size: var(--tombo-text-note); line-height: var(--tombo-lh-note); letter-spacing: .08em; color: var(--tombo-ink-faint); text-transform: uppercase; }
+  .tombo-fig { font-family: var(--tombo-font-mono); font-size: var(--tombo-text-note); line-height: var(--tombo-lh-note); font-weight: 400; letter-spacing: .08em; color: var(--tombo-ink-faint); text-transform: uppercase; }
 
   /* S-05 朱の現在地 */
   .tombo-current { position: relative; }
@@ -208,7 +208,7 @@
   .tombo-metric > .v { font-family: var(--tombo-font-mono); font-size: var(--tombo-text-metric); line-height: var(--tombo-lh-metric); font-weight: 600; margin: 8px 0 12px; }
 
   .tombo-footer { border-top: 1px solid var(--tombo-hairline); padding: 22px 0 46px;
-    font-family: var(--tombo-font-mono); font-size: var(--tombo-text-label); letter-spacing: .12em; color: var(--tombo-ink-faint); line-height: 1.9; }
+    font-family: var(--tombo-font-mono); font-size: var(--tombo-text-label); font-weight: 400; letter-spacing: .12em; color: var(--tombo-ink-faint); line-height: 1.9; }
 
   /* S-04 — the mark, engraved: C-01 見当 (assets/logo/tombo-mark.svg) drawn in CSS.
      markup: <span class="tombo-logo" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span> */
