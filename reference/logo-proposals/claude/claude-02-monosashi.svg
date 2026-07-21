@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style="color:#0E5A47">
+  <title>TOMBO — 物差し (the dragonfly is a ruler)</title>
+  <!-- head -->
+  <circle cx="50" cy="12" r="5.5" fill="none" stroke="currentColor" stroke-width="3.2"/>
+  <!-- body = graduated ruler -->
+  <line x1="50" y1="17.5" x2="50" y2="88" stroke="currentColor" stroke-width="3.2"/>
+  <!-- graduations -->
+  <line x1="50" y1="26" x2="58" y2="26" stroke="currentColor" stroke-width="2.2"/>
+  <line x1="50" y1="56" x2="58" y2="56" stroke="currentColor" stroke-width="2.2"/>
+  <line x1="50" y1="64" x2="58" y2="64" stroke="currentColor" stroke-width="2.2"/>
+  <line x1="50" y1="72" x2="58" y2="72" stroke="currentColor" stroke-width="2.2"/>
+  <!-- wings = the two longest graduations -->
+  <line x1="12" y1="36" x2="88" y2="36" stroke="currentColor" stroke-width="3.2"/>
+  <line x1="24" y1="46" x2="76" y2="46" stroke="currentColor" stroke-width="3.2"/>
+  <!-- current reading in shu -->
+  <line x1="50" y1="82" x2="62" y2="82" stroke="#D8442B" stroke-width="2.6"/>
+</svg>

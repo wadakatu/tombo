@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" color="#0E5A47" role="img" aria-labelledby="title desc">
+  <title id="title">TOMBO logo proposal 04 — 原点印</title>
+  <desc id="desc">A compact T and O monogram built as a registration target, with crop-mark corners, a wing bar, a measured body axis, and a vermilion origin tick.</desc>
+  <g fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M32 72V32H72M184 32H224V72M32 184V224H72M184 224H224V184" stroke-width="8"/>
+    <path d="M64 72H192M128 72V216" stroke-width="12"/>
+    <circle cx="128" cy="132" r="40" stroke-width="12"/>
+    <path d="M80 132H176" stroke-width="8"/>
+    <path d="M92 62V82M164 62V82M128 188H144" stroke-width="6"/>
+  </g>
+  <path d="M114 216H142" fill="none" stroke="#D8442B" stroke-width="8" stroke-linecap="square"/>
+</svg>

@@ -1,4 +1,15 @@
-# TOMBO
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo/tombo-mark-dark.svg">
+    <img src="assets/logo/tombo-mark.svg" alt="TOMBO mark — a dragonfly drawn as a printer's registration mark" width="92">
+  </picture>
+</p>
+<h1 align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo/tombo-wordmark-dark.svg">
+    <img src="assets/logo/tombo-wordmark.svg" alt="TOMBO" width="320">
+  </picture>
+</h1>
 
 A single-file CSS design system for everything wadakatu ships — OSS docs sites, web apps, LPs, portfolios. Zero JS, zero dependencies, one `<link>`.
 

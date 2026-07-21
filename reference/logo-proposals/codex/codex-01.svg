@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" color="#0E5A47" role="img" aria-labelledby="title desc">
+  <title id="title">TOMBO logo proposal 01 — 見当蜻蛉</title>
+  <desc id="desc">A front-facing dragonfly constructed from a registration circle, crosshairs, wing strokes, ruler ticks, and a vermilion current-position tick.</desc>
+  <g fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="miter">
+    <circle cx="128" cy="104" r="32" stroke-width="10"/>
+    <path d="M128 48V216M68 104H188" stroke-width="10"/>
+    <path d="M104 88L40 64M152 88L216 64M104 120L56 164M152 120L200 164" stroke-width="10"/>
+    <path d="M128 176H146M128 196H138" stroke-width="6"/>
+  </g>
+  <path d="M114 216H142" fill="none" stroke="#D8442B" stroke-width="8" stroke-linecap="square"/>
+</svg>

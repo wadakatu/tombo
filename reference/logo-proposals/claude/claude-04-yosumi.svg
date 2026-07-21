@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style="color:#0E5A47">
+  <title>TOMBO — 四隅 (crop-mark wings)</title>
+  <!-- head -->
+  <circle cx="50" cy="14" r="5.5" fill="none" stroke="currentColor" stroke-width="3.2"/>
+  <!-- body -->
+  <line x1="50" y1="19.5" x2="50" y2="84" stroke="currentColor" stroke-width="3.2"/>
+  <!-- upper wing pair: crop-mark corners opening outward -->
+  <polyline points="14,24 14,34 44,34" fill="none" stroke="currentColor" stroke-width="3.2"/>
+  <polyline points="86,24 86,34 56,34" fill="none" stroke="currentColor" stroke-width="3.2"/>
+  <!-- lower wing pair: smaller corners, mirrored downward -->
+  <polyline points="26,56 26,46 44,46" fill="none" stroke="currentColor" stroke-width="3.2"/>
+  <polyline points="74,56 74,46 56,46" fill="none" stroke="currentColor" stroke-width="3.2"/>
+  <!-- tail: shu -->
+  <line x1="50" y1="84" x2="50" y2="96" stroke="#D8442B" stroke-width="3.2"/>
+</svg>

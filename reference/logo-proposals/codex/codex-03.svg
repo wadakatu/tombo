@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" color="#0E5A47" role="img" aria-labelledby="title desc">
+  <title id="title">TOMBO logo proposal 03 — 計測銘</title>
+  <desc id="desc">The TOMBO wordmark in Archivo 900, held between crop corners and measured by a dimension line with a vermilion current-position tick.</desc>
+  <g fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M20 64V36H48M208 36H236V64M20 192V220H48M208 220H236V192" stroke-width="8"/>
+    <circle cx="128" cy="68" r="24" stroke-width="8"/>
+    <path d="M128 32V104M92 68H164" stroke-width="8"/>
+    <path d="M28 172H228M28 162V182M228 162V182" stroke-width="6"/>
+  </g>
+  <text x="128" y="144" fill="currentColor" stroke="none" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-size="52" font-weight="900" letter-spacing="-1.5" textLength="208" lengthAdjust="spacingAndGlyphs">TOMBO</text>
+  <path d="M128 158V186" fill="none" stroke="#D8442B" stroke-width="8" stroke-linecap="square"/>
+</svg>

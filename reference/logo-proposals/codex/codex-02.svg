@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" color="#0E5A47" role="img" aria-labelledby="title desc">
+  <title id="title">TOMBO logo proposal 02 — 前進軸</title>
+  <desc id="desc">A right-facing dragonfly whose body is a measured axis, with swept-back crop-mark wings and a registration target for its head.</desc>
+  <g fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M36 128H184" stroke-width="10"/>
+    <circle cx="208" cy="128" r="24" stroke-width="10"/>
+    <path d="M208 92V164M172 128H244" stroke-width="8"/>
+    <path d="M116 120L76 56H48M144 120L124 80H100M116 136L76 200H48M144 136L124 176H100" stroke-width="10"/>
+    <path d="M36 112V144M56 118V138M76 120V136" stroke-width="6"/>
+  </g>
+  <path d="M164 116V140" fill="none" stroke="#D8442B" stroke-width="8" stroke-linecap="square"/>
+</svg>
