@@ -151,7 +151,7 @@ Figma キット / JS コンポーネント / React・Vue ラッパー / アイ�
 | display | clamp(44–64) / 1.1 | display 700 | 欧文題字 |
 
 - 和欧混植: 本文中の欧文・数字は M PLUS 2 自身のラテンで組む。数値の並ぶ場所は掟 2 により Martian Mono
-- 配信: Google Fonts(M PLUS 2 は unicode-range 分割)。フォールバック: `'Instrument Sans', 'M PLUS 2', system-ui, sans-serif` / `'M PLUS 2', system-ui, sans-serif` / `'Martian Mono', ui-monospace, monospace`
+- 配信: Google Fonts(M PLUS 2 は unicode-range 分割)。フォールバック: `'Instrument Sans', 'M PLUS 2', system-ui, sans-serif` / `'M PLUS 2', system-ui, sans-serif` / `'Martian Mono', ui-monospace, SFMono-Regular, monospace`
 
 ## 7. レイアウト・形状
 
