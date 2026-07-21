@@ -34,7 +34,7 @@ The dark flavor is named **hotaru** (蛍, firefly): at night, the instruments gl
 ## Quick start
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wadakatu/tombo@main/tombo.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wadakatu/tombo@v0.1.1/tombo.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -117,7 +117,7 @@ Six marks repeated across every product, "played" at a different volume per cont
 | S-03 | Tick marks | `.tombo-ticks`, `.tombo-ruler` | list bullets as green ticks; ruler = 10%-grid track + green fill + shu current-value line |
 | S-04 | Running numbers | `.tombo-sections`, `.tombo-sec`, `.tombo-fig` | auto-numbered headings (`02 —`) and mono figure/note captions |
 | S-05 | Shu current position | `.tombo-current`, `.tombo-kicker`, `[aria-current]` | the shu marker on active tabs, TOC entries, kickers |
-| S-06 | Graph paper | `.tombo-vol-lp`, `.tombo-gutters` | background grid — full-bleed on LP, margins only on docs, off on app |
+| S-06 | Graph paper | `.tombo-vol-lp`, `.tombo-gutters` | background grid — full-bleed hero on LP, margins only on docs, off on app |
 
 ## Volume dial
 
@@ -125,7 +125,7 @@ The same six marks, turned up or down per product type:
 
 | Signature | DOCS | APP | LP |
 |---|---|---|---|
-| Graph paper | margins only | none | full bleed |
+| Graph paper | margins only | none | hero full-bleed |
 | Registration corners | figures only | instrument cards only | hero frame + figures |
 | Dimension line | hr replacement | none | under headings + captions |
 | Running numbers | headings, notes | REV label | FIG. numbers |

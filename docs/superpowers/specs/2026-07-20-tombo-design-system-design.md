@@ -43,7 +43,7 @@ Figma キット / JS コンポーネント / React・Vue ラッパー / アイ�
 | S-03 | 目盛 | 箇条書きの点・進捗・グラフ軸 | リスト: 12px/1.5px の green 横線。ルーラー: 10% 刻み目盛背景 + ink 基線 + green 帯 + 朱の現在値線 |
 | S-04 | 通し番号 | 見出し(`02 —`)・図版(`FIG. 04-1`)・注記(`NOTE 001`)・リリース(`REV 2026.07.20`) | mono、green または faint。CSS カウンタで自動採番可 |
 | S-05 | 朱の現在地 | アクティブタブ・ナビ現在地・TOC 現在節・ルーラー現在値・callout 左罫 | 1.5-2px の shu 線。面塗り・本文文字は禁止(夜の小ラベルのみ AA を満たすため許可) |
-| S-06 | 方眼 | 背景。音量で濃度が変わる | LP: 縦横全面 / docs: 余白のみ / app: なし。夜は濃度半減 |
+| S-06 | 方眼 | 背景。音量で濃度が変わる | LP: ヒーロー全面 / docs: 余白のみ / app: なし。夜は濃度半減 |
 
 ## 5. 色
 
@@ -88,19 +88,38 @@ Figma キット / JS コンポーネント / React・Vue ラッパー / アイ�
 | warn | `#B07818` | `#D9A441` | |
 | error | `#A6301C`(臙脂) | `#D06A5A` | **面塗り可**。朱(線)とは太さと役割で区別 — 朱=現在地、臙脂=失敗 |
 
-### コントラスト実測値(WCAG 2.1、検証スクリプトで算出)
+### コントラスト実測値(WCAG 2.1、scripts/check_contrast.py の全 28 ペアと同期)
 
 | ペア | 比 | 判定 |
 |---|---|---|
 | ink / paper(昼) | 14.82 | AAA |
 | ink-sub / paper(昼) | 6.88 | AA |
+| ink-faint / paper(昼) | 4.64 | AA |
 | green / paper(昼) | 7.37 | AAA |
 | shu / paper(昼) | 3.97 | 非テキスト 3:1 PASS(線専用のため設計通り) |
+| on-green / green(昼) | 7.37 | AAA |
+| error / paper(昼) | 6.19 | AA |
+| success dot / paper(昼) | 4.75 | 非テキスト 3:1 PASS |
+| warn dot / paper(昼) | 3.42 | 非テキスト 3:1 PASS |
+| callout-label / paper(昼) | 6.19 | AA |
+| ink / surface(昼) | 15.81 | AAA |
+| ink-sub / surface(昼) | 7.34 | AAA |
+| ink-faint / surface(昼) | 4.95 | AA |
+| code-faint / code-bg(昼) | 4.84 | AA |
 | ink / paper(夜) | 14.96 | AAA |
 | ink-sub / paper(夜) | 7.18 | AAA |
+| ink-faint / paper(夜) | 5.23 | AA |
 | green / paper(夜) | 8.25 | AAA |
 | shu / paper(夜) | 5.43 | AA(夜のみ小ラベル可) |
-| ink-dark / green ボタン(夜) | 7.70 | AAA |
+| on-green / green(夜) | 7.70 | AAA |
+| error / paper(夜) | 5.08 | AA |
+| success dot / paper(夜) | 7.51 | 非テキスト 3:1 PASS |
+| warn dot / paper(夜) | 8.05 | 非テキスト 3:1 PASS |
+| callout-label / paper(夜) | 5.43 | AA |
+| ink / surface(夜) | 13.70 | AAA |
+| ink-sub / surface(夜) | 6.57 | AA |
+| ink-faint / surface(夜) | 4.79 | AA |
+| code-faint / code-bg(夜) | 4.60 | AA |
 
 「朱は面に塗らない・文字にしない」の掟が、そのまま WCAG 非テキスト基準の保証になる。
 
@@ -140,7 +159,7 @@ Figma キット / JS コンポーネント / React・Vue ラッパー / アイ�
 
 | 署名要素 | DOCS | APP | LP |
 |---|---|---|---|
-| 方眼 | 余白のみ | なし | 全面 |
+| 方眼 | 余白のみ | なし | ヒーロー全面 |
 | トンボ | 図版のみ | 計器カードのみ | ヒーロー枠 + 図版 |
 | 寸法線 | hr 代替 | なし | 見出し下 + 注記 |
 | 通し番号 | 見出し・注記 | REV 表記 | FIG. 番号 |
