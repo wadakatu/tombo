@@ -7,16 +7,16 @@
 <link rel="stylesheet" href="../tombo.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
 <style>
   .shell { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
   .layout { display: grid; grid-template-columns: 200px 1fr; gap: 56px; padding: 48px 0 64px; align-items: start; }
   .side { position: sticky; top: 48px; }
-  .brand { font-family: var(--tombo-font-display); font-weight: 900; font-size: 16px; }
-  .brand small { display: block; font-family: var(--tombo-font-mono); font-weight: 400; font-size: 9.5px; color: var(--tombo-ink-faint); letter-spacing: .12em; margin-top: 4px; }
+  .brand { font-family: var(--tombo-font-display); font-weight: 700; font-size: 16px; }
+  .brand small { display: block; font-family: var(--tombo-font-mono); font-weight: 400; font-size: var(--tombo-text-label); color: var(--tombo-ink-faint); letter-spacing: .12em; margin-top: 4px; }
   .side .tombo-toc { margin-top: 22px; }
   main.tombo-sections { counter-reset: tombo-section 1; }
-  main p { font-size: 13.5px; line-height: 2.15; color: var(--tombo-ink-sub); margin-top: 14px; max-width: 62ch; }
+  main p { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); margin-top: 14px; max-width: 62ch; }
   main h3, main .tombo-code, main .tombo-callout, main .tombo-table { margin-top: 24px; max-width: 62ch; }
   main .tombo-dim { margin-top: 32px; max-width: 62ch; }
   @media (max-width: 680px) {

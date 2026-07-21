@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="../tombo.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
 <style>
   .shell { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
   .hero { padding: 76px 0 64px; }
@@ -15,13 +15,13 @@
   .hero h1 small { display: block; font-family: var(--tombo-font-body); font-weight: 700;
     font-size: clamp(18px, 2vw, 22px); color: var(--tombo-green); margin-top: 14px; letter-spacing: -.005em; }
   .hero .tombo-dim { width: 320px; margin-top: 22px; }
-  .tagline { margin-top: 18px; font-size: 14.5px; line-height: 2.05; color: var(--tombo-ink-sub); max-width: 50ch; }
+  .tagline { margin-top: 18px; font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); max-width: 50ch; }
   .cta { margin-top: 26px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
   .inst .tombo-fig { position: absolute; top: -20px; left: 0; }
-  .inst .v small { font-size: 14px; color: var(--tombo-ink-faint); font-weight: 400; }
+  .inst .v small { font-size: var(--tombo-text-ui); color: var(--tombo-ink-faint); font-weight: 400; }
   .inst .rows { margin-top: 16px; border-top: 1px solid var(--tombo-hairline); }
   .inst .row { display: flex; justify-content: space-between; gap: 14px; font-family: var(--tombo-font-mono);
-    font-size: 10.5px; padding: 8px 0; border-bottom: 1px solid var(--tombo-hairline); color: var(--tombo-ink-sub); }
+    font-size: var(--tombo-text-label); padding: 8px 0; border-bottom: 1px solid var(--tombo-hairline); color: var(--tombo-ink-sub); }
   .inst .row b { color: var(--tombo-ink); font-weight: 500; }
   .inst .row .miss { color: var(--tombo-error); }
   .inst .cfoot { margin-top: 14px; }
@@ -29,7 +29,7 @@
   .feat { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   .fcard { display: flex; flex-direction: column; }
   .fcard h3 { margin-top: 8px; }
-  .fcard p { margin-top: 10px; font-size: 12.5px; line-height: 1.95; color: var(--tombo-ink-sub); }
+  .fcard p { margin-top: 10px; font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); color: var(--tombo-ink-sub); }
   .fcard .meta { margin-top: auto; padding-top: 14px; }
   .fcard .meta div { border-top: 1px solid var(--tombo-hairline); padding-top: 10px; min-height: 55px; }
   @media (max-width: 720px) {
