@@ -92,3 +92,45 @@
     *, *::before, *::after { transition: none !important; animation: none !important; }
   }
 }
+
+@layer tombo.components {
+  /* S-01 トンボ: 2 corners via pseudos; add <b class="tombo-corner-tr/bl"> for 4 */
+  .tombo-corners { position: relative; }
+  .tombo-corners::before, .tombo-corners::after,
+  .tombo-corner-tr, .tombo-corner-bl { position: absolute; width: 12px; height: 12px; border: 0 solid var(--tombo-ink); opacity: .8; content: ""; }
+  .tombo-corners::before { top: -1px; left: -1px; border-top-width: 1.5px; border-left-width: 1.5px; }
+  .tombo-corners::after  { bottom: -1px; right: -1px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+  .tombo-corner-tr { top: -1px; right: -1px; border-top-width: 1.5px; border-right-width: 1.5px; }
+  .tombo-corner-bl { bottom: -1px; left: -1px; border-bottom-width: 1.5px; border-left-width: 1.5px; }
+
+  /* S-02 寸法線 */
+  .tombo-dim { position: relative; height: 10px; border-left: 1px solid var(--tombo-ink); border-right: 1px solid var(--tombo-ink); }
+  .tombo-dim::after { content: ""; position: absolute; inset: 4.5px 0 auto; border-top: 1px solid var(--tombo-ink); }
+  .tombo-dimlab { font-family: var(--tombo-font-mono); font-size: 10.5px; letter-spacing: .08em; color: var(--tombo-ink-faint); margin-top: 7px; }
+
+  /* S-03 目盛 */
+  .tombo-ticks { list-style: none; padding: 0; }
+  .tombo-ticks > li { position: relative; padding: 5px 0 5px 22px; }
+  .tombo-ticks > li::before { content: ""; position: absolute; left: 0; top: 50%; width: 12px; border-top: 1.5px solid var(--tombo-green); }
+
+  .tombo-ruler { position: relative; height: 20px; border-bottom: 1.5px solid var(--tombo-ink);
+    background-image: repeating-linear-gradient(90deg, var(--tombo-hairline) 0 1px, transparent 1px 10%); }
+  .tombo-ruler::before { content: ""; position: absolute; bottom: 0; left: 0; height: 6px;
+    width: var(--tombo-ruler-value, 0%); background: var(--tombo-green);
+    transition: width var(--tombo-dur) var(--tombo-ease); }
+  .tombo-ruler::after { content: ""; position: absolute; top: 0; bottom: -5px;
+    left: var(--tombo-ruler-value, 0%); border-left: 1.5px solid var(--tombo-shu); }
+
+  /* S-04 通し番号 */
+  .tombo-sections { counter-reset: tombo-section; }
+  .tombo-sec { counter-increment: tombo-section; }
+  .tombo-sec::before { content: counter(tombo-section, decimal-leading-zero) " — ";
+    font-family: var(--tombo-font-mono); font-weight: 500; font-size: .72em; color: var(--tombo-green); }
+  .tombo-fig { font-family: var(--tombo-font-mono); font-size: 10px; letter-spacing: .1em; color: var(--tombo-ink-faint); text-transform: uppercase; }
+
+  /* S-05 朱の現在地 */
+  .tombo-current { position: relative; }
+  .tombo-current::before { content: ""; position: absolute; left: 0; top: 50%; width: 12px; border-top: 2px solid var(--tombo-shu); }
+  .tombo-kicker { font-family: var(--tombo-font-mono); font-size: 11px; letter-spacing: .16em; color: var(--tombo-green); text-transform: uppercase; }
+  .tombo-kicker::before { content: ""; display: inline-block; width: 12px; border-top: 2px solid var(--tombo-shu); vertical-align: 4px; margin-right: 10px; }
+}
