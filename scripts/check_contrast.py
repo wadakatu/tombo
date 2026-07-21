@@ -36,6 +36,10 @@ PAIRS = [
     ("dark error text/paper",  "#D06A5A", "#131714", 4.5),
     ("dark success dot/paper", "#57B98A", "#131714", 3.0),
     ("dark warn dot/paper",    "#D9A441", "#131714", 3.0),
+    ("light ink-faint/paper",  "#667069", "#F2F4EF", 4.5),
+    ("dark ink-faint/paper",   "#78847D", "#131714", 4.5),
+    ("light callout-label/paper", "#A6301C", "#F2F4EF", 4.5),
+    ("dark callout-label/paper",  "#E5654C", "#131714", 4.5),
 ]
 
 def self_test() -> None:

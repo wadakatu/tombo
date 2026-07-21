@@ -35,6 +35,8 @@
   @media (max-width: 720px) {
     .hero .cols, .feat { grid-template-columns: 1fr; }
   }
+  .tombo-themectl button { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: inherit; }
+  .tombo-themectl button[aria-pressed="true"] { border-bottom: 2px solid var(--tombo-shu); }
 </style>
 </head>
 <body>
@@ -102,17 +104,25 @@
   <footer class="tombo-footer">
     <div class="shell">
       TOMBO — WADAKATU DESIGN SYSTEM · LP VOLUME EXAMPLE — EXAMPLES/LP.HTML
-      <div class="tombo-themectl tombo-label" hidden></div>
+      <div class="tombo-themectl tombo-label" hidden>
+        <button type="button" data-t="tombo">tombo</button>
+        <button type="button" data-t="hotaru">hotaru</button>
+      </div>
     </div>
   </footer>
 
   <script>
     const ctl = document.querySelector('.tombo-themectl');
     ctl.hidden = false;
-    ctl.innerHTML = '<span data-t="tombo">tombo</span> <span data-t="hotaru">hotaru</span>';
+    const ctlBtns = ctl.querySelectorAll('button');
+    const syncCtl = () => {
+      const t = document.documentElement.dataset.theme || 'tombo';
+      ctlBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.t === t));
+    };
+    syncCtl();
     ctl.addEventListener('click', e => {
       const t = e.target.dataset.t;
-      if (t) document.documentElement.dataset.theme = t;
+      if (t) { document.documentElement.dataset.theme = t; syncCtl(); }
     });
   </script>
 </body>

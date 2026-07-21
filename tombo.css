@@ -11,7 +11,7 @@
     /* ink */
     --tombo-ink:       light-dark(#1A211D, #E5EBE6);
     --tombo-ink-sub:   light-dark(#4C5650, #9AA69F);
-    --tombo-ink-faint: light-dark(#8B968F, #66716A);
+    --tombo-ink-faint: light-dark(#667069, #78847D);
     --tombo-hairline:  light-dark(rgba(26,33,29,.16), rgba(229,235,230,.14));
     --tombo-grid:      light-dark(rgba(26,33,29,.07), rgba(229,235,230,.05));
     /* instruments */
@@ -22,6 +22,7 @@
     --tombo-success: light-dark(#2C7A4B, #57B98A);
     --tombo-warn:    light-dark(#B07818, #D9A441);
     --tombo-error:   light-dark(#A6301C, #D06A5A);
+    --tombo-callout-label: light-dark(#A6301C, #E5654C); /* crimson by day, shu by night — shu text is a night-only privilege */
     /* code block: day = night panel, night = outlined, never sunken (spec §10-5) */
     --tombo-code-bg:     light-dark(#161B18, #1A201C);
     --tombo-code-ink:    light-dark(#DDE5DF, #E5EBE6);
@@ -166,7 +167,7 @@
     padding: 12px 16px; font-size: 12.5px; color: var(--tombo-ink-sub); }
   .tombo-callout--warn { border-left-color: var(--tombo-warn); }
   .tombo-callout > b:first-child { font-family: var(--tombo-font-mono); font-weight: 500; font-size: 10px;
-    letter-spacing: .14em; color: var(--tombo-shu); margin-right: 10px; text-transform: uppercase; }
+    letter-spacing: .14em; color: var(--tombo-callout-label); margin-right: 10px; text-transform: uppercase; }
 
   .tombo-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
   .tombo-table th { font-family: var(--tombo-font-mono); font-size: 10px; letter-spacing: .12em;
