@@ -7,17 +7,18 @@
 <link rel="stylesheet" href="../tombo.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
 <style>
   .shell { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
   .layout { display: grid; grid-template-columns: 220px 1fr; gap: 56px; padding: 48px 0 64px; align-items: start; }
+  main.tombo-sections { min-width: 0; }
   .side { position: sticky; top: 48px; }
-  .brand { font-family: var(--tombo-font-display); font-weight: 900; font-size: 16px; }
-  .brand small { display: block; font-family: var(--tombo-font-mono); font-weight: 400; font-size: 9.5px; color: var(--tombo-ink-faint); letter-spacing: .12em; margin-top: 4px; }
+  .brand { font-family: var(--tombo-font-display); font-weight: 700; font-size: 16px; }
+  .brand small { display: block; font-family: var(--tombo-font-mono); font-weight: 400; font-size: var(--tombo-text-label); color: var(--tombo-ink-faint); letter-spacing: .12em; margin-top: 4px; }
   .side .tombo-toc { margin-top: 22px; }
-  main > p.lead { font-size: 13.5px; line-height: 2.15; color: var(--tombo-ink-sub); margin-top: 14px; max-width: 62ch; }
+  main > p.lead { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); margin-top: 14px; max-width: 62ch; }
   section { margin-top: 52px; max-width: 720px; }
-  section .note { font-size: 13px; line-height: 2.1; color: var(--tombo-ink-sub); margin-top: 10px; max-width: 62ch; }
+  section .note { font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); color: var(--tombo-ink-sub); margin-top: 10px; max-width: 62ch; }
   .demo { border: 1px solid var(--tombo-hairline); padding: 24px; margin-top: 16px; }
   .demo + .tombo-code { margin-top: 12px; }
   .row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
@@ -304,16 +305,16 @@
 
       <section id="c14">
         <h2 class="tombo-sec">ユーティリティ</h2>
-        <p class="note">.tombo-display は Archivo 900 の見出し、.tombo-label は等幅の大文字銘、.tombo-mono は等幅化。方眼は音量クラスで敷く — .tombo-vol-lp が全面、.tombo-gutters が余白のみ(このページが実演)、app は敷かない。</p>
+        <p class="note">.tombo-display は Instrument Sans 700 の欧文題字(和文が混ざる見出しは h1/h2 を使う)、.tombo-label は等幅の大文字銘、.tombo-mono は等幅化。方眼は音量クラスで敷く — .tombo-vol-lp がヒーロー全面、.tombo-gutters が余白のみ(このページが実演)、app は敷かない。</p>
         <div class="demo">
           <p class="tombo-display">TOMBO</p>
-          <p class="tombo-label" style="margin-top:10px">MEASURED / SET IN PLEX MONO</p>
+          <p class="tombo-label" style="margin-top:10px">MEASURED / SET IN MARTIAN MONO</p>
           <div class="tombo-vol-lp griddemo" style="margin-top:16px"></div>
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>UTILITIES</span></figcaption>
           <pre>&lt;h1 class="tombo-display"&gt;TOMBO&lt;/h1&gt;
-&lt;p class="tombo-label"&gt;MEASURED / SET IN PLEX MONO&lt;/p&gt;
+&lt;p class="tombo-label"&gt;MEASURED / SET IN MARTIAN MONO&lt;/p&gt;
 
 &lt;body class="tombo-gutters"&gt;      &lt;!-- docs: 方眼は余白のみ --&gt;
 &lt;section class="tombo-vol-lp"&gt;    &lt;!-- LP: ヒーロー全面 --&gt;</pre>
