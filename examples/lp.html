@@ -32,8 +32,14 @@
   .fcard p { margin-top: 10px; font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); color: var(--tombo-ink-sub); }
   .fcard .meta { margin-top: auto; padding-top: 14px; }
   .fcard .meta div { border-top: 1px solid var(--tombo-hairline); padding-top: 10px; min-height: 55px; }
-  @media (max-width: 720px) {
+  @media (max-width: 760px) {
     .hero .cols, .feat { grid-template-columns: 1fr; }
+  }
+  @media (min-width: 761px) and (max-width: 1099px) {
+    /* Martian Mono's wider letterforms need more room for .inst .row than
+       the default 1.25fr/.75fr split + 56px gap can give in this band. */
+    .hero .cols { grid-template-columns: 1.27fr .95fr; gap: 32px; }
+    .inst.tombo-metric { padding: 20px 16px; }
   }
   .tombo-themectl button { background: none; border: 0; border-bottom: 2px solid transparent; padding: 0; cursor: pointer; font: inherit; color: inherit; }
   .tombo-themectl button[aria-pressed="true"] { border-bottom-color: var(--tombo-shu); }
