@@ -37,10 +37,22 @@ The dark flavor is named **hotaru** (蛍, firefly): at night, the instruments gl
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wadakatu/tombo@v0.1.1/tombo.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
 ```
 
 That's it — no build step, no framework. Works with any templating layer (Astro, Laravel Blade, Vue, plain HTML) since it's a single stylesheet. The font `<link>`s are optional: `tombo.css` declares font stacks with system fallbacks (`system-ui`, `ui-monospace`), so the page degrades gracefully without them.
+
+## Type
+
+Three voices, selected zero-base with the reader first (see `docs/superpowers/specs/2026-07-21-tombo-typography-design.md`):
+
+| Voice | Face | Role |
+|---|---|---|
+| DISPLAY | Instrument Sans 700 | Latin display headings only (tracking -.015em never touches Japanese) |
+| BODY | M PLUS 2 at weight 450 | Japanese body, UI copy, Japanese headings |
+| INSTRUMENT | Martian Mono | labels, numbers, indices, code (code condenses to width 87.5%) |
+
+A 10-step type scale (`--tombo-text-*` / `--tombo-lh-*`, body 15px/30px) replaces all ad-hoc sizes — components may only reference scale tokens.
 
 ## Themes
 

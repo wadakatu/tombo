@@ -129,17 +129,29 @@ Figma キット / JS コンポーネント / React・Vue ラッパー / アイ�
 - 朱の面塗り・朱の本文文字
 - ドロップシャドウ・ぼかし(昼夜とも。階層は面の明度 1 段 + 罫線で作る)
 
-## 6. タイポグラフィ
+## 6. タイポグラフィ(v0.2 — 全書体ゼロベース改稿。詳細: specs/2026-07-21-tombo-typography-design.md)
 
 | 役割 | 書体 | 用途 |
 |---|---|---|
-| DISPLAY | Archivo 700/900 | 見出し(欧文)・ロゴ・大数字。字間 -.015em |
-| BODY | IBM Plex Sans JP 400/500/700 | 本文・UI・和文見出し。字間はいじらない |
-| INSTRUMENT | IBM Plex Mono 400/500/600 | 数値・ラベル・コード・索引。ラベルは大文字 + 字間 .12-.16em |
+| DISPLAY | Instrument Sans 700(サブ 600。900 は存在しない) | 欧文題字専用。字間 -.015em はこの声だけ |
+| BODY | M PLUS 2 — 本文 450 / 強調 500 / 太字・和文見出し 700 | 和文本文・UI・和文見出し。和文に負の字間を当てない |
+| INSTRUMENT | Martian Mono 400–600(コードは幅軸 87.5%) | 数値・ラベル・コード・索引。ラベルは大文字 + 字間 .12-.16em |
 
-- スケール: display 44-64 / h1 28 / h2 20 / h3 15 / body 14 / small 12.5 / label 10-11(mono)
-- 本文の行間 1.9-2.1。読み手の速度を邪魔しないことが本文の唯一の仕事で、個性は計器(mono とトンボ)が担当する
-- 配信: Google Fonts。フォールバック: `Archivo, 'IBM Plex Sans JP', system-ui, sans-serif` / `'IBM Plex Mono', ui-monospace, monospace`
+タイプスケール(対トークン `--tombo-text-*` / `--tombo-lh-*`。その場サイズの新設は禁止):
+
+| 段 | size / lh | 書体 | 用途 |
+|---|---|---|---|
+| label | 10.5 / 18 | mono 500 caps | 計器銘・チップ・フッター(フッターのみ 400 の刻印例外) |
+| note | 12 / 18 | mono 400 | 寸法ラベル・fig・注記 |
+| code | 12 / 22 | mono 400 幅 87.5% | コードブロック |
+| ui | 13 / 24 | body | 表・コールアウト・タブ・ボタン |
+| body | 15 / 30 | body 450 | 本文 |
+| h3 / h2 / h1 | 19/30 · 23/36 · 29/42 | body 700 | 見出し |
+| metric | 29 / 36 | mono 600 | 計器の大数字 |
+| display | clamp(44–64) / 1.1 | display 700 | 欧文題字 |
+
+- 和欧混植: 本文中の欧文・数字は M PLUS 2 自身のラテンで組む。数値の並ぶ場所は掟 2 により Martian Mono
+- 配信: Google Fonts(M PLUS 2 は unicode-range 分割)。フォールバック: `'Instrument Sans', 'M PLUS 2', system-ui, sans-serif` / `'M PLUS 2', system-ui, sans-serif` / `'Martian Mono', ui-monospace, monospace`
 
 ## 7. レイアウト・形状
 
