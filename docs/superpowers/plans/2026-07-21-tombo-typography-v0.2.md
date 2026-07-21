@@ -11,7 +11,7 @@
 ## Global Constraints
 
 - 色トークンは一切変更しない。各タスク完了時に `python3 scripts/check_contrast.py` が exit 0(28/28 PASS)であること
-- tombo.css 内の `font-size:` は必ず `var(--tombo-text-*)` を参照(生 px 禁止)。検査: `grep -n "font-size:" tombo.css | grep -v "var(--tombo-text-"` が空
+- tombo.css 内の `font-size:` は必ず `var(--tombo-text-*)` を参照(生 px 禁止)。例外(2026-07-21 実装中修正): 装飾 pseudo-element の**比例サイズ(em)は許容** — `.tombo-sec::before` の `.72em` と `.tombo-chip::before` の `.76em` の 2 箇所のみ。検査: `grep -n "font-size:" tombo.css | grep -vE "var\(--tombo-text-|font-size: ?\.[0-9]+em"` が空
 - `font-weight: 900` は全廃(Instrument Sans に 900 は存在しない)。検査: `grep -rn "font-weight: 900\|font-weight:900" tombo.css examples/` が空
 - 和文に負の字間を当てない。`letter-spacing: -.015em` は `.tombo-display`(欧文専用)のみ
 - 本文ウェイトは `var(--tombo-w-body)`(= 450)
@@ -336,10 +336,17 @@ NEW:
     font-family: var(--tombo-font-mono); font-size: var(--tombo-text-label); letter-spacing: .12em; color: var(--tombo-ink-faint); line-height: 1.9; }
 ```
 
+- [ ] **Step 7b(実装中修正 2026-07-21): 装飾 pseudo-element の生 px を em 化**
+
+計画の OLD→NEW に含まれない font-size が 2 箇所ある(実装者検出)。制約本文「生 px 禁止」の意図に合わせ:
+
+- `.tombo-chip::before` の `font-size: 8px` → `font-size: .76em`(チップ本体 10.5px 比 ≈ 8px、視覚同寸)
+- `.tombo-sec::before` の `font-size: .72em` は見出しに対する比例装飾(カウンター)なのでそのまま維持
+
 - [ ] **Step 8: 機械検査 + ゲート**
 
-Run: `grep -n "font-size:" tombo.css | grep -v "var(--tombo-text-"`
-Expected: 出力なし(全 font-size がトークン参照)
+Run: `grep -n "font-size:" tombo.css | grep -vE "var\(--tombo-text-|font-size: ?\.[0-9]+em"`
+Expected: 出力なし(全 font-size がトークン参照。em 比例装飾 2 箇所のみ許容)
 
 Run: `grep -n "font-weight: 900\|font-weight:900" tombo.css`
 Expected: 出力なし
