@@ -14,6 +14,9 @@
     --tombo-ink-faint: light-dark(#667069, #808D86);
     --tombo-hairline:  light-dark(rgba(26,33,29,.16), rgba(229,235,230,.14));
     --tombo-grid:      light-dark(rgba(26,33,29,.07), rgba(229,235,230,.05));
+    --tombo-grid-bold: light-dark(rgba(26,33,29,.13), rgba(229,235,230,.09)); /* wide-screen gutters only */
+    /* shell — content column cap shared by consumers; widens when the viewport affords real margins */
+    --tombo-shell-max: 1100px;
     /* instruments */
     --tombo-green:    light-dark(#0E5A47, #4FC2A2);
     --tombo-on-green: light-dark(#F2F4EF, #10201A);
@@ -51,6 +54,9 @@
   }
   :root[data-theme="tombo"]  { color-scheme: light; }
   :root[data-theme="hotaru"] { color-scheme: dark; }
+  @media (min-width: 1600px) {
+    :root { --tombo-shell-max: 1280px; }
+  }
 }
 
 @layer tombo.reset {
@@ -93,13 +99,32 @@
   .tombo-gutters { position: relative; }
   .tombo-gutters::before, .tombo-gutters::after {
     content: ""; position: absolute; top: 0; bottom: 0; pointer-events: none;
-    width: max(24px, calc((100vw - 1100px) / 2));
+    width: max(24px, calc((100vw - var(--tombo-shell-max)) / 2));
     background-image:
       repeating-linear-gradient(0deg,  var(--tombo-grid) 0 1px, transparent 1px 24px),
       repeating-linear-gradient(90deg, var(--tombo-grid) 0 1px, transparent 1px 24px);
   }
   .tombo-gutters::before { left: 0; }
   .tombo-gutters::after  { right: 0; }
+  @media (min-width: 1600px) {
+    /* wide screens: the margins become the trim area — bolder grid, and the
+       registration mark moves to the window's own corners (print puts tombo
+       outside the live area; here the viewport edge is that outside) */
+    .tombo-gutters::before, .tombo-gutters::after { --tombo-grid: var(--tombo-grid-bold); }
+    html:has(> body.tombo-gutters)::before {
+      content: ""; position: fixed; inset: 20px; pointer-events: none; opacity: .45;
+      background:
+        linear-gradient(var(--tombo-ink), var(--tombo-ink)) left 0 top 0 / 22px 1.5px,
+        linear-gradient(var(--tombo-ink), var(--tombo-ink)) left 0 top 0 / 1.5px 22px,
+        linear-gradient(var(--tombo-ink), var(--tombo-ink)) right 0 top 0 / 22px 1.5px,
+        linear-gradient(var(--tombo-ink), var(--tombo-ink)) right 0 top 0 / 1.5px 22px,
+        linear-gradient(var(--tombo-ink), var(--tombo-ink)) left 0 bottom 0 / 22px 1.5px,
+        linear-gradient(var(--tombo-ink), var(--tombo-ink)) left 0 bottom 0 / 1.5px 22px,
+        linear-gradient(var(--tombo-ink), var(--tombo-ink)) right 0 bottom 0 / 22px 1.5px,
+        linear-gradient(var(--tombo-ink), var(--tombo-ink)) right 0 bottom 0 / 1.5px 22px;
+      background-repeat: no-repeat;
+    }
+  }
 
   .tombo-mono { font-family: var(--tombo-font-mono); }
   .tombo-label {
