@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TOMBO — docs volume example</title>
+<link rel="stylesheet" href="../tombo.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  .shell { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  .layout { display: grid; grid-template-columns: 200px 1fr; gap: 56px; padding: 48px 0 64px; align-items: start; }
+  .side { position: sticky; top: 48px; }
+  .brand { font-family: var(--tombo-font-display); font-weight: 900; font-size: 16px; }
+  .brand small { display: block; font-family: var(--tombo-font-mono); font-weight: 400; font-size: 9.5px; color: var(--tombo-ink-faint); letter-spacing: .12em; margin-top: 4px; }
+  .side .tombo-toc { margin-top: 22px; }
+  main.tombo-sections { counter-reset: tombo-section 1; }
+  main p { font-size: 13.5px; line-height: 2.15; color: var(--tombo-ink-sub); margin-top: 14px; max-width: 62ch; }
+  main h3, main .tombo-code, main .tombo-callout, main .tombo-table { margin-top: 24px; max-width: 62ch; }
+  @media (max-width: 680px) {
+    .layout { grid-template-columns: 1fr; gap: 28px; }
+    .side { position: static; }
+  }
+</style>
+</head>
+<body class="tombo-gutters">
+
+  <div class="shell layout">
+    <aside class="side">
+      <div class="brand">SPECTRUM<small>BY WADAKATU / TOMBO</small></div>
+      <nav class="tombo-toc">
+        <a href="#">01 — はじめに</a>
+        <a href="#" aria-current="page">02 — インストール</a>
+        <a href="#">03 — 設定</a>
+        <a href="#">04 — アノテーション不要の理由</a>
+      </nav>
+    </aside>
+
+    <main class="tombo-sections">
+      <p class="tombo-fig">DOCS / GETTING-STARTED / 02</p>
+      <h2 class="tombo-sec">インストール</h2>
+      <p>Composer で導入する。<a href="#">Laravel 11 以降</a>に対応し、設定ファイルの公開は任意。導入後は<a href="#">ルート定義から自動で</a> OpenAPI ドキュメントが生成される。</p>
+
+      <figure class="tombo-code">
+        <figcaption><span>SHELL — INSTALL</span><span>COPY ⧉</span></figcaption>
+        <pre>1  $ composer require wadakatu/laravel-spectrum
+2  $ php artisan spectrum:generate</pre>
+      </figure>
+
+      <div class="tombo-callout"><b>NOTE — 001</b>Lumen で使う場合はサービスプロバイダの手動登録が必要。</div>
+
+      <h3>動作要件</h3>
+      <table class="tombo-table">
+        <thead>
+          <tr><th>Requirement</th><th>Version</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>PHP</td><td class="tombo-mono">&ge; 8.2</td><td>OpenSSL, mbstring</td></tr>
+          <tr><td>Laravel</td><td class="tombo-mono">&ge; 11.0</td><td>optional, for adapter</td></tr>
+          <tr><td>Composer</td><td class="tombo-mono">&ge; 2.0</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+  <footer class="tombo-footer">
+    <div class="shell">TOMBO — WADAKATU DESIGN SYSTEM<br>DOCS VOLUME EXAMPLE — EXAMPLES/DOCS.HTML</div>
+  </footer>
+
+  <div class="tombo-themectl tombo-label" hidden></div>
+  <script>
+    const ctl = document.querySelector('.tombo-themectl');
+    ctl.hidden = false;
+    ctl.innerHTML = '<span data-t="tombo">tombo</span> <span data-t="hotaru">hotaru</span>';
+    ctl.addEventListener('click', e => {
+      const t = e.target.dataset.t;
+      if (t) document.documentElement.dataset.theme = t;
+    });
+  </script>
+</body>
+</html>
