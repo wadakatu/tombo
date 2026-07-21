@@ -11,7 +11,7 @@
     /* ink */
     --tombo-ink:       light-dark(#1A211D, #E5EBE6);
     --tombo-ink-sub:   light-dark(#4C5650, #9AA69F);
-    --tombo-ink-faint: light-dark(#667069, #78847D);
+    --tombo-ink-faint: light-dark(#667069, #808D86);
     --tombo-hairline:  light-dark(rgba(26,33,29,.16), rgba(229,235,230,.14));
     --tombo-grid:      light-dark(rgba(26,33,29,.07), rgba(229,235,230,.05));
     /* instruments */
