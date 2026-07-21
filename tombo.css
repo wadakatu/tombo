@@ -1,4 +1,4 @@
-/*! TOMBO v0.1.0 — wadakatu design system. MIT. https://github.com/wadakatu/tombo */
+/*! TOMBO v0.2.0 — wadakatu design system. MIT. https://github.com/wadakatu/tombo */
 @layer tombo.reset, tombo.tokens, tombo.base, tombo.components, tombo.utilities;
 
 @layer tombo.tokens {
@@ -29,10 +29,22 @@
     --tombo-code-border: light-dark(transparent, rgba(229,235,230,.14));
     --tombo-code-faint:    #7D8A82;              /* captions on code-bg — the panel is dark in both themes */
     --tombo-code-hairline: rgba(229,235,230,.09);
-    /* type */
-    --tombo-font-display: "Archivo", "IBM Plex Sans JP", system-ui, sans-serif;
-    --tombo-font-body: "IBM Plex Sans JP", system-ui, sans-serif;
-    --tombo-font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+    /* type — three voices (spec 2026-07-21) */
+    --tombo-font-display: "Instrument Sans", "M PLUS 2", system-ui, sans-serif; /* Latin display only */
+    --tombo-font-body: "M PLUS 2", system-ui, sans-serif;
+    --tombo-font-mono: "Martian Mono", ui-monospace, SFMono-Regular, monospace;
+    --tombo-w-body: 450; /* variable weight — 400 thins out on hotaru */
+    /* type scale — no ad-hoc sizes: every font-size below references these */
+    --tombo-text-label: 10.5px;  --tombo-lh-label: 18px;
+    --tombo-text-note: 12px;     --tombo-lh-note: 18px;
+    --tombo-text-code: 12px;     --tombo-lh-code: 22px;
+    --tombo-text-ui: 13px;       --tombo-lh-ui: 24px;
+    --tombo-text-body: 15px;     --tombo-lh-body: 30px;
+    --tombo-text-h3: 19px;       --tombo-lh-h3: 30px;
+    --tombo-text-h2: 23px;       --tombo-lh-h2: 36px;
+    --tombo-text-h1: 29px;       --tombo-lh-h1: 42px;
+    --tombo-text-metric: 29px;   --tombo-lh-metric: 36px;
+    --tombo-text-display: clamp(44px, 6vw, 64px);
     /* motion */
     --tombo-ease: cubic-bezier(0.2, 0, 0, 1);
     --tombo-dur: 150ms;
@@ -52,14 +64,18 @@
   body {
     background: var(--tombo-paper);
     color: var(--tombo-ink);
-    font-size: 14px;
-    line-height: 2;
+    font-size: var(--tombo-text-body);
+    font-weight: var(--tombo-w-body);
+    line-height: 2; /* = 30px at body size; unitless so larger text inherits safely */
     transition: background var(--tombo-dur) var(--tombo-ease), color var(--tombo-dur) var(--tombo-ease);
   }
-  h1, h2, h3, h4 { line-height: 1.3; font-weight: 700; }
-  h1 { font-size: 28px; } h2 { font-size: 20px; } h3 { font-size: 15px; }
-  .tombo-display { font-family: var(--tombo-font-display); font-weight: 900;
-    font-size: clamp(44px, 6vw, 64px); line-height: 1.1; letter-spacing: -.015em; }
+  h1, h2, h3, h4 { font-weight: 700; }
+  h1 { font-size: var(--tombo-text-h1); line-height: var(--tombo-lh-h1); }
+  h2 { font-size: var(--tombo-text-h2); line-height: var(--tombo-lh-h2); }
+  h3 { font-size: var(--tombo-text-h3); line-height: var(--tombo-lh-h3); }
+  h4 { line-height: 1.3; }
+  .tombo-display { font-family: var(--tombo-font-display); font-weight: 700; /* Instrument Sans has no 900 */
+    font-size: var(--tombo-text-display); line-height: 1.1; letter-spacing: -.015em; }
   a { color: var(--tombo-green); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
   code, kbd, samp, pre { font-family: var(--tombo-font-mono); }
   hr { border: 0; border-top: 1px solid var(--tombo-hairline); }
