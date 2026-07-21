@@ -11,7 +11,7 @@
 ## Global Constraints
 
 - 色トークンは一切変更しない。各タスク完了時に `python3 scripts/check_contrast.py` が exit 0(28/28 PASS)であること
-- tombo.css 内の `font-size:` は必ず `var(--tombo-text-*)` を参照(生 px 禁止)。例外(2026-07-21 実装中修正): 装飾 pseudo-element の**比例サイズ(em)は許容** — `.tombo-sec::before` の `.72em` と `.tombo-chip::before` の `.76em` の 2 箇所のみ。検査: `grep -n "font-size:" tombo.css | grep -vE "var\(--tombo-text-|font-size: ?\.[0-9]+em"` が空
+- tombo.css 内の `font-size:` は必ず `var(--tombo-text-*)` を参照(生 px 禁止)。例外(2026-07-21 実装中修正): 装飾 pseudo-element の**比例サイズ(em)は許容** — `.tombo-sec::before` の `.72em` の 1 箇所のみ(`.tombo-chip::before` は当初 `.76em` 化したが、● グリフのベースラインずれ(ユーザー指摘)により font-size を持たない幾何学的な円に置換済み)。検査: `grep -n "font-size:" tombo.css | grep -vE "var\(--tombo-text-|font-size: ?\.[0-9]+em"` が空
 - `font-weight: 900` は全廃(Instrument Sans に 900 は存在しない)。検査: `grep -rn "font-weight: 900\|font-weight:900" tombo.css examples/` が空
 - 和文に負の字間を当てない。`letter-spacing: -.015em` は `.tombo-display`(欧文専用)のみ
 - 本文ウェイトは `var(--tombo-w-body)`(= 450)

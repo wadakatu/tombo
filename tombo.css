@@ -196,7 +196,8 @@
 
   .tombo-chip { font-family: var(--tombo-font-mono); font-size: var(--tombo-text-label); font-weight: 500; letter-spacing: .08em;
     padding: 3px 10px; border: 1px solid var(--tombo-hairline); border-radius: 99px; }
-  .tombo-chip::before { content: "● " / ""; font-size: .76em; color: var(--tombo-ink-faint); }
+  .tombo-chip::before { content: ""; display: inline-block; width: .5em; height: .5em; border-radius: 50%;
+    background: currentColor; margin-right: .55em; vertical-align: .08em; color: var(--tombo-ink-faint); }
   .tombo-chip[data-status="ok"]::before   { color: var(--tombo-success); }
   .tombo-chip[data-status="warn"]::before { color: var(--tombo-warn); }
   .tombo-chip[data-status="err"]::before  { color: var(--tombo-error); }
