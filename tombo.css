@@ -134,3 +134,58 @@
   .tombo-kicker { font-family: var(--tombo-font-mono); font-size: 11px; letter-spacing: .16em; color: var(--tombo-green); text-transform: uppercase; }
   .tombo-kicker::before { content: ""; display: inline-block; width: 12px; border-top: 2px solid var(--tombo-shu); vertical-align: 4px; margin-right: 10px; }
 }
+
+@layer tombo.components {
+  .tombo-btn { display: inline-block; padding: 12px 26px; font-size: 13.5px; font-family: var(--tombo-font-body);
+    border: 1px solid transparent; cursor: pointer; background: none;
+    transition: background var(--tombo-dur) var(--tombo-ease), color var(--tombo-dur) var(--tombo-ease); }
+  .tombo-btn--primary { background: var(--tombo-green); color: var(--tombo-on-green); font-weight: 700; }
+  .tombo-btn--primary:hover { background: var(--tombo-ink); color: var(--tombo-paper); }
+  .tombo-btn--secondary { border-color: var(--tombo-ink); color: var(--tombo-ink); }
+  .tombo-btn--secondary:hover { background: var(--tombo-surface); }
+  .tombo-btn--ghost { color: var(--tombo-green); text-decoration: underline; text-underline-offset: 4px; padding: 12px 8px; }
+
+  .tombo-tabs { display: flex; gap: 22px; border-bottom: 1px solid var(--tombo-hairline); }
+  .tombo-tabs > * { padding: 6px 2px 9px; color: var(--tombo-ink-sub); text-decoration: none; position: relative; font-size: 13px; }
+  .tombo-tabs > [aria-current] { color: var(--tombo-ink); font-weight: 500; }
+  .tombo-tabs > [aria-current]::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 100%; border-bottom: 2px solid var(--tombo-shu); }
+
+  .tombo-toc { font-size: 12.5px; }
+  .tombo-toc a { display: block; color: var(--tombo-ink-sub); text-decoration: none; padding: 7px 0 7px 22px; position: relative; }
+  .tombo-toc a[aria-current] { color: var(--tombo-ink); font-weight: 500; }
+  .tombo-toc a[aria-current]::before { content: ""; position: absolute; left: 0; top: 50%; width: 12px; border-top: 2px solid var(--tombo-shu); }
+
+  .tombo-code { background: var(--tombo-code-bg); color: var(--tombo-code-ink);
+    border: 1px solid var(--tombo-code-border); border-radius: 6px; overflow: hidden; }
+  .tombo-code > figcaption { display: flex; justify-content: space-between; font-family: var(--tombo-font-mono);
+    font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #7d8a82;
+    padding: 8px 14px; border-bottom: 1px solid rgba(229,235,230,.09); }
+  .tombo-code pre { font-size: 12px; line-height: 1.9; padding: 14px 18px; overflow-x: auto; }
+
+  .tombo-callout { border: 1px solid var(--tombo-hairline); border-left: 2px solid var(--tombo-shu);
+    padding: 12px 16px; font-size: 12.5px; color: var(--tombo-ink-sub); }
+  .tombo-callout--warn { border-left-color: var(--tombo-warn); }
+  .tombo-callout > b:first-child { font-family: var(--tombo-font-mono); font-weight: 500; font-size: 10px;
+    letter-spacing: .14em; color: var(--tombo-shu); margin-right: 10px; text-transform: uppercase; }
+
+  .tombo-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .tombo-table th { font-family: var(--tombo-font-mono); font-size: 10px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--tombo-ink-sub); font-weight: 500; text-align: left;
+    padding: 11px 14px; border-bottom: 1.5px solid var(--tombo-ink); }
+  .tombo-table td { padding: 10px 14px; border-bottom: 1px solid var(--tombo-hairline); }
+
+  .tombo-chip { font-family: var(--tombo-font-mono); font-size: 10px; letter-spacing: .08em;
+    padding: 3px 10px; border: 1px solid var(--tombo-hairline); border-radius: 99px; }
+  .tombo-chip::before { content: "● "; font-size: 8px; color: var(--tombo-ink-faint); }
+  .tombo-chip[data-status="ok"]::before   { color: var(--tombo-success); }
+  .tombo-chip[data-status="warn"]::before { color: var(--tombo-warn); }
+  .tombo-chip[data-status="err"]::before  { color: var(--tombo-error); }
+
+  .tombo-metric { background: var(--tombo-surface); border: 1px solid var(--tombo-hairline); padding: 20px 24px; }
+  .tombo-metric > .k { font-family: var(--tombo-font-mono); font-size: 10px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--tombo-ink-sub); }
+  .tombo-metric > .v { font-family: var(--tombo-font-mono); font-size: 30px; font-weight: 600; margin: 8px 0 12px; }
+
+  .tombo-footer { border-top: 1px solid var(--tombo-hairline); padding: 22px 0 46px;
+    font-family: var(--tombo-font-mono); font-size: 10px; letter-spacing: .12em; color: var(--tombo-ink-faint); line-height: 1.9; }
+}
