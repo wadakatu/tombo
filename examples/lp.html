@@ -32,12 +32,16 @@
   .fcard p { margin-top: 10px; font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); color: var(--tombo-ink-sub); }
   .fcard .meta { margin-top: auto; padding-top: 14px; }
   .fcard .meta div { border-top: 1px solid var(--tombo-hairline); padding-top: 10px; min-height: 55px; }
-  @media (max-width: 760px) {
+  @media (max-width: 840px) {
     .hero .cols, .feat { grid-template-columns: 1fr; }
   }
-  @media (min-width: 761px) and (max-width: 1099px) {
+  @media (min-width: 841px) and (max-width: 1099px) {
     /* Martian Mono's wider letterforms need more room for .inst .row than
-       the default 1.25fr/.75fr split + 56px gap can give in this band. */
+       the default 1.25fr/.75fr split + 56px gap can give in this band.
+       Empirically, .inst .row wraps up to 824px viewport with this ratio/gap;
+       840px is the stacking breakpoint (16px buffer above the measured
+       threshold), so the whole broken sub-range is absorbed by the
+       single-column layout instead. */
     .hero .cols { grid-template-columns: 1.27fr .95fr; gap: 32px; }
     .inst.tombo-metric { padding: 20px 16px; }
   }
