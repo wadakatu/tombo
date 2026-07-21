@@ -27,6 +27,8 @@
     --tombo-code-bg:     light-dark(#161B18, #1A201C);
     --tombo-code-ink:    light-dark(#DDE5DF, #E5EBE6);
     --tombo-code-border: light-dark(transparent, rgba(229,235,230,.14));
+    --tombo-code-faint:    #7D8A82;              /* captions on code-bg — the panel is dark in both themes */
+    --tombo-code-hairline: rgba(229,235,230,.09);
     /* type */
     --tombo-font-display: "Archivo", "IBM Plex Sans JP", system-ui, sans-serif;
     --tombo-font-body: "IBM Plex Sans JP", system-ui, sans-serif;
@@ -159,8 +161,8 @@
   .tombo-code { background: var(--tombo-code-bg); color: var(--tombo-code-ink);
     border: 1px solid var(--tombo-code-border); border-radius: 6px; overflow: hidden; }
   .tombo-code > figcaption { display: flex; justify-content: space-between; font-family: var(--tombo-font-mono);
-    font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #7d8a82;
-    padding: 8px 14px; border-bottom: 1px solid rgba(229,235,230,.09); }
+    font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--tombo-code-faint);
+    padding: 8px 14px; border-bottom: 1px solid var(--tombo-code-hairline); }
   .tombo-code pre { font-size: 12px; line-height: 1.9; padding: 14px 18px; overflow-x: auto; }
 
   .tombo-callout { border: 1px solid var(--tombo-hairline); border-left: 2px solid var(--tombo-shu);

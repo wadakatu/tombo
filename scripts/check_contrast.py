@@ -15,12 +15,16 @@ CSS_PATH = Path(__file__).resolve().parent.parent / "tombo.css"
 TOKEN_RE = re.compile(
     r"--tombo-([a-z-]+):\s*light-dark\(\s*(#[0-9A-Fa-f]{6})\s*,\s*(#[0-9A-Fa-f]{6})\s*\)"
 )
+PLAIN_RE = re.compile(r"--tombo-([a-z-]+):\s*(#[0-9A-Fa-f]{6})\s*;")
 
 def load_tokens(css_path: Path = CSS_PATH) -> dict:
-    """Parse every `--tombo-*: light-dark(#hex, #hex)` declaration."""
+    """Parse `--tombo-*: light-dark(#hex, #hex)` and plain `--tombo-*: #hex` declarations."""
+    text = css_path.read_text()
     tokens = {}
-    for name, light, dark in TOKEN_RE.findall(css_path.read_text()):
+    for name, light, dark in TOKEN_RE.findall(text):
         tokens[name] = {"light": light, "dark": dark}
+    for name, value in PLAIN_RE.findall(text):
+        tokens[name] = {"light": value, "dark": value}
     return tokens
 
 def _lin(c: float) -> float:
@@ -50,6 +54,7 @@ PAIRS = [
     ("light ink/surface",         "light", "ink",           "surface", 7.0),
     ("light ink-sub/surface",     "light", "ink-sub",       "surface", 4.5),
     ("light ink-faint/surface",   "light", "ink-faint",     "surface", 4.5),
+    ("light code-faint/code-bg",  "light", "code-faint",    "code-bg", 4.5),
     ("dark ink/paper",            "dark",  "ink",           "paper",   7.0),
     ("dark ink-sub/paper",        "dark",  "ink-sub",       "paper",   4.5),
     ("dark ink-faint/paper",      "dark",  "ink-faint",     "paper",   4.5),
@@ -63,6 +68,7 @@ PAIRS = [
     ("dark ink/surface",          "dark",  "ink",           "surface", 7.0),
     ("dark ink-sub/surface",      "dark",  "ink-sub",       "surface", 4.5),
     ("dark ink-faint/surface",    "dark",  "ink-faint",     "surface", 4.5),
+    ("dark code-faint/code-bg",   "dark",  "code-faint",    "code-bg", 4.5),
 ]
 
 def self_test() -> None:
