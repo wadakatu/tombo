@@ -1,0 +1,94 @@
+/*! TOMBO v0.1.0 — wadakatu design system. MIT. https://github.com/wadakatu/tombo */
+@layer tombo.reset, tombo.tokens, tombo.base, tombo.components, tombo.utilities;
+
+@layer tombo.tokens {
+  :root {
+    color-scheme: light dark;
+    /* surfaces */
+    --tombo-paper:    light-dark(#F2F4EF, #131714);
+    --tombo-surface:  light-dark(#FAFBF8, #1A201C);
+    --tombo-raised:   light-dark(#FAFBF8, #212824); /* light has no +2 step (spec §5) */
+    /* ink */
+    --tombo-ink:       light-dark(#1A211D, #E5EBE6);
+    --tombo-ink-sub:   light-dark(#4C5650, #9AA69F);
+    --tombo-ink-faint: light-dark(#8B968F, #66716A);
+    --tombo-hairline:  light-dark(rgba(26,33,29,.16), rgba(229,235,230,.14));
+    --tombo-grid:      light-dark(rgba(26,33,29,.07), rgba(229,235,230,.05));
+    /* instruments */
+    --tombo-green:    light-dark(#0E5A47, #4FC2A2);
+    --tombo-on-green: light-dark(#F2F4EF, #10201A);
+    --tombo-shu:      light-dark(#D8442B, #E5654C);
+    /* status (app volume only) */
+    --tombo-success: light-dark(#2C7A4B, #57B98A);
+    --tombo-warn:    light-dark(#B07818, #D9A441);
+    --tombo-error:   light-dark(#A6301C, #D06A5A);
+    /* code block: day = night panel, night = outlined, never sunken (spec §10-5) */
+    --tombo-code-bg:     light-dark(#161B18, #1A201C);
+    --tombo-code-ink:    #DDE5DF;
+    --tombo-code-border: light-dark(transparent, rgba(229,235,230,.14));
+    /* type */
+    --tombo-font-display: "Archivo", "IBM Plex Sans JP", system-ui, sans-serif;
+    --tombo-font-body: "IBM Plex Sans JP", system-ui, sans-serif;
+    --tombo-font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+    /* motion */
+    --tombo-ease: cubic-bezier(0.2, 0, 0, 1);
+    --tombo-dur: 150ms;
+  }
+  :root[data-theme="tombo"]  { color-scheme: light; }
+  :root[data-theme="hotaru"] { color-scheme: dark; }
+}
+
+@layer tombo.reset {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  img, svg { max-width: 100%; display: block; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+}
+
+@layer tombo.base {
+  html { font-family: var(--tombo-font-body); }
+  body {
+    background: var(--tombo-paper);
+    color: var(--tombo-ink);
+    font-size: 14px;
+    line-height: 2;
+    transition: background var(--tombo-dur) var(--tombo-ease), color var(--tombo-dur) var(--tombo-ease);
+  }
+  h1, h2, h3, h4 { line-height: 1.3; font-weight: 700; }
+  h1 { font-size: 28px; } h2 { font-size: 20px; } h3 { font-size: 15px; }
+  .tombo-display { font-family: var(--tombo-font-display); font-weight: 900;
+    font-size: clamp(44px, 6vw, 64px); line-height: 1.1; letter-spacing: -.015em; }
+  a { color: var(--tombo-green); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  code, kbd, samp, pre { font-family: var(--tombo-font-mono); }
+  hr { border: 0; border-top: 1px solid var(--tombo-hairline); }
+  ::selection { background: var(--tombo-green); color: var(--tombo-on-green); }
+  :focus-visible { outline: 2px solid var(--tombo-green); outline-offset: 2px; }
+}
+
+@layer tombo.utilities {
+  /* S-06 方眼 — volume dial */
+  .tombo-vol-lp {
+    background-image:
+      repeating-linear-gradient(0deg,  var(--tombo-grid) 0 1px, transparent 1px 24px),
+      repeating-linear-gradient(90deg, var(--tombo-grid) 0 1px, transparent 1px 24px);
+  }
+  .tombo-gutters { position: relative; }
+  .tombo-gutters::before, .tombo-gutters::after {
+    content: ""; position: absolute; top: 0; bottom: 0; pointer-events: none;
+    width: max(24px, calc((100vw - 1100px) / 2));
+    background-image:
+      repeating-linear-gradient(0deg,  var(--tombo-grid) 0 1px, transparent 1px 24px),
+      repeating-linear-gradient(90deg, var(--tombo-grid) 0 1px, transparent 1px 24px);
+  }
+  .tombo-gutters::before { left: 0; }
+  .tombo-gutters::after  { right: 0; }
+
+  .tombo-mono { font-family: var(--tombo-font-mono); }
+  .tombo-label {
+    font-family: var(--tombo-font-mono); font-size: 11px;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--tombo-ink-sub);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+}
