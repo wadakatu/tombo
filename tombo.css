@@ -191,4 +191,18 @@
 
   .tombo-footer { border-top: 1px solid var(--tombo-hairline); padding: 22px 0 46px;
     font-family: var(--tombo-font-mono); font-size: 10px; letter-spacing: .12em; color: var(--tombo-ink-faint); line-height: 1.9; }
+
+  /* S-04 — the mark, engraved: C-01 見当 (assets/logo/tombo-mark.svg) drawn in CSS.
+     markup: <span class="tombo-logo" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span> */
+  .tombo-logo { position: relative; display: inline-block; width: 24px; height: 24px; color: var(--tombo-green); }
+  .tombo-logo > i { position: absolute; display: block; }
+  .tombo-logo > .h { top: 0; left: 50%; width: 5px; height: 5px; transform: translateX(-50%);
+    border: 1.5px solid currentColor; border-radius: 50%; }
+  .tombo-logo > .b { top: 5px; bottom: 4px; left: calc(50% - .75px); border-left: 1.5px solid currentColor; }
+  .tombo-logo > .w1 { top: 8.5px; left: 2px; right: 2px; border-top: 1.5px solid currentColor; }
+  .tombo-logo > .w2 { top: 11.5px; left: 5px; right: 5px; border-top: 1.5px solid currentColor; }
+  .tombo-logo > .t { bottom: 0; left: calc(50% - .75px); height: 4px; border-left: 1.5px solid var(--tombo-shu); }
+  /* spec §9 — the single glow exception: at night the LP hero tail is a firefly, not a mark */
+  .tombo-logo--glow > .t { border-color: light-dark(var(--tombo-shu), var(--tombo-green));
+    box-shadow: 0 0 7px light-dark(transparent, var(--tombo-green)); }
 }

@@ -25,6 +25,7 @@
   }
   .tombo-themectl button { background: none; border: 0; border-bottom: 2px solid transparent; padding: 0; cursor: pointer; font: inherit; color: inherit; }
   .tombo-themectl button[aria-pressed="true"] { border-bottom-color: var(--tombo-shu); }
+  .foot { display: flex; align-items: center; gap: 18px; }
 </style>
 </head>
 <body class="tombo-gutters">
@@ -71,11 +72,14 @@
   </div>
 
   <footer class="tombo-footer">
-    <div class="shell">
+    <div class="shell foot">
+      <span class="tombo-logo" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
+      <div>
       TOMBO — WADAKATU DESIGN SYSTEM<br>DOCS VOLUME EXAMPLE — EXAMPLES/DOCS.HTML
       <div class="tombo-themectl tombo-label" hidden>
         <button type="button" data-t="tombo">tombo</button>
         <button type="button" data-t="hotaru">hotaru</button>
+      </div>
       </div>
     </div>
   </footer>
