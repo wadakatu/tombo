@@ -34,7 +34,7 @@ The dark flavor is named **hotaru** (蛍, firefly): at night, the instruments gl
 ## Quick start
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wadakatu/tombo@v0.3.1/tombo.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wadakatu/tombo@v0.3.2/tombo.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
