@@ -339,12 +339,15 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-SHELL</span></figcaption>
-          <pre>&lt;html style="--tombo-shell: var(--tombo-shell-wide)"&gt;  &lt;!-- 段を変えるときだけ --&gt;
-
-&lt;div class="tombo-shell"&gt;                    &lt;!-- ページの幅(既定 = default) --&gt;
+          <pre>&lt;div class="tombo-shell"&gt;                     &lt;!-- ページの幅(既定 = default) --&gt;
 &lt;div class="tombo-shell tombo-shell--reading"&gt; &lt;!-- 本文 --&gt;
 &lt;div class="tombo-shell tombo-shell--wide"&gt;    &lt;!-- LP・グリッド --&gt;
 &lt;div class="tombo-shell tombo-shell--full"&gt;    &lt;!-- 背景・装飾 --&gt;</pre>
+        </figure>
+        <p class="note">ページ全体の段を変えるときだけ、自分のスタイルシートで <code>--tombo-shell</code> を差し替える。インライン <code>style</code> は使わない — システムが認めるインライン custom property は <code>--tombo-ruler-value</code> だけ。<code>.tombo-gutters</code> は <code>&lt;body&gt;</code> に載るので、宣言はそれより上(<code>:root</code> か <code>&lt;body&gt;</code>)に置くこと。下層に書くと余白の方眼が本文の端に届かなくなる。</p>
+        <figure class="tombo-code">
+          <figcaption><span>CSS</span><span>ページ幅の上書き</span></figcaption>
+          <pre>:root { --tombo-shell: var(--tombo-shell-wide); }</pre>
         </figure>
       </section>
     </main>

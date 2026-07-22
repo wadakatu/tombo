@@ -138,18 +138,24 @@ One class, `.tombo-shell`, and a four-step scale. The step is chosen by what the
 <div class="tombo-shell tombo-shell--full">     <!-- backgrounds, decoration: no cap, no gutter -->
 ```
 
-The page runs at `--tombo-shell-default` unless you say otherwise. Reassign `--tombo-shell` once, at the root, when a whole page wants a different step — an LP, say:
-
-```html
-<html style="--tombo-shell: var(--tombo-shell-wide)">
-```
-
-`.tombo-shell` reads `--tombo-shell`; the modifiers rebind it for one element. `.tombo-gutters` reads the same variable, so the margin grid always meets the content edge. There are no container breakpoints — `max-inline-size` plus the clamp()ed gutter cover every viewport continuously.
+Markup is the whole API. `.tombo-shell` reads `--tombo-shell`; the modifiers rebind it for one element. `.tombo-gutters` reads the same variable, so the margin grid always meets the content edge. There are no container breakpoints — `max-inline-size` plus the clamp()ed gutter cover every viewport continuously.
 
 Two things to know:
 
 - **Don't use the `padding` shorthand on a `.tombo-shell` element.** Your rule is unlayered and `.tombo-shell` lives in `@layer tombo.utilities`, so the shorthand wins and silently zeroes the gutter. Use `padding-block`.
 - **Code blocks and tables are not prose.** Cap paragraphs at `--tombo-shell-reading`; let code and tables fill the column. A grid item holding a code block also needs `min-inline-size: 0`, or its longest line widens the track instead of scrolling.
+
+### Overriding the page width
+
+The page runs at `--tombo-shell-default`. When a whole page wants a different step — an LP, say — reassign `--tombo-shell` once in your own stylesheet:
+
+```css
+:root { --tombo-shell: var(--tombo-shell-wide); }
+```
+
+Set it at `:root` or on `<body>`, above everything that reads it. `.tombo-gutters` sits on `<body>`, so a value declared further down the tree reaches that element's own subtree but never the gutters, and the margin grid stops meeting the content edge. Reach for the modifier classes instead when only one container needs another step.
+
+The system's one sanctioned inline custom property is `--tombo-ruler-value`; `--tombo-shell` is not one. Keep it in a stylesheet.
 
 ### Migrating from `--tombo-shell-max` (0.3 → 0.4)
 
