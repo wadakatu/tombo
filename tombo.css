@@ -254,6 +254,13 @@
     text-transform: uppercase; color: var(--tombo-ink-sub); font-weight: 500; text-align: left;
     padding: 11px 14px; border-bottom: 1.5px solid var(--tombo-ink); }
   .tombo-table td { padding: 10px 14px; border-bottom: 1px solid var(--tombo-hairline); }
+  /* A data table is a reflow exception under WCAG 2.2 SC 1.4.10, but the scroll
+     belongs to the table, not the page. Wrap every .tombo-table that can outgrow
+     its column. The region must be focusable or a keyboard user cannot scroll it,
+     and role="region" needs an accessible name:
+     <div class="tombo-table-wrap" role="region" aria-labelledby="ID" tabindex="0">
+       <table class="tombo-table"> … */
+  .tombo-table-wrap { overflow-x: auto; }
 
   .tombo-chip { font-family: var(--tombo-font-mono); font-size: var(--tombo-text-label); font-weight: 500; letter-spacing: .08em;
     padding: 3px 10px; border: 1px solid var(--tombo-hairline); border-radius: 99px; }

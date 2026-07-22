@@ -16,7 +16,8 @@
   .hero .cols { display: grid; grid-template-columns: 1.25fr .75fr; gap: 56px; align-items: center; margin-top: 24px; }
   .hero h1 small { display: block; font-family: var(--tombo-font-body); font-weight: 700;
     font-size: clamp(18px, 2vw, 22px); color: var(--tombo-green); margin-top: 14px; letter-spacing: -.005em; }
-  .hero .tombo-dim { width: 320px; margin-top: 22px; }
+  /* max-, not a fixed width: at 320px a fixed 320 stretches the whole grid track */
+  .hero .tombo-dim { max-inline-size: 320px; margin-top: 22px; }
   .tagline { margin-top: 18px; font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); max-width: 50ch; }
   .cta { margin-top: 26px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
   .inst .tombo-fig { position: absolute; top: -20px; left: 0; }

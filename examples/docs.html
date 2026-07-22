@@ -19,7 +19,7 @@
   main p { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); margin-top: 14px; max-inline-size: var(--tombo-shell-reading); }
   main h3, main .tombo-callout { margin-top: 24px; max-inline-size: var(--tombo-shell-reading); }
   /* code and tables are not prose — they fill the column instead of the measure */
-  main .tombo-code, main .tombo-table { margin-top: 24px; }
+  main .tombo-code, main .tombo-table-wrap { margin-top: 24px; }
   main .tombo-dim { margin-top: 32px; max-inline-size: var(--tombo-shell-reading); }
   @media (max-width: 680px) {
     .layout { grid-template-columns: 1fr; gap: 28px; }
@@ -59,8 +59,9 @@
       <div class="tombo-dim"></div>
       <div class="tombo-dimlab">section — 02.1 / requirements</div>
 
-      <h3>動作要件</h3>
-      <table class="tombo-table">
+      <h3 id="req">動作要件</h3>
+      <div class="tombo-table-wrap" role="region" aria-labelledby="req" tabindex="0">
+        <table class="tombo-table">
         <thead>
           <tr><th>Requirement</th><th>Version</th><th>Notes</th></tr>
         </thead>
@@ -69,7 +70,8 @@
           <tr><td>Laravel</td><td class="tombo-mono">&ge; 11.0</td><td>optional, for adapter</td></tr>
           <tr><td>Composer</td><td class="tombo-mono">&ge; 2.0</td><td>—</td></tr>
         </tbody>
-      </table>
+        </table>
+      </div>
     </main>
   </div>
 

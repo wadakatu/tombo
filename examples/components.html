@@ -226,24 +226,30 @@
 
       <section id="c10">
         <h2 class="tombo-sec">テーブル</h2>
-        <p class="note">ヘッダは等幅の大文字 + ink の 1.5px 罫、行は hairline。数値セルには .tombo-mono を併用する。</p>
+        <p class="note">ヘッダは等幅の大文字 + ink の 1.5px 罫、行は hairline。数値セルには .tombo-mono を併用する。列が多い表は狭い画面で列に収まらないので、必ず .tombo-table-wrap で包む — データ表は WCAG 2.2 の Reflow(SC 1.4.10)の例外だが、スクロールさせてよいのは表であってページではない。スクロール領域はフォーカス可能にしないとキーボードで動かせないため、role="region" + アクセシブル名 + tabindex="0" が揃って 1 セットになる。</p>
         <div class="demo">
-          <table class="tombo-table">
-            <thead>
-              <tr><th>Requirement</th><th>Version</th><th>Notes</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>PHP</td><td class="tombo-mono">&ge; 8.2</td><td>OpenSSL, mbstring</td></tr>
-              <tr><td>Laravel</td><td class="tombo-mono">&ge; 11.0</td><td>optional, for adapter</td></tr>
-            </tbody>
-          </table>
+          <div class="tombo-table-wrap" role="region" aria-labelledby="c10-cap" tabindex="0">
+            <table class="tombo-table">
+              <thead>
+                <tr><th>Requirement</th><th>Version</th><th>Notes</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>PHP</td><td class="tombo-mono">&ge; 8.2</td><td>OpenSSL, mbstring</td></tr>
+                <tr><td>Laravel</td><td class="tombo-mono">&ge; 11.0</td><td>optional, for adapter</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="tombo-dimlab" id="c10-cap">動作要件 — 幅が足りなければこの枠内だけが横スクロールする</p>
         </div>
         <figure class="tombo-code">
-          <figcaption><span>HTML</span><span>.TOMBO-TABLE</span></figcaption>
-          <pre>&lt;table class="tombo-table"&gt;
-  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Requirement&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
-  &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PHP&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
-&lt;/table&gt;</pre>
+          <figcaption><span>HTML</span><span>.TOMBO-TABLE / .TOMBO-TABLE-WRAP</span></figcaption>
+          <pre>&lt;div class="tombo-table-wrap" role="region" aria-labelledby="cap" tabindex="0"&gt;
+  &lt;table class="tombo-table"&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Requirement&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PHP&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+&lt;p class="tombo-dimlab" id="cap"&gt;動作要件&lt;/p&gt;</pre>
         </figure>
       </section>
 

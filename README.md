@@ -135,7 +135,7 @@ One class, `.tombo-shell`, and a four-step scale. The step is chosen by what the
 
 | Token | Value | Holds |
 |---|---|---|
-| `--tombo-shell-reading` | `65ch` | body copy — 621px at the body voice, 76 latin / 41 japanese characters per line |
+| `--tombo-shell-reading` | `65ch` | body copy — caps the line at 621px at the body voice, 76 latin / 41 japanese characters |
 | `--tombo-shell-default` | `1280px` | ordinary pages and documentation |
 | `--tombo-shell-wide` | `1792px` | landing pages, card grids, dashboards |
 | `--tombo-shell-gutter` | `clamp(20px, 3.25vw, 64px)` | the inline padding, fluid across the whole range |
@@ -151,7 +151,7 @@ One class, `.tombo-shell`, and a four-step scale. The step is chosen by what the
 
 Markup is the whole API. `.tombo-shell` reads `--tombo-shell`; the modifiers rebind it for one element. `.tombo-gutters` reads the same variable and adds the shell's own gutter, so the margin grid meets the content edge rather than the shell's outer edge. There are no container breakpoints — `max-inline-size` plus the clamp()ed gutter cover every viewport continuously.
 
-`reading` is the only step measured on the text rather than the box: the shell is `border-box`, so `.tombo-shell--reading` sizes itself to `65ch` **plus two gutters** and the line inside lands on 65ch. `default` and `wide` are frame widths and mean exactly the number they state. Applying `--tombo-shell-reading` directly to a paragraph — which has no gutter — needs no compensation:
+`reading` is the only step measured on the text rather than the box: the shell is `border-box`, so `.tombo-shell--reading` sizes itself to `65ch` **plus two gutters**, and the line inside lands on 65ch wherever the viewport affords it. Below that the shell fills the viewport and the line shrinks with it — every step is a ceiling, not a fixed width. `default` and `wide` are frame widths and mean exactly the number they state. Applying `--tombo-shell-reading` directly to a paragraph — which has no gutter — needs no compensation:
 
 ```css
 .prose p { max-inline-size: var(--tombo-shell-reading); }
@@ -161,6 +161,14 @@ Two things to know:
 
 - **Don't use the `padding` shorthand on a `.tombo-shell` element.** Your rule is unlayered and `.tombo-shell` lives in `@layer tombo.utilities`, so the shorthand wins and silently zeroes the gutter. Use `padding-block`.
 - **Code blocks and tables are not prose.** Cap paragraphs at `--tombo-shell-reading`; let code and tables fill the column. A grid item holding a code block also needs `min-inline-size: 0`, or its longest line widens the track instead of scrolling.
+- **Wrap any table that can outgrow its column** in `.tombo-table-wrap`. A data table is a reflow exception under [WCAG 2.2 SC 1.4.10](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html), but the scroll belongs to the table, not the page. The three attributes are one set — a scroll container that cannot take focus is unreachable by keyboard, and `role="region"` needs a name:
+
+  ```html
+  <div class="tombo-table-wrap" role="region" aria-labelledby="cap" tabindex="0">
+    <table class="tombo-table"> … </table>
+  </div>
+  <p class="tombo-dimlab" id="cap">動作要件</p>
+  ```
 
 ### Overriding the page width
 
