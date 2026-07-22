@@ -156,9 +156,8 @@ Figma キット / JS コンポーネント / React・Vue ラッパー / アイ�
 ## 7. レイアウト・形状
 
 - 基本単位 4px。方眼セルは 24px 固定、セクション律動は docs 64px / LP 96px
-- 本文最大幅 62ch(docs)
-- shell(コンテンツ列)は `--tombo-shell-max` = 1100px。**1600px 以上で 1280px** に段階拡大(消費側は `max-width: var(--tombo-shell-max, 1100px)` で追随)
-- **v0.4 で用途別コンテナスケールに置換(2026-07-22)**: `.tombo-shell` 1 クラス + `--tombo-shell-{reading,default,wide}` = 65ch / 1280px / 1792px、ガターは `clamp(20px, 3.25vw, 64px)`。ページ幅は `--tombo-shell` に一度だけ代入し、`.tombo-gutters` も同じ変数を読む。`reading` だけ `ch`(measure は組む書体を追う必要がある)、`default`/`wide` は px 型スケールに合わせて px。コンテナのブレークポイントは廃止 — `max-inline-size` と clamp() で連続。`--tombo-shell-max` は `--tombo-shell` の別名として存続(0.5 で削除)。上の 62ch は `--tombo-shell-reading` に統合
+- **〜v0.3(廃止、下の v0.4 契約に置換済み)**: 本文最大幅 62ch(docs)。shell(コンテンツ列)は `--tombo-shell-max` = 1100px で、**1600px 以上で 1280px** に段階拡大(消費側は `max-width: var(--tombo-shell-max, 1100px)` で追随)
+- **v0.4 以降 — 用途別コンテナスケール(2026-07-22)**: `.tombo-shell` 1 クラス + `--tombo-shell-{reading,default,wide}` = 65ch / 1280px / 1792px、ガターは `clamp(20px, 3.25vw, 64px)`。ページ幅は `--tombo-shell` に **`:root` で一度だけ**代入する(`<body>` 以下だと `:root` 宣言の `--tombo-shell-max` alias と `.tombo-gutters` が追従しない)。`reading` だけ `ch`(measure は組む書体を追う必要がある)、`default`/`wide` は px 型スケールに合わせて px。shell は border-box なので `--reading` の外寸はガター 2 本分を足す(足さないと実測 51.9ch になる)。`.tombo-gutters` の幅も shell 外側の余白 + ガターで本文の端に一致させる。コンテナのブレークポイントは廃止 — `max-inline-size` と clamp() で連続。旧 62ch は `--tombo-shell-reading` に統合。`--tombo-shell-max` は alias として存続するが **値が 1100px → 1280px に変化**(0.5 で削除)
 - 広幅(1600px 以上)では余白を計器化する: `.tombo-gutters` の方眼が `--tombo-grid-bold`(昼 .13 / 夜 .09)に濃くなり、ビューポート四隅に見当マーク(ink、opacity .45)が出る。印刷でトンボが住むのは版面外 — 画面ではビューポートの縁がそれにあたる(2026-07-22 追加)
 - 角丸: 原則 0(図面に丸はない)。例外: コードブロック等の大型パネル 6px、チップ 99px
 - 罫線: 通常 1px hairline / 強調 1.5px ink / 現在地 2px shu
@@ -214,6 +213,7 @@ tombo/
 ```
 
 - 配布: GitHub リポジトリ + jsDelivr CDN 参照。npm 公開は follow-up
+  - **2026-07-22 訂正**: リポジトリを private 化した時点で jsDelivr の `gh` エンドポイントは 404 になっており、CDN 配布は最初から成立していなかった(既存タグ v0.3.2 でも 404 を実測)。実際の配布はタグからの vendor(消費側で sha256 をピン留めして CI 検証)。公開予定が立つまでこれが唯一の経路
 - 適用先の実装形態(Astro / Laravel Blade / Vue)を問わず `<link rel="stylesheet">` 一枚で導入できること
 
 ## 13. 検証方針

@@ -109,16 +109,21 @@
       repeating-linear-gradient(90deg, var(--tombo-grid) 0 1px, transparent 1px 24px);
   }
   /* container scale — one class, four widths. The page runs at --tombo-shell-default;
-     reassign --tombo-shell on :root or <body> when a whole page wants another step.
-     .tombo-gutters reads the same variable, so the margins always meet the content
-     edge. The modifiers rebind it for a single element. */
+     reassign --tombo-shell on :root (only there — the deprecated --tombo-shell-max
+     alias is declared at :root and will not follow an override made lower down)
+     when a whole page wants another step. .tombo-gutters reads the same variable, so
+     the margins always meet the content edge. The modifiers rebind it per element. */
   .tombo-shell {
     inline-size: 100%;
     max-inline-size: var(--tombo-shell);
     margin-inline: auto;
     padding-inline: var(--tombo-shell-gutter);
   }
-  .tombo-shell--reading { --tombo-shell: var(--tombo-shell-reading); }
+  /* reading is a measure of TEXT, so the box has to carry the gutter on top of it —
+     the shell is border-box, and capping it at the bare 65ch would leave 65ch minus
+     two gutters of actual line (51.9ch at a 1920px viewport). default and wide are
+     frame widths and mean exactly what they say, so they are not compensated. */
+  .tombo-shell--reading { --tombo-shell: calc(var(--tombo-shell-reading) + 2 * var(--tombo-shell-gutter)); }
   .tombo-shell--wide    { --tombo-shell: var(--tombo-shell-wide); }
   /* full bleed leaves --tombo-shell untouched so a nested .tombo-shell keeps the page width */
   .tombo-shell--full    { max-inline-size: none; padding-inline: 0; }
@@ -126,7 +131,11 @@
   .tombo-gutters { position: relative; }
   .tombo-gutters::before, .tombo-gutters::after {
     content: ""; position: absolute; inset-block: 0; pointer-events: none;
-    inline-size: max(24px, calc((100vw - var(--tombo-shell)) / 2));
+    /* reach the content edge, not the shell's outer edge: the margin outside the
+       shell PLUS the shell's own gutter. 100% (the body box) rather than 100vw so a
+       classic scrollbar does not push the grid past the content. Below the shell
+       width the first term is 0 and the grid is exactly the gutter. */
+    inline-size: calc(max(0px, (100% - var(--tombo-shell)) / 2) + var(--tombo-shell-gutter));
     background-image:
       repeating-linear-gradient(0deg,  var(--tombo-grid) 0 1px, transparent 1px 24px),
       repeating-linear-gradient(90deg, var(--tombo-grid) 0 1px, transparent 1px 24px);

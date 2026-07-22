@@ -33,14 +33,25 @@ The dark flavor is named **hotaru** (蛍, firefly): at night, the instruments gl
 
 ## Quick start
 
+This repository is private, so there is no CDN to link — jsDelivr's `gh` endpoint 404s on private repos, tag or no tag. Vendor the stylesheet from a tag instead:
+
+```bash
+git -C /path/to/tombo show v0.4.0:tombo.css > public/styles/tombo.css
+git -C /path/to/tombo show v0.4.0:LICENSE   > public/styles/tombo.LICENSE
+```
+
+Then link your copy, alongside the three voices:
+
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wadakatu/tombo@v0.4.0/tombo.css">
+<link rel="stylesheet" href="/styles/tombo.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
 ```
 
-That's it — no build step, no framework. Works with any templating layer (Astro, Laravel Blade, Vue, plain HTML) since it's a single stylesheet. The font `<link>`s are optional: `tombo.css` declares font stacks with system fallbacks (`system-ui`, `ui-monospace`), so the page degrades gracefully without them.
+No build step, no framework — it's a single stylesheet, so any templating layer works (Astro, Laravel Blade, Vue, plain HTML). The font `<link>`s are optional: `tombo.css` declares font stacks with system fallbacks (`system-ui`, `ui-monospace`), so the page degrades gracefully without them.
+
+A vendored copy drifts silently, so pin it: record the tag and the file's sha256 in the consuming repo and check it in CI. Then a hand-edit or a stale copy fails the build instead of turning into a mystery months later.
 
 ## Type
 
@@ -138,7 +149,13 @@ One class, `.tombo-shell`, and a four-step scale. The step is chosen by what the
 <div class="tombo-shell tombo-shell--full">     <!-- backgrounds, decoration: no cap, no gutter -->
 ```
 
-Markup is the whole API. `.tombo-shell` reads `--tombo-shell`; the modifiers rebind it for one element. `.tombo-gutters` reads the same variable, so the margin grid always meets the content edge. There are no container breakpoints — `max-inline-size` plus the clamp()ed gutter cover every viewport continuously.
+Markup is the whole API. `.tombo-shell` reads `--tombo-shell`; the modifiers rebind it for one element. `.tombo-gutters` reads the same variable and adds the shell's own gutter, so the margin grid meets the content edge rather than the shell's outer edge. There are no container breakpoints — `max-inline-size` plus the clamp()ed gutter cover every viewport continuously.
+
+`reading` is the only step measured on the text rather than the box: the shell is `border-box`, so `.tombo-shell--reading` sizes itself to `65ch` **plus two gutters** and the line inside lands on 65ch. `default` and `wide` are frame widths and mean exactly the number they state. Applying `--tombo-shell-reading` directly to a paragraph — which has no gutter — needs no compensation:
+
+```css
+.prose p { max-inline-size: var(--tombo-shell-reading); }
+```
 
 Two things to know:
 
@@ -153,7 +170,9 @@ The page runs at `--tombo-shell-default`. When a whole page wants a different st
 :root { --tombo-shell: var(--tombo-shell-wide); }
 ```
 
-Set it at `:root` or on `<body>`, above everything that reads it. `.tombo-gutters` sits on `<body>`, so a value declared further down the tree reaches that element's own subtree but never the gutters, and the margin grid stops meeting the content edge. Reach for the modifier classes instead when only one container needs another step.
+**`:root` and nowhere else.** Two things are declared there and will not follow an override made further down: the deprecated `--tombo-shell-max` alias, and — because `.tombo-gutters` sits on `<body>` — the margin grid, which would stop meeting the content edge. Setting it on `<body>` looks like it works and silently leaves the alias at `1280px`.
+
+When only one container needs another step, use the modifier classes rather than reassigning anything.
 
 The system's one sanctioned inline custom property is `--tombo-ruler-value`; `--tombo-shell` is not one. Keep it in a stylesheet.
 
@@ -229,7 +248,7 @@ Each toggles `tombo` / `hotaru` live and can be opened directly in a browser (no
 
 ## Scope
 
-Pure CSS, zero JS, zero dependencies — one `tombo.css` file (`@layer tombo.reset, tombo.tokens, tombo.base, tombo.components, tombo.utilities`). Distributed via GitHub + jsDelivr CDN.
+Pure CSS, zero JS, zero dependencies — one `tombo.css` file (`@layer tombo.reset, tombo.tokens, tombo.base, tombo.components, tombo.utilities`). Distributed by vendoring from a tag; the repo is private, so there is no CDN and no npm package.
 
 Deliberately out of scope for v1: Figma kit, JS components, framework wrappers (React/Vue), an icon set beyond the logo, and **npm publishing** — these are follow-ups once the CSS itself is stable.
 

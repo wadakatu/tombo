@@ -326,7 +326,7 @@
 
       <section id="c15">
         <h2 class="tombo-sec">コンテナ</h2>
-        <p class="note">用途別の 4 段。<code>.tombo-shell</code> が唯一のクラスで、幅は <code>--tombo-shell</code> を読む。ページ全体の幅は <code>:root</code> か <code>&lt;body&gt;</code> に一度だけ書き、修飾子はその要素だけ付け替える。<code>.tombo-gutters</code> も同じ変数を読むので、余白の方眼は常に本文の端に接する。ブレークポイントは無い — <code>max-inline-size</code> と clamp() のガターで全幅域を連続的に埋める。</p>
+        <p class="note">用途別の 4 段。<code>.tombo-shell</code> が唯一のクラスで、幅は <code>--tombo-shell</code> を読む。ページ全体の幅は <code>:root</code> に一度だけ書き、修飾子はその要素だけ付け替える。<code>.tombo-gutters</code> も同じ変数を読むので、余白の方眼は常に本文の端に接する。ブレークポイントは無い — <code>max-inline-size</code> と clamp() のガターで全幅域を連続的に埋める。</p>
         <div class="demo scale-demo">
           <div class="tombo-dim" style="width:34.7%"></div>
           <p class="tombo-dimlab">--tombo-shell-reading — 65ch ≒ 621px / 本文。和文 41 字・欧文 76 字</p>
@@ -344,7 +344,7 @@
 &lt;div class="tombo-shell tombo-shell--wide"&gt;    &lt;!-- LP・グリッド --&gt;
 &lt;div class="tombo-shell tombo-shell--full"&gt;    &lt;!-- 背景・装飾 --&gt;</pre>
         </figure>
-        <p class="note">ページ全体の段を変えるときだけ、自分のスタイルシートで <code>--tombo-shell</code> を差し替える。インライン <code>style</code> は使わない — システムが認めるインライン custom property は <code>--tombo-ruler-value</code> だけ。<code>.tombo-gutters</code> は <code>&lt;body&gt;</code> に載るので、宣言はそれより上(<code>:root</code> か <code>&lt;body&gt;</code>)に置くこと。下層に書くと余白の方眼が本文の端に届かなくなる。</p>
+        <p class="note">ページ全体の段を変えるときだけ、自分のスタイルシートで <code>--tombo-shell</code> を差し替える。インライン <code>style</code> は使わない — システムが認めるインライン custom property は <code>--tombo-ruler-value</code> だけ。宣言は必ず <code>:root</code> に置く — <code>&lt;body&gt;</code> 以下に書くと、<code>:root</code> で宣言された deprecated alias <code>--tombo-shell-max</code> と <code>.tombo-gutters</code> の方眼が追従しない。</p>
         <figure class="tombo-code">
           <figcaption><span>CSS</span><span>ページ幅の上書き</span></figcaption>
           <pre>:root { --tombo-shell: var(--tombo-shell-wide); }</pre>
