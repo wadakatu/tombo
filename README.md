@@ -36,8 +36,8 @@ The dark flavor is named **hotaru** (蛍, firefly): at night, the instruments gl
 This repository is private, so there is no CDN to link — jsDelivr's `gh` endpoint 404s on private repos, tag or no tag. Vendor the stylesheet from a tag instead:
 
 ```bash
-git -C /path/to/tombo show v0.4.0:tombo.css > public/styles/tombo.css
-git -C /path/to/tombo show v0.4.0:LICENSE   > public/styles/tombo.LICENSE
+git -C /path/to/tombo show v0.5.0:tombo.css > public/styles/tombo.css
+git -C /path/to/tombo show v0.5.0:LICENSE   > public/styles/tombo.LICENSE
 ```
 
 Then link your copy, alongside the three voices:
@@ -127,7 +127,7 @@ Day has no `raised` (+2) step — pure white is forbidden, so there's no headroo
 | warn | `#B07818` | `#D9A441` | |
 | error | `#A6301C` (crimson) | `#D06A5A` | **fills are allowed** — distinguished from shu by weight and role: shu = position, crimson = failure |
 
-Forbidden everywhere: pure `#000`/`#FFF`, filled shu, shu body text, drop shadows, blur.
+Forbidden everywhere: pure `#000`/`#FFF`, filled shu, shu body text, and any shadow with an offset — a shadow that implies a light source. The one exception is the offset-zero glow of [`.tombo-glow`](#glow), which is opt-in and night-only.
 
 ## Containers
 
@@ -219,7 +219,7 @@ Six marks repeated across every product, "played" at a different volume per cont
 | S-03 | Tick marks | `.tombo-ticks`, `.tombo-ruler` | list bullets as green ticks; ruler = 10%-grid track + green fill + shu current-value line |
 | S-04 | Running numbers | `.tombo-sections`, `.tombo-sec`, `.tombo-fig` | auto-numbered headings (`02 —`) and mono figure/note captions |
 | S-05 | Shu current position | `.tombo-current`, `.tombo-kicker`, `[aria-current]` | the shu marker on active tabs, TOC entries, kickers |
-| S-06 | Graph paper | `.tombo-vol-lp`, `.tombo-gutters` | background grid — full-bleed hero on LP, margins only on docs, off on app |
+| S-06 | Graph paper | `.tombo-vol-lp`, `.tombo-gutters`, `.tombo-glow` | background grid — full-bleed hero on LP, margins only on docs, off on app; the glow lights the grid at night |
 
 ## Volume dial
 
@@ -232,7 +232,25 @@ The same six marks, turned up or down per product type:
 | Dimension line | hr replacement | none | under headings + captions |
 | Running numbers | headings, notes | REV label | FIG. numbers |
 | Shu current position | TOC, tabs | nav, instruments | first stroke of the kicker |
-| Logo tail glow (hotaru) | none | none | hero only |
+| Glow (hotaru) | none | none | hero + instruments, opt-in |
+
+## Glow
+
+`hotaru` means firefly: at night the instruments are supposed to glow. Until 0.5 that was one hard-coded exception on the LP logo tail. It is now an opt-in class.
+
+```html
+<header class="hero tombo-vol-lp tombo-glow tombo-corners"> … </header>
+<figure class="tombo-metric tombo-glow"> … </figure>
+```
+
+`.tombo-glow` lights a surface, rings it, and haloes the display type and metric values inside it. Every glow token is `light-dark(transparent, …)`, so **the class is inert by day and needs no theme selector** — it follows the OS and `data-theme` alike through `color-scheme`. Writing the rules as `[data-theme="hotaru"]` instead would miss every page that merely follows a dark OS without forcing a theme.
+
+Two constraints are baked in, and both exist because the mockups got them wrong first:
+
+- **The wash is a background layer, never a pseudo-element.** `.tombo-corners`, `.tombo-dim`, `.tombo-ticks`, `.tombo-ruler`, `.tombo-current` and `.tombo-kicker` all own `::before`/`::after`. A glow built on a pseudo silently eats one of their marks the first time the classes are combined — in our case the hero's bottom-right registration mark vanished and survived two rounds of review.
+- **Annotation ink is lifted one step inside the glow.** A lit surface sits ~1.3 contrast points brighter, which drops `--tombo-ink-faint` to 3.93:1 on the wash and 3.68:1 on a lit panel — under the 4.5 floor that `.tombo-dimlab`, `.tombo-fig` and `.tombo-footer` all depend on. `.tombo-glow` rebinds `--tombo-ink-faint`, so every component inside follows without being touched.
+
+The contrast gate flattens the wash onto the background before measuring, so raising `--tombo-glow-wash` past `.23` fails the build instead of the review.
 
 ## Contrast gate
 

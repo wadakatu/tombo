@@ -71,6 +71,38 @@ PAIRS = [
     ("dark code-faint/code-bg",   "dark",  "code-faint",    "code-bg", 4.5),
 ]
 
+# --- .tombo-glow ---------------------------------------------------------
+# A lit surface is a COMPOSITE: the wash paints over paper/surface before any
+# text lands on it, so a plain token-vs-token check cannot see it. v0.4 shipped
+# a mock whose annotations measured 3.93:1 and 3.68:1 against exactly this and
+# the gate stayed green. The alphas below must track the --tombo-glow-* tokens.
+GLOW_ALPHAS = {"wash": 0.16, "edge": 0.14}
+
+# (label, fg token, bg token, overlay alpha, floor) — night only; the tokens are
+# transparent by day, so the composite equals the plain background there.
+GLOW_PAIRS = [
+    ("glow hero ink",         "ink",                  "paper",   GLOW_ALPHAS["wash"], 7.0),
+    ("glow hero annotation",  "ink-sub",              "paper",   GLOW_ALPHAS["wash"], 4.5),
+    ("glow hero green",       "green",                "paper",   GLOW_ALPHAS["wash"], 4.5),
+    ("glow hero shu line",    "shu",                  "paper",   GLOW_ALPHAS["wash"], 3.0),
+    ("glow panel ink",        "ink",                  "surface", GLOW_ALPHAS["edge"], 7.0),
+    ("glow panel annotation", "ink-sub",              "surface", GLOW_ALPHAS["edge"], 4.5),
+    ("glow panel shu line",   "shu",                  "surface", GLOW_ALPHAS["edge"], 3.0),
+    # the lift itself: inside .tombo-glow, --tombo-ink-faint becomes this token
+    ("glow lifted faint",     "ink-faint-glow",       "paper",   GLOW_ALPHAS["wash"], 4.5),
+]
+
+def _hex_to_rgb(h: str) -> tuple:
+    return tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
+
+def _rgb_to_hex(rgb) -> str:
+    return "#{:02X}{:02X}{:02X}".format(*(max(0, min(255, round(c))) for c in rgb))
+
+def composite(over_hex: str, alpha: float, under_hex: str) -> str:
+    """Flatten `over` at `alpha` onto `under` — what the eye actually sees."""
+    o, u = _hex_to_rgb(over_hex), _hex_to_rgb(under_hex)
+    return _rgb_to_hex(tuple(uu * (1 - alpha) + oo * alpha for oo, uu in zip(o, u)))
+
 def self_test() -> None:
     assert abs(ratio("#FFFFFF", "#000000") - 21.0) < 0.01
     assert abs(ratio("#1A211D", "#F2F4EF") - 14.82) < 0.05
@@ -93,6 +125,29 @@ def main() -> int:
         ok = r >= floor
         failed |= not ok
         print(f"{'PASS' if ok else 'FAIL'}  {label:26} {r:6.2f}  (floor {floor})")
+
+    # the lift must actually equal ink-faint by day and ink-sub by night, or the
+    # comment in tombo.css is a lie and one of the two themes silently shifts
+    if "ink-faint-glow" in tokens:
+        want = (tokens["ink-faint"]["light"], tokens["ink-sub"]["dark"])
+        got = (tokens["ink-faint-glow"]["light"], tokens["ink-faint-glow"]["dark"])
+        ok = want == got
+        failed |= not ok
+        print(f"{'PASS' if ok else 'FAIL'}  {'glow lift mirrors tokens':26}        "
+              f"({got[0]}/{got[1]} vs {want[0]}/{want[1]})")
+
+    for label, fg, bg, alpha, floor in GLOW_PAIRS:
+        if fg not in tokens or bg not in tokens:
+            missing = fg if fg not in tokens else bg
+            print(f"FAIL  {label:26}   n/a  (token --tombo-{missing} not found)")
+            failed = True
+            continue
+        lit = composite(tokens["green"]["dark"], alpha, tokens[bg]["dark"])
+        r = ratio(tokens[fg]["dark"], lit)
+        ok = r >= floor
+        failed |= not ok
+        print(f"{'PASS' if ok else 'FAIL'}  {label:26} {r:6.2f}  (floor {floor}, on {lit})")
+
     return 1 if failed else 0
 
 if __name__ == "__main__":

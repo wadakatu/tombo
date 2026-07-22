@@ -60,6 +60,7 @@
         <a href="#c13">13 — ロゴ刻印</a>
         <a href="#c14">14 — ユーティリティ</a>
         <a href="#c15">15 — コンテナ</a>
+        <a href="#c16">16 — 発光</a>
       </nav>
     </aside>
 
@@ -355,6 +356,27 @@
           <figcaption><span>CSS</span><span>ページ幅の上書き</span></figcaption>
           <pre>:root { --tombo-shell: var(--tombo-shell-wide); }</pre>
         </figure>
+      </section>
+
+      <section id="c16">
+        <h2 class="tombo-sec">発光</h2>
+        <p class="note">S-06。hotaru = 蛍。夜だけ計器が光る。<code>.tombo-glow</code> はオプトインで、面を光らせ、縁にリングを回し、中の <code>.tombo-display</code> と <code>.tombo-metric</code> の数値に暈をつける。トークンが全部 <code>light-dark(transparent, …)</code> なので<b>昼は完全に不活性</b>で、テーマセレクタが要らない — OS のダークモードにも <code>data-theme</code> にも <code>color-scheme</code> 経由で追従する。</p>
+        <div class="demo">
+          <figure class="tombo-metric tombo-glow tombo-corners" style="padding:20px 22px">
+            <b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
+            <p class="tombo-fig">FIG. 16 — LIT INSTRUMENT</p>
+            <div class="k" style="margin-top:12px">OPERATIONS COVERED</div>
+            <div class="v">96.2<small style="font-size:var(--tombo-text-note)">%</small></div>
+            <div class="tombo-ruler" style="--tombo-ruler-value:96%"></div>
+            <p class="tombo-dimlab">この注記は発光面の中なので ink-sub に一段上がっている</p>
+          </figure>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-GLOW</span></figcaption>
+          <pre>&lt;header class="hero tombo-vol-lp tombo-glow tombo-corners"&gt; … &lt;/header&gt;
+&lt;figure class="tombo-metric tombo-glow"&gt; … &lt;/figure&gt;</pre>
+        </figure>
+        <p class="note">2 点が仕様として固定されている。<b>光は background-image に合成し、擬似要素では作らない</b> — <code>.tombo-corners</code> をはじめ signature classes はほぼ全部 <code>::before</code>/<code>::after</code> を使っているので、擬似要素で光を作ると組み合わせた瞬間にどれかの印が消える。<b>発光面の中では注記の階調が一段上がる</b> — 光で下地が約 1.3 ポイント明るくなり、<code>--tombo-ink-faint</code> が 4.5:1 を割るため。<code>.tombo-glow</code> がトークンを差し替えるので配下は自動で追従する。コントラストゲートは合成後の下地で測るので、<code>--tombo-glow-wash</code> を .23 より上げるとビルドが落ちる。</p>
       </section>
     </main>
   </div>

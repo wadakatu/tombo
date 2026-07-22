@@ -1,4 +1,4 @@
-/*! TOMBO v0.4.0 — wadakatu design system. MIT. https://github.com/wadakatu/tombo */
+/*! TOMBO v0.5.0 — wadakatu design system. MIT. https://github.com/wadakatu/tombo */
 @layer tombo.reset, tombo.tokens, tombo.base, tombo.components, tombo.utilities;
 
 @layer tombo.tokens {
@@ -34,6 +34,19 @@
     --tombo-green:    light-dark(#0E5A47, #4FC2A2);
     --tombo-on-green: light-dark(#F2F4EF, #10201A);
     --tombo-shu:      light-dark(#D8442B, #E5654C);
+    /* glow — the hotaru firefly (spec §9), opt-in via .tombo-glow. Every value is
+       transparent by day, so the rules that use them need no theme selector and
+       follow the OS and data-theme alike through color-scheme. Writing them as
+       [data-theme="hotaru"] instead would miss every page that merely follows a
+       dark OS without forcing a theme. */
+    --tombo-glow-wash: light-dark(transparent, rgba(79,194,162,.16));
+    --tombo-glow-edge: light-dark(transparent, rgba(79,194,162,.14));
+    --tombo-glow-halo: light-dark(transparent, rgba(79,194,162,.30));
+    /* a lit surface sits ~1.3 contrast points brighter, which drops ink-faint to
+       3.93:1 on the wash and 3.68:1 on a lit panel — under the 4.5 floor. Inside
+       .tombo-glow the annotation ink is lifted one step. The two values mirror
+       ink-faint by day and ink-sub by night; check_contrast.py asserts that. */
+    --tombo-ink-faint-glow: light-dark(#667069, #9AA69F);
     /* status (app volume only) */
     --tombo-success: light-dark(#2C7A4B, #57B98A);
     --tombo-warn:    light-dark(#B07818, #D9A441);
@@ -127,6 +140,32 @@
   .tombo-shell--wide    { --tombo-shell: var(--tombo-shell-wide); }
   /* full bleed leaves --tombo-shell untouched so a nested .tombo-shell keeps the page width */
   .tombo-shell--full    { max-inline-size: none; padding-inline: 0; }
+
+  /* S-06 発光 — LP volume, night only, opt-in. The wash is a background layer and
+     never a pseudo-element: .tombo-corners, .tombo-dim, .tombo-ticks, .tombo-ruler,
+     .tombo-current and .tombo-kicker all own ::before/::after already, so a glow
+     built on a pseudo silently eats one of their marks the first time the classes
+     are combined. Pair it with .tombo-vol-lp on a hero and the grid rides on top. */
+  .tombo-glow {
+    --tombo-ink-faint: var(--tombo-ink-faint-glow);
+    background-image: radial-gradient(72% 88% at 26% 46%, var(--tombo-glow-wash), transparent 68%);
+    background-repeat: no-repeat;
+  }
+  .tombo-vol-lp.tombo-glow {
+    background-image:
+      radial-gradient(72% 88% at 26% 46%, var(--tombo-glow-wash), transparent 68%),
+      repeating-linear-gradient(0deg,  var(--tombo-grid) 0 1px, transparent 1px 24px),
+      repeating-linear-gradient(90deg, var(--tombo-grid) 0 1px, transparent 1px 24px);
+    background-repeat: no-repeat, repeat, repeat;
+  }
+  /* offset-zero glows only — a shadow that implies a light source is still forbidden */
+  .tombo-glow.tombo-metric { box-shadow: 0 0 0 1px var(--tombo-glow-edge), 0 0 46px -14px var(--tombo-glow-halo); }
+  .tombo-glow .tombo-display,
+  .tombo-glow.tombo-metric > .v { text-shadow: 0 0 22px var(--tombo-glow-halo); }
+  @media (forced-colors: active) {
+    .tombo-glow { background-image: none; box-shadow: none; }
+    .tombo-glow .tombo-display, .tombo-glow.tombo-metric > .v { text-shadow: none; }
+  }
 
   .tombo-gutters { position: relative; }
   .tombo-gutters::before, .tombo-gutters::after {
