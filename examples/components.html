@@ -9,17 +9,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
 <style>
-  .shell { max-width: var(--tombo-shell-max, 1100px); margin: 0 auto; padding: 0 32px; }
-  .layout { display: grid; grid-template-columns: 220px 1fr; gap: 56px; padding: 48px 0 64px; align-items: start; }
+  :root { --tombo-shell: var(--tombo-shell-default); }
+  .layout { display: grid; grid-template-columns: 220px 1fr; gap: 56px; padding-block: 48px 64px; align-items: start; }
   main.tombo-sections { min-width: 0; }
   .side { position: sticky; top: 48px; }
   .brand { font-family: var(--tombo-font-display); font-weight: 700; font-size: 16px; }
   .brand small { display: block; font-family: var(--tombo-font-mono); font-weight: 400; font-size: var(--tombo-text-label); color: var(--tombo-ink-faint); letter-spacing: .12em; margin-top: 4px; }
   .side .tombo-toc { margin-top: 22px; }
-  main > p.lead { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); margin-top: 14px; max-width: 62ch; }
+  main > p.lead { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); margin-top: 14px; max-inline-size: var(--tombo-shell-reading); }
   section { margin-top: 52px; max-width: 720px; }
   @media (min-width: 1600px) { section { max-width: 880px; } }
-  section .note { font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); color: var(--tombo-ink-sub); margin-top: 10px; max-width: 62ch; }
+  section .note { font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); color: var(--tombo-ink-sub); margin-top: 10px; max-inline-size: var(--tombo-shell-reading); }
   .demo { border: 1px solid var(--tombo-hairline); padding: 24px; margin-top: 16px; }
   .demo + .tombo-code { margin-top: 12px; }
   .row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
@@ -29,6 +29,8 @@
   .metric-demo { max-width: 280px; }
   .tombo-metric .tombo-ruler { margin-top: 12px; height: 14px; }
   .griddemo { height: 96px; border: 1px solid var(--tombo-hairline); }
+  .scale-demo .tombo-dimlab { margin-bottom: 20px; }
+  .scale-demo .tombo-dimlab:last-child { margin-bottom: 0; }
   @media (max-width: 680px) {
     .layout { grid-template-columns: 1fr; gap: 28px; }
     .side { position: static; }
@@ -40,7 +42,7 @@
 </head>
 <body class="tombo-gutters">
 
-  <div class="shell layout">
+  <div class="tombo-shell layout">
     <aside class="side">
       <div class="brand">TOMBO<small>COMPONENT CATALOG</small></div>
       <nav class="tombo-toc">
@@ -58,6 +60,7 @@
         <a href="#c12">12 — メトリクス</a>
         <a href="#c13">13 — ロゴ刻印</a>
         <a href="#c14">14 — ユーティリティ</a>
+        <a href="#c15">15 — コンテナ</a>
       </nav>
     </aside>
 
@@ -321,11 +324,35 @@
 &lt;section class="tombo-vol-lp"&gt;    &lt;!-- LP: ヒーロー全面 --&gt;</pre>
         </figure>
       </section>
+
+      <section id="c15">
+        <h2 class="tombo-sec">コンテナ</h2>
+        <p class="note">用途別の 4 段。<code>.tombo-shell</code> が唯一のクラスで、幅は <code>--tombo-shell</code> を読む。ページ全体の幅は <code>:root</code> か <code>&lt;body&gt;</code> に一度だけ書き、修飾子はその要素だけ付け替える。<code>.tombo-gutters</code> も同じ変数を読むので、余白の方眼は常に本文の端に接する。ブレークポイントは無い — <code>max-inline-size</code> と clamp() のガターで全幅域を連続的に埋める。</p>
+        <div class="demo scale-demo">
+          <div class="tombo-dim" style="width:34.7%"></div>
+          <p class="tombo-dimlab">--tombo-shell-reading — 65ch ≒ 621px / 本文。和文 41 字・欧文 76 字</p>
+          <div class="tombo-dim" style="width:71.4%"></div>
+          <p class="tombo-dimlab">--tombo-shell-default — 1280px / 通常ページ・ドキュメント</p>
+          <div class="tombo-dim" style="width:100%"></div>
+          <p class="tombo-dimlab">--tombo-shell-wide — 1792px / LP・カードグリッド・ダッシュボード</p>
+          <div class="tombo-dim" style="width:100%; opacity:.35"></div>
+          <p class="tombo-dimlab">.tombo-shell--full — 幅制限なし / 背景・装飾。ガターも 0</p>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-SHELL</span></figcaption>
+          <pre>&lt;html style="--tombo-shell: var(--tombo-shell-default)"&gt;  &lt;!-- ページの幅 --&gt;
+
+&lt;div class="tombo-shell"&gt;                    &lt;!-- ページの幅 --&gt;
+&lt;div class="tombo-shell tombo-shell--reading"&gt; &lt;!-- 本文 --&gt;
+&lt;div class="tombo-shell tombo-shell--wide"&gt;    &lt;!-- LP・グリッド --&gt;
+&lt;div class="tombo-shell tombo-shell--full"&gt;    &lt;!-- 背景・装飾 --&gt;</pre>
+        </figure>
+      </section>
     </main>
   </div>
 
   <footer class="tombo-footer">
-    <div class="shell foot">
+    <div class="tombo-shell foot">
       <span class="tombo-logo" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
       <div>
       TOMBO — WADAKATU DESIGN SYSTEM<br>COMPONENT CATALOG — EXAMPLES/COMPONENTS.HTML

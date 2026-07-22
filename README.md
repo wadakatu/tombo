@@ -34,7 +34,7 @@ The dark flavor is named **hotaru** (蛍, firefly): at night, the instruments gl
 ## Quick start
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wadakatu/tombo@v0.3.2/tombo.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wadakatu/tombo@v0.4.0/tombo.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
@@ -117,6 +117,37 @@ Day has no `raised` (+2) step — pure white is forbidden, so there's no headroo
 | error | `#A6301C` (crimson) | `#D06A5A` | **fills are allowed** — distinguished from shu by weight and role: shu = position, crimson = failure |
 
 Forbidden everywhere: pure `#000`/`#FFF`, filled shu, shu body text, drop shadows, blur.
+
+## Containers
+
+One class, `.tombo-shell`, and a four-step scale. The step is chosen by what the container holds, not by screen size.
+
+| Token | Value | Holds |
+|---|---|---|
+| `--tombo-shell-reading` | `65ch` | body copy — 621px at the body voice, 76 latin / 41 japanese characters per line |
+| `--tombo-shell-default` | `1280px` | ordinary pages and documentation |
+| `--tombo-shell-wide` | `1792px` | landing pages, card grids, dashboards |
+| `--tombo-shell-gutter` | `clamp(20px, 3.25vw, 64px)` | the inline padding, fluid across the whole range |
+
+`reading` is in `ch` because it *is* a measure — it has to track whatever type it wraps, so the same token is wider on a mono caption than on body copy. `default` and `wide` are structural, so they stay in `px` to match the px type scale: a `rem` container under a `px` type scale lengthens the line without enlarging the text.
+
+```html
+<html style="--tombo-shell: var(--tombo-shell-default)">   <!-- the page's width, set once -->
+
+<div class="tombo-shell">                      <!-- the page's width -->
+<div class="tombo-shell tombo-shell--reading">  <!-- body copy -->
+<div class="tombo-shell tombo-shell--wide">     <!-- LP, grids -->
+<div class="tombo-shell tombo-shell--full">     <!-- backgrounds, decoration: no cap, no gutter -->
+```
+
+`.tombo-shell` reads `--tombo-shell`; the modifiers rebind it for one element. `.tombo-gutters` reads the same variable, so the margin grid always meets the content edge. There are no container breakpoints — `max-inline-size` plus the clamp()ed gutter cover every viewport continuously.
+
+Two things to know:
+
+- **Don't use the `padding` shorthand on a `.tombo-shell` element.** Your rule is unlayered and `.tombo-shell` lives in `@layer tombo.utilities`, so the shorthand wins and silently zeroes the gutter. Use `padding-block`.
+- **Code blocks and tables are not prose.** Cap paragraphs at `--tombo-shell-reading`; let code and tables fill the column. A grid item holding a code block also needs `min-inline-size: 0`, or its longest line widens the track instead of scrolling.
+
+`--tombo-shell-max` is deprecated as of 0.4 — it is now an alias for `--tombo-shell`, kept at its pre-0.4 values (1100px, 1280px from 1600px up) so existing pages do not shift. It is removed in 0.5.
 
 ## Signature classes (the 6 fingerprints)
 

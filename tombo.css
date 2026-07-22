@@ -1,4 +1,4 @@
-/*! TOMBO v0.3.2 — wadakatu design system. MIT. https://github.com/wadakatu/tombo */
+/*! TOMBO v0.4.0 — wadakatu design system. MIT. https://github.com/wadakatu/tombo */
 @layer tombo.reset, tombo.tokens, tombo.base, tombo.components, tombo.utilities;
 
 @layer tombo.tokens {
@@ -15,8 +15,20 @@
     --tombo-hairline:  light-dark(rgba(26,33,29,.16), rgba(229,235,230,.14));
     --tombo-grid:      light-dark(rgba(26,33,29,.07), rgba(229,235,230,.05));
     --tombo-grid-bold: light-dark(rgba(26,33,29,.13), rgba(229,235,230,.09)); /* wide-screen gutters only */
-    /* shell — content column cap shared by consumers; widens when the viewport affords real margins */
-    --tombo-shell-max: 1100px;
+    /* shell — the container scale. `--tombo-shell` is the page's active width; the
+       steps below are the values you assign to it. `reading` is font-relative because
+       it IS a measure — it has to track whatever type it wraps. `default` and `wide`
+       are structural, so they stay px to match the px type scale: a rem container
+       under a px type scale lengthens the line without enlarging the text, which is
+       backwards. If the type scale ever moves to rem, these move with it.
+       No breakpoints — max-inline-size plus a clamp()ed gutter cover every viewport. */
+    --tombo-shell-reading: 65ch;    /* 621px at the body voice — 76 latin / 41 japanese per line */
+    --tombo-shell-default: 1280px;
+    --tombo-shell-wide:    1792px;
+    --tombo-shell-gutter:  clamp(20px, 3.25vw, 64px);
+    --tombo-shell: 1100px;          /* pre-0.4 default, kept so existing pages do not shift;
+                                       0.5 makes this var(--tombo-shell-default) */
+    --tombo-shell-max: var(--tombo-shell); /* DEPRECATED since 0.4 — read --tombo-shell */
     /* instruments */
     --tombo-green:    light-dark(#0E5A47, #4FC2A2);
     --tombo-on-green: light-dark(#F2F4EF, #10201A);
@@ -57,7 +69,7 @@
   :root[data-theme="tombo"]  { color-scheme: light; }
   :root[data-theme="hotaru"] { color-scheme: dark; }
   @media (min-width: 1600px) {
-    :root { --tombo-shell-max: 1280px; }
+    :root { --tombo-shell: 1280px; } /* pre-0.4 step; retires with the default above in 0.5 */
   }
 }
 
@@ -98,16 +110,30 @@
       repeating-linear-gradient(0deg,  var(--tombo-grid) 0 1px, transparent 1px 24px),
       repeating-linear-gradient(90deg, var(--tombo-grid) 0 1px, transparent 1px 24px);
   }
+  /* container scale — one class, four widths. Assign --tombo-shell on :root or <body>
+     to set the page width; .tombo-gutters reads the same variable, so the margins
+     always meet the content edge. The modifiers rebind it for a single element. */
+  .tombo-shell {
+    inline-size: 100%;
+    max-inline-size: var(--tombo-shell);
+    margin-inline: auto;
+    padding-inline: var(--tombo-shell-gutter);
+  }
+  .tombo-shell--reading { --tombo-shell: var(--tombo-shell-reading); }
+  .tombo-shell--wide    { --tombo-shell: var(--tombo-shell-wide); }
+  /* full bleed leaves --tombo-shell untouched so a nested .tombo-shell keeps the page width */
+  .tombo-shell--full    { max-inline-size: none; padding-inline: 0; }
+
   .tombo-gutters { position: relative; }
   .tombo-gutters::before, .tombo-gutters::after {
-    content: ""; position: absolute; top: 0; bottom: 0; pointer-events: none;
-    width: max(24px, calc((100vw - var(--tombo-shell-max)) / 2));
+    content: ""; position: absolute; inset-block: 0; pointer-events: none;
+    inline-size: max(24px, calc((100vw - var(--tombo-shell)) / 2));
     background-image:
       repeating-linear-gradient(0deg,  var(--tombo-grid) 0 1px, transparent 1px 24px),
       repeating-linear-gradient(90deg, var(--tombo-grid) 0 1px, transparent 1px 24px);
   }
-  .tombo-gutters::before { left: 0; }
-  .tombo-gutters::after  { right: 0; }
+  .tombo-gutters::before { inset-inline-start: 0; }
+  .tombo-gutters::after  { inset-inline-end: 0; }
   @media (min-width: 1600px) {
     /* wide screens: the margins become the trim area — bolder grid, and the
        registration mark moves to the window's own corners (print puts tombo

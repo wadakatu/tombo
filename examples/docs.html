@@ -9,16 +9,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
 <style>
-  .shell { max-width: var(--tombo-shell-max, 1100px); margin: 0 auto; padding: 0 32px; }
-  .layout { display: grid; grid-template-columns: 200px 1fr; gap: 56px; padding: 48px 0 64px; align-items: start; }
+  :root { --tombo-shell: var(--tombo-shell-default); }
+  .layout { display: grid; grid-template-columns: 200px 1fr; gap: 56px; padding-block: 48px 64px; align-items: start; }
   .side { position: sticky; top: 48px; }
   .brand { font-family: var(--tombo-font-display); font-weight: 700; font-size: 16px; }
   .brand small { display: block; font-family: var(--tombo-font-mono); font-weight: 400; font-size: var(--tombo-text-label); color: var(--tombo-ink-faint); letter-spacing: .12em; margin-top: 4px; }
   .side .tombo-toc { margin-top: 22px; }
-  main.tombo-sections { counter-reset: tombo-section 1; }
-  main p { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); margin-top: 14px; max-width: 62ch; }
-  main h3, main .tombo-code, main .tombo-callout, main .tombo-table { margin-top: 24px; max-width: 62ch; }
-  main .tombo-dim { margin-top: 32px; max-width: 62ch; }
+  /* min-inline-size: 0 lets the code block scroll instead of widening the grid track */
+  main.tombo-sections { counter-reset: tombo-section 1; min-inline-size: 0; }
+  main p { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); margin-top: 14px; max-inline-size: var(--tombo-shell-reading); }
+  main h3, main .tombo-callout { margin-top: 24px; max-inline-size: var(--tombo-shell-reading); }
+  /* code and tables are not prose — they fill the column instead of the measure */
+  main .tombo-code, main .tombo-table { margin-top: 24px; }
+  main .tombo-dim { margin-top: 32px; max-inline-size: var(--tombo-shell-reading); }
   @media (max-width: 680px) {
     .layout { grid-template-columns: 1fr; gap: 28px; }
     .side { position: static; }
@@ -30,7 +33,7 @@
 </head>
 <body class="tombo-gutters">
 
-  <div class="shell layout">
+  <div class="tombo-shell layout">
     <aside class="side">
       <div class="brand">SPECTRUM<small>BY WADAKATU / TOMBO</small></div>
       <nav class="tombo-toc">
@@ -72,7 +75,7 @@
   </div>
 
   <footer class="tombo-footer">
-    <div class="shell foot">
+    <div class="tombo-shell foot">
       <span class="tombo-logo" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
       <div>
       TOMBO — WADAKATU DESIGN SYSTEM<br>DOCS VOLUME EXAMPLE — EXAMPLES/DOCS.HTML

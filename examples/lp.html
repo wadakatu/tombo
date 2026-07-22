@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
 <style>
-  .shell { max-width: var(--tombo-shell-max, 1100px); margin: 0 auto; padding: 0 32px; }
+  :root { --tombo-shell: var(--tombo-shell-default); }
   .hero { padding: 76px 0 64px; }
   /* full-bleed frame: the corners' 1px outdent would poke past the viewport and grow scrollWidth */
   .hero.tombo-corners::after, .hero .tombo-corner-tr { right: 0; }
@@ -27,7 +27,7 @@
   .inst .row b { color: var(--tombo-ink); font-weight: 500; }
   .inst .row .miss { color: var(--tombo-error); }
   .inst .cfoot { margin-top: 14px; }
-  .feat-sec { padding: 56px 0 8px; }
+  .feat-sec { padding-block: 56px 8px; }
   .feat { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   .fcard { display: flex; flex-direction: column; }
   .fcard h3 { margin-top: 8px; }
@@ -57,7 +57,7 @@
 
   <section class="hero tombo-vol-lp tombo-corners">
     <b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
-    <div class="shell">
+    <div class="tombo-shell">
       <span class="tombo-logo tombo-logo--glow" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
       <p class="tombo-kicker">GESSO — FIG. 00 / CONTRACTS, MEASURED</p>
       <div class="cols">
@@ -90,7 +90,7 @@
     </div>
   </section>
 
-  <section class="feat-sec shell">
+  <section class="feat-sec tombo-shell">
     <div class="tombo-dim"></div>
     <div class="tombo-dimlab">section — 01 / features</div>
     <h2 class="tombo-sec">Why Gesso</h2>
@@ -117,7 +117,7 @@
   </section>
 
   <footer class="tombo-footer">
-    <div class="shell foot">
+    <div class="tombo-shell foot">
       <span class="tombo-logo" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
       <div>
       TOMBO — WADAKATU DESIGN SYSTEM · LP VOLUME EXAMPLE — EXAMPLES/LP.HTML
