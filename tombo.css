@@ -26,9 +26,10 @@
     --tombo-shell-default: 1280px;
     --tombo-shell-wide:    1792px;
     --tombo-shell-gutter:  clamp(20px, 3.25vw, 64px);
-    --tombo-shell: 1100px;          /* pre-0.4 default, kept so existing pages do not shift;
-                                       0.5 makes this var(--tombo-shell-default) */
-    --tombo-shell-max: var(--tombo-shell); /* DEPRECATED since 0.4 — read --tombo-shell */
+    --tombo-shell: var(--tombo-shell-default); /* the page's width — reassign to pick a step */
+    --tombo-shell-max: var(--tombo-shell);     /* DEPRECATED since 0.4 — read --tombo-shell.
+                                                  NOTE: the value moved 1100px -> 1280px and the
+                                                  1600px step is gone. Removed in 0.5. */
     /* instruments */
     --tombo-green:    light-dark(#0E5A47, #4FC2A2);
     --tombo-on-green: light-dark(#F2F4EF, #10201A);
@@ -68,9 +69,6 @@
   }
   :root[data-theme="tombo"]  { color-scheme: light; }
   :root[data-theme="hotaru"] { color-scheme: dark; }
-  @media (min-width: 1600px) {
-    :root { --tombo-shell: 1280px; } /* pre-0.4 step; retires with the default above in 0.5 */
-  }
 }
 
 @layer tombo.reset {
@@ -110,9 +108,10 @@
       repeating-linear-gradient(0deg,  var(--tombo-grid) 0 1px, transparent 1px 24px),
       repeating-linear-gradient(90deg, var(--tombo-grid) 0 1px, transparent 1px 24px);
   }
-  /* container scale — one class, four widths. Assign --tombo-shell on :root or <body>
-     to set the page width; .tombo-gutters reads the same variable, so the margins
-     always meet the content edge. The modifiers rebind it for a single element. */
+  /* container scale — one class, four widths. The page runs at --tombo-shell-default;
+     reassign --tombo-shell on :root or <body> when a whole page wants another step.
+     .tombo-gutters reads the same variable, so the margins always meet the content
+     edge. The modifiers rebind it for a single element. */
   .tombo-shell {
     inline-size: 100%;
     max-inline-size: var(--tombo-shell);

@@ -132,12 +132,16 @@ One class, `.tombo-shell`, and a four-step scale. The step is chosen by what the
 `reading` is in `ch` because it *is* a measure — it has to track whatever type it wraps, so the same token is wider on a mono caption than on body copy. `default` and `wide` are structural, so they stay in `px` to match the px type scale: a `rem` container under a `px` type scale lengthens the line without enlarging the text.
 
 ```html
-<html style="--tombo-shell: var(--tombo-shell-default)">   <!-- the page's width, set once -->
-
-<div class="tombo-shell">                      <!-- the page's width -->
+<div class="tombo-shell">                       <!-- the page's width (default) -->
 <div class="tombo-shell tombo-shell--reading">  <!-- body copy -->
 <div class="tombo-shell tombo-shell--wide">     <!-- LP, grids -->
 <div class="tombo-shell tombo-shell--full">     <!-- backgrounds, decoration: no cap, no gutter -->
+```
+
+The page runs at `--tombo-shell-default` unless you say otherwise. Reassign `--tombo-shell` once, at the root, when a whole page wants a different step — an LP, say:
+
+```html
+<html style="--tombo-shell: var(--tombo-shell-wide)">
 ```
 
 `.tombo-shell` reads `--tombo-shell`; the modifiers rebind it for one element. `.tombo-gutters` reads the same variable, so the margin grid always meets the content edge. There are no container breakpoints — `max-inline-size` plus the clamp()ed gutter cover every viewport continuously.
@@ -147,7 +151,29 @@ Two things to know:
 - **Don't use the `padding` shorthand on a `.tombo-shell` element.** Your rule is unlayered and `.tombo-shell` lives in `@layer tombo.utilities`, so the shorthand wins and silently zeroes the gutter. Use `padding-block`.
 - **Code blocks and tables are not prose.** Cap paragraphs at `--tombo-shell-reading`; let code and tables fill the column. A grid item holding a code block also needs `min-inline-size: 0`, or its longest line widens the track instead of scrolling.
 
-`--tombo-shell-max` is deprecated as of 0.4 — it is now an alias for `--tombo-shell`, kept at its pre-0.4 values (1100px, 1280px from 1600px up) so existing pages do not shift. It is removed in 0.5.
+### Migrating from `--tombo-shell-max` (0.3 → 0.4)
+
+`--tombo-shell-max` still resolves — it is now an alias for `--tombo-shell` — but **its value changed**, so a page that reads it without migrating will shift:
+
+| | 0.3 | 0.4 |
+|---|---|---|
+| below 1600px | 1100px | 1280px |
+| 1600px and up | 1280px | 1280px |
+| the 1600px step | yes | gone — the scale replaces it |
+
+The alias is removed in 0.5. To migrate, drop your hand-rolled container and pick the step by what it holds:
+
+```css
+/* 0.3 */
+.site-shell { max-width: var(--tombo-shell-max, 1100px); margin: 0 auto; padding: 0 32px; }
+```
+```html
+<!-- 0.4 — no CSS of your own -->
+<div class="tombo-shell">                       <!-- was: the 1280px case -->
+<div class="tombo-shell tombo-shell--reading">  <!-- was: the 1100px prose case -->
+```
+
+If a page was relying on 1100px specifically, that was a measure, and `--tombo-shell-reading` (65ch) is what it wanted — narrower, and it tracks the type instead of guessing at it.
 
 ## Signature classes (the 6 fingerprints)
 
