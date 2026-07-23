@@ -445,3 +445,25 @@
     border-block-end-color: var(--tombo-hairline);
   }
 }
+
+@layer tombo.components {
+  /* select caret — the OS arrow breaks the instrument look, so draw our own.
+     A themeable chevron needs border-color tokens (a data-URI image can't
+     follow the theme), so it lives on a .tombo-select wrapper's ::after. */
+  .tombo-select { position: relative; display: block; }
+  /* scoped under .tombo-field so it matches the base control rule's specificity
+     (0,2,1) and wins on source order — an unscoped `.tombo-select select` (0,1,1)
+     would lose padding-inline-end to the base `padding` shorthand */
+  .tombo-field .tombo-select select { appearance: none; padding-inline-end: var(--tombo-space-32); }
+  .tombo-select::after {
+    content: ""; position: absolute; inset-inline-end: var(--tombo-space-12); inset-block-start: 50%;
+    inline-size: 7px; block-size: 7px;
+    border-inline-end: 1.5px solid var(--tombo-ink-sub);
+    border-block-end: 1.5px solid var(--tombo-ink-sub);
+    transform: translateY(-70%) rotate(45deg); pointer-events: none;
+  }
+  @media (forced-colors: active) {
+    .tombo-field .tombo-select select { appearance: auto; padding-inline-end: var(--tombo-space-12); }
+    .tombo-select::after { display: none; } /* restore the native arrow so it never vanishes */
+  }
+}
