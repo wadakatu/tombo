@@ -36,8 +36,8 @@ The dark flavor is named **hotaru** (蛍, firefly): at night, the instruments gl
 This repository is private, so there is no CDN to link — jsDelivr's `gh` endpoint 404s on private repos, tag or no tag. Vendor the stylesheet from a tag instead:
 
 ```bash
-git -C /path/to/tombo show v0.5.0:tombo.css > public/styles/tombo.css
-git -C /path/to/tombo show v0.5.0:LICENSE   > public/styles/tombo.LICENSE
+git -C /path/to/tombo show v0.6.0:tombo.css > public/styles/tombo.css
+git -C /path/to/tombo show v0.6.0:LICENSE   > public/styles/tombo.LICENSE
 ```
 
 Then link your copy, alongside the three voices:
@@ -62,7 +62,7 @@ A vendored copy drifts silently, so pin it: record the tag and the file's sha256
 Vendor `tombo.js` the same way as `tombo.css`, from a tag, with the same sha256-pin discipline:
 
 ```bash
-git -C /path/to/tombo show v0.5.0:tombo.js > public/scripts/tombo.js
+git -C /path/to/tombo show v0.6.0:tombo.js > public/scripts/tombo.js
 ```
 
 Then wire two script tags around the page:
@@ -101,7 +101,7 @@ window.Tombo.setTheme('system' | 'tombo' | 'hotaru');
 window.Tombo.getTheme(); // 'system' | 'tombo' | 'hotaru' — 'system' when nothing is stored
 ```
 
-Use these instead of touching `localStorage['tombo-theme']` or `data-theme` by hand — `setTheme()` updates the stored value, `<html data-theme>`, and every `.tombo-themes` button's `aria-pressed` state together in one call; changing only one of those leaves the others stale until the next click.
+Use these instead of touching `localStorage['tombo-theme']` or `data-theme` by hand — `setTheme()` updates the stored value, `<html data-theme>`, and every `[data-tombo-theme]` button's `aria-pressed` state together in one call; changing only one of those leaves the others stale until the next click.
 
 ### Copy buttons
 
