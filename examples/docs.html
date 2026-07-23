@@ -10,23 +10,25 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
 <style>
-  .layout { display: grid; grid-template-columns: 200px 1fr; gap: 56px; padding-block: 48px 64px; align-items: start; }
-  .side { position: sticky; top: 48px; }
+  .layout { display: grid; grid-template-columns: 200px 1fr; gap: var(--tombo-space-48); padding-block: var(--tombo-space-48) var(--tombo-space-72); align-items: start; }
+  .side { position: sticky; top: var(--tombo-space-48); }
   .brand { font-family: var(--tombo-font-display); font-weight: 700; font-size: 16px; }
-  .brand small { display: block; font-family: var(--tombo-font-mono); font-weight: 400; font-size: var(--tombo-text-label); color: var(--tombo-ink-faint); letter-spacing: .12em; margin-top: 4px; }
-  .side .tombo-toc { margin-top: 22px; }
+  .brand small { display: block; font-family: var(--tombo-font-mono); font-weight: 400; font-size: var(--tombo-text-label); color: var(--tombo-ink-faint); letter-spacing: .12em; margin-top: var(--tombo-space-4); }
+  .side .tombo-toc { margin-top: var(--tombo-space-24); }
   /* min-inline-size: 0 lets the code block scroll instead of widening the grid track */
-  main.tombo-sections { counter-reset: tombo-section 1; min-inline-size: 0; }
-  main p { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); margin-top: 14px; max-inline-size: var(--tombo-shell-reading); }
-  main h3, main .tombo-callout { margin-top: 24px; max-inline-size: var(--tombo-shell-reading); }
-  /* code and tables are not prose — they fill the column instead of the measure */
-  main .tombo-code, main .tombo-table-wrap { margin-top: 24px; }
-  main .tombo-dim { margin-top: 32px; max-inline-size: var(--tombo-shell-reading); }
+  main.tombo-sections { counter-reset: tombo-section 1; min-inline-size: 0; --tombo-flow-space: var(--tombo-space-16); }
+  main.tombo-sections > .tombo-sec { --tombo-flow-space: var(--tombo-space-4); }        /* eyebrow → title, tight */
+  main.tombo-sections > :is(h3, .tombo-callout, .tombo-code, .tombo-table-wrap) { --tombo-flow-space: var(--tombo-space-24); }
+  main.tombo-sections > .tombo-dim { --tombo-flow-space: var(--tombo-space-32); }
+  main.tombo-sections > .tombo-dimlab { --tombo-flow-space: var(--tombo-space-8); }     /* dim line → caption, tight */
+  main p { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); max-inline-size: var(--tombo-shell-reading); }
+  main h3, main .tombo-callout { max-inline-size: var(--tombo-shell-reading); }
+  main .tombo-dim { max-inline-size: var(--tombo-shell-reading); }
   @media (max-width: 680px) {
-    .layout { grid-template-columns: 1fr; gap: 28px; }
+    .layout { grid-template-columns: 1fr; gap: var(--tombo-space-24); }
     .side { position: static; }
   }
-  .foot { display: flex; align-items: center; gap: 18px; }
+  .foot { display: flex; align-items: center; gap: var(--tombo-space-16); }
 </style>
 </head>
 <body class="tombo-gutters">
@@ -42,7 +44,7 @@
       </nav>
     </aside>
 
-    <main class="tombo-sections">
+    <main class="tombo-sections tombo-flow">
       <p class="tombo-fig">DOCS / GETTING-STARTED / 02</p>
       <h2 class="tombo-sec">インストール</h2>
       <p>Composer で導入する。<a href="#">Laravel 11 以降</a>に対応し、設定ファイルの公開は任意。導入後は<a href="#">ルート定義から自動で</a> OpenAPI ドキュメントが生成される。</p>
