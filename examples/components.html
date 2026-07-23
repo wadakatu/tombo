@@ -410,6 +410,10 @@
               <label for="d-lock">LOCKED FIELD</label>
               <input id="d-lock" type="text" value="read-only" readonly>
             </div>
+            <div class="tombo-field">
+              <label for="d-key">DISABLED FIELD</label>
+              <input id="d-key" type="text" value="sk_live_… (locked)" disabled>
+            </div>
             <fieldset class="tombo-fieldset">
               <legend>MODE</legend>
               <label class="tombo-check"><input type="radio" name="d-m" checked> Strict mode</label>
@@ -429,7 +433,10 @@
   &lt;p class="error" id="cov-err"&gt;0 から 100 の数値を入力してください。&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div class="tombo-select"&gt;&lt;select&gt;…&lt;/select&gt;&lt;/div&gt;
+&lt;div class="tombo-field"&gt;
+  &lt;label for="fw"&gt;FRAMEWORK&lt;/label&gt;
+  &lt;div class="tombo-select"&gt;&lt;select id="fw"&gt;&lt;option&gt;Laravel&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+&lt;/div&gt;
 
 &lt;fieldset class="tombo-fieldset"&gt;
   &lt;legend&gt;MODE&lt;/legend&gt;
