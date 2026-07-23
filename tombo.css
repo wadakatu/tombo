@@ -223,6 +223,12 @@
     letter-spacing: .14em; text-transform: uppercase; color: var(--tombo-ink-sub);
   }
 
+  /* flow — vertical rhythm between stacked children (Every Layout "Stack" /
+     Andy Bell "flow"). Override --tombo-flow-space on the container or on any
+     child to change the space that precedes it. Default is one grid cell. */
+  .tombo-flow { --tombo-flow-space: var(--tombo-space-24); }
+  .tombo-flow > * + * { margin-block-start: var(--tombo-flow-space); }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; animation: none !important; }
   }
