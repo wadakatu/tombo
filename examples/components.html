@@ -10,32 +10,33 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
 <style>
-  .layout { display: grid; grid-template-columns: 220px 1fr; gap: 56px; padding-block: 48px 64px; align-items: start; }
-  main.tombo-sections { min-width: 0; }
-  .side { position: sticky; top: 48px; }
+  .layout { display: grid; grid-template-columns: 220px 1fr; gap: var(--tombo-space-48); padding-block: var(--tombo-space-48) var(--tombo-space-72); align-items: start; }
+  main.tombo-sections { min-width: 0; --tombo-flow-space: var(--tombo-space-48); }   /* section rhythm */
+  main.tombo-sections > p.lead { --tombo-flow-space: var(--tombo-space-16); }        /* lead under H1 (first child gets 0 anyway) */
+  .side { position: sticky; top: var(--tombo-space-48); }
   .brand { font-family: var(--tombo-font-display); font-weight: 700; font-size: 16px; }
-  .brand small { display: block; font-family: var(--tombo-font-mono); font-weight: 400; font-size: var(--tombo-text-label); color: var(--tombo-ink-faint); letter-spacing: .12em; margin-top: 4px; }
-  .side .tombo-toc { margin-top: 22px; }
-  main > p.lead { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); margin-top: 14px; max-inline-size: var(--tombo-shell-reading); }
-  section { margin-top: 52px; max-width: 720px; }
+  .brand small { display: block; font-family: var(--tombo-font-mono); font-weight: 400; font-size: var(--tombo-text-label); color: var(--tombo-ink-faint); letter-spacing: .12em; margin-top: var(--tombo-space-4); }
+  .side .tombo-toc { margin-top: var(--tombo-space-24); }
+  main > p.lead { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); max-inline-size: var(--tombo-shell-reading); }
+  section { max-width: 720px; }
   @media (min-width: 1600px) { section { max-width: 880px; } }
-  section .note { font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); color: var(--tombo-ink-sub); margin-top: 10px; max-inline-size: var(--tombo-shell-reading); }
-  .demo { border: 1px solid var(--tombo-hairline); padding: 24px; margin-top: 16px; }
-  .demo + .tombo-code { margin-top: 12px; }
-  .row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  section .note { font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); color: var(--tombo-ink-sub); margin-top: var(--tombo-space-8); max-inline-size: var(--tombo-shell-reading); }
+  .demo { border: 1px solid var(--tombo-hairline); padding: var(--tombo-space-24); margin-top: var(--tombo-space-16); }
+  .demo + .tombo-code { margin-top: var(--tombo-space-12); }
+  .row { display: flex; gap: var(--tombo-space-16); align-items: center; flex-wrap: wrap; }
   .cornerbox { height: 90px; }
   .demo .tombo-dim { max-width: 320px; }
   .demo .tombo-ruler { max-width: 320px; }
   .metric-demo { max-width: 280px; }
-  .tombo-metric .tombo-ruler { margin-top: 12px; height: 14px; }
+  .tombo-metric .tombo-ruler { margin-top: var(--tombo-space-12); height: 14px; }
   .griddemo { height: 96px; border: 1px solid var(--tombo-hairline); }
-  .scale-demo .tombo-dimlab { margin-bottom: 20px; }
+  .scale-demo .tombo-dimlab { margin-bottom: var(--tombo-space-24); }
   .scale-demo .tombo-dimlab:last-child { margin-bottom: 0; }
   @media (max-width: 680px) {
-    .layout { grid-template-columns: 1fr; gap: 28px; }
+    .layout { grid-template-columns: 1fr; gap: var(--tombo-space-24); }
     .side { position: static; }
   }
-  .foot { display: flex; align-items: center; gap: 18px; }
+  .foot { display: flex; align-items: center; gap: var(--tombo-space-16); }
 </style>
 </head>
 <body class="tombo-gutters">
@@ -63,7 +64,7 @@
       </nav>
     </aside>
 
-    <main class="tombo-sections">
+    <main class="tombo-sections tombo-flow">
       <p class="tombo-fig">CATALOG / ALL COMPONENTS / DOCS VOLUME</p>
       <p class="lead">tombo.css の全コンポーネント。各項は実物とコピペ用マークアップの対。このページ自体が docs 音量の実演になっている — 余白だけの方眼、hr 代替の寸法線、見出しの通し番号。</p>
 
