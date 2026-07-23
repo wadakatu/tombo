@@ -267,6 +267,10 @@
   .tombo-btn--secondary { border-color: var(--tombo-ink); color: var(--tombo-ink); }
   .tombo-btn--secondary:hover { background: var(--tombo-surface); }
   .tombo-btn--ghost { color: var(--tombo-green); text-decoration: underline; text-underline-offset: 4px; padding: 12px 8px; }
+  .tombo-btn:disabled { opacity: .45; cursor: not-allowed; }
+  /* :hover still applies to disabled buttons in Chromium — hold the resting look */
+  .tombo-btn--primary:disabled:hover { background: var(--tombo-green); color: var(--tombo-on-green); }
+  .tombo-btn--secondary:disabled:hover { background: none; }
 
   .tombo-tabs { display: flex; gap: 22px; border-bottom: 1px solid var(--tombo-hairline); }
   .tombo-tabs > * { padding: 6px 2px 9px; color: var(--tombo-ink-sub); text-decoration: none; position: relative; font-size: var(--tombo-text-ui); }
