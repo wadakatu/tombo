@@ -108,6 +108,8 @@
   h4, h5, h6 { font-size: var(--tombo-text-body); line-height: 1.3; }
   .tombo-display { font-family: var(--tombo-font-display); font-weight: 700; /* Instrument Sans has no 900 */
     font-size: var(--tombo-text-display); line-height: 1.1; letter-spacing: -.015em; }
+  /* classless prose lists only — component lists (.tombo-ticks/.tombo-toc/…) keep their own padding */
+  ul:not([class]), ol:not([class]) { padding-inline-start: 1.4em; }
   a { color: var(--tombo-green); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
   code, kbd, samp, pre { font-family: var(--tombo-font-mono); font-weight: 400; }
   hr { border: 0; border-top: 1px solid var(--tombo-hairline); }
