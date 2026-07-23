@@ -26,9 +26,51 @@
   }
   function getTheme() { return stored(); }
 
+  var live;
+  function announce(msg) {
+    if (!live) {
+      live = document.createElement("div");
+      live.className = "tombo-sr-only";
+      live.setAttribute("role", "status");
+      live.setAttribute("aria-live", "polite");
+      document.body.appendChild(live);
+    }
+    live.textContent = ""; live.textContent = msg;
+  }
+  function injectCopy() {
+    var blocks = document.querySelectorAll(".tombo-code:not([data-tombo-copy='off'])");
+    for (var i = 0; i < blocks.length; i++) {
+      var fig = blocks[i];
+      if (fig.querySelector(".tombo-copy")) continue;
+      var cap = fig.querySelector("figcaption");
+      if (!cap) { cap = document.createElement("figcaption"); fig.insertBefore(cap, fig.firstChild); }
+      var btn = document.createElement("button");
+      btn.type = "button"; btn.className = "tombo-copy";
+      btn.setAttribute("aria-label", "Copy code"); btn.textContent = "COPY ⧉";
+      cap.appendChild(btn);
+    }
+  }
+  function copyFrom(btn) {
+    var fig = btn.closest(".tombo-code"); if (!fig) return;
+    var pre = fig.querySelector("pre"); if (!pre) return;
+    var done = function () {
+      btn.textContent = "COPIED ✓"; announce("Copied");
+      setTimeout(function () { btn.textContent = "COPY ⧉"; }, 1500);
+    };
+    var fail = function () { announce("Press Ctrl or Cmd + C to copy"); };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText)
+        navigator.clipboard.writeText(pre.textContent).then(done, fail);
+      else fail();
+    } catch (e) { fail(); }
+  }
+
   document.addEventListener("click", function (e) {
-    var t = e.target.closest && e.target.closest("[data-tombo-theme]");
-    if (t) { setTheme(t.getAttribute("data-tombo-theme")); }
+    if (!e.target.closest) return;
+    var t = e.target.closest("[data-tombo-theme]");
+    if (t) { setTheme(t.getAttribute("data-tombo-theme")); return; }
+    var c = e.target.closest(".tombo-copy");
+    if (c) { copyFrom(c); }
   });
 
   function init() {
@@ -36,6 +78,7 @@
     var c = document.querySelectorAll(".tombo-themes[hidden]");
     for (var i = 0; i < c.length; i++) c[i].hidden = false;
     reflect();
+    injectCopy();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
