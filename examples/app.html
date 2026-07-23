@@ -24,6 +24,11 @@
     .top .tombo-shell { flex-wrap: wrap; gap: var(--tombo-space-16); }
   }
   .foot { display: flex; align-items: center; gap: var(--tombo-space-16); }
+  .login { max-inline-size: 380px; margin-top: var(--tombo-space-48); }
+  .login h2 { font-size: var(--tombo-text-h3); line-height: var(--tombo-lh-h3); }
+  .login .cap { margin-top: var(--tombo-space-4); }
+  .login form { margin-top: var(--tombo-space-24); }
+  .login .reqnote { color: var(--tombo-ink-faint); }
 </style>
 </head>
 <body>
@@ -74,6 +79,28 @@
       </tbody>
       </table>
     </div>
+
+    <section class="login" aria-labelledby="login-h">
+      <h2 id="login-h">サインイン</h2>
+      <p class="tombo-fig cap">FIG. — /LOGIN · SCREEN PREVIEW</p>
+      <form class="tombo-flow" action="#" method="post">
+        <p class="tombo-label reqnote"><span class="tombo-req" aria-hidden="true">*</span> 必須</p>
+        <div class="tombo-field">
+          <label for="email">EMAIL<span class="tombo-req" aria-hidden="true">*</span></label>
+          <input id="email" type="email" name="email" required autocomplete="email"
+                 value="wadakatu@" aria-invalid="true" aria-describedby="email-err">
+          <p class="error" id="email-err">メールアドレスの形式が正しくありません。</p>
+        </div>
+        <div class="tombo-field">
+          <label for="pw">PASSWORD<span class="tombo-req" aria-hidden="true">*</span></label>
+          <input id="pw" type="password" name="password" required autocomplete="current-password"
+                 aria-describedby="pw-help">
+          <p class="help" id="pw-help">8 文字以上。</p>
+        </div>
+        <label class="tombo-check"><input type="checkbox" name="remember"> ログイン状態を保持する</label>
+        <button class="tombo-btn tombo-btn--primary" type="submit">サインイン</button>
+      </form>
+    </section>
   </main>
 
   <footer class="tombo-footer">
