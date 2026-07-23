@@ -288,7 +288,7 @@
 
   .tombo-code { background: var(--tombo-code-bg); color: var(--tombo-code-ink);
     border: 1px solid var(--tombo-code-border); border-radius: 6px; overflow: hidden; }
-  .tombo-code > figcaption { display: flex; justify-content: space-between; font-family: var(--tombo-font-mono);
+  .tombo-code > figcaption { display: flex; justify-content: space-between; gap: 16px; font-family: var(--tombo-font-mono);
     font-size: var(--tombo-text-label); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--tombo-code-faint);
     padding: 8px 14px; border-bottom: 1px solid var(--tombo-code-hairline); }
   .tombo-code pre { font-size: var(--tombo-text-code); line-height: var(--tombo-lh-code); font-stretch: 87.5%; padding: 14px 18px; overflow-x: auto; }
@@ -349,7 +349,7 @@
   .tombo-themes button[aria-pressed="true"] { border-bottom-color: var(--tombo-shu); color: var(--tombo-ink); }
 
   /* copy button — injected by tombo.js into a .tombo-code figcaption; matches the caption voice */
-  .tombo-copy { background: none; border: 0; padding: 0; cursor: pointer;
+  .tombo-copy { background: none; border: 0; padding: 0; cursor: pointer; margin-inline-start: auto;
     font-family: var(--tombo-font-mono); font-size: var(--tombo-text-label); font-weight: 500;
     letter-spacing: .1em; text-transform: uppercase; color: var(--tombo-code-faint); }
   .tombo-copy:hover { color: var(--tombo-code-ink); }
