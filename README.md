@@ -11,7 +11,7 @@
   </picture>
 </h1>
 
-A single-file CSS design system for everything wadakatu ships — OSS docs sites, web apps, LPs, portfolios. Zero JS, zero dependencies, one `<link>`.
+A single-file CSS design system for everything wadakatu ships — OSS docs sites, web apps, LPs, portfolios. Zero dependencies, one `<link>` — an optional `tombo.js` adds theme persistence and copy buttons, but no page needs it.
 
 The goal is not a component library. It's recognition: the same handful of signature marks, repeated without exception across every product, at a "volume" tuned to context — quiet in docs, loud in an LP.
 
@@ -52,6 +52,83 @@ Then link your copy, alongside the three voices:
 No build step, no framework — it's a single stylesheet, so any templating layer works (Astro, Laravel Blade, Vue, plain HTML). The font `<link>`s are optional: `tombo.css` declares font stacks with system fallbacks (`system-ui`, `ui-monospace`), so the page degrades gracefully without them.
 
 A vendored copy drifts silently, so pin it: record the tag and the file's sha256 in the consuming repo and check it in CI. Then a hand-edit or a stale copy fails the build instead of turning into a mystery months later.
+
+## Behavior (tombo.js)
+
+`tombo.js` is optional. It's a single dependency-free file that layers three behaviors onto the CSS: theme persistence across visits, wiring for the `.tombo-themes` control, and copy buttons on code blocks. Nothing in `tombo.css` requires it — every page renders and works with the stylesheet alone.
+
+### Loading
+
+Vendor `tombo.js` the same way as `tombo.css`, from a tag, with the same sha256-pin discipline:
+
+```bash
+git -C /path/to/tombo show v0.5.0:tombo.js > public/scripts/tombo.js
+```
+
+Then wire two script tags around the page:
+
+```html
+<!-- in <head>, before paint: applies a stored theme with no flash -->
+<script>try{var t=localStorage.getItem('tombo-theme');if(t==='tombo'||t==='hotaru')document.documentElement.dataset.theme=t}catch(e){}</script>
+<!-- once, before </body> -->
+<script src="/path/tombo.js" defer></script>
+```
+
+Both are optional, and independent of each other:
+
+- **Neither** — the page still follows the OS theme (`color-scheme` handles that on its own); the `.tombo-themes` control stays hidden and code blocks get no copy button, since only `tombo.js` reveals and wires those.
+- **The deferred `tombo.js`, no inline snippet** — a previously chosen `tombo`/`hotaru` theme still applies (`tombo.js` reads `localStorage` itself on load), and the theme control and copy buttons both work. But a reader who overrode their OS theme sees the OS-default theme paint first and then swap a moment later — a brief flash. A reader who never overrode it sees nothing, since the OS default and the stored choice already agree.
+- **The inline snippet, no deferred script** — no flash, but nothing else: the `.tombo-themes` block never un-hides, no copy button appears, and `window.Tombo` doesn't exist.
+
+### Theme control
+
+You author the `.tombo-themes` markup; `tombo.js` reveals it and wires the clicks. Ship it `hidden`, since there's nothing to click when JS never runs:
+
+```html
+<div class="tombo-themes tombo-label" hidden>
+  <button type="button" data-tombo-theme="system">system</button>
+  <button type="button" data-tombo-theme="tombo">tombo</button>
+  <button type="button" data-tombo-theme="hotaru">hotaru</button>
+</div>
+```
+
+On load, `tombo.js` un-hides every `.tombo-themes[hidden]` block and sets `aria-pressed` on each button — `true` for whichever matches the current setting, `false` for the rest. Clicking any `[data-tombo-theme]` element calls `setTheme()` with its value: `tombo` and `hotaru` force that theme and persist it; `system` clears the stored choice and returns the page to following the OS.
+
+### `window.Tombo`
+
+```js
+window.Tombo.setTheme('system' | 'tombo' | 'hotaru');
+window.Tombo.getTheme(); // 'system' | 'tombo' | 'hotaru' — 'system' when nothing is stored
+```
+
+Use these instead of touching `localStorage['tombo-theme']` or `data-theme` by hand — `setTheme()` updates the stored value, `<html data-theme>`, and every `.tombo-themes` button's `aria-pressed` state together in one call; changing only one of those leaves the others stale until the next click.
+
+### Copy buttons
+
+Every `.tombo-code` figure gets a copy button injected into its `figcaption` automatically (one is created if the block doesn't already have one) — no markup required beyond the block itself:
+
+```html
+<figure class="tombo-code">
+  <figcaption><span>SHELL — INSTALL</span></figcaption>
+  <pre tabindex="0">$ composer require wadakatu/laravel-spectrum</pre>
+</figure>
+```
+
+Opt a block out with `data-tombo-copy="off"`:
+
+```html
+<figure class="tombo-code" data-tombo-copy="off">
+  <pre tabindex="0">…</pre>
+</figure>
+```
+
+The button copies the `<pre>`'s text via the Clipboard API, reads "COPIED ✓" for 1.5s, and falls back to an `aria-live` announcement ("Press Ctrl or Cmd + C to copy") if the clipboard call is unavailable or is rejected.
+
+Give every code `<pre>` inside `.tombo-code` a `tabindex="0"`, whether or not `tombo.js` is loaded — it's a horizontally-scrolling region, and one that can't take focus is unreachable by keyboard.
+
+### SSR (optional upgrade)
+
+`localStorage` is the universal default, but a server-rendered consumer (Blade, Astro SSR) can go one step further: store the choice in a cookie instead of — or alongside — `localStorage`, read it on the server, and emit `data-theme` on `<html>` directly in the response HTML. That skips even the inline boot snippet, since there's nothing left to apply client-side before paint. `tombo.js` itself only ever reads `localStorage`; the cookie round-trip is something the consuming app implements on its own.
 
 ## Type
 
@@ -274,7 +351,7 @@ Each toggles `tombo` / `hotaru` live and can be opened directly in a browser (no
 
 ## Scope
 
-Pure CSS, zero JS, zero dependencies — one `tombo.css` file (`@layer tombo.reset, tombo.tokens, tombo.base, tombo.components, tombo.utilities`). Distributed by vendoring from a tag; the repo is private, so there is no CDN and no npm package.
+Zero dependencies — one `tombo.css` file (`@layer tombo.reset, tombo.tokens, tombo.base, tombo.components, tombo.utilities`), plus an **optional** `tombo.js` for theme persistence and copy buttons (see [Behavior (tombo.js)](#behavior-tombojs)). It's progressive enhancement, not a requirement: every page renders and works with `tombo.css` alone and no JS at all, following the OS theme; `tombo.js` only makes a chosen theme remember itself across visits and adds the copy buttons. Distributed by vendoring from a tag; the repo is private, so there is no CDN and no npm package.
 
 Deliberately out of scope for v1: Figma kit, JS components, framework wrappers (React/Vue), an icon set beyond the logo, and **npm publishing** — these are follow-ups once the CSS itself is stable.
 
