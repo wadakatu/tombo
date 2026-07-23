@@ -467,3 +467,25 @@
     .tombo-select::after { display: none; } /* restore the native arrow so it never vanishes */
   }
 }
+
+@layer tombo.components {
+  /* checkbox / radio — native accent-color (a11y, zero-JS, OS-consistent);
+     green because a selection is not an error or a current position */
+  :where(.tombo-field, .tombo-check, .tombo-fieldset) { accent-color: var(--tombo-green); }
+  .tombo-check { /* the <label> is the row and the whole click target */
+    display: flex; align-items: center; gap: var(--tombo-space-8);
+    min-block-size: 24px; /* WCAG 2.5.8 target size (minimum) */
+    font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui);
+  }
+  .tombo-check input { inline-size: 18px; block-size: 18px; }
+  /* fieldset — reset native chrome; min-inline-size:0 defeats the fieldset
+     min-content shrink bug inside flex/grid; radio groups need fieldset+legend */
+  .tombo-fieldset { border: 0; padding: 0; min-inline-size: 0; }
+  .tombo-fieldset > legend {
+    padding: 0; margin-block-end: var(--tombo-space-8);
+    font-family: var(--tombo-font-mono);
+    font-size: var(--tombo-text-label); line-height: var(--tombo-lh-label);
+    font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--tombo-ink-sub);
+  }
+}
