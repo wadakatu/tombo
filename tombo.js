@@ -27,16 +27,15 @@
   function getTheme() { return stored(); }
 
   var live;
-  function announce(msg) {
-    if (!live) {
-      live = document.createElement("div");
-      live.className = "tombo-sr-only";
-      live.setAttribute("role", "status");
-      live.setAttribute("aria-live", "polite");
-      document.body.appendChild(live);
-    }
-    live.textContent = ""; live.textContent = msg;
+  function ensureLive() {
+    if (live) return;
+    live = document.createElement("div");
+    live.className = "tombo-sr-only";
+    live.setAttribute("role", "status");
+    live.setAttribute("aria-live", "polite");
+    document.body.appendChild(live);
   }
+  function announce(msg) { ensureLive(); live.textContent = ""; live.textContent = msg; }
   function injectCopy() {
     var blocks = document.querySelectorAll(".tombo-code:not([data-tombo-copy='off'])");
     for (var i = 0; i < blocks.length; i++) {
@@ -74,6 +73,7 @@
   });
 
   function init() {
+    ensureLive();
     apply(stored());
     var c = document.querySelectorAll(".tombo-themes[hidden]");
     for (var i = 0; i < c.length; i++) c[i].hidden = false;
