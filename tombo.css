@@ -27,6 +27,17 @@
     --tombo-shell-wide:    1792px;
     --tombo-shell-gutter:  clamp(20px, 3.25vw, 64px);
     --tombo-shell: var(--tombo-shell-default); /* the page's width — reassign to pick a step */
+    /* space scale — 4px base; 24 and up are multiples of the 24px grid cell.
+       Names are pixel-encoded (the name is the measurement). See spec §7. */
+    --tombo-space-4:   4px;
+    --tombo-space-8:   8px;
+    --tombo-space-12:  12px;
+    --tombo-space-16:  16px;
+    --tombo-space-24:  24px;   /* one grid cell — default block rhythm */
+    --tombo-space-32:  32px;
+    --tombo-space-48:  48px;   /* 2 cells */
+    --tombo-space-72:  72px;   /* 3 cells — docs section rhythm */
+    --tombo-space-96:  96px;   /* 4 cells — LP section rhythm */
     /* instruments */
     --tombo-green:    light-dark(#0E5A47, #4FC2A2);
     --tombo-on-green: light-dark(#F2F4EF, #10201A);
