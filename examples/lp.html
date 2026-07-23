@@ -11,31 +11,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
 <style>
   :root { --tombo-shell: var(--tombo-shell-wide); }  /* LP volume runs wide */
-  .hero { padding: 76px 0 64px; }
+  .hero { padding: var(--tombo-space-72) 0; }
   /* full-bleed frame: the corners' 1px outdent would poke past the viewport and grow scrollWidth */
   .hero.tombo-corners::after, .hero .tombo-corner-tr { right: 0; }
-  .hero .cols { display: grid; grid-template-columns: 1.25fr .75fr; gap: 56px; align-items: center; margin-top: 24px; }
+  .hero .cols { display: grid; grid-template-columns: 1.25fr .75fr; gap: 56px; align-items: center; margin-top: var(--tombo-space-24); }
+  /* hero-left column rhythm (.tombo-flow) */
+  .hero .cols > .tombo-flow { --tombo-flow-space: var(--tombo-space-16); }
+  .hero .cols > .tombo-flow > .tombo-dim { --tombo-flow-space: var(--tombo-space-24); }
+  .hero .cols > .tombo-flow > .cta { --tombo-flow-space: var(--tombo-space-24); }
   .hero h1 small { display: block; font-family: var(--tombo-font-body); font-weight: 700;
-    font-size: clamp(18px, 2vw, 22px); color: var(--tombo-green); margin-top: 14px; letter-spacing: -.005em; }
+    font-size: clamp(18px, 2vw, 22px); color: var(--tombo-green); margin-top: var(--tombo-space-16); letter-spacing: -.005em; }
   /* max-, not a fixed width: at 320px a fixed 320 stretches the whole grid track */
-  .hero .tombo-dim { max-inline-size: 320px; margin-top: 22px; }
-  .tagline { margin-top: 18px; font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); max-width: 50ch; }
-  .cta { margin-top: 26px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .hero .tombo-dim { max-inline-size: 320px; }
+  .tagline { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); max-width: 50ch; }
+  .cta { display: flex; gap: var(--tombo-space-16); align-items: center; flex-wrap: wrap; }
   .inst .tombo-fig { position: absolute; top: -20px; left: 0; }
   .inst .v small { font-size: var(--tombo-text-ui); color: var(--tombo-ink-faint); font-weight: 400; }
-  .inst .rows { margin-top: 16px; border-top: 1px solid var(--tombo-hairline); }
-  .inst .row { display: flex; justify-content: space-between; gap: 14px; font-family: var(--tombo-font-mono);
-    font-size: var(--tombo-text-label); padding: 8px 0; border-bottom: 1px solid var(--tombo-hairline); color: var(--tombo-ink-sub); }
+  .inst .rows { margin-top: var(--tombo-space-16); border-top: 1px solid var(--tombo-hairline); }
+  .inst .row { display: flex; justify-content: space-between; gap: var(--tombo-space-16); font-family: var(--tombo-font-mono);
+    font-size: var(--tombo-text-label); padding: var(--tombo-space-8) 0; border-bottom: 1px solid var(--tombo-hairline); color: var(--tombo-ink-sub); }
   .inst .row b { color: var(--tombo-ink); font-weight: 500; }
   .inst .row .miss { color: var(--tombo-error); }
-  .inst .cfoot { margin-top: 14px; }
-  .feat-sec { padding-block: 56px 8px; }
-  .feat { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  .fcard { display: flex; flex-direction: column; }
-  .fcard h3 { margin-top: 8px; }
-  .fcard p { margin-top: 10px; font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); color: var(--tombo-ink-sub); }
-  .fcard .meta { margin-top: auto; padding-top: 14px; }
-  .fcard .meta div { border-top: 1px solid var(--tombo-hairline); padding-top: 10px; min-height: 55px; }
+  .inst .cfoot { margin-top: var(--tombo-space-16); }
+  .feat-sec { padding-block: var(--tombo-space-48) var(--tombo-space-8); }
+  .feat { margin-top: var(--tombo-space-24); display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--tombo-space-16); }
+  .fcard { display: flex; flex-direction: column; --tombo-flow-space: var(--tombo-space-8); }
+  .fcard > .meta { margin-top: auto; --tombo-flow-space: 0; padding-top: var(--tombo-space-16); }
+  .fcard .meta div { border-top: 1px solid var(--tombo-hairline); padding-top: var(--tombo-space-8); min-height: 55px; }
   @media (max-width: 840px) {
     .hero .cols, .feat { grid-template-columns: 1fr; }
   }
@@ -49,8 +51,8 @@
     .hero .cols { grid-template-columns: 1.27fr .95fr; gap: 32px; }
     .inst.tombo-metric { padding: 20px 16px; }
   }
-  .foot { display: flex; align-items: center; gap: 18px; }
-  .hero .tombo-logo { display: block; margin-bottom: 16px; }
+  .foot { display: flex; align-items: center; gap: var(--tombo-space-16); }
+  .hero .tombo-logo { display: block; margin-bottom: var(--tombo-space-16); }
 </style>
 </head>
 <body>
@@ -61,7 +63,7 @@
       <span class="tombo-logo tombo-logo--glow" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
       <p class="tombo-kicker">GESSO — FIG. 00 / CONTRACTS, MEASURED</p>
       <div class="cols">
-        <div>
+        <div class="tombo-flow">
           <h1 class="tombo-display">OpenAPI contract<br>testing for PHP.<small>Validate. Measure. Ship.</small></h1>
           <div class="tombo-dim"></div>
           <div class="tombo-dimlab">headline: 2 lines — measured / spec: OpenAPI 3.0 · 3.1 · 3.2</div>
@@ -95,19 +97,19 @@
     <div class="tombo-dimlab">section — 01 / features</div>
     <h2 class="tombo-sec">Why Gesso</h2>
     <div class="feat">
-      <div class="fcard tombo-metric tombo-corners">
+      <div class="fcard tombo-flow tombo-metric tombo-corners">
         <p class="tombo-fig">F-01</p>
         <h3>Contract enforcement</h3>
         <p>Validate requests and responses with OpenAPI 3.0, 3.1, and 3.2 semantics.</p>
         <div class="meta"><div class="tombo-label">SPEC: OPENAPI 3.0 · 3.1 · 3.2</div></div>
       </div>
-      <div class="fcard tombo-metric tombo-corners">
+      <div class="fcard tombo-flow tombo-metric tombo-corners">
         <p class="tombo-fig">F-02</p>
         <h3>Visible coverage</h3>
         <p>See untested operations, statuses, and content types in PHPUnit and CI.</p>
         <div class="meta"><div class="tombo-label">GRANULARITY: METHOD · PATH · STATUS · CONTENT-TYPE</div></div>
       </div>
-      <div class="fcard tombo-metric tombo-corners">
+      <div class="fcard tombo-flow tombo-metric tombo-corners">
         <p class="tombo-fig">F-03</p>
         <h3>Framework choice</h3>
         <p>Use dedicated adapters or the framework-independent core.</p>
