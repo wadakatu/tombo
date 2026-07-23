@@ -155,7 +155,7 @@ Figma キット / JS コンポーネント / React・Vue ラッパー / アイ�
 
 ## 7. レイアウト・形状
 
-- 基本単位 4px。方眼セルは 24px 固定、セクション律動は docs 64px / LP 96px
+- 基本単位 4px。space token `--tombo-space-{4,8,12,16,24,32,48,72,96}`（24 以上は 24px 方眼セルの倍数）。方眼セルは 24px 固定、セクション律動は docs 72px（3 セル）/ LP 96px（4 セル）。縦リズムは `.tombo-flow`（owl セレクタ + `--tombo-flow-space`、既定 1 セル）で管理する
 - **〜v0.3(廃止、下の v0.4 契約に置換済み)**: 本文最大幅 62ch(docs)。shell(コンテンツ列)は `--tombo-shell-max` = 1100px で、**1600px 以上で 1280px** に段階拡大(消費側は `max-width: var(--tombo-shell-max, 1100px)` で追随)
 - **v0.4 以降 — 用途別コンテナスケール(2026-07-22)**: `.tombo-shell` 1 クラス + `--tombo-shell-{reading,default,wide}` = 65ch / 1280px / 1792px、ガターは `clamp(20px, 3.25vw, 64px)`。ページ幅は `--tombo-shell` に **`:root` で一度だけ**代入する(`<body>` 以下だと `<body>` に載る `.tombo-gutters` の方眼が追従しない)。`reading` だけ `ch`(measure は組む書体を追う必要がある)、`default`/`wide` は px 型スケールに合わせて px。shell は border-box なので `--reading` の外寸はガター 2 本分を足す(足さないと実測 51.9ch になる)。`.tombo-gutters` の幅も shell 外側の余白 + ガターで本文の端に一致させる。コンテナのブレークポイントは廃止 — `max-inline-size` と clamp() で連続。旧 62ch は `--tombo-shell-reading` に統合。`--tombo-shell-max` は 0.4〜0.6 の間 alias として存続したが **値が 1100px → 1280px に変化**し、**v0.7.0 で削除**
 - 広幅(1600px 以上)では余白を計器化する: `.tombo-gutters` の方眼が `--tombo-grid-bold`(昼 .13 / 夜 .09)に濃くなり、ビューポート四隅に見当マーク(ink、opacity .45)が出る。印刷でトンボが住むのは版面外 — 画面ではビューポートの縁がそれにあたる(2026-07-22 追加)

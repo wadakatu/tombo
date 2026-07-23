@@ -285,6 +285,36 @@ The alias is **removed as of v0.7.0**. A page still reading `var(--tombo-shell-m
 
 If a page was relying on 1100px specifically, that was a measure, and `--tombo-shell-reading` (65ch) is what it wanted — narrower, and it tracks the type instead of guessing at it.
 
+### Space scale
+
+Spacing is tokenised on a 4px base. Steps 24 and up are multiples of the 24px grid cell, so block and section rhythm sit on the same grid the margin marks draw.
+
+| token | px | typical use |
+|---|---|---|
+| `--tombo-space-4` | 4 | hairline gap, eyebrow → title |
+| `--tombo-space-8` | 8 | chip / row padding, tight caption |
+| `--tombo-space-12` | 12 | button padding-y, tight rhythm |
+| `--tombo-space-16` | 16 | callout / code inset, body rhythm, card gap |
+| `--tombo-space-24` | 24 | one grid cell — default block rhythm |
+| `--tombo-space-32` | 32 | medium gap between components |
+| `--tombo-space-48` | 48 | 2 cells — sidebar gap, small section |
+| `--tombo-space-72` | 72 | 3 cells — docs section rhythm |
+| `--tombo-space-96` | 96 | 4 cells — LP section rhythm |
+
+Use tokens for `gap` and `padding` in your own layout CSS: `gap: var(--tombo-space-48)`.
+
+#### Vertical rhythm — `.tombo-flow`
+
+Add `.tombo-flow` to a container to space its direct children apart with a single grid cell. Override `--tombo-flow-space` on the container to change the default, or on any child to change the space that precedes it:
+
+```css
+.article { } /* markup: <div class="article tombo-flow"> */
+.article { --tombo-flow-space: var(--tombo-space-16); }   /* body rhythm */
+.article > h2 { --tombo-flow-space: var(--tombo-space-48); } /* more air before headings */
+```
+
+`.tombo-flow` uses `margin-block-start` on `* + *`, so the first child has no leading margin. Use it for stacked prose/content; keep `gap` for grid and flex layouts.
+
 ## Signature classes (the 6 fingerprints)
 
 Six marks repeated across every product, "played" at a different volume per context (docs quiet, app functional, LP loud). See `examples/{docs,app,lp}.html`.
