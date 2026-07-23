@@ -61,6 +61,7 @@
         <a href="#c14">14 — ユーティリティ</a>
         <a href="#c15">15 — コンテナ</a>
         <a href="#c16">16 — 発光</a>
+        <a href="#c17">17 — フォーム</a>
       </nav>
     </aside>
 
@@ -377,6 +378,64 @@
 &lt;figure class="tombo-metric tombo-glow"&gt; … &lt;/figure&gt;</pre>
         </figure>
         <p class="note">2 点が仕様として固定されている。<b>光は background-image に合成し、擬似要素では作らない</b> — <code>.tombo-corners</code> をはじめ signature classes はほぼ全部 <code>::before</code>/<code>::after</code> を使っているので、擬似要素で光を作ると組み合わせた瞬間にどれかの印が消える。<b>発光面の中では注記の階調が一段上がる</b> — 光で下地が約 1.3 ポイント明るくなり、<code>--tombo-ink-faint</code> が 4.5:1 を割るため。<code>.tombo-glow</code> がトークンを差し替えるので配下は自動で追従する。コントラストゲートは合成後の下地で測るので、<code>--tombo-glow-wash</code> を .23 より上げるとビルドが落ちる。</p>
+      </section>
+
+      <section id="c17">
+        <h2 class="tombo-sec">フォーム</h2>
+        <p class="note">ネイティブ優先。造形は <code>.tombo-field</code> の中でだけ効く（外の input は素のまま）。ハイブリッド＝ hairline のボックス＋状態を運ぶ下ルール（focus=green・invalid=臙脂）。ラベルは等幅の計器声、required は ink の <code>*</code>（朱は線専用のまま）。checkbox/radio はネイティブ <code>accent-color</code>。エラーは <code>aria-describedby</code> と <code>aria-invalid</code> で結線する。</p>
+        <div class="demo">
+          <form class="tombo-flow" action="#" style="max-width:420px">
+            <p class="tombo-label" style="color:var(--tombo-ink-faint)"><span class="tombo-req" aria-hidden="true">*</span> 必須</p>
+            <div class="tombo-field">
+              <label for="d-name">PROJECT NAME<span class="tombo-req" aria-hidden="true">*</span></label>
+              <input id="d-name" type="text" required aria-describedby="d-name-help" value="gesso-openapi">
+              <p class="help" id="d-name-help">小文字・ハイフン区切り。</p>
+            </div>
+            <div class="tombo-field">
+              <label for="d-cov">COVERAGE THRESHOLD<span class="tombo-req" aria-hidden="true">*</span></label>
+              <input id="d-cov" type="text" required aria-invalid="true" aria-describedby="d-cov-err" value="ninety">
+              <p class="error" id="d-cov-err">0 から 100 の数値を入力してください。</p>
+            </div>
+            <div class="tombo-field">
+              <label for="d-fw">FRAMEWORK ADAPTER</label>
+              <div class="tombo-select">
+                <select id="d-fw"><option>Laravel</option><option>Symfony</option><option>Pest</option></select>
+              </div>
+            </div>
+            <div class="tombo-field">
+              <label for="d-note">NOTES</label>
+              <textarea id="d-note" rows="2">PATCH /users/{id} · 422 still untested.</textarea>
+            </div>
+            <div class="tombo-field">
+              <label for="d-lock">LOCKED FIELD</label>
+              <input id="d-lock" type="text" value="read-only" readonly>
+            </div>
+            <fieldset class="tombo-fieldset">
+              <legend>MODE</legend>
+              <label class="tombo-check"><input type="radio" name="d-m" checked> Strict mode</label>
+              <label class="tombo-check"><input type="radio" name="d-m"> Lenient mode</label>
+              <label class="tombo-check"><input type="checkbox" checked> Validate responses</label>
+            </fieldset>
+            <button class="tombo-btn tombo-btn--primary" type="submit">Save</button>
+          </form>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-FIELD</span></figcaption>
+          <pre tabindex="0">&lt;div class="tombo-field"&gt;
+  &lt;label for="cov"&gt;COVERAGE THRESHOLD&lt;span class="tombo-req" aria-hidden="true"&gt;*&lt;/span&gt;&lt;/label&gt;
+  &lt;input id="cov" type="number" required
+         aria-describedby="cov-help cov-err" aria-invalid="true"&gt;
+  &lt;p class="help"  id="cov-help"&gt;0–100 の整数。&lt;/p&gt;
+  &lt;p class="error" id="cov-err"&gt;0 から 100 の数値を入力してください。&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="tombo-select"&gt;&lt;select&gt;…&lt;/select&gt;&lt;/div&gt;
+
+&lt;fieldset class="tombo-fieldset"&gt;
+  &lt;legend&gt;MODE&lt;/legend&gt;
+  &lt;label class="tombo-check"&gt;&lt;input type="radio" name="m"&gt; Strict&lt;/label&gt;
+&lt;/fieldset&gt;</pre>
+        </figure>
       </section>
     </main>
   </div>
