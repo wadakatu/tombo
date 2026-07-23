@@ -124,6 +124,10 @@
       repeating-linear-gradient(0deg,  var(--tombo-grid) 0 1px, transparent 1px 24px),
       repeating-linear-gradient(90deg, var(--tombo-grid) 0 1px, transparent 1px 24px);
   }
+  /* visually hidden — for the copy live region (spec §5.3) */
+  .tombo-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
   /* container scale — one class, four widths. The page runs at --tombo-shell-default;
      reassign --tombo-shell on :root (only there — the deprecated --tombo-shell-max
      alias is declared at :root and will not follow an override made lower down)
@@ -337,4 +341,16 @@
   /* spec §9 — the single glow exception: at night the LP hero tail is a firefly, not a mark */
   .tombo-logo--glow > .t { border-color: light-dark(var(--tombo-shu), var(--tombo-green));
     box-shadow: 0 0 7px light-dark(transparent, var(--tombo-green)); }
+
+  /* theme control — author markup, revealed + wired by tombo.js. Current position = shu underline (S-05) */
+  .tombo-themes { display: flex; gap: 18px; }
+  .tombo-themes button { background: none; border: 0; border-bottom: 2px solid transparent;
+    padding: 0 0 2px; cursor: pointer; font: inherit; color: var(--tombo-ink-sub); }
+  .tombo-themes button[aria-pressed="true"] { border-bottom-color: var(--tombo-shu); color: var(--tombo-ink); }
+
+  /* copy button — injected by tombo.js into a .tombo-code figcaption; matches the caption voice */
+  .tombo-copy { background: none; border: 0; padding: 0; cursor: pointer;
+    font-family: var(--tombo-font-mono); font-size: var(--tombo-text-label); font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--tombo-code-faint); }
+  .tombo-copy:hover { color: var(--tombo-code-ink); }
 }
