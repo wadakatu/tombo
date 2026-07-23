@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TOMBO — component catalog</title>
 <link rel="stylesheet" href="../tombo.css">
+  <script>try{var t=localStorage.getItem('tombo-theme');if(t==='tombo'||t==='hotaru')document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
@@ -34,8 +35,6 @@
     .layout { grid-template-columns: 1fr; gap: 28px; }
     .side { position: static; }
   }
-  .tombo-themectl button { background: none; border: 0; border-bottom: 2px solid transparent; padding: 0; cursor: pointer; font: inherit; color: inherit; }
-  .tombo-themectl button[aria-pressed="true"] { border-bottom-color: var(--tombo-shu); }
   .foot { display: flex; align-items: center; gap: 18px; }
 </style>
 </head>
@@ -78,7 +77,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-CORNERS</span></figcaption>
-          <pre>&lt;div class="tombo-corners"&gt;
+          <pre tabindex="0">&lt;div class="tombo-corners"&gt;
   &lt;b class="tombo-corner-tr"&gt;&lt;/b&gt;&lt;b class="tombo-corner-bl"&gt;&lt;/b&gt;
   …
 &lt;/div&gt;</pre>
@@ -94,7 +93,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-DIM</span></figcaption>
-          <pre>&lt;div class="tombo-dim"&gt;&lt;/div&gt;
+          <pre tabindex="0">&lt;div class="tombo-dim"&gt;&lt;/div&gt;
 &lt;div class="tombo-dimlab"&gt;section — 02.1 / requirements&lt;/div&gt;</pre>
         </figure>
       </section>
@@ -111,7 +110,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-TICKS</span></figcaption>
-          <pre>&lt;ul class="tombo-ticks"&gt;
+          <pre tabindex="0">&lt;ul class="tombo-ticks"&gt;
   &lt;li&gt;リクエストとレスポンスを OpenAPI 定義で検証する&lt;/li&gt;
 &lt;/ul&gt;</pre>
         </figure>
@@ -125,7 +124,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-RULER</span></figcaption>
-          <pre>&lt;div class="tombo-ruler" style="--tombo-ruler-value:62%"&gt;&lt;/div&gt;</pre>
+          <pre tabindex="0">&lt;div class="tombo-ruler" style="--tombo-ruler-value:62%"&gt;&lt;/div&gt;</pre>
         </figure>
       </section>
 
@@ -137,7 +136,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-SEC / .TOMBO-FIG</span></figcaption>
-          <pre>&lt;main class="tombo-sections"&gt;
+          <pre tabindex="0">&lt;main class="tombo-sections"&gt;
   &lt;h2 class="tombo-sec"&gt;インストール&lt;/h2&gt;   &lt;!-- 01 — インストール --&gt;
 &lt;/main&gt;
 &lt;p class="tombo-fig"&gt;FIG. 01 — ENDPOINT COVERAGE&lt;/p&gt;</pre>
@@ -161,7 +160,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-KICKER / .TOMBO-TABS / .TOMBO-TOC</span></figcaption>
-          <pre>&lt;p class="tombo-kicker"&gt;GESSO — FIG. 00&lt;/p&gt;
+          <pre tabindex="0">&lt;p class="tombo-kicker"&gt;GESSO — FIG. 00&lt;/p&gt;
 
 &lt;nav class="tombo-tabs"&gt;
   &lt;a href="#" aria-current="page"&gt;画面一覧&lt;/a&gt;
@@ -186,7 +185,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-BTN</span></figcaption>
-          <pre>&lt;button class="tombo-btn tombo-btn--primary"&gt;Choose a quickstart&lt;/button&gt;
+          <pre tabindex="0">&lt;button class="tombo-btn tombo-btn--primary"&gt;Choose a quickstart&lt;/button&gt;
 &lt;button class="tombo-btn tombo-btn--secondary"&gt;View on GitHub&lt;/button&gt;
 &lt;button class="tombo-btn tombo-btn--ghost"&gt;Read the spec&lt;/button&gt;</pre>
         </figure>
@@ -197,16 +196,16 @@
         <p class="note">昼は夜の面、夜は罫線 — コードは沈めない。figcaption の左右にラベルを振り分ける。</p>
         <div class="demo">
           <figure class="tombo-code">
-            <figcaption><span>SHELL — INSTALL</span><span>COPY ⧉</span></figcaption>
-            <pre>1  $ composer require wadakatu/laravel-spectrum
+            <figcaption><span>SHELL — INSTALL</span></figcaption>
+            <pre tabindex="0">1  $ composer require wadakatu/laravel-spectrum
 2  $ php artisan spectrum:generate</pre>
           </figure>
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-CODE</span></figcaption>
-          <pre>&lt;figure class="tombo-code"&gt;
-  &lt;figcaption&gt;&lt;span&gt;SHELL — INSTALL&lt;/span&gt;&lt;span&gt;COPY ⧉&lt;/span&gt;&lt;/figcaption&gt;
-  &lt;pre&gt;$ composer require wadakatu/laravel-spectrum&lt;/pre&gt;
+          <pre tabindex="0">&lt;figure class="tombo-code"&gt;
+  &lt;figcaption&gt;&lt;span&gt;SHELL — INSTALL&lt;/span&gt;&lt;/figcaption&gt;
+  &lt;pre tabindex="0"&gt;$ composer require wadakatu/laravel-spectrum&lt;/pre&gt;
 &lt;/figure&gt;</pre>
         </figure>
       </section>
@@ -220,7 +219,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-CALLOUT</span></figcaption>
-          <pre>&lt;div class="tombo-callout"&gt;&lt;b&gt;NOTE — 001&lt;/b&gt;本文。&lt;/div&gt;
+          <pre tabindex="0">&lt;div class="tombo-callout"&gt;&lt;b&gt;NOTE — 001&lt;/b&gt;本文。&lt;/div&gt;
 &lt;div class="tombo-callout tombo-callout--warn"&gt;&lt;b&gt;WARN — 002&lt;/b&gt;本文。&lt;/div&gt;</pre>
         </figure>
       </section>
@@ -244,7 +243,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-TABLE / .TOMBO-TABLE-WRAP</span></figcaption>
-          <pre>&lt;div class="tombo-table-wrap" role="region" aria-labelledby="cap" tabindex="0"&gt;
+          <pre tabindex="0">&lt;div class="tombo-table-wrap" role="region" aria-labelledby="cap" tabindex="0"&gt;
   &lt;table class="tombo-table"&gt;
     &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Requirement&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
     &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PHP&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
@@ -267,7 +266,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-CHIP</span></figcaption>
-          <pre>&lt;span class="tombo-chip" data-status="ok"&gt;OK&lt;/span&gt;
+          <pre tabindex="0">&lt;span class="tombo-chip" data-status="ok"&gt;OK&lt;/span&gt;
 &lt;span class="tombo-chip" data-status="warn"&gt;STALE&lt;/span&gt;
 &lt;span class="tombo-chip" data-status="err"&gt;MISSING&lt;/span&gt;</pre>
         </figure>
@@ -286,7 +285,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-METRIC</span></figcaption>
-          <pre>&lt;div class="tombo-metric tombo-corners"&gt;
+          <pre tabindex="0">&lt;div class="tombo-metric tombo-corners"&gt;
   &lt;b class="tombo-corner-tr"&gt;&lt;/b&gt;&lt;b class="tombo-corner-bl"&gt;&lt;/b&gt;
   &lt;div class="k"&gt;COVERAGE&lt;/div&gt;
   &lt;div class="v"&gt;96.2&lt;/div&gt;
@@ -307,7 +306,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-LOGO</span></figcaption>
-          <pre>&lt;span class="tombo-logo" aria-hidden="true"&gt;
+          <pre tabindex="0">&lt;span class="tombo-logo" aria-hidden="true"&gt;
   &lt;i class="h"&gt;&lt;/i&gt;&lt;i class="b"&gt;&lt;/i&gt;&lt;i class="w1"&gt;&lt;/i&gt;&lt;i class="w2"&gt;&lt;/i&gt;&lt;i class="t"&gt;&lt;/i&gt;
 &lt;/span&gt;</pre>
         </figure>
@@ -323,7 +322,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>UTILITIES</span></figcaption>
-          <pre>&lt;h1 class="tombo-display"&gt;TOMBO&lt;/h1&gt;
+          <pre tabindex="0">&lt;h1 class="tombo-display"&gt;TOMBO&lt;/h1&gt;
 &lt;p class="tombo-label"&gt;MEASURED / SET IN MARTIAN MONO&lt;/p&gt;
 
 &lt;body class="tombo-gutters"&gt;      &lt;!-- docs: 方眼は余白のみ --&gt;
@@ -346,7 +345,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-SHELL</span></figcaption>
-          <pre>&lt;div class="tombo-shell"&gt;                     &lt;!-- ページの幅(既定 = default) --&gt;
+          <pre tabindex="0">&lt;div class="tombo-shell"&gt;                     &lt;!-- ページの幅(既定 = default) --&gt;
 &lt;div class="tombo-shell tombo-shell--reading"&gt; &lt;!-- 本文 --&gt;
 &lt;div class="tombo-shell tombo-shell--wide"&gt;    &lt;!-- LP・グリッド --&gt;
 &lt;div class="tombo-shell tombo-shell--full"&gt;    &lt;!-- 背景・装飾 --&gt;</pre>
@@ -354,7 +353,7 @@
         <p class="note">ページ全体の段を変えるときだけ、自分のスタイルシートで <code>--tombo-shell</code> を差し替える。インライン <code>style</code> は使わない — システムが認めるインライン custom property は <code>--tombo-ruler-value</code> だけ。宣言は必ず <code>:root</code> に置く — <code>&lt;body&gt;</code> 以下に書くと、<code>:root</code> で宣言された deprecated alias <code>--tombo-shell-max</code> と <code>.tombo-gutters</code> の方眼が追従しない。</p>
         <figure class="tombo-code">
           <figcaption><span>CSS</span><span>ページ幅の上書き</span></figcaption>
-          <pre>:root { --tombo-shell: var(--tombo-shell-wide); }</pre>
+          <pre tabindex="0">:root { --tombo-shell: var(--tombo-shell-wide); }</pre>
         </figure>
       </section>
 
@@ -373,7 +372,7 @@
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-GLOW</span></figcaption>
-          <pre>&lt;header class="hero tombo-vol-lp tombo-glow tombo-corners"&gt; … &lt;/header&gt;
+          <pre tabindex="0">&lt;header class="hero tombo-vol-lp tombo-glow tombo-corners"&gt; … &lt;/header&gt;
 &lt;figure class="tombo-metric tombo-glow"&gt; … &lt;/figure&gt;</pre>
         </figure>
         <p class="note">2 点が仕様として固定されている。<b>光は background-image に合成し、擬似要素では作らない</b> — <code>.tombo-corners</code> をはじめ signature classes はほぼ全部 <code>::before</code>/<code>::after</code> を使っているので、擬似要素で光を作ると組み合わせた瞬間にどれかの印が消える。<b>発光面の中では注記の階調が一段上がる</b> — 光で下地が約 1.3 ポイント明るくなり、<code>--tombo-ink-faint</code> が 4.5:1 を割るため。<code>.tombo-glow</code> がトークンを差し替えるので配下は自動で追従する。コントラストゲートは合成後の下地で測るので、<code>--tombo-glow-wash</code> を .23 より上げるとビルドが落ちる。</p>
@@ -386,28 +385,15 @@
       <span class="tombo-logo" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
       <div>
       TOMBO — WADAKATU DESIGN SYSTEM<br>COMPONENT CATALOG — EXAMPLES/COMPONENTS.HTML
-      <div class="tombo-themectl tombo-label" hidden>
-        <button type="button" data-t="tombo">tombo</button>
-        <button type="button" data-t="hotaru">hotaru</button>
+      <div class="tombo-themes tombo-label" hidden>
+        <button type="button" data-tombo-theme="system">system</button>
+        <button type="button" data-tombo-theme="tombo">tombo</button>
+        <button type="button" data-tombo-theme="hotaru">hotaru</button>
       </div>
       </div>
     </div>
   </footer>
 
-  <script>
-    const ctl = document.querySelector('.tombo-themectl');
-    ctl.hidden = false;
-    const ctlBtns = ctl.querySelectorAll('button');
-    const syncCtl = () => {
-      const t = document.documentElement.dataset.theme ||
-        (matchMedia('(prefers-color-scheme: dark)').matches ? 'hotaru' : 'tombo');
-      ctlBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.t === t));
-    };
-    syncCtl();
-    ctl.addEventListener('click', e => {
-      const t = e.target.dataset.t;
-      if (t) { document.documentElement.dataset.theme = t; syncCtl(); }
-    });
-  </script>
+  <script src="../tombo.js" defer></script>
 </body>
 </html>
