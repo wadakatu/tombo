@@ -27,9 +27,6 @@
     --tombo-shell-wide:    1792px;
     --tombo-shell-gutter:  clamp(20px, 3.25vw, 64px);
     --tombo-shell: var(--tombo-shell-default); /* the page's width — reassign to pick a step */
-    --tombo-shell-max: var(--tombo-shell);     /* DEPRECATED since 0.4 — read --tombo-shell.
-                                                  NOTE: the value moved 1100px -> 1280px and the
-                                                  1600px step is gone. Removed in 0.5. */
     /* instruments */
     --tombo-green:    light-dark(#0E5A47, #4FC2A2);
     --tombo-on-green: light-dark(#F2F4EF, #10201A);
@@ -129,10 +126,10 @@
     overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 
   /* container scale — one class, four widths. The page runs at --tombo-shell-default;
-     reassign --tombo-shell on :root (only there — the deprecated --tombo-shell-max
-     alias is declared at :root and will not follow an override made lower down)
-     when a whole page wants another step. .tombo-gutters reads the same variable, so
-     the margins always meet the content edge. The modifiers rebind it per element. */
+     reassign --tombo-shell on :root (only there — .tombo-gutters sits on <body> and its
+     margin grid will not follow an override made lower down) when a whole page wants
+     another step. .tombo-gutters reads the same variable, so the margins always meet the
+     content edge. The modifiers rebind it per element. */
   .tombo-shell {
     inline-size: 100%;
     max-inline-size: var(--tombo-shell);

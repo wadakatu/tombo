@@ -255,15 +255,15 @@ The page runs at `--tombo-shell-default`. When a whole page wants a different st
 :root { --tombo-shell: var(--tombo-shell-wide); }
 ```
 
-**`:root` and nowhere else.** Two things are declared there and will not follow an override made further down: the deprecated `--tombo-shell-max` alias, and — because `.tombo-gutters` sits on `<body>` — the margin grid, which would stop meeting the content edge. Setting it on `<body>` looks like it works and silently leaves the alias at `1280px`.
+**`:root` and nowhere else.** Because `.tombo-gutters` sits on `<body>`, the margin grid will not follow an override made further down — set `--tombo-shell` on `<body>` and it looks like it works while the gutters silently stop meeting the content edge.
 
 When only one container needs another step, use the modifier classes rather than reassigning anything.
 
 The system's one sanctioned inline custom property is `--tombo-ruler-value`; `--tombo-shell` is not one. Keep it in a stylesheet.
 
-### Migrating from `--tombo-shell-max` (0.3 → 0.4)
+### Migrating from `--tombo-shell-max` (removed in v0.7.0)
 
-`--tombo-shell-max` still resolves — it is now an alias for `--tombo-shell` — but **its value changed**, so a page that reads it without migrating will shift:
+`--tombo-shell-max` resolved as an alias for `--tombo-shell` from 0.4 through 0.6 — but **its value changed** in 0.4, so a page that read it without migrating shifted:
 
 | | 0.3 | 0.4 |
 |---|---|---|
@@ -271,7 +271,7 @@ The system's one sanctioned inline custom property is `--tombo-ruler-value`; `--
 | 1600px and up | 1280px | 1280px |
 | the 1600px step | yes | gone — the scale replaces it |
 
-The alias is removed in 0.5. To migrate, drop your hand-rolled container and pick the step by what it holds:
+The alias is **removed as of v0.7.0**. A page still reading `var(--tombo-shell-max, 1100px)` now falls back to its own `1100px` default because the variable is undefined — it can look unchanged while silently diverging from the system, so migrate off it. To migrate, drop your hand-rolled container and pick the step by what it holds:
 
 ```css
 /* 0.3 */

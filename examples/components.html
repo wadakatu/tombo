@@ -350,7 +350,7 @@
 &lt;div class="tombo-shell tombo-shell--wide"&gt;    &lt;!-- LP・グリッド --&gt;
 &lt;div class="tombo-shell tombo-shell--full"&gt;    &lt;!-- 背景・装飾 --&gt;</pre>
         </figure>
-        <p class="note">ページ全体の段を変えるときだけ、自分のスタイルシートで <code>--tombo-shell</code> を差し替える。インライン <code>style</code> は使わない — システムが認めるインライン custom property は <code>--tombo-ruler-value</code> だけ。宣言は必ず <code>:root</code> に置く — <code>&lt;body&gt;</code> 以下に書くと、<code>:root</code> で宣言された deprecated alias <code>--tombo-shell-max</code> と <code>.tombo-gutters</code> の方眼が追従しない。</p>
+        <p class="note">ページ全体の段を変えるときだけ、自分のスタイルシートで <code>--tombo-shell</code> を差し替える。インライン <code>style</code> は使わない — システムが認めるインライン custom property は <code>--tombo-ruler-value</code> だけ。宣言は必ず <code>:root</code> に置く — <code>&lt;body&gt;</code> 以下に書くと、<code>&lt;body&gt;</code> に載る <code>.tombo-gutters</code> の方眼が追従しない。</p>
         <figure class="tombo-code">
           <figcaption><span>CSS</span><span>ページ幅の上書き</span></figcaption>
           <pre tabindex="0">:root { --tombo-shell: var(--tombo-shell-wide); }</pre>
