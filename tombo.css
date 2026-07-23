@@ -455,7 +455,7 @@
      (0,2,1) and wins on source order — an unscoped `.tombo-select select` (0,1,1)
      would lose padding-inline-end to the base `padding` shorthand */
   .tombo-field .tombo-select select { appearance: none; padding-inline-end: var(--tombo-space-32); }
-  .tombo-select::after {
+  .tombo-field .tombo-select::after {
     content: ""; position: absolute; inset-inline-end: var(--tombo-space-12); inset-block-start: 50%;
     inline-size: 7px; block-size: 7px;
     border-inline-end: 1.5px solid var(--tombo-ink-sub);
@@ -464,7 +464,7 @@
   }
   @media (forced-colors: active) {
     .tombo-field .tombo-select select { appearance: auto; padding-inline-end: var(--tombo-space-12); }
-    .tombo-select::after { display: none; } /* restore the native arrow so it never vanishes */
+    .tombo-field .tombo-select::after { display: none; } /* restore the native arrow so it never vanishes */
   }
 }
 
