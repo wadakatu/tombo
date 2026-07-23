@@ -368,3 +368,80 @@
     letter-spacing: .1em; text-transform: uppercase; color: var(--tombo-code-faint); }
   .tombo-copy:hover { color: var(--tombo-code-ink); }
 }
+
+@layer tombo.components {
+  /* forms — native-first field vocabulary (spec 2026-07-23). Everything is
+     scoped to .tombo-field / .tombo-check / .tombo-fieldset so it never
+     restyles inputs outside the system. Field look = hybrid: a hairline box
+     with a heavier bottom rule that carries state (green focus / crimson
+     invalid) — the instrument's reading line. Adds no new color. */
+  .tombo-field > label {
+    display: block; margin-block-end: var(--tombo-space-8);
+    font-family: var(--tombo-font-mono);
+    font-size: var(--tombo-text-label); line-height: var(--tombo-lh-label);
+    font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--tombo-ink-sub);
+  }
+  .tombo-req { color: var(--tombo-ink); margin-inline-start: .3em; } /* required *, never shu */
+  .tombo-field .help,
+  .tombo-field .error {
+    margin-block-start: var(--tombo-space-8);
+    font-size: var(--tombo-text-note); line-height: var(--tombo-lh-note);
+  }
+  .tombo-field .help  { color: var(--tombo-ink-faint); }
+  .tombo-field .error { color: var(--tombo-error); }
+  .tombo-field .error::before { content: "!\00a0"; font-weight: 700; } /* non-color cue (1.4.1) */
+
+  /* control appearance — the allowlist boxes exactly text-like inputs, select,
+     textarea; date/range/color/file/checkbox/radio stay native by omission */
+  .tombo-field :is(
+    input:not([type]), input[type="text"], input[type="email"], input[type="password"],
+    input[type="number"], input[type="search"], input[type="tel"], input[type="url"],
+    select, textarea
+  ) {
+    inline-size: 100%;
+    background: var(--tombo-surface);
+    border: 1px solid var(--tombo-hairline);
+    border-block-end: 1.5px solid var(--tombo-ink-sub); /* the measured baseline */
+    padding: var(--tombo-space-8) var(--tombo-space-12);
+    font-family: var(--tombo-font-body);
+    font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui);
+    color: var(--tombo-ink);
+    transition: border-color var(--tombo-dur) var(--tombo-ease);
+  }
+  /* focus — the baseline lights (mouse or keyboard). The 2px green ring is the
+     base-layer :focus-visible outline; the two are layers, not duplicates. */
+  .tombo-field :is(
+    input:not([type]), input[type="text"], input[type="email"], input[type="password"],
+    input[type="number"], input[type="search"], input[type="tel"], input[type="url"],
+    select, textarea
+  ):focus { border-block-end-color: var(--tombo-green); }
+  /* invalid — :user-invalid fires only after interaction (not on load); the
+     [aria-invalid] hook is the universal fallback for scripted/server validation */
+  .tombo-field :is(
+    input:not([type]), input[type="text"], input[type="email"], input[type="password"],
+    input[type="number"], input[type="search"], input[type="tel"], input[type="url"],
+    select, textarea
+  ):user-invalid,
+  .tombo-field :is(
+    input:not([type]), input[type="text"], input[type="email"], input[type="password"],
+    input[type="number"], input[type="search"], input[type="tel"], input[type="url"],
+    select, textarea
+  )[aria-invalid="true"] { border-block-end-color: var(--tombo-error); }
+  /* disabled — matches .tombo-btn:disabled */
+  .tombo-field :is(
+    input:not([type]), input[type="text"], input[type="email"], input[type="password"],
+    input[type="number"], input[type="search"], input[type="tel"], input[type="url"],
+    select, textarea
+  ):disabled { opacity: .5; cursor: not-allowed; }
+  /* readonly — recessed to paper, baseline de-emphasized to hairline (select is
+     never readonly, so it is absent from this list) */
+  .tombo-field :is(
+    input:not([type]), input[type="text"], input[type="email"], input[type="password"],
+    input[type="number"], input[type="search"], input[type="tel"], input[type="url"],
+    textarea
+  ):read-only:not(:disabled) {
+    background: var(--tombo-paper);
+    border-block-end-color: var(--tombo-hairline);
+  }
+}
