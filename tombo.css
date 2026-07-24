@@ -530,4 +530,75 @@
   .tombo-metric, .tombo-callout, .tombo-code, figure, tr, .tombo-check { break-inside: avoid; }
   h1, h2, h3, h4 { break-after: avoid; }
   p, li { orphans: 2; widows: 2; }
+
+  /* (B) paper トンボ — opt-in via <body class="tombo-trim">.
+     Marks are ink (registration black), drawn as background layers, so the
+     overlay needs print-color-adjust:exact or nothing prints. position:fixed
+     repeats the marks on every page. ::before = 角トンボ (corner crop marks),
+     ::after = センタートンボ (edge-center registration rings). Geometry lives in
+     custom properties so it can be tuned against the print preview. */
+  html:has(> body.tombo-trim)::before,
+  html:has(> body.tombo-trim)::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    background-repeat: no-repeat;
+  }
+
+  /* 角トンボ: a single L hugging each corner of the printable area, arms along
+     the trim edges with a small gap at the vertex (crop-mark convention). */
+  html:has(> body.tombo-trim)::before {
+    --tl: 24px;  /* arm length */
+    --tk: 1px;   /* stroke     */
+    --gp: 7px;   /* gap from the exact corner */
+    background-image:
+      linear-gradient(var(--tombo-ink), var(--tombo-ink)),
+      linear-gradient(var(--tombo-ink), var(--tombo-ink)),
+      linear-gradient(var(--tombo-ink), var(--tombo-ink)),
+      linear-gradient(var(--tombo-ink), var(--tombo-ink)),
+      linear-gradient(var(--tombo-ink), var(--tombo-ink)),
+      linear-gradient(var(--tombo-ink), var(--tombo-ink)),
+      linear-gradient(var(--tombo-ink), var(--tombo-ink)),
+      linear-gradient(var(--tombo-ink), var(--tombo-ink));
+    background-size:
+      var(--tl) var(--tk), var(--tk) var(--tl),   /* TL: horizontal, vertical */
+      var(--tl) var(--tk), var(--tk) var(--tl),   /* TR */
+      var(--tl) var(--tk), var(--tk) var(--tl),   /* BL */
+      var(--tl) var(--tk), var(--tk) var(--tl);   /* BR */
+    background-position:
+      left var(--gp) top 0,     left 0 top var(--gp),
+      right var(--gp) top 0,    right 0 top var(--gp),
+      left var(--gp) bottom 0,  left 0 bottom var(--gp),
+      right var(--gp) bottom 0, right 0 bottom var(--gp);
+  }
+
+  /* センタートンボ: a 1px ink ring + crosshair at each edge midpoint. Offset in
+     from the edge by the ring radius so it isn't clipped by the overlay box. */
+  html:has(> body.tombo-trim)::after {
+    --rs: 13px;  /* ring size (outer) */
+    --cl: 26px;  /* crosshair length  */
+    --tk: 1px;
+    --rr: calc(var(--rs) / 2);            /* ring radius */
+    --ring: radial-gradient(circle,
+      transparent calc(var(--rr) - 1px),
+      var(--tombo-ink) calc(var(--rr) - 1px) var(--rr),
+      transparent var(--rr));
+    --hbar: linear-gradient(var(--tombo-ink), var(--tombo-ink));
+    --vbar: linear-gradient(var(--tombo-ink), var(--tombo-ink));
+    background-image:
+      var(--ring), var(--ring), var(--ring), var(--ring),
+      var(--hbar), var(--hbar), var(--hbar), var(--hbar),
+      var(--vbar), var(--vbar), var(--vbar), var(--vbar);
+    background-size:
+      var(--rs) var(--rs), var(--rs) var(--rs), var(--rs) var(--rs), var(--rs) var(--rs),
+      var(--cl) var(--tk), var(--cl) var(--tk), var(--cl) var(--tk), var(--cl) var(--tk),
+      var(--tk) var(--cl), var(--tk) var(--cl), var(--tk) var(--cl), var(--tk) var(--cl);
+    background-position:
+      top var(--rr) left 50%,  bottom var(--rr) left 50%,  left var(--rr) top 50%,  right var(--rr) top 50%,
+      top var(--rr) left 50%,  bottom var(--rr) left 50%,  left var(--rr) top 50%,  right var(--rr) top 50%,
+      top var(--rr) left 50%,  bottom var(--rr) left 50%,  left var(--rr) top 50%,  right var(--rr) top 50%;
+  }
 }
