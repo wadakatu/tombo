@@ -491,6 +491,53 @@
   }
 }
 
+@layer tombo.components {
+  /* 図版 — S-03「グラフ軸」の部品化 (spec 2026-07-24, issue #15)。
+     枠 = plate(版)。.tombo-fig(図版の銘)とは別物: 銘は figcaption に載せる。
+     チャート内部(.axis/.base/.bar/.val/.now)は枠配下でだけ効く。 */
+  .tombo-plate {
+    position: relative; /* .tombo-tip の基準 */
+    border: 1px solid var(--tombo-hairline);
+    padding: var(--tombo-space-24);
+    overflow-x: auto; /* 溢れたら枠内だけスクロール(ページは動かさない) */
+  }
+  /* viewBox だけだと縮み続けてスクロールが発動しない — 最小幅で読み取り可能性を守る。
+     上書きは消費側スタイルシートで(インライン custom property は --tombo-ruler-value のみ)。 */
+  .tombo-plate svg { inline-size: 100%; block-size: auto; min-inline-size: var(--tombo-plate-min, 560px); }
+  .tombo-plate .axis { stroke: var(--tombo-hairline); stroke-width: 1; }   /* 目盛線 */
+  .tombo-plate .base { stroke: var(--tombo-ink); stroke-width: 1.5; }      /* 基線 — 軸はこの 1 本 */
+  .tombo-plate .now  { stroke: var(--tombo-shu); stroke-width: 2; }        /* 朱の現在地 — 線専用 */
+  .tombo-plate .bar  { fill: var(--tombo-green); }                         /* 単系列は green 一色 */
+  .tombo-plate .bar.is-zero { fill: var(--tombo-hairline); }               /* ゼロ値の 2px スタブ */
+  .tombo-plate .bar:hover { opacity: .82; }                                /* 読み取りの合図 */
+  .tombo-plate text  { font-family: var(--tombo-font-mono); font-size: var(--tombo-text-label);
+    letter-spacing: .08em; fill: var(--tombo-ink-faint); }                 /* 銘は等幅(憲法②) */
+  .tombo-plate .val  { fill: var(--tombo-ink); font-weight: 600; }         /* 選択的な値ラベル */
+
+  /* ツールチップ — パネルの造形だけ。表示(display)と位置(transform)は消費側 JS。
+     視覚専用チャネル(role="presentation")なので pointer-events:none、
+     アクセシブルなデータ経路は数表と bar の aria-label が担う。 */
+  .tombo-tip {
+    position: absolute; inset-block-start: 0; inset-inline-start: 0;
+    display: none; z-index: 2; pointer-events: none;
+    background: var(--tombo-surface); border: 1px solid var(--tombo-ink);
+    padding: var(--tombo-space-8) var(--tombo-space-12);
+    font-family: var(--tombo-font-mono);
+    font-size: var(--tombo-text-note); line-height: var(--tombo-lh-note);
+    color: var(--tombo-ink-sub); white-space: pre;
+  }
+  .tombo-tip > b { display: block; color: var(--tombo-ink); font-weight: 600; } /* 見出し行 */
+
+  /* 数表 — 図版と対になるアクセシブルなテーブル代替の開閉 */
+  .tombo-numbers > summary {
+    cursor: pointer;
+    font-family: var(--tombo-font-mono);
+    font-size: var(--tombo-text-label); line-height: var(--tombo-lh-label);
+    letter-spacing: .12em; color: var(--tombo-ink-faint);
+  }
+  .tombo-numbers[open] > summary { margin-block-end: var(--tombo-space-12); }
+}
+
 /* ── print ─────────────────────────────────────────────────────────────
    Unlayered on purpose: these overrides must beat every @layer rule, and
    being outside all layers wins the cascade without !important. Two halves:
@@ -510,7 +557,7 @@
   :root[data-theme="hotaru"] { color-scheme: light; }
 
   /* screen-only chrome never prints */
-  .tombo-themes, .tombo-copy { display: none; }
+  .tombo-themes, .tombo-copy, .tombo-tip { display: none; }
 
   /* glow + motion off (mirrors the forced-colors guard) */
   .tombo-glow { background-image: none; box-shadow: none; }
@@ -528,7 +575,7 @@
   .tombo-code > figcaption { color: var(--tombo-ink-sub); }
 
   /* fragmentation: keep instrument blocks whole; don't strand headings */
-  .tombo-metric, .tombo-callout, .tombo-code, figure, tr, .tombo-check { break-inside: avoid; }
+  .tombo-metric, .tombo-callout, .tombo-code, figure, tr, .tombo-check, .tombo-plate { break-inside: avoid; }
   h1, h2, h3, h4 { break-after: avoid; }
   p, li { orphans: 2; widows: 2; }
 
