@@ -182,19 +182,27 @@
 
       <section id="c07">
         <h2 class="tombo-sec">ボタン</h2>
-        <p class="note">primaryは唯一のgreen面塗り。secondaryはinkの罫線、ghostは下線リンク型。角丸なし。</p>
+        <p class="note">primaryは唯一のgreen面塗り。secondaryはinkの罫線、ghostは下線リンク型。角丸なし。動作は&lt;button&gt;、遷移は&lt;a&gt; — 見た目は同一。</p>
         <div class="demo">
           <div class="row">
             <button class="tombo-btn tombo-btn--primary">Choose a quickstart</button>
             <button class="tombo-btn tombo-btn--secondary">View on GitHub</button>
             <button class="tombo-btn tombo-btn--ghost">Read the spec</button>
           </div>
+          <div class="row">
+            <a class="tombo-btn tombo-btn--primary" href="#c07">Choose a quickstart</a>
+            <a class="tombo-btn tombo-btn--secondary" href="#c07">View on GitHub</a>
+            <a class="tombo-btn tombo-btn--ghost" href="#c07">Read the spec</a>
+          </div>
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-BTN</span></figcaption>
           <pre tabindex="0">&lt;button class="tombo-btn tombo-btn--primary"&gt;Choose a quickstart&lt;/button&gt;
 &lt;button class="tombo-btn tombo-btn--secondary"&gt;View on GitHub&lt;/button&gt;
-&lt;button class="tombo-btn tombo-btn--ghost"&gt;Read the spec&lt;/button&gt;</pre>
+&lt;button class="tombo-btn tombo-btn--ghost"&gt;Read the spec&lt;/button&gt;
+
+&lt;!-- 遷移には a — 見た目は button と同一 --&gt;
+&lt;a class="tombo-btn tombo-btn--primary" href="/quickstart"&gt;Choose a quickstart&lt;/a&gt;</pre>
         </figure>
       </section>
 

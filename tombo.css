@@ -280,6 +280,7 @@
 @layer tombo.components {
   .tombo-btn { display: inline-block; padding: var(--tombo-space-12) var(--tombo-space-24); font-size: var(--tombo-text-ui); font-family: var(--tombo-font-body);
     border: 1px solid transparent; cursor: pointer; background: none;
+    text-decoration: none; /* a.tombo-btn: cancel the base link underline (--ghost re-declares its own) */
     transition: background var(--tombo-dur) var(--tombo-ease), color var(--tombo-dur) var(--tombo-ease); }
   .tombo-btn--primary { background: var(--tombo-green); color: var(--tombo-on-green); font-weight: 700; }
   .tombo-btn--primary:hover { background: var(--tombo-ink); color: var(--tombo-paper); }
