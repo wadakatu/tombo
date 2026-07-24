@@ -1,0 +1,15 @@
+{
+  "name": "tombo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Dev/CI tooling for the TOMBO design system (not a published package — vendor tombo.css).",
+  "scripts": {
+    "check": "bash scripts/check.sh",
+    "lint:css": "stylelint tombo.css"
+  },
+  "devDependencies": {
+    "stylelint": "^17.14.1",
+    "stylelint-plugin-use-baseline": "^1.4.4"
+  }
+}
