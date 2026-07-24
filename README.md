@@ -36,9 +36,9 @@ The dark flavor is named **hotaru** (蛍, firefly): at night, the instruments gl
 TOMBO is distributed by vendoring — no npm package, no CDN link to go down or drift. Copy the files out of a release tag:
 
 ```bash
-git -C /path/to/tombo show v0.14.0:tombo.css > public/styles/tombo.css
-git -C /path/to/tombo show v0.14.0:LICENSE   > public/styles/tombo.LICENSE
-git -C /path/to/tombo show v0.14.0:tombo.js  > public/scripts/tombo.js   # optional — see docs/tombo-js.md
+git -C /path/to/tombo show v0.14.1:tombo.css > public/styles/tombo.css
+git -C /path/to/tombo show v0.14.1:LICENSE   > public/styles/tombo.LICENSE
+git -C /path/to/tombo show v0.14.1:tombo.js  > public/scripts/tombo.js   # optional — see docs/tombo-js.md
 ```
 
 Then link your copy, alongside the three voices:
