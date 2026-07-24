@@ -378,8 +378,8 @@ A field is a hairline box with a heavier bottom rule that carries its state — 
   <label for="cov">COVERAGE THRESHOLD<span class="tombo-req" aria-hidden="true">*</span></label>
   <input id="cov" type="number" required
          aria-describedby="cov-help cov-err" aria-invalid="true">
-  <p class="help"  id="cov-help">0–100 の整数。</p>
-  <p class="error" id="cov-err">0 から 100 の数値を入力してください。</p>
+  <p class="help"  id="cov-help">0–100の整数。</p>
+  <p class="error" id="cov-err">0から100の数値を入力してください。</p>
 </div>
 
 <div class="tombo-field">

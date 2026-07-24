@@ -68,11 +68,11 @@
 
     <main class="tombo-sections tombo-flow">
       <p class="tombo-fig">CATALOG / ALL COMPONENTS / DOCS VOLUME</p>
-      <p class="lead">tombo.css の全コンポーネント。各項は実物とコピペ用マークアップの対。このページ自体が docs 音量の実演になっている — 余白だけの方眼、hr 代替の寸法線、見出しの通し番号。</p>
+      <p class="lead">tombo.cssの全コンポーネント。各項は実物とコピペ用マークアップの対。このページ自体がdocs音量の実演になっている — 余白だけの方眼、hr代替の寸法線、見出しの通し番号。</p>
 
       <section id="c01">
         <h2 class="tombo-sec">見当マーク</h2>
-        <p class="note">S-01。カード・図版・ヒーロー枠の四隅に置く 12px のブラケット。::before / ::after が左上・右下を描くので、四隅に出すときだけ &lt;b&gt; を 2 つ足す。</p>
+        <p class="note">S-01。カード・図版・ヒーロー枠の四隅に置く12pxのブラケット。::before / ::afterが左上・右下を描くので、四隅に出すときだけ &lt;b&gt; を2つ足す。</p>
         <div class="demo">
           <div class="tombo-corners cornerbox">
             <b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
@@ -89,7 +89,7 @@
 
       <section id="c02">
         <h2 class="tombo-sec">寸法線</h2>
-        <p class="note">S-02。hr の代替。端の立ち上がりと中央の線、その下に等幅のキャプション。docs 音量ではセクションの区切りに使う。</p>
+        <p class="note">S-02。hrの代替。端の立ち上がりと中央の線、その下に等幅のキャプション。docs音量ではセクションの区切りに使う。</p>
         <div class="demo">
           <div class="tombo-dim"></div>
           <div class="tombo-dimlab">section — 02.1 / requirements</div>
@@ -103,25 +103,25 @@
 
       <section id="c03">
         <h2 class="tombo-sec">目盛リスト</h2>
-        <p class="note">S-03。箇条書きの黒丸を green の目盛線に置き換えるリスト。</p>
+        <p class="note">S-03。箇条書きの黒丸をgreenの目盛線に置き換えるリスト。</p>
         <div class="demo">
           <ul class="tombo-ticks">
-            <li>リクエストとレスポンスを OpenAPI 定義で検証する</li>
-            <li>カバレッジを操作 × ステータス × content-type で数える</li>
-            <li>ドリフトを CI で検出する</li>
+            <li>リクエストとレスポンスをOpenAPI定義で検証する</li>
+            <li>カバレッジを操作 × ステータス × content-typeで数える</li>
+            <li>ドリフトをCIで検出する</li>
           </ul>
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-TICKS</span></figcaption>
           <pre tabindex="0">&lt;ul class="tombo-ticks"&gt;
-  &lt;li&gt;リクエストとレスポンスを OpenAPI 定義で検証する&lt;/li&gt;
+  &lt;li&gt;リクエストとレスポンスをOpenAPI定義で検証する&lt;/li&gt;
 &lt;/ul&gt;</pre>
         </figure>
       </section>
 
       <section id="c04">
         <h2 class="tombo-sec">ルーラー</h2>
-        <p class="note">S-03。10% 刻みの目盛トラックに green の充填、朱の縦線が現在値。値はインライン custom property で渡す(システム唯一の許可インラインスタイル)。</p>
+        <p class="note">S-03。10% 刻みの目盛トラックにgreenの充填、朱の縦線が現在値。値はインラインcustom propertyで渡す(システム唯一の許可インラインスタイル)。</p>
         <div class="demo">
           <div class="tombo-ruler" style="--tombo-ruler-value:62%"></div>
         </div>
@@ -133,7 +133,7 @@
 
       <section id="c05">
         <h2 class="tombo-sec">通し番号</h2>
-        <p class="note">S-04。.tombo-sections 配下の .tombo-sec 見出しに「01 — 」を自動採番する。このページの見出しがそのまま実演。図版の銘は .tombo-fig。</p>
+        <p class="note">S-04。.tombo-sections配下の .tombo-sec見出しに「01 — 」を自動採番する。このページの見出しがそのまま実演。図版の銘は .tombo-fig。</p>
         <div class="demo">
           <p class="tombo-fig">FIG. 01 — ENDPOINT COVERAGE</p>
         </div>
@@ -148,7 +148,7 @@
 
       <section id="c06">
         <h2 class="tombo-sec">朱の現在地</h2>
-        <p class="note">S-05。朱は 2px の線でだけ「ここ」を指す。キッカーの先頭・タブの下線・目次の左線。現在状態は aria-current 属性で宣言する(クラスではなく)。</p>
+        <p class="note">S-05。朱は2pxの線でだけ「ここ」を指す。キッカーの先頭・タブの下線・目次の左線。現在状態はaria-current属性で宣言する(クラスではなく)。</p>
         <div class="demo">
           <p class="tombo-kicker">GESSO — FIG. 00 / CONTRACTS, MEASURED</p>
           <nav class="tombo-tabs" style="margin-top:18px">
@@ -178,7 +178,7 @@
 
       <section id="c07">
         <h2 class="tombo-sec">ボタン</h2>
-        <p class="note">primary は唯一の green 面塗り。secondary は ink の罫線、ghost は下線リンク型。角丸なし。</p>
+        <p class="note">primaryは唯一のgreen面塗り。secondaryはinkの罫線、ghostは下線リンク型。角丸なし。</p>
         <div class="demo">
           <div class="row">
             <button class="tombo-btn tombo-btn--primary">Choose a quickstart</button>
@@ -196,7 +196,7 @@
 
       <section id="c08">
         <h2 class="tombo-sec">コードブロック</h2>
-        <p class="note">昼は夜の面、夜は罫線 — コードは沈めない。figcaption の左右にラベルを振り分ける。</p>
+        <p class="note">昼は夜の面、夜は罫線 — コードは沈めない。figcaptionの左右にラベルを振り分ける。</p>
         <div class="demo">
           <figure class="tombo-code">
             <figcaption><span>SHELL — INSTALL</span></figcaption>
@@ -215,9 +215,9 @@
 
       <section id="c09">
         <h2 class="tombo-sec">コールアウト</h2>
-        <p class="note">左の 2px が既定は朱(位置の印)、--warn で警告色。先頭の &lt;b&gt; が等幅の銘になる。</p>
+        <p class="note">左の2pxが既定は朱(位置の印)、--warnで警告色。先頭の &lt;b&gt; が等幅の銘になる。</p>
         <div class="demo">
-          <div class="tombo-callout"><b>NOTE — 001</b>Lumen で使う場合はサービスプロバイダの手動登録が必要。</div>
+          <div class="tombo-callout"><b>NOTE — 001</b>Lumenで使う場合はサービスプロバイダの手動登録が必要。</div>
           <div class="tombo-callout tombo-callout--warn" style="margin-top:12px"><b>WARN — 002</b>キャッシュを有効にすると再生成が必要になる。</div>
         </div>
         <figure class="tombo-code">
@@ -229,7 +229,7 @@
 
       <section id="c10">
         <h2 class="tombo-sec">テーブル</h2>
-        <p class="note">ヘッダは等幅の大文字 + ink の 1.5px 罫、行は hairline。数値セルには .tombo-mono を併用する。列が多い表は狭い画面で列に収まらないので、必ず .tombo-table-wrap で包む — データ表は WCAG 2.2 の Reflow(SC 1.4.10)の例外だが、スクロールさせてよいのは表であってページではない。スクロール領域はフォーカス可能にしないとキーボードで動かせないため、role="region" + アクセシブル名 + tabindex="0" が揃って 1 セットになる。</p>
+        <p class="note">ヘッダは等幅の大文字 + inkの1.5px罫、行はhairline。数値セルには .tombo-monoを併用する。列が多い表は狭い画面で列に収まらないので、必ず .tombo-table-wrapで包む — データ表はWCAG 2.2のReflow(SC 1.4.10)の例外だが、スクロールさせてよいのは表であってページではない。スクロール領域はフォーカス可能にしないとキーボードで動かせないため、role="region" + アクセシブル名 + tabindex="0" が揃って1セットになる。</p>
         <div class="demo">
           <div class="tombo-table-wrap" role="region" aria-labelledby="c10-cap" tabindex="0">
             <table class="tombo-table">
@@ -258,7 +258,7 @@
 
       <section id="c11">
         <h2 class="tombo-sec">チップ</h2>
-        <p class="note">app 音量のステータス表示。data-status が点の色を決める(ok / warn / err)。点は装飾なので読み上げ対象外。</p>
+        <p class="note">app音量のステータス表示。data-statusが点の色を決める(ok / warn / err)。点は装飾なので読み上げ対象外。</p>
         <div class="demo">
           <div class="row">
             <span class="tombo-chip" data-status="ok">OK</span>
@@ -299,7 +299,7 @@
 
       <section id="c13">
         <h2 class="tombo-sec">ロゴ刻印</h2>
-        <p class="note">C-01 見当マークの CSS 化。フッターに刻印する。--glow は LP ヒーロー専用で、hotaru のとき尾が蛍光 green に発光する(spec §9 唯一の発光例外)。装飾なので aria-hidden を付ける。</p>
+        <p class="note">C-01見当マークのCSS化。フッターに刻印する。--glowはLPヒーロー専用で、hotaruのとき尾が蛍光greenに発光する(spec §9唯一の発光例外)。装飾なのでaria-hiddenを付ける。</p>
         <div class="demo">
           <div class="row">
             <span class="tombo-logo" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
@@ -317,7 +317,7 @@
 
       <section id="c14">
         <h2 class="tombo-sec">ユーティリティ</h2>
-        <p class="note">.tombo-display は Instrument Sans 700 の欧文題字(和文が混ざる見出しは h1/h2 を使う)、.tombo-label は等幅の大文字銘、.tombo-mono は等幅化。方眼は音量クラスで敷く — .tombo-vol-lp がヒーロー全面、.tombo-gutters が余白のみ(このページが実演)、app は敷かない。</p>
+        <p class="note">.tombo-displayはInstrument Sans 700の欧文題字(和文が混ざる見出しはh1/h2を使う)、.tombo-labelは等幅の大文字銘、.tombo-monoは等幅化。方眼は音量クラスで敷く — .tombo-vol-lpがヒーロー全面、.tombo-guttersが余白のみ(このページが実演)、appは敷かない。</p>
         <div class="demo">
           <p class="tombo-display">TOMBO</p>
           <p class="tombo-label" style="margin-top:10px">MEASURED / SET IN MARTIAN MONO</p>
@@ -335,16 +335,16 @@
 
       <section id="c15">
         <h2 class="tombo-sec">コンテナ</h2>
-        <p class="note">用途別の 4 段。<code>.tombo-shell</code> が唯一のクラスで、幅は <code>--tombo-shell</code> を読む。ページ全体の幅は <code>:root</code> に一度だけ書き、修飾子はその要素だけ付け替える。<code>.tombo-gutters</code> も同じ変数を読むので、余白の方眼は常に本文の端に接する。ブレークポイントは無い — <code>max-inline-size</code> と clamp() のガターで全幅域を連続的に埋める。</p>
+        <p class="note">用途別の4段。<code>.tombo-shell</code> が唯一のクラスで、幅は <code>--tombo-shell</code> を読む。ページ全体の幅は <code>:root</code> に一度だけ書き、修飾子はその要素だけ付け替える。<code>.tombo-gutters</code> も同じ変数を読むので、余白の方眼は常に本文の端に接する。ブレークポイントは無い — <code>max-inline-size</code> とclamp() のガターで全幅域を連続的に埋める。</p>
         <div class="demo scale-demo">
           <div class="tombo-dim" style="width:34.7%"></div>
-          <p class="tombo-dimlab">--tombo-shell-reading — 65ch ≒ 621px / 本文。和文 41 字・欧文 76 字</p>
+          <p class="tombo-dimlab">--tombo-shell-reading — 65ch ≒ 621px / 本文。和文41字・欧文76字</p>
           <div class="tombo-dim" style="width:71.4%"></div>
           <p class="tombo-dimlab">--tombo-shell-default — 1280px / 通常ページ・ドキュメント</p>
           <div class="tombo-dim" style="width:100%"></div>
           <p class="tombo-dimlab">--tombo-shell-wide — 1792px / LP・カードグリッド・ダッシュボード</p>
           <div class="tombo-dim" style="width:100%; opacity:.35"></div>
-          <p class="tombo-dimlab">.tombo-shell--full — 幅制限なし / 背景・装飾。ガターも 0</p>
+          <p class="tombo-dimlab">.tombo-shell--full — 幅制限なし / 背景・装飾。ガターも0</p>
         </div>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-SHELL</span></figcaption>
@@ -353,7 +353,7 @@
 &lt;div class="tombo-shell tombo-shell--wide"&gt;    &lt;!-- LP・グリッド --&gt;
 &lt;div class="tombo-shell tombo-shell--full"&gt;    &lt;!-- 背景・装飾 --&gt;</pre>
         </figure>
-        <p class="note">ページ全体の段を変えるときだけ、自分のスタイルシートで <code>--tombo-shell</code> を差し替える。インライン <code>style</code> は使わない — システムが認めるインライン custom property は <code>--tombo-ruler-value</code> だけ。宣言は必ず <code>:root</code> に置く — <code>&lt;body&gt;</code> 以下に書くと、<code>&lt;body&gt;</code> に載る <code>.tombo-gutters</code> の方眼が追従しない。</p>
+        <p class="note">ページ全体の段を変えるときだけ、自分のスタイルシートで <code>--tombo-shell</code> を差し替える。インライン <code>style</code> は使わない — システムが認めるインラインcustom propertyは <code>--tombo-ruler-value</code> だけ。宣言は必ず <code>:root</code> に置く — <code>&lt;body&gt;</code> 以下に書くと、<code>&lt;body&gt;</code> に載る <code>.tombo-gutters</code> の方眼が追従しない。</p>
         <figure class="tombo-code">
           <figcaption><span>CSS</span><span>ページ幅の上書き</span></figcaption>
           <pre tabindex="0">:root { --tombo-shell: var(--tombo-shell-wide); }</pre>
@@ -362,7 +362,7 @@
 
       <section id="c16">
         <h2 class="tombo-sec">発光</h2>
-        <p class="note">S-06。hotaru = 蛍。夜だけ計器が光る。<code>.tombo-glow</code> はオプトインで、面を光らせ、縁にリングを回し、中の <code>.tombo-display</code> と <code>.tombo-metric</code> の数値に暈をつける。トークンが全部 <code>light-dark(transparent, …)</code> なので<b>昼は完全に不活性</b>で、テーマセレクタが要らない — OS のダークモードにも <code>data-theme</code> にも <code>color-scheme</code> 経由で追従する。</p>
+        <p class="note">S-06。hotaru = 蛍。夜だけ計器が光る。<code>.tombo-glow</code> はオプトインで、面を光らせ、縁にリングを回し、中の <code>.tombo-display</code> と <code>.tombo-metric</code> の数値に暈をつける。トークンが全部 <code>light-dark(transparent, …)</code> なので<b>昼は完全に不活性</b>で、テーマセレクタが要らない — OSのダークモードにも <code>data-theme</code> にも <code>color-scheme</code> 経由で追従する。</p>
         <div class="demo">
           <figure class="tombo-metric tombo-glow tombo-corners" style="padding:20px 22px">
             <b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
@@ -370,7 +370,7 @@
             <div class="k" style="margin-top:12px">OPERATIONS COVERED</div>
             <div class="v">96.2<small style="font-size:var(--tombo-text-note)">%</small></div>
             <div class="tombo-ruler" style="--tombo-ruler-value:96%"></div>
-            <p class="tombo-dimlab">この注記は発光面の中なので ink-sub に一段上がっている</p>
+            <p class="tombo-dimlab">この注記は発光面の中なのでink-subに一段上がっている</p>
           </figure>
         </div>
         <figure class="tombo-code">
@@ -378,12 +378,12 @@
           <pre tabindex="0">&lt;header class="hero tombo-vol-lp tombo-glow tombo-corners"&gt; … &lt;/header&gt;
 &lt;figure class="tombo-metric tombo-glow"&gt; … &lt;/figure&gt;</pre>
         </figure>
-        <p class="note">2 点が仕様として固定されている。<b>光は background-image に合成し、擬似要素では作らない</b> — <code>.tombo-corners</code> をはじめ signature classes はほぼ全部 <code>::before</code>/<code>::after</code> を使っているので、擬似要素で光を作ると組み合わせた瞬間にどれかの印が消える。<b>発光面の中では注記の階調が一段上がる</b> — 光で下地が約 1.3 ポイント明るくなり、<code>--tombo-ink-faint</code> が 4.5:1 を割るため。<code>.tombo-glow</code> がトークンを差し替えるので配下は自動で追従する。コントラストゲートは合成後の下地で測るので、<code>--tombo-glow-wash</code> を .23 より上げるとビルドが落ちる。</p>
+        <p class="note">2点が仕様として固定されている。<b>光はbackground-imageに合成し、擬似要素では作らない</b> — <code>.tombo-corners</code> をはじめsignature classesはほぼ全部 <code>::before</code>/<code>::after</code> を使っているので、擬似要素で光を作ると組み合わせた瞬間にどれかの印が消える。<b>発光面の中では注記の階調が一段上がる</b> — 光で下地が約1.3ポイント明るくなり、<code>--tombo-ink-faint</code> が4.5:1を割るため。<code>.tombo-glow</code> がトークンを差し替えるので配下は自動で追従する。コントラストゲートは合成後の下地で測るので、<code>--tombo-glow-wash</code> を .23より上げるとビルドが落ちる。</p>
       </section>
 
       <section id="c17">
         <h2 class="tombo-sec">フォーム</h2>
-        <p class="note">ネイティブ優先。造形は <code>.tombo-field</code> の中でだけ効く（外の input は素のまま）。ハイブリッド＝ hairline のボックス＋状態を運ぶ下ルール（focus=green・invalid=臙脂）。ラベルは等幅の計器声、required は ink の <code>*</code>（朱は線専用のまま）。checkbox/radio はネイティブ <code>accent-color</code>。エラーは <code>aria-describedby</code> と <code>aria-invalid</code> で結線する。</p>
+        <p class="note">ネイティブ優先。造形は <code>.tombo-field</code> の中でだけ効く（外のinputは素のまま）。ハイブリッド＝ hairlineのボックス＋状態を運ぶ下ルール（focus=green・invalid=臙脂）。ラベルは等幅の計器声、requiredはinkの <code>*</code>（朱は線専用のまま）。checkbox/radioはネイティブ <code>accent-color</code>。エラーは <code>aria-describedby</code> と <code>aria-invalid</code> で結線する。</p>
         <div class="demo">
           <form class="tombo-flow" action="#" style="max-width:420px">
             <p class="tombo-label" style="color:var(--tombo-ink-faint)"><span class="tombo-req" aria-hidden="true">*</span> 必須</p>
@@ -395,7 +395,7 @@
             <div class="tombo-field">
               <label for="d-cov">COVERAGE THRESHOLD<span class="tombo-req" aria-hidden="true">*</span></label>
               <input id="d-cov" type="text" required aria-invalid="true" aria-describedby="d-cov-err" value="ninety">
-              <p class="error" id="d-cov-err">0 から 100 の数値を入力してください。</p>
+              <p class="error" id="d-cov-err">0から100の数値を入力してください。</p>
             </div>
             <div class="tombo-field">
               <label for="d-fw">FRAMEWORK ADAPTER</label>
@@ -430,8 +430,8 @@
   &lt;label for="cov"&gt;COVERAGE THRESHOLD&lt;span class="tombo-req" aria-hidden="true"&gt;*&lt;/span&gt;&lt;/label&gt;
   &lt;input id="cov" type="number" required
          aria-describedby="cov-help cov-err" aria-invalid="true"&gt;
-  &lt;p class="help"  id="cov-help"&gt;0–100 の整数。&lt;/p&gt;
-  &lt;p class="error" id="cov-err"&gt;0 から 100 の数値を入力してください。&lt;/p&gt;
+  &lt;p class="help"  id="cov-help"&gt;0–100の整数。&lt;/p&gt;
+  &lt;p class="error" id="cov-err"&gt;0から100の数値を入力してください。&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;div class="tombo-field"&gt;
@@ -447,8 +447,8 @@
       </section>
       <section id="c18">
         <h2 class="tombo-sec">印刷</h2>
-        <p class="note">TOMBO は名前どおり印刷の見当マーク。どのページも <code>@media print</code> で素直に刷れる（夜テーマも紙は白、コードは白地インク、トグルやコピーボタンは消える、計器ブロックは改ページで割れない）。さらに <code>&lt;body class="tombo-trim"&gt;</code> を付けると、紙面の余白に本物のトンボ——四隅の<strong>角トンボ</strong>と各辺中央の<strong>センタートンボ</strong>——がインク1色で毎ページ刷られる。ブラウザ印刷に裁ち落とし領域は無いので、単一の角トンボ（＝印刷可能域の角を指す）を採る視覚的オマージュ。</p>
-        <p class="note">このカタログ（<code>components.html</code>）自体は opt-in していないので、<kbd>⌘P</kbd> してもトンボは出ない。<code>docs.html</code> を <kbd>⌘P</kbd> するとトンボが出る。</p>
+        <p class="note">TOMBOは名前どおり印刷の見当マーク。どのページも <code>@media print</code> で素直に刷れる（夜テーマも紙は白、コードは白地インク、トグルやコピーボタンは消える、計器ブロックは改ページで割れない）。さらに <code>&lt;body class="tombo-trim"&gt;</code> を付けると、紙面の余白に本物のトンボ——四隅の<strong>角トンボ</strong>と各辺中央の<strong>センタートンボ</strong>——がインク1色で毎ページ刷られる。ブラウザ印刷に裁ち落とし領域は無いので、単一の角トンボ（＝印刷可能域の角を指す）を採る視覚的オマージュ。</p>
+        <p class="note">このカタログ（<code>components.html</code>）自体はopt-inしていないので、<kbd>⌘P</kbd> してもトンボは出ない。<code>docs.html</code> を <kbd>⌘P</kbd> するとトンボが出る。</p>
         <figure class="tombo-code">
           <figcaption><span>HTML</span><span>.TOMBO-TRIM</span></figcaption>
           <pre tabindex="0">&lt;body class="tombo-trim"&gt;
