@@ -538,6 +538,22 @@
   .tombo-numbers[open] > summary { margin-block-end: var(--tombo-space-12); }
 }
 
+@layer tombo.components {
+  /* トップバー — アプリ音量の先頭 (spec 2026-07-24, issue #16)。
+     外枠が全幅の下罫、幅は内側の .tombo-shell(直下)が決める。
+     ロゴ段は display 声の text-body 固定 — 14/15px のブレはここで止める。 */
+  .tombo-topbar { border-block-end: 1px solid var(--tombo-hairline); padding-block: var(--tombo-space-16); }
+  .tombo-topbar > .tombo-shell { display: flex; align-items: baseline; gap: var(--tombo-space-16); flex-wrap: wrap; }
+  .tombo-topbar .brand { font-family: var(--tombo-font-display); font-weight: 700;
+    font-size: var(--tombo-text-body); letter-spacing: -.015em; }
+  .tombo-topbar .brand a { color: inherit; text-decoration: none; } /* ロゴリンクは ink・下線なし */
+  .tombo-topbar .meta { margin-inline-start: auto; font-family: var(--tombo-font-mono);
+    font-size: var(--tombo-text-label); line-height: var(--tombo-lh-label);
+    letter-spacing: .12em; color: var(--tombo-ink-faint); } /* 大小文字を運ぶので uppercase はかけない */
+  /* タブ組み込み — 消費側の暗黙知だった打ち消しを部品側で吸収 */
+  .tombo-topbar .tombo-tabs { border-block-end: 0; flex: 1; }
+}
+
 /* ── print ─────────────────────────────────────────────────────────────
    Unlayered on purpose: these overrides must beat every @layer rule, and
    being outside all layers wins the cascade without !important. Two halves:
