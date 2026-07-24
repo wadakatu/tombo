@@ -49,8 +49,12 @@ def main() -> int:
     print(f"PASS  all banners and pins agree: v{agreed}")
 
     ref = os.environ.get("GITHUB_REF", "")
-    m = re.fullmatch(r"refs/tags/v(\d+\.\d+\.\d+)", ref)
-    if m:
+    if ref.startswith("refs/tags/"):
+        # any tag that triggered CI must be a strict vX.Y.Z release tag AND match
+        m = re.fullmatch(r"refs/tags/v(\d+\.\d+\.\d+)", ref)
+        if not m:
+            print(f"FAIL  tag {ref.removeprefix('refs/tags/')} is not a vX.Y.Z release tag")
+            return 1
         tag = m.group(1)
         if tag != agreed:
             print(f"FAIL  tag v{tag} != banner/pin v{agreed}")
