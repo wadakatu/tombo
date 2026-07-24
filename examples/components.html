@@ -37,6 +37,7 @@
     .side { position: static; }
   }
   #c19 .tombo-tip { display: inline-block; position: static; margin-top: var(--tombo-space-16); } /* デモは静置(ページJSゼロ) */
+  #c20 .tombo-shell { padding-inline: 0; } /* demo枠内はガター不要(実演は下罫とflexの構造) */
   .foot { display: flex; align-items: center; gap: var(--tombo-space-16); }
 </style>
 </head>
@@ -65,6 +66,7 @@
         <a href="#c17">17 — フォーム</a>
         <a href="#c18">18 — 印刷</a>
         <a href="#c19">19 — 図版</a>
+        <a href="#c20">20 — トップバー</a>
       </nav>
     </aside>
 
@@ -539,6 +541,38 @@ REVIEWS       3</div>
 &lt;/figure&gt;</pre>
         </figure>
         <p class="note">ツールチップはこのデモでは見せるために静置している(カタログはページJSゼロ)。実装では既定 <code>display:none</code> — 消費側JSが <code>display</code> を立て、<code>transform: translate(x, y)</code> で置く。アクセシブルなデータ経路は数表が担い、ツールチップは視覚の補助(<code>role="presentation"</code>・<code>pointer-events:none</code>)。インタラクティブなバーには <code>tabindex="0"</code> と <code>aria-label</code> を振る。枠がスクロールし得るのに中にフォーカス可能要素が無い図では、テーブルと同じ作法(<code>role="region"</code> + アクセシブル名 + <code>tabindex="0"</code>)を枠に付ける。</p>
+      </section>
+
+      <section id="c20">
+        <h2 class="tombo-sec">トップバー</h2>
+        <p class="note">アプリ音量の先頭。外枠が全幅のhairline下罫を引き、幅は直下の <code>.tombo-shell</code> が決める(下罫はビューポート全幅・中身はshellが絞る)。ロゴ段(<code>.brand</code>)はdisplay声のtext-body固定 — 実装ごとの14/15pxのブレはここで止まる。中の <code>&lt;a&gt;</code> はink継承・下線なし。右肩(<code>.meta</code>)は等幅ink-faintで <code>margin-inline-start: auto</code> — ユーザー名やREVなど大小文字を運ぶのでuppercaseはかけない。タブは <code>.tombo-tabs</code> をそのまま入れる — 組み込み時の打ち消し(<code>border-block-end: 0; flex: auto</code>)は部品側が吸収する。要素は <code>&lt;header&gt;</code>(bannerランドマーク)、現在地は従来どおり <code>aria-current</code>。行はbaseline揃え、狭幅ではwrapで折り返す(<code>.meta</code> を消したいページは自分のCSSで — 部品は消さない)。</p>
+        <div class="demo">
+          <header class="tombo-topbar">
+            <div class="tombo-shell">
+              <span class="brand"><a href="#c20">SCREENBOOK</a></span>
+              <nav class="tombo-tabs">
+                <a href="#c20" aria-current="page">画面一覧</a>
+                <a href="#c20">依存グラフ</a>
+                <a href="#c20">変更影響</a>
+              </nav>
+              <span class="meta">wadakatu@prod / REV 4.2.1</span>
+            </div>
+          </header>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-TOPBAR</span></figcaption>
+          <pre tabindex="0">&lt;header class="tombo-topbar"&gt;
+  &lt;div class="tombo-shell"&gt;
+    &lt;span class="brand"&gt;&lt;a href="/"&gt;SCREENBOOK&lt;/a&gt;&lt;/span&gt;
+    &lt;nav class="tombo-tabs"&gt;
+      &lt;a href="/screens" aria-current="page"&gt;画面一覧&lt;/a&gt;
+      &lt;a href="/deps"&gt;依存グラフ&lt;/a&gt;
+    &lt;/nav&gt;
+    &lt;span class="meta"&gt;wadakatu@prod / REV 4.2.1&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/header&gt;</pre>
+        </figure>
+        <p class="note">アプリ/ダッシュボード音量のページの先頭20行を、どのプロダクトでも同一マークアップにするための部品。ロゴだけ・タブ無しの構成も可 — <code>.meta</code> はauto marginで右肩に残る。実物は <a href="app.html">examples/app.html</a> の先頭。</p>
       </section>
     </main>
   </div>
