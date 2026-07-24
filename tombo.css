@@ -106,6 +106,7 @@
     font-size: var(--tombo-text-body);
     font-weight: var(--tombo-w-body);
     line-height: 2; /* = 30px at body size; unitless so larger text inherits safely */
+    text-autospace: normal; /* 八分アキ(1/8 em) at 和欧 boundaries — CSS Text L4. Unsupported → tight (PE) */
     transition: background var(--tombo-dur) var(--tombo-ease), color var(--tombo-dur) var(--tombo-ease);
   }
   h1, h2, h3, h4, h5, h6 { font-weight: 700; }
@@ -119,7 +120,7 @@
   /* classless prose lists only — component lists (.tombo-ticks/.tombo-toc/…) keep their own padding */
   ul:not([class]), ol:not([class]) { padding-inline-start: 1.4em; }
   a { color: var(--tombo-green); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
-  code, kbd, samp, pre { font-family: var(--tombo-font-mono); font-weight: 400; }
+  code, kbd, samp, pre { font-family: var(--tombo-font-mono); font-weight: 400; text-autospace: no-autospace; } /* verbatim: no re-spacing (text-autospace inherits) */
   hr { border: 0; border-top: 1px solid var(--tombo-hairline); }
   ::selection { background: var(--tombo-green); color: var(--tombo-on-green); }
   :focus-visible { outline: 2px solid var(--tombo-green); outline-offset: 2px; }
