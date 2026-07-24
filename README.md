@@ -439,6 +439,20 @@ python3 scripts/check_contrast.py       # runs the gate, exits 1 on any violatio
 python3 scripts/check_contrast.py --self-test   # verifies the luminance math itself
 ```
 
+## CI
+
+Every push to `main`, every `v*` tag, and every pull request runs one gate —
+the same `npm run check` you can run locally before merging:
+
+1. **stylelint + [`use-baseline`](https://github.com/ryo-manba/stylelint-plugin-use-baseline)** (`available: "widely"`) — keeps `tombo.css` inside Baseline. Deliberately non-widely features (progressive enhancement) are listed, with justification, in `stylelint.config.mjs` — that list is the project's PE ledger.
+2. **Contrast** — `scripts/check_contrast.py` (above).
+3. **Size budget** — `scripts/check_size.py` (gzipped-byte ceilings).
+4. **Banner / tag integrity** — `scripts/check_banner.py` asserts the version agrees across both banners and the three vendoring pins, and matches the tag on a release.
+5. **JS syntax** — `node --check tombo.js`.
+
+There's no build step and nothing is published; CI only verifies. Run the whole
+gate yourself with `npm run check` (Node + Python 3 required for dev only).
+
 ## Examples
 
 Three volumes of the same language, side by side:
