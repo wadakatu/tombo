@@ -2,9 +2,10 @@
 """TOMBO banner/tag integrity.
 
 Asserts the version is consistent across: tombo.css banner (line 1),
-tombo.js banner (line 1), and the three README vendoring pins
-(`git ... show vX.Y.Z:...`). When run on a tag (GITHUB_REF=refs/tags/vX.Y.Z),
-also asserts the tag matches. Exit 1 on any mismatch.
+tombo.js banner (line 1), and the vendoring pins (`git ... show vX.Y.Z:...`)
+in README.md, index.html, and ja/index.html — three pins each. When run on a
+tag (GITHUB_REF=refs/tags/vX.Y.Z), also asserts the tag matches. Exit 1 on
+any mismatch.
 """
 import os
 import re
@@ -19,7 +20,7 @@ def first_line_version(path: Path) -> str | None:
     m = VER.search(line)
     return m.group(1) if m else None
 
-def readme_pin_versions(path: Path) -> list[str]:
+def pin_versions(path: Path) -> list[str]:
     # lines like: git -C /path/to/tombo show v0.12.0:tombo.css > ...
     return [m.group(1) for m in re.finditer(r"show v(\d+\.\d+\.\d+):", path.read_text())]
 
@@ -27,17 +28,23 @@ def main() -> int:
     versions = {}
     versions["tombo.css banner"] = first_line_version(ROOT / "tombo.css")
     versions["tombo.js banner"] = first_line_version(ROOT / "tombo.js")
-    pins = readme_pin_versions(ROOT / "README.md")
-    for i, p in enumerate(pins, 1):
-        versions[f"README pin {i}"] = p
+
+    pin_sources = [("README.md", 3), ("index.html", 3), ("ja/index.html", 3)]
+    ok = True
+    for name, want in pin_sources:
+        got = pin_versions(ROOT / name)
+        if len(got) != want:
+            print(f"FAIL  expected {want} vendoring pins in {name}, found {len(got)}")
+            ok = False
+        for i, p in enumerate(got, 1):
+            versions[f"{name} pin {i}"] = p
+    if not ok:
+        return 1
 
     print("versions found:")
     for k, v in versions.items():
         print(f"  {k:18} {v}")
 
-    if len(pins) != 3:
-        print(f"FAIL  expected 3 README vendoring pins, found {len(pins)}")
-        return 1
     if None in versions.values():
         print("FAIL  a banner has no vX.Y.Z version")
         return 1
