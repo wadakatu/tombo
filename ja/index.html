@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TOMBO — 測る印。wadakatu のシングルファイル CSS デザインシステム</title>
+<meta name="description" content="TOMBO は wadakatu のシングルファイル・依存ゼロの CSS デザインシステム。6 つの署名要素、2 つのテーマ、「現在地」を指す一本の朱。">
+<link rel="alternate" hreflang="en" href="https://wadakatu.github.io/tombo/">
+<link rel="alternate" hreflang="ja" href="https://wadakatu.github.io/tombo/ja/">
+<link rel="alternate" hreflang="x-default" href="https://wadakatu.github.io/tombo/">
+<link rel="icon" href="../assets/logo/tombo-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../tombo.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem('tombo-theme');if(t==='tombo'||t==='hotaru')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
+</head>
+<body class="tombo-gutters">
+<header class="tombo-topbar">
+  <div class="tombo-shell">
+    <span class="brand"><a href="./">TOMBO</a></span>
+    <span class="meta">REV v0.14.1</span>
+    <div class="tombo-themes tombo-label" hidden>
+      <button type="button" data-tombo-theme="system">system</button>
+      <button type="button" data-tombo-theme="tombo">tombo</button>
+      <button type="button" data-tombo-theme="hotaru">hotaru</button>
+    </div>
+    <span class="tombo-label"><a href="../" lang="en" hreflang="en">English</a></span>
+  </div>
+</header>
+
+<main class="tombo-sections">
+<section class="hero tombo-vol-lp tombo-glow tombo-corners">
+  <b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
+  <div class="tombo-shell">
+    <span class="tombo-logo tombo-logo--glow" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
+    <p class="tombo-kicker">TOMBO — WADAKATU DESIGN SYSTEM / FIG. 00</p>
+    <div class="cols">
+      <div class="tombo-flow">
+        <h1 class="tombo-display">The mark that<br>measures.<small>測ってから、置く。</small></h1>
+        <div class="tombo-dim"></div>
+        <div class="tombo-dimlab">単一ファイル · 依存ゼロ · タグから vendoring</div>
+        <p class="tagline">wadakatu が作るすべて — ドキュメント、アプリ、LP、ポートフォリオ — をひとつのスタイルシートで。6 つの署名要素を例外なく反復し、文脈に合わせて「音量」だけを変える: ドキュメントでは静かに、LP では最大音量で。</p>
+        <div class="cta">
+          <a class="tombo-btn tombo-btn--primary" href="#quickstart">スタイルシートを入手</a>
+          <a class="tombo-btn tombo-btn--secondary" href="https://github.com/wadakatu/tombo">GitHub で見る</a>
+          <span class="tombo-label">MIT · CSS 11.8 KB GZIP</span>
+        </div>
+      </div>
+      <div class="inst tombo-metric tombo-glow tombo-corners">
+        <b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
+        <p class="tombo-fig">FIG. 01 — SIZE BUDGET</p>
+        <div class="k">TOMBO.CSS GZIPPED</div>
+        <div class="v">11.8<small>KB</small></div>
+        <!-- 11,808 / 12,288 B = 96.1% — 出典: scripts/check_size.py(npm run check) -->
+        <div class="tombo-ruler" style="--tombo-ruler-value:96.1%"></div>
+        <div class="rows">
+          <div class="row"><span>tombo.css · gzip</span><b>11,808 B</b></div>
+          <div class="row"><span>ceiling</span><b>12,288 B</b></div>
+          <div class="row"><span>tombo.js · gzip · optional</span><b>1,264 B</b></div>
+          <div class="row"><span>ceiling</span><b>2,048 B</b></div>
+        </div>
+        <div class="cfoot tombo-label">MEASURED BY SCRIPTS/CHECK_SIZE.PY — CI GATE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec tombo-shell">
+  <div class="tombo-dim"></div>
+  <div class="tombo-dimlab">憲法 — 三原則 / 例外なし</div>
+  <h2 class="tombo-sec">三原則</h2>
+  <div class="cards3">
+    <div class="fcard tombo-flow tombo-metric tombo-corners">
+      <p class="tombo-fig">R-01</p>
+      <h3>すべてを測る</h3>
+      <p>要素は寸法線・目盛・通し番号の隣に置かれる。「置く前に測った」という気配が、ページの空気を作る。</p>
+      <div class="meta"><div class="tombo-label">DIMENSION LINES · TICKS · RUNNING NUMBERS</div></div>
+    </div>
+    <div class="fcard tombo-flow tombo-metric tombo-corners">
+      <p class="tombo-fig">R-02</p>
+      <h3>銘は等幅</h3>
+      <p>数字・ラベル・インデックス・単位は必ず等幅。本文は静かなサンセリフに保ち、計器だけが等幅で光る。</p>
+      <div class="meta"><div class="tombo-label">VOICE: MARTIAN MONO — LABELS · NUMBERS · CODE</div></div>
+    </div>
+    <div class="fcard tombo-flow tombo-metric tombo-corners">
+      <p class="tombo-fig">R-03</p>
+      <h3>朱は現在地</h3>
+      <p>赤は「ここ」を指す 1–2px の線にだけ使う。現在のタブ、現在の目次、現在の値。面を塗った瞬間、それは朱ではなくただの赤になる。</p>
+      <div class="meta"><div class="tombo-label">SHU: CURRENT TAB · TOC · RULER VALUE — NEVER A FILL</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec tombo-shell">
+  <h2 class="tombo-sec">6 つの署名要素</h2>
+  <p class="lede">コンポーネントライブラリではなく、指紋。以下のタイルはすべて絵ではなく実物。</p>
+  <div class="sigs">
+    <div class="sig tombo-corners"><b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
+      <p class="tombo-fig">S-01 — REGISTRATION CORNERS</p>
+      <p class="s-note">「合っている」ことを示す 12px のブラケット。いままさに見えている — このタイルは四隅すべてを着けている。</p>
+    </div>
+    <div class="sig">
+      <p class="tombo-fig">S-02 — DIMENSION LINE</p>
+      <div class="tombo-dim"></div>
+      <div class="tombo-dimlab">測る hr — 両端の罫 · 中央のティック · 等幅の銘</div>
+    </div>
+    <div class="sig">
+      <p class="tombo-fig">S-03 — TICKS &amp; RULER</p>
+      <ul class="tombo-ticks"><li>箇条書きは green のティックになる</li><li>ルーラーは現在値を朱で読む</li></ul>
+      <div class="tombo-ruler" style="--tombo-ruler-value:62%"></div>
+    </div>
+    <div class="sig">
+      <p class="tombo-fig">S-04 — RUNNING NUMBERS</p>
+      <p class="s-note">このページの見出しは自ら番号を刻み(<span class="tombo-mono">01 —</span>、<span class="tombo-mono">02 —</span>)、すべての図版が上のような等幅の銘を持つ。</p>
+    </div>
+    <div class="sig">
+      <p class="tombo-fig">S-05 — SHU CURRENT POSITION</p>
+      <nav class="tombo-tabs" aria-label="S-05 demo">
+        <a href="#" aria-current="page">現在地</a>
+        <a href="#">よそ</a>
+      </nav>
+    </div>
+    <div class="sig sig--grid">
+      <p class="tombo-fig">S-06 — GRAPH PAPER</p>
+      <p class="s-note">ヒーローの背後にある製図の方眼 — LP ではフルブリード、ドキュメントでは余白のみ、アプリではオフ。夜は <span class="tombo-mono">.tombo-glow</span> が灯す。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec tombo-shell">
+  <h2 class="tombo-sec">2 つのテーマ</h2>
+  <p class="lede">傘はひとつ、<span class="tombo-mono">data-theme</span> は 2 つ: 昼の図面 <b>tombo</b> と、計器が発光する夜の図面 <b>hotaru</b>(蛍)。既定では OS に追従し、トップバーのトグルで固定・記憶できる — その部分が <span class="tombo-mono">tombo.js</span>(設計上オプション)。このページは JS なしでも完全に読める。</p>
+  <div class="swatches">
+    <div class="sw sw--paper"><i></i><span class="tombo-label">PAPER</span></div>
+    <div class="sw sw--surface"><i></i><span class="tombo-label">SURFACE</span></div>
+    <div class="sw sw--ink"><i></i><span class="tombo-label">INK</span></div>
+    <div class="sw sw--ink-sub"><i></i><span class="tombo-label">INK-SUB</span></div>
+    <div class="sw sw--green"><i></i><span class="tombo-label">GREEN</span></div>
+    <div class="sw sw--shu"><i></i><span class="tombo-label">SHU</span></div>
+  </div>
+  <p class="s-note">スウォッチは <span class="tombo-mono">var(--tombo-*)</span> を直接塗っている — テーマを切り替えれば追従する。28 のトークンペアを WCAG 2.1 の下限値で CI ゲートしている。</p>
+</section>
+
+<section class="sec tombo-shell" id="quickstart">
+  <h2 class="tombo-sec">クイックスタート</h2>
+  <p class="lede">npm も CDN もなし — リリースタグからファイルを vendoring し、タグと sha256 を自分の CI でピン留めする。</p>
+  <figure class="tombo-code">
+    <figcaption><span>SHELL — VENDOR FROM A TAG</span></figcaption>
+    <pre tabindex="0">git -C /path/to/tombo show v0.14.1:tombo.css > public/styles/tombo.css
+git -C /path/to/tombo show v0.14.1:LICENSE   > public/styles/tombo.LICENSE
+git -C /path/to/tombo show v0.14.1:tombo.js  > public/scripts/tombo.js</pre>
+  </figure>
+  <figure class="tombo-code">
+    <figcaption><span>HTML — LINK YOUR COPY + THE THREE VOICES</span></figcaption>
+    <pre tabindex="0">&lt;link rel="stylesheet" href="/styles/tombo.css"&gt;
+&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&amp;family=M+PLUS+2:wght@450;500;700&amp;family=Martian+Mono:wdth,wght@75..112.5,400..600&amp;display=swap" rel="stylesheet"&gt;</pre>
+  </figure>
+  <p class="s-note">詳細リファレンス: <a href="https://github.com/wadakatu/tombo/tree/main/docs">docs/</a> · <a href="https://github.com/wadakatu/tombo#quick-start">README</a>。</p>
+</section>
+
+<section class="sec tombo-shell">
+  <h2 class="tombo-sec">3 つの音量</h2>
+  <p class="lede">同じ 6 つの署名を、プロダクトごとに上げ下げする。以下はすべてライブページ — 中からテーマを切り替えられる。</p>
+  <div class="cards3">
+    <a class="vol fcard tombo-flow tombo-metric tombo-corners" href="../examples/docs.html">
+      <p class="tombo-fig">VOL — DOCS</p>
+      <h3>静かに</h3>
+      <p>方眼は余白にだけ。hr の代わりに寸法線。見出しは自ら番号を刻む。</p>
+      <div class="meta"><div class="tombo-label">EXAMPLES/DOCS.HTML</div></div>
+    </a>
+    <a class="vol fcard tombo-flow tombo-metric tombo-corners" href="../examples/app.html">
+      <p class="tombo-fig">VOL — APP</p>
+      <h3>機能的に</h3>
+      <p>方眼なし。計器だけ — メトリクス、ルーラー、ステータス。朱が現在のナビを指す。</p>
+      <div class="meta"><div class="tombo-label">EXAMPLES/APP.HTML</div></div>
+    </a>
+    <a class="vol fcard tombo-flow tombo-metric tombo-corners" href="../examples/lp.html">
+      <p class="tombo-fig">VOL — LP</p>
+      <h3>最大音量</h3>
+      <p>方眼はフルブリード、ヒーローに枠、四隅に見当 — そして夜は、発光。</p>
+      <div class="meta"><div class="tombo-label">EXAMPLES/LP.HTML</div></div>
+    </a>
+  </div>
+  <p class="s-note"><a href="../examples/components.html">コンポーネントカタログ</a> — 全部品をライブデモ + コピペ用マークアップで。</p>
+</section>
+</main>
+
+<footer class="tombo-footer">
+  <div class="tombo-shell foot">
+    <span class="tombo-logo" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
+    <div>TOMBO — WADAKATU DESIGN SYSTEM · MIT · VENDORED FROM A TAG<br>
+      <a href="https://github.com/wadakatu/tombo">GITHUB.COM/WADAKATU/TOMBO</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../tombo.js" defer></script>
+</body>
+</html>
