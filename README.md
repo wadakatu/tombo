@@ -425,7 +425,7 @@ Mixed Japanese/Latin (和欧混植) spacing is CSS-native — you don't hand-typ
 
 ```html
 <!-- write it tight; the browser does the spacing -->
-<p>Laravel11以降に対応し、OpenAPIドキュメントを生成する。</p>
+<p>Laravel 11以降に対応し、OpenAPIドキュメントを生成する。</p>
 ```
 
 It's progressive enhancement: supporting engines (Chromium today) render the 八分アキ; others render tight — fully legible — and pick it up automatically as they ship `text-autospace`, with no change to your markup. A hand-typed space, if you leave one in, is respected and suppresses autospace at that boundary.
