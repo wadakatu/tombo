@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TOMBO — the mark that measures. wadakatu's single-file CSS design system</title>
+<meta name="description" content="TOMBO is wadakatu's single-file, zero-dependency CSS design system — six signature marks, two themes, and one vermillion line for “you are here.”">
+<link rel="alternate" hreflang="en" href="https://wadakatu.github.io/tombo/">
+<link rel="alternate" hreflang="ja" href="https://wadakatu.github.io/tombo/ja/">
+<link rel="alternate" hreflang="x-default" href="https://wadakatu.github.io/tombo/">
+<link rel="icon" href="assets/logo/tombo-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="tombo.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem('tombo-theme');if(t==='tombo'||t==='hotaru')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
+</head>
+<body class="tombo-gutters">
+<header class="tombo-topbar">
+  <div class="tombo-shell">
+    <span class="brand"><a href="./">TOMBO</a></span>
+    <span class="meta">REV v0.14.1</span>
+    <div class="tombo-themes tombo-label" hidden>
+      <button type="button" data-tombo-theme="system">system</button>
+      <button type="button" data-tombo-theme="tombo">tombo</button>
+      <button type="button" data-tombo-theme="hotaru">hotaru</button>
+    </div>
+    <span class="tombo-label"><a href="ja/" lang="ja" hreflang="ja">日本語</a></span>
+  </div>
+</header>
+
+<main class="tombo-sections">
+<section class="hero tombo-vol-lp tombo-glow tombo-corners">
+  <b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
+  <div class="tombo-shell">
+    <span class="tombo-logo tombo-logo--glow" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
+    <p class="tombo-kicker">TOMBO — WADAKATU DESIGN SYSTEM / FIG. 00</p>
+    <div class="cols">
+      <div class="tombo-flow">
+        <h1 class="tombo-display">The mark that<br>measures.<small lang="ja">測ってから、置く。</small></h1>
+        <div class="tombo-dim"></div>
+        <div class="tombo-dimlab">single file · zero dependencies · vendored from a tag</div>
+        <p class="tagline">One stylesheet for everything wadakatu ships — docs sites, web apps, LPs, portfolios. Six signature marks, repeated without exception, at a volume tuned to context: quiet in docs, loud on an LP.</p>
+        <div class="cta">
+          <a class="tombo-btn tombo-btn--primary" href="#quickstart">Get the stylesheet</a>
+          <a class="tombo-btn tombo-btn--secondary" href="https://github.com/wadakatu/tombo">View on GitHub</a>
+          <span class="tombo-label">MIT · CSS 11.8 KB GZIP</span>
+        </div>
+      </div>
+      <div class="inst tombo-metric tombo-glow tombo-corners">
+        <b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
+        <p class="tombo-fig">FIG. 01 — SIZE BUDGET</p>
+        <div class="k">TOMBO.CSS GZIPPED</div>
+        <div class="v">11.8<small>KB</small></div>
+        <!-- 11,808 / 12,288 B = 96.1% — 出典: scripts/check_size.py(npm run check) -->
+        <div class="tombo-ruler" style="--tombo-ruler-value:96.1%"></div>
+        <div class="rows">
+          <div class="row"><span>tombo.css · gzip</span><b>11,808 B</b></div>
+          <div class="row"><span>ceiling</span><b>12,288 B</b></div>
+          <div class="row"><span>tombo.js · gzip · optional</span><b>1,264 B</b></div>
+          <div class="row"><span>ceiling</span><b>2,048 B</b></div>
+        </div>
+        <div class="cfoot tombo-label">MEASURED BY SCRIPTS/CHECK_SIZE.PY — CI GATE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec tombo-shell">
+  <div class="tombo-dim"></div>
+  <div class="tombo-dimlab">constitution — three rules / no exceptions</div>
+  <h2 class="tombo-sec">The three rules</h2>
+  <div class="cards3">
+    <div class="fcard tombo-flow tombo-metric tombo-corners">
+      <p class="tombo-fig">R-01</p>
+      <h3 lang="ja">すべてを測る</h3>
+      <p>Measure everything. Elements sit beside dimension lines, tick marks, and running numbers — the sense that something was measured before it was placed is what gives the page its air.</p>
+      <div class="meta"><div class="tombo-label">DIMENSION LINES · TICKS · RUNNING NUMBERS</div></div>
+    </div>
+    <div class="fcard tombo-flow tombo-metric tombo-corners">
+      <p class="tombo-fig">R-02</p>
+      <h3 lang="ja">銘は等幅</h3>
+      <p>Inscriptions are monospace. Numbers, labels, indices, and units are always set in mono; body copy stays in a quiet sans. Only the instrumentation gets to glow.</p>
+      <div class="meta"><div class="tombo-label">VOICE: MARTIAN MONO — LABELS · NUMBERS · CODE</div></div>
+    </div>
+    <div class="fcard tombo-flow tombo-metric tombo-corners">
+      <p class="tombo-fig">R-03</p>
+      <h3 lang="ja">朱は現在地</h3>
+      <p>Shu marks the current position. Red is reserved for a 1–2px line that points at “here.” The moment it fills a shape, it stops being shu and becomes plain red.</p>
+      <div class="meta"><div class="tombo-label">SHU: CURRENT TAB · TOC · RULER VALUE — NEVER A FILL</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec tombo-shell">
+  <h2 class="tombo-sec">Six signatures</h2>
+  <p class="lede">Not a component library — a fingerprint. Each tile below is the real thing, not a picture of it.</p>
+  <div class="sigs">
+    <div class="sig tombo-corners"><b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
+      <p class="tombo-fig">S-01 — REGISTRATION CORNERS</p>
+      <p class="s-note">12px brackets that say “aligned.” You are looking at them — this tile wears all four.</p>
+    </div>
+    <div class="sig">
+      <p class="tombo-fig">S-02 — DIMENSION LINE</p>
+      <div class="tombo-dim"></div>
+      <div class="tombo-dimlab">the hr that measures — end rules · center tick · mono caption</div>
+    </div>
+    <div class="sig">
+      <p class="tombo-fig">S-03 — TICKS &amp; RULER</p>
+      <ul class="tombo-ticks"><li>bullets become green ticks</li><li>the ruler reads its current value in shu</li></ul>
+      <div class="tombo-ruler" style="--tombo-ruler-value:62%"></div>
+    </div>
+    <div class="sig">
+      <p class="tombo-fig">S-04 — RUNNING NUMBERS</p>
+      <p class="s-note">Headings on this page number themselves (<span class="tombo-mono">01 —</span>, <span class="tombo-mono">02 —</span>), and every figure carries a mono inscription like the one above.</p>
+    </div>
+    <div class="sig">
+      <p class="tombo-fig">S-05 — SHU CURRENT POSITION</p>
+      <nav class="tombo-tabs" aria-label="S-05 demo">
+        <a href="#" aria-current="page">you are here</a>
+        <a href="#">elsewhere</a>
+      </nav>
+    </div>
+    <div class="sig sig--grid">
+      <p class="tombo-fig">S-06 — GRAPH PAPER</p>
+      <p class="s-note">The drafting grid behind the hero — full-bleed on an LP, margins only in docs, off in apps. At night, <span class="tombo-mono">.tombo-glow</span> lights it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec tombo-shell">
+  <h2 class="tombo-sec">Two themes</h2>
+  <p class="lede">One umbrella name, two <span class="tombo-mono">data-theme</span> values: <b>tombo</b>, the day drawing, and <b>hotaru</b> (蛍, firefly), the night drawing where the instruments glow. Pages follow the OS by default; the toggle in the topbar forces one and remembers it — that part is <span class="tombo-mono">tombo.js</span>, optional by design. This page reads fine without it.</p>
+  <div class="swatches">
+    <div class="sw sw--paper"><i></i><span class="tombo-label">PAPER</span></div>
+    <div class="sw sw--surface"><i></i><span class="tombo-label">SURFACE</span></div>
+    <div class="sw sw--ink"><i></i><span class="tombo-label">INK</span></div>
+    <div class="sw sw--ink-sub"><i></i><span class="tombo-label">INK-SUB</span></div>
+    <div class="sw sw--green"><i></i><span class="tombo-label">GREEN</span></div>
+    <div class="sw sw--shu"><i></i><span class="tombo-label">SHU</span></div>
+  </div>
+  <p class="s-note">Swatches are painted straight from <span class="tombo-mono">var(--tombo-*)</span> — flip the theme and they follow. 28 token pairs are gated against WCAG 2.1 floors in CI.</p>
+</section>
+
+<section class="sec tombo-shell" id="quickstart">
+  <h2 class="tombo-sec">Quick start</h2>
+  <p class="lede">No npm, no CDN — vendor the files out of a release tag, then pin the tag and the sha256 in your own CI.</p>
+  <figure class="tombo-code">
+    <figcaption><span>SHELL — VENDOR FROM A TAG</span></figcaption>
+    <pre tabindex="0">git -C /path/to/tombo show v0.14.1:tombo.css > public/styles/tombo.css
+git -C /path/to/tombo show v0.14.1:LICENSE   > public/styles/tombo.LICENSE
+git -C /path/to/tombo show v0.14.1:tombo.js  > public/scripts/tombo.js</pre>
+  </figure>
+  <figure class="tombo-code">
+    <figcaption><span>HTML — LINK YOUR COPY + THE THREE VOICES</span></figcaption>
+    <pre tabindex="0">&lt;link rel="stylesheet" href="/styles/tombo.css"&gt;
+&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&amp;family=M+PLUS+2:wght@450;500;700&amp;family=Martian+Mono:wdth,wght@75..112.5,400..600&amp;display=swap" rel="stylesheet"&gt;</pre>
+  </figure>
+  <p class="s-note">Full reference: <a href="https://github.com/wadakatu/tombo/tree/main/docs">docs/</a> · <a href="https://github.com/wadakatu/tombo#quick-start">README</a>.</p>
+</section>
+
+<section class="sec tombo-shell">
+  <h2 class="tombo-sec">Three volumes</h2>
+  <p class="lede">The same six marks, turned up or down per product. Every example below is a live page — flip the theme from inside it.</p>
+  <div class="cards3">
+    <a class="vol fcard tombo-flow tombo-metric tombo-corners" href="examples/docs.html">
+      <p class="tombo-fig">VOL — DOCS</p>
+      <h3>Quiet</h3>
+      <p>Graph paper in the margins only. Dimension lines replace hr. Headings number themselves.</p>
+      <div class="meta"><div class="tombo-label">EXAMPLES/DOCS.HTML</div></div>
+    </a>
+    <a class="vol fcard tombo-flow tombo-metric tombo-corners" href="examples/app.html">
+      <p class="tombo-fig">VOL — APP</p>
+      <h3>Functional</h3>
+      <p>No grid. Instruments only — metrics, rulers, status. Shu points at the current nav.</p>
+      <div class="meta"><div class="tombo-label">EXAMPLES/APP.HTML</div></div>
+    </a>
+    <a class="vol fcard tombo-flow tombo-metric tombo-corners" href="examples/lp.html">
+      <p class="tombo-fig">VOL — LP</p>
+      <h3>Loud</h3>
+      <p>Full-bleed grid, hero frame, corners everywhere — and the glow, at night.</p>
+      <div class="meta"><div class="tombo-label">EXAMPLES/LP.HTML</div></div>
+    </a>
+  </div>
+  <p class="s-note"><a href="examples/components.html">Component catalog</a> — every component as a live demo with copy-paste markup.</p>
+</section>
+</main>
+
+<footer class="tombo-footer">
+  <div class="tombo-shell foot">
+    <span class="tombo-logo" aria-hidden="true"><i class="h"></i><i class="b"></i><i class="w1"></i><i class="w2"></i><i class="t"></i></span>
+    <div>TOMBO — WADAKATU DESIGN SYSTEM · MIT · VENDORED FROM A TAG<br>
+      <a href="https://github.com/wadakatu/tombo">GITHUB.COM/WADAKATU/TOMBO</a>
+    </div>
+  </div>
+</footer>
+
+<script src="tombo.js" defer></script>
+</body>
+</html>
