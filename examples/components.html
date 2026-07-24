@@ -318,6 +318,7 @@
       <section id="c14">
         <h2 class="tombo-sec">ユーティリティ</h2>
         <p class="note">.tombo-displayはInstrument Sans 700の欧文題字(和文が混ざる見出しはh1/h2を使う)、.tombo-labelは等幅の大文字銘、.tombo-monoは等幅化。方眼は音量クラスで敷く — .tombo-vol-lpがヒーロー全面、.tombo-guttersが余白のみ(このページが実演)、appは敷かない。</p>
+        <p class="note">和欧混植の間隔はCSSに任せる。<code>tombo.css</code> が <code>text-autospace: normal</code> を <code>body</code> に効かせるので、和文と欧文の境目にブラウザが八分アキ(1/8 em)を入れる — 手打ちの半角スペースは要らない。<code>code</code>/<code>pre</code> は逐語なので除外。未対応ブラウザはベタ組みにdegradeし、実装が揃えば自動で八分アキになる。このページの本文が実演——ソースは詰めて書き、間隔はブラウザが入れている。</p>
         <div class="demo">
           <p class="tombo-display">TOMBO</p>
           <p class="tombo-label" style="margin-top:10px">MEASURED / SET IN MARTIAN MONO</p>

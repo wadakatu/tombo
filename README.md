@@ -36,8 +36,8 @@ The dark flavor is named **hotaru** (蛍, firefly): at night, the instruments gl
 This repository is private, so there is no CDN to link — jsDelivr's `gh` endpoint 404s on private repos, tag or no tag. Vendor the stylesheet from a tag instead:
 
 ```bash
-git -C /path/to/tombo show v0.11.0:tombo.css > public/styles/tombo.css
-git -C /path/to/tombo show v0.11.0:LICENSE   > public/styles/tombo.LICENSE
+git -C /path/to/tombo show v0.12.0:tombo.css > public/styles/tombo.css
+git -C /path/to/tombo show v0.12.0:LICENSE   > public/styles/tombo.LICENSE
 ```
 
 Then link your copy, alongside the three voices:
@@ -62,7 +62,7 @@ A vendored copy drifts silently, so pin it: record the tag and the file's sha256
 Vendor `tombo.js` the same way as `tombo.css`, from a tag, with the same sha256-pin discipline:
 
 ```bash
-git -C /path/to/tombo show v0.11.0:tombo.js > public/scripts/tombo.js
+git -C /path/to/tombo show v0.12.0:tombo.js > public/scripts/tombo.js
 ```
 
 Then wire two script tags around the page:
@@ -418,6 +418,17 @@ TOMBO is named after the printer's registration mark, so it prints like one.
 ```
 
 The marks are `--tombo-ink` — registration black, the all-plate alignment color — never shu (shu stays reserved for current-position lines). Browser print has no bleed area, so each corner gets a single crop mark at the printable-area corner — an honest homage rather than an imposition-accurate double mark with a fake bleed line.
+
+## Japanese typography
+
+Mixed Japanese/Latin (和欧混植) spacing is CSS-native — you don't hand-type spaces between the scripts. `tombo.css` opts into [`text-autospace: normal`](https://www.w3.org/TR/css-text-4/#text-autospace-property) on `body`, so the browser inserts the proper 八分アキ (1/8 em) at every Japanese↔Latin/number boundary. Verbatim text (`code`, `kbd`, `samp`, `pre`) is exempt.
+
+```html
+<!-- write it tight; the browser does the spacing -->
+<p>Laravel11以降に対応し、OpenAPIドキュメントを生成する。</p>
+```
+
+It's progressive enhancement: supporting engines (Chromium today) render the 八分アキ; others render tight — fully legible — and pick it up automatically as they ship `text-autospace`, with no change to your markup. A hand-typed space, if you leave one in, is respected and suppresses autospace at that boundary.
 
 ## Contrast gate
 
