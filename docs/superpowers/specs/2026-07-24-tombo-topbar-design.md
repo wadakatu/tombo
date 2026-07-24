@@ -27,7 +27,7 @@ Issue: <https://github.com/wadakatu/tombo/issues/16>
 - **`.tombo-topbar`** — 下罫(hairline)+ padding-block 16。直下の `.tombo-shell` を flex 化(baseline 揃え・gap 16・wrap)。
 - **`.tombo-topbar .brand`** — display 声のロゴ段(Instrument Sans 700・text-body 段・-.015em)。中の `<a>` は ink 継承・下線なし。
 - **`.tombo-topbar .meta`** — mono ink-faint の右肩ラベル(text-label 段・.12em・`margin-inline-start: auto`)。
-- **`.tombo-topbar .tombo-tabs`** — 組み込み時の打ち消し(`border-block-end: 0; flex: 1`)を部品側で吸収。
+- **`.tombo-topbar .tombo-tabs`** — 組み込み時の打ち消し(`border-block-end: 0; flex: auto`)を部品側で吸収。
 - **example**: examples/app.html のトップバーを新部品で置き換え(ページ CSS の `.top`/`.logo`/`.me` と 640px の wrap 上書きを削除)。
 - **example**: components.html カタログに「20 — トップバー」節(実演 + コピペ用スニペット)+ toc 追加。
 - **README**: 「Topbar (トップバー)」節(クラス一覧 + markup 契約)。Charts と Print の間に追加。
@@ -49,7 +49,7 @@ Issue: <https://github.com/wadakatu/tombo/issues/16>
 4. **`gap: var(--tombo-space-16)` + `flex-wrap: wrap` を既定にする。** issue が「現状のレシピ」として引用しているのは studio 版(16/wrap)。app 版の 24 も 640px 以下では 16 + wrap に落ちており、統一しても失うものがない。メディアクエリ無しで全幅域が動く(コンテナ思想と同じ)。
 5. **`.meta` は mono 声を部品側が持つ。** app 版は markup の `.tombo-mono` 併用、studio 版は CSS — 部品化するなら CSS 側。`letter-spacing: .12em` は `.tombo-footer`・`.path` と同値。`text-transform` は**かけない** — ユーザー名・REV など大小文字を運ぶ内容が載る(studio も未設定)。
 6. **ロゴのリンクは部品が受ける。** `.tombo-topbar .brand a { color: inherit; text-decoration: none; }` — studio 版で必要になった実証済みレシピ。ロゴがリンクなのはトップバーの常態で、green 下線のままでは使えない。
-7. **タブの打ち消しは部品側。** `.tombo-topbar .tombo-tabs`(0,2,0)は同層の `.tombo-tabs`(0,1,0)に specificity で勝つ。`flex: 1` でタブが残り幅を取り、`.meta` の `margin-inline-start: auto` は(タブ無しでも)右肩を保証する。
+7. **タブの打ち消しは部品側。** `.tombo-topbar .tombo-tabs`(0,2,0)は同層の `.tombo-tabs`(0,1,0)に specificity で勝つ。`flex: auto` でタブが残り幅を取る(basis 0 の `flex: 1` は狭幅で nav を min-content まで潰し、CJK タブが 1 文字幅の縦積みになるため不採用 — auto なら内容幅を保ったままブロックごと折り返す)。`.meta` の `margin-inline-start: auto` は(タブ無しでも)右肩を保証する。
 8. **要素は `<header>` を契約に推す。** ページ先頭のバーは banner ランドマーク。クラス自体は要素非依存(app.html の現行は `<div>` — 置き換え時に `<header>` へ)。セレクタは直下結合(`.tombo-topbar > .tombo-shell`)— 両実装とも shell は直下で、深い入れ子の誤爆を避ける。
 
 ## 設計(CSS)
@@ -69,8 +69,9 @@ Issue: <https://github.com/wadakatu/tombo/issues/16>
   .tombo-topbar .meta { margin-inline-start: auto; font-family: var(--tombo-font-mono);
     font-size: var(--tombo-text-label); line-height: var(--tombo-lh-label);
     letter-spacing: .12em; color: var(--tombo-ink-faint); } /* 大小文字を運ぶので uppercase はかけない */
-  /* タブ組み込み — 消費側の暗黙知だった打ち消しを部品側で吸収 */
-  .tombo-topbar .tombo-tabs { border-block-end: 0; flex: 1; }
+  /* タブ組み込み — 消費側の暗黙知だった打ち消しを部品側で吸収。flex は auto —
+     basis 0 だと狭幅で nav が min-content まで潰れ、CJK タブが 1 文字幅の縦積みになる */
+  .tombo-topbar .tombo-tabs { border-block-end: 0; flex: auto; }
 }
 ```
 

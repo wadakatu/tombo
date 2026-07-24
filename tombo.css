@@ -550,8 +550,9 @@
   .tombo-topbar .meta { margin-inline-start: auto; font-family: var(--tombo-font-mono);
     font-size: var(--tombo-text-label); line-height: var(--tombo-lh-label);
     letter-spacing: .12em; color: var(--tombo-ink-faint); } /* 大小文字を運ぶので uppercase はかけない */
-  /* タブ組み込み — 消費側の暗黙知だった打ち消しを部品側で吸収 */
-  .tombo-topbar .tombo-tabs { border-block-end: 0; flex: 1; }
+  /* タブ組み込み — 消費側の暗黙知だった打ち消しを部品側で吸収。flex は auto —
+     basis 0 だと狭幅で nav が min-content まで潰れ、CJK タブが 1 文字幅の縦積みになる */
+  .tombo-topbar .tombo-tabs { border-block-end: 0; flex: auto; }
 }
 
 /* ── print ─────────────────────────────────────────────────────────────

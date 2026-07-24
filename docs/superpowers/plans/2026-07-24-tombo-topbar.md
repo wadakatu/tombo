@@ -53,8 +53,9 @@
   .tombo-topbar .meta { margin-inline-start: auto; font-family: var(--tombo-font-mono);
     font-size: var(--tombo-text-label); line-height: var(--tombo-lh-label);
     letter-spacing: .12em; color: var(--tombo-ink-faint); } /* 大小文字を運ぶので uppercase はかけない */
-  /* タブ組み込み — 消費側の暗黙知だった打ち消しを部品側で吸収 */
-  .tombo-topbar .tombo-tabs { border-block-end: 0; flex: 1; }
+  /* タブ組み込み — 消費側の暗黙知だった打ち消しを部品側で吸収。flex は auto —
+     basis 0 だと狭幅で nav が min-content まで潰れ、CJK タブが 1 文字幅の縦積みになる */
+  .tombo-topbar .tombo-tabs { border-block-end: 0; flex: auto; }
 }
 ```
 
@@ -174,7 +175,7 @@ git commit -m "docs: rebuild the app example's topbar on .tombo-topbar"
 ```html
       <section id="c20">
         <h2 class="tombo-sec">トップバー</h2>
-        <p class="note">アプリ音量の先頭。外枠が全幅のhairline下罫を引き、幅は直下の <code>.tombo-shell</code> が決める(下罫はビューポート全幅・中身はshellが絞る)。ロゴ段(<code>.brand</code>)はdisplay声のtext-body固定 — 実装ごとの14/15pxのブレはここで止まる。中の <code>&lt;a&gt;</code> はink継承・下線なし。右肩(<code>.meta</code>)は等幅ink-faintで <code>margin-inline-start: auto</code> — ユーザー名やREVなど大小文字を運ぶのでuppercaseはかけない。タブは <code>.tombo-tabs</code> をそのまま入れる — 組み込み時の打ち消し(<code>border-block-end: 0; flex: 1</code>)は部品側が吸収する。要素は <code>&lt;header&gt;</code>(bannerランドマーク)、現在地は従来どおり <code>aria-current</code>。行はbaseline揃え、狭幅ではwrapで折り返す(<code>.meta</code> を消したいページは自分のCSSで — 部品は消さない)。</p>
+        <p class="note">アプリ音量の先頭。外枠が全幅のhairline下罫を引き、幅は直下の <code>.tombo-shell</code> が決める(下罫はビューポート全幅・中身はshellが絞る)。ロゴ段(<code>.brand</code>)はdisplay声のtext-body固定 — 実装ごとの14/15pxのブレはここで止まる。中の <code>&lt;a&gt;</code> はink継承・下線なし。右肩(<code>.meta</code>)は等幅ink-faintで <code>margin-inline-start: auto</code> — ユーザー名やREVなど大小文字を運ぶのでuppercaseはかけない。タブは <code>.tombo-tabs</code> をそのまま入れる — 組み込み時の打ち消し(<code>border-block-end: 0; flex: auto</code>)は部品側が吸収する。要素は <code>&lt;header&gt;</code>(bannerランドマーク)、現在地は従来どおり <code>aria-current</code>。行はbaseline揃え、狭幅ではwrapで折り返す(<code>.meta</code> を消したいページは自分のCSSで — 部品は消さない)。</p>
         <div class="demo">
           <header class="tombo-topbar">
             <div class="tombo-shell">
@@ -212,7 +213,7 @@ git commit -m "docs: rebuild the app example's topbar on .tombo-topbar"
 ```markdown
 ## Topbar (トップバー)
 
-Every app-volume page opens the same way: a full-width hairline rule, the brand in the display voice, mono metadata on the right shoulder. `.tombo-topbar` fixes that recipe so the first 20 lines of every product are the same markup — the brand is locked to `--tombo-text-body` (no more 14px/15px drift), the row aligns on baselines and wraps on narrow screens, and dropping `.tombo-tabs` inside needs no undo CSS (the bar absorbs `border-block-end: 0; flex: 1`).
+Every app-volume page opens the same way: a full-width hairline rule, the brand in the display voice, mono metadata on the right shoulder. `.tombo-topbar` fixes that recipe so the first 20 lines of every product are the same markup — the brand is locked to `--tombo-text-body` (no more 14px/15px drift), the row aligns on baselines and wraps on narrow screens, and dropping `.tombo-tabs` inside needs no undo CSS (the bar absorbs `border-block-end: 0; flex: auto`).
 
 | Class | Role |
 |---|---|
