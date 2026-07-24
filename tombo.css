@@ -489,3 +489,45 @@
     color: var(--tombo-ink-sub);
   }
 }
+
+/* ── print ─────────────────────────────────────────────────────────────
+   Unlayered on purpose: these overrides must beat every @layer rule, and
+   being outside all layers wins the cascade without !important. Two halves:
+   (A) hardening — every TOMBO page prints cleanly; (B) opt-in .tombo-trim —
+   real printer's トンボ on the sheet (the system finally does what it is named
+   after). @page is a bare at-rule; it cannot live inside @layer. */
+@page { margin: 16mm; }
+
+@media print {
+  /* (A) hardening — unconditional */
+
+  /* night pages print on white paper: flipping color-scheme re-resolves every
+     light-dark() token to its light value (surfaces near-white, ink near-black),
+     so a hotaru page never prints as a black rectangle. */
+  :root,
+  :root[data-theme="tombo"],
+  :root[data-theme="hotaru"] { color-scheme: light; }
+
+  /* screen-only chrome never prints */
+  .tombo-themes, .tombo-copy { display: none; }
+
+  /* glow + motion off (mirrors the forced-colors guard) */
+  .tombo-glow { background-image: none; box-shadow: none; }
+  .tombo-glow .tombo-display,
+  .tombo-glow.tombo-metric > .v { text-shadow: none; }
+  *, *::before, *::after { transition: none; animation: none; }
+
+  /* the code panel is dark in both themes (a background — not printed by
+     default, which would drop its light text onto white and vanish). Repaint
+     to ink-on-white with a hairline so code stays readable on paper. */
+  .tombo-code, .tombo-code pre {
+    background: #fff; color: var(--tombo-ink);
+    border: 1px solid var(--tombo-hairline);
+  }
+  .tombo-code > figcaption { color: var(--tombo-ink-sub); }
+
+  /* fragmentation: keep instrument blocks whole; don't strand headings */
+  .tombo-metric, .tombo-callout, .tombo-code, figure, tr, .tombo-check { break-inside: avoid; }
+  h1, h2, h3, h4 { break-after: avoid; }
+  p, li { orphans: 2; widows: 2; }
+}
