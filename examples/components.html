@@ -36,6 +36,7 @@
     .layout { grid-template-columns: 1fr; gap: var(--tombo-space-24); }
     .side { position: static; }
   }
+  #c19 .tombo-tip { display: inline-block; position: static; margin-top: var(--tombo-space-16); } /* デモは静置(ページJSゼロ) */
   .foot { display: flex; align-items: center; gap: var(--tombo-space-16); }
 </style>
 </head>
@@ -63,6 +64,7 @@
         <a href="#c16">16 — 発光</a>
         <a href="#c17">17 — フォーム</a>
         <a href="#c18">18 — 印刷</a>
+        <a href="#c19">19 — 図版</a>
       </nav>
     </aside>
 
@@ -456,6 +458,82 @@
   &lt;!-- 中身は普段どおり。印刷すると余白にトンボが出る --&gt;
 &lt;/body&gt;</pre>
         </figure>
+      </section>
+
+      <section id="c19">
+        <h2 class="tombo-sec">図版</h2>
+        <p class="note">S-03「グラフ軸」の部品化。<code>.tombo-plate</code>(=版)が図版枠 — hairline罫 + padding、溢れたら枠内だけが横スクロールする(SVGの最小幅は <code>--tombo-plate-min</code>、既定560px。上書きはスタイルシートで — インラインcustom propertyは <code>--tombo-ruler-value</code> だけ)。銘は既存の <code>.tombo-fig</code> を <code>&lt;figcaption&gt;</code> に載せて枠の上に置く。チャート内部は枠配下でだけ効く — <code>.axis</code>(hairline目盛線)/ <code>.base</code>(ink基線)/ <code>.bar</code>(green面、<code>.is-zero</code> はhairline)/ <code>.val</code>(値ラベル)/ <code>.now</code>(朱の現在地)。SVGの <code>text</code> は自動で等幅・label段・ink-faintになる(銘は等幅)。</p>
+        <p class="note">規範: <b>軸は1本</b>(ink基線のみ、第2軸は作らない)・<b>目盛線はhairline</b>・<b>単系列はgreen一色</b>(多系列の色分けはしない — 系列が増えたら図を分ける)・<b>値ラベルは選択的</b>(ピークだけ。全記入は数表の仕事)・<b>朱は現在地のみ</b>(選択中の週・今日を指す線。データには使わない)。</p>
+        <div class="demo">
+          <figure>
+            <figcaption class="tombo-fig">FIG. 19 — DAILY CONTRIBUTIONS · W30</figcaption>
+            <div class="tombo-plate" style="margin-top:12px">
+              <svg viewBox="0 0 720 200" role="img" aria-label="日別コントリビューション数の棒グラフ(デモ)">
+                <line class="axis" x1="34" y1="24" x2="710" y2="24"/>
+                <line class="axis" x1="34" y1="98" x2="710" y2="98"/>
+                <text x="28" y="27" text-anchor="end">24</text>
+                <text x="28" y="101" text-anchor="end">12</text>
+                <text x="28" y="175" text-anchor="end">0</text>
+                <rect class="bar" x="58" y="147" width="48" height="25"/>
+                <rect class="bar" x="155" y="116" width="48" height="56"/>
+                <rect class="bar is-zero" x="251" y="170" width="48" height="2"/>
+                <rect class="bar" x="348" y="42" width="48" height="130"/>
+                <rect class="bar" x="445" y="135" width="48" height="37"/>
+                <rect class="bar" x="541" y="98" width="48" height="74"/>
+                <rect class="bar" x="638" y="154" width="48" height="18"/>
+                <text class="val" x="372" y="35" text-anchor="middle">21</text>
+                <line class="now" x1="441" y1="177" x2="497" y2="177"/>
+                <line class="base" x1="34" y1="172" x2="710" y2="172"/>
+                <text x="82" y="192" text-anchor="middle">MON 20</text>
+                <text x="179" y="192" text-anchor="middle">TUE 21</text>
+                <text x="275" y="192" text-anchor="middle">WED 22</text>
+                <text x="372" y="192" text-anchor="middle">THU 23</text>
+                <text x="469" y="192" text-anchor="middle">FRI 24</text>
+                <text x="565" y="192" text-anchor="middle">SAT 25</text>
+                <text x="662" y="192" text-anchor="middle">SUN 26</text>
+              </svg>
+<div class="tombo-tip" role="presentation"><b>07/23 THU — 21</b>COMMITS      14
+PR MERGED     4
+REVIEWS       3</div>
+            </div>
+            <details class="tombo-numbers" open>
+              <summary>NUMBERS — 数表を開く</summary>
+              <div class="tombo-table-wrap" role="region" aria-label="日次の数表(デモ)" tabindex="0">
+                <table class="tombo-table">
+                  <thead><tr><th>DATE</th><th>COMMITS</th><th>TOTAL</th></tr></thead>
+                  <tbody>
+                    <tr><td class="tombo-mono">07/22 WED</td><td class="tombo-mono">0</td><td class="tombo-mono">0</td></tr>
+                    <tr><td class="tombo-mono">07/23 THU</td><td class="tombo-mono">14</td><td class="tombo-mono">21</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          </figure>
+        </div>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-PLATE / .TOMBO-TIP / .TOMBO-NUMBERS</span></figcaption>
+          <pre tabindex="0">&lt;figure&gt;
+  &lt;figcaption class="tombo-fig"&gt;FIG. 01 — DAILY CONTRIBUTIONS&lt;/figcaption&gt;
+  &lt;div class="tombo-plate"&gt;
+    &lt;svg viewBox="0 0 720 200" role="img" aria-label="日別コントリビューション数の棒グラフ"&gt;
+      &lt;line class="axis" …/&gt;&lt;text …&gt;12&lt;/text&gt;   &lt;!-- hairlineの目盛線 + 等幅の銘 --&gt;
+      &lt;rect class="bar" … tabindex="0" aria-label="07/23 THU: 21"/&gt;
+      &lt;rect class="bar is-zero" …/&gt;              &lt;!-- ゼロ値は2pxスタブ --&gt;
+      &lt;text class="val" …&gt;21&lt;/text&gt;              &lt;!-- 値ラベルはピークだけ --&gt;
+      &lt;line class="now" …/&gt;                      &lt;!-- 朱は現在地のみ --&gt;
+      &lt;line class="base" …/&gt;                     &lt;!-- 軸はこの1本 --&gt;
+    &lt;/svg&gt;
+    &lt;div class="tombo-tip" role="presentation"&gt;&lt;b&gt;07/23 THU — 21&lt;/b&gt;COMMITS 14&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;details class="tombo-numbers"&gt;
+    &lt;summary&gt;NUMBERS — 数表を開く&lt;/summary&gt;
+    &lt;div class="tombo-table-wrap" role="region" aria-label="日次の数表" tabindex="0"&gt;
+      &lt;table class="tombo-table"&gt;…&lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/details&gt;
+&lt;/figure&gt;</pre>
+        </figure>
+        <p class="note">ツールチップはこのデモでは見せるために静置している(カタログはページJSゼロ)。実装では既定 <code>display:none</code> — 消費側JSが <code>display</code> を立て、<code>transform: translate(x, y)</code> で置く。アクセシブルなデータ経路は数表が担い、ツールチップは視覚の補助(<code>role="presentation"</code>・<code>pointer-events:none</code>)。インタラクティブなバーには <code>tabindex="0"</code> と <code>aria-label</code> を振る。枠がスクロールし得るのに中にフォーカス可能要素が無い図では、テーブルと同じ作法(<code>role="region"</code> + アクセシブル名 + <code>tabindex="0"</code>)を枠に付ける。</p>
       </section>
     </main>
   </div>
