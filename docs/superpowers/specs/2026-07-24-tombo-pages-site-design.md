@@ -25,7 +25,7 @@
 - **GitHub Pages: main ブランチ / ルートから配信**(Actions ワークフロー追加なし)
 - `.nojekyll` をルートに置き Jekyll 処理を無効化(`ja/` ディレクトリや `_` なしでも安全側に倒す)
 - 副産物として `examples/*.html` がそのままライブデモ URL になる
-- リポジトリの `homepage` フィールドを `https://wadakatu.github.io/tombo/` に設定
+- リポジトリの `homepage` フィールドを `https://www.wadakatu.dev/tombo/` に設定
 
 ## 3. ファイル構成
 
@@ -70,7 +70,7 @@
 2. chrome-devtools で **両テーマ × 両言語**(4 通り)のスクリーンショット確認 + 狭幅(375px)での折り返し確認
 3. リンク検査: 言語リンク・docs/examples への相対リンク・hreflang の解決
 4. tombo.js なしでも全文が読めること(`.tombo-themes` が hidden のまま、コピーボタン無し、それ以外は完全)
-5. マージ後: Pages 反映を待って https://wadakatu.github.io/tombo/ と /ja/ をライブで再確認、`homepage` フィールド設定
+5. マージ後: Pages 反映を待って https://www.wadakatu.dev/tombo/ と /ja/ をライブで再確認、`homepage` フィールド設定
 
 ## 8. リリース
 
