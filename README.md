@@ -33,7 +33,7 @@ The dark flavor is named **hotaru** (蛍, firefly): at night, the instruments gl
 
 ## Quick start
 
-This repository is private, so there is no CDN to link — jsDelivr's `gh` endpoint 404s on private repos, tag or no tag. Vendor the files from a tag instead:
+TOMBO is distributed by vendoring — no npm package, no CDN link to go down or drift. Copy the files out of a release tag:
 
 ```bash
 git -C /path/to/tombo show v0.14.0:tombo.css > public/styles/tombo.css
@@ -109,7 +109,7 @@ gate yourself with `npm run check` (Node + Python 3 required for dev only).
 
 ## Scope
 
-Zero dependencies — one `tombo.css` file (`@layer tombo.reset, tombo.tokens, tombo.base, tombo.components, tombo.utilities`), plus an **optional** `tombo.js` for theme persistence and copy buttons (see [docs/tombo-js.md](docs/tombo-js.md)). It's progressive enhancement, not a requirement: every page renders and works with `tombo.css` alone and no JS at all, following the OS theme; `tombo.js` only makes a chosen theme remember itself across visits and adds the copy buttons. Distributed by vendoring from a tag; the repo is private, so there is no CDN and no npm package.
+Zero dependencies — one `tombo.css` file (`@layer tombo.reset, tombo.tokens, tombo.base, tombo.components, tombo.utilities`), plus an **optional** `tombo.js` for theme persistence and copy buttons (see [docs/tombo-js.md](docs/tombo-js.md)). It's progressive enhancement, not a requirement: every page renders and works with `tombo.css` alone and no JS at all, following the OS theme; `tombo.js` only makes a chosen theme remember itself across visits and adds the copy buttons. Distributed by vendoring from a tag — there is no CDN and no npm package, deliberately.
 
 Deliberately out of scope for v1: Figma kit, JS components, framework wrappers (React/Vue), an icon set beyond the logo, and **npm publishing** — these are follow-ups once the CSS itself is stable.
 
