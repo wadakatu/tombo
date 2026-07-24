@@ -575,8 +575,9 @@
       right var(--gp) bottom 0, right 0 bottom var(--gp);
   }
 
-  /* センタートンボ: a 1px ink ring + crosshair at each edge midpoint. Offset in
-     from the edge by the ring radius so it isn't clipped by the overlay box. */
+  /* センタートンボ: a 1px ink ring + crosshair at each edge midpoint. Every layer
+     is centered on a point --rs in from the edge, so the ring clears the overlay
+     box edge and the crosshair stays concentric with it. */
   html:has(> body.tombo-trim)::after {
     --rs: 13px;  /* ring size (outer) */
     --cl: 26px;  /* crosshair length  */
@@ -596,9 +597,18 @@
       var(--rs) var(--rs), var(--rs) var(--rs), var(--rs) var(--rs), var(--rs) var(--rs),
       var(--cl) var(--tk), var(--cl) var(--tk), var(--cl) var(--tk), var(--cl) var(--tk),
       var(--tk) var(--cl), var(--tk) var(--cl), var(--tk) var(--cl), var(--tk) var(--cl);
+    /* each image is centered on the mark point (--rs in from the edge, edge-
+       midpoint along it): the ring's own edge sits at --rr, but the crosshair
+       bars are longer, so they need their own half-size offset — an equal
+       edge-offset across differently-sized layers would not share a center. */
     background-position:
+      /* rings */
       top var(--rr) left 50%,  bottom var(--rr) left 50%,  left var(--rr) top 50%,  right var(--rr) top 50%,
-      top var(--rr) left 50%,  bottom var(--rr) left 50%,  left var(--rr) top 50%,  right var(--rr) top 50%,
-      top var(--rr) left 50%,  bottom var(--rr) left 50%,  left var(--rr) top 50%,  right var(--rr) top 50%;
+      /* horizontal cross bars */
+      top calc(var(--rs) - var(--tk) / 2) left 50%,  bottom calc(var(--rs) - var(--tk) / 2) left 50%,
+      left calc(var(--rs) - var(--cl) / 2) top 50%,  right calc(var(--rs) - var(--cl) / 2) top 50%,
+      /* vertical cross bars */
+      top calc(var(--rs) - var(--cl) / 2) left 50%,  bottom calc(var(--rs) - var(--cl) / 2) left 50%,
+      left calc(var(--rs) - var(--tk) / 2) top 50%,  right calc(var(--rs) - var(--tk) / 2) top 50%;
   }
 }

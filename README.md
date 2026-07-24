@@ -417,7 +417,7 @@ TOMBO is named after the printer's registration mark, so it prints like one.
 </body>
 ```
 
-The marks are `--tombo-ink` — registration black, the all-plate alignment color — never shu (shu stays reserved for current-position lines). Browser print has no bleed area, so the corner mark is a single line at the true trim (the sheet edge), an honest homage rather than an imposition-accurate double mark with a fake bleed line.
+The marks are `--tombo-ink` — registration black, the all-plate alignment color — never shu (shu stays reserved for current-position lines). Browser print has no bleed area, so each corner gets a single crop mark at the printable-area corner — an honest homage rather than an imposition-accurate double mark with a fake bleed line.
 
 ## Contrast gate
 
