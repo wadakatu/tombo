@@ -62,6 +62,7 @@
         <a href="#c15">15 — コンテナ</a>
         <a href="#c16">16 — 発光</a>
         <a href="#c17">17 — フォーム</a>
+        <a href="#c18">18 — 印刷</a>
       </nav>
     </aside>
 
@@ -442,6 +443,17 @@
   &lt;legend&gt;MODE&lt;/legend&gt;
   &lt;label class="tombo-check"&gt;&lt;input type="radio" name="m"&gt; Strict&lt;/label&gt;
 &lt;/fieldset&gt;</pre>
+        </figure>
+      </section>
+      <section id="c18">
+        <h2 class="tombo-sec">印刷</h2>
+        <p class="note">TOMBO は名前どおり印刷の見当マーク。どのページも <code>@media print</code> で素直に刷れる（夜テーマも紙は白、コードは白地インク、トグルやコピーボタンは消える、計器ブロックは改ページで割れない）。さらに <code>&lt;body class="tombo-trim"&gt;</code> を付けると、紙面の余白に本物のトンボ——四隅の<strong>角トンボ</strong>と各辺中央の<strong>センタートンボ</strong>——がインク1色で毎ページ刷られる。ブラウザ印刷に裁ち落とし領域は無いので、単一の角トンボ（＝紙の端が真の仕上がり）を採る視覚的オマージュ。</p>
+        <p class="note">このカタログ（<code>components.html</code>）自体は opt-in していないので、<kbd>⌘P</kbd> してもトンボは出ない。<code>docs.html</code> を <kbd>⌘P</kbd> するとトンボが出る。</p>
+        <figure class="tombo-code">
+          <figcaption><span>HTML</span><span>.TOMBO-TRIM</span></figcaption>
+          <pre tabindex="0">&lt;body class="tombo-trim"&gt;
+  &lt;!-- 中身は普段どおり。印刷すると余白にトンボが出る --&gt;
+&lt;/body&gt;</pre>
         </figure>
       </section>
     </main>

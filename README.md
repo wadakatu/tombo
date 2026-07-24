@@ -36,8 +36,8 @@ The dark flavor is named **hotaru** (蛍, firefly): at night, the instruments gl
 This repository is private, so there is no CDN to link — jsDelivr's `gh` endpoint 404s on private repos, tag or no tag. Vendor the stylesheet from a tag instead:
 
 ```bash
-git -C /path/to/tombo show v0.10.0:tombo.css > public/styles/tombo.css
-git -C /path/to/tombo show v0.10.0:LICENSE   > public/styles/tombo.LICENSE
+git -C /path/to/tombo show v0.11.0:tombo.css > public/styles/tombo.css
+git -C /path/to/tombo show v0.11.0:LICENSE   > public/styles/tombo.LICENSE
 ```
 
 Then link your copy, alongside the three voices:
@@ -62,7 +62,7 @@ A vendored copy drifts silently, so pin it: record the tag and the file's sha256
 Vendor `tombo.js` the same way as `tombo.css`, from a tag, with the same sha256-pin discipline:
 
 ```bash
-git -C /path/to/tombo show v0.10.0:tombo.js > public/scripts/tombo.js
+git -C /path/to/tombo show v0.11.0:tombo.js > public/scripts/tombo.js
 ```
 
 Then wire two script tags around the page:
@@ -402,6 +402,22 @@ The CSS styles the states; you own the accessible markup:
 - States are pure CSS: `:focus` (baseline green) + the base `:focus-visible` ring, `:user-invalid` **and** `[aria-invalid="true"]` (baseline crimson), `:disabled` (dimmed), `:read-only` (recessed). `:user-invalid` shows validation only after the reader interacts; the `[aria-invalid]` hook covers scripted or server-side validation.
 
 Controls are `width:100%`, so keep the form's container to a comfortable measure (a login form around `380px`, a settings form no wider than the reading measure) rather than the full page width. Deep styling of `range` / `color` / `file` / date pickers is deliberately left native.
+
+## Print
+
+TOMBO is named after the printer's registration mark, so it prints like one.
+
+**Hardening is unconditional.** Any TOMBO page prints cleanly: a `hotaru` page prints on white paper (not a black rectangle), the dark code panel repaints to ink-on-white so it stays readable, the theme toggle and copy buttons disappear, glow and motion are dropped, and instrument blocks (`.tombo-metric`, `.tombo-callout`, `.tombo-code`, figures, table rows) don't split across a page break. The page margin is a consistent `16mm`.
+
+**Real トンボ are opt-in.** Add `tombo-trim` to `<body>` and every printed sheet gets actual printer's marks in ink: a single 角トンボ (corner crop mark) at each of the four corners, and a センタートンボ (registration ring + crosshair) at each edge center.
+
+```html
+<body class="tombo-trim">
+  <!-- your page — print it (⌘P) to see the トンボ -->
+</body>
+```
+
+The marks are `--tombo-ink` — registration black, the all-plate alignment color — never shu (shu stays reserved for current-position lines). Browser print has no bleed area, so the corner mark is a single line at the true trim (the sheet edge), an honest homage rather than an imposition-accurate double mark with a fake bleed line.
 
 ## Contrast gate
 
