@@ -128,9 +128,9 @@ head(hreflang は絶対 URL、ピンは 3 つ):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TOMBO — the mark that measures. wadakatu's single-file CSS design system</title>
 <meta name="description" content="TOMBO is wadakatu's single-file, zero-dependency CSS design system — six signature marks, two themes, and one vermillion line for “you are here.”">
-<link rel="alternate" hreflang="en" href="https://wadakatu.github.io/tombo/">
-<link rel="alternate" hreflang="ja" href="https://wadakatu.github.io/tombo/ja/">
-<link rel="alternate" hreflang="x-default" href="https://wadakatu.github.io/tombo/">
+<link rel="alternate" hreflang="en" href="https://www.wadakatu.dev/tombo/">
+<link rel="alternate" hreflang="ja" href="https://www.wadakatu.dev/tombo/ja/">
+<link rel="alternate" hreflang="x-default" href="https://www.wadakatu.dev/tombo/">
 <link rel="icon" href="assets/logo/tombo-mark.svg" type="image/svg+xml">
 <link rel="stylesheet" href="tombo.css">
 <link rel="stylesheet" href="assets/site.css">
@@ -525,8 +525,8 @@ git commit -m "ci: gate the intro site's vendoring pins in check_banner"
 gh api -X POST repos/wadakatu/tombo/pages --input - <<'EOF'
 {"source": {"branch": "main", "path": "/"}}
 EOF
-gh repo edit wadakatu/tombo --homepage "https://wadakatu.github.io/tombo/"
+gh repo edit wadakatu/tombo --homepage "https://www.wadakatu.dev/tombo/"
 ```
 
-- [ ] **Step 4:** Pages のビルド完了(`gh api repos/wadakatu/tombo/pages --jq .status` が `built`)を待ち、https://wadakatu.github.io/tombo/ と /ja/ を chrome-devtools で開いて昼夜スクリーンショット・言語往復・テーマ永続・コピーボタンをライブ確認
+- [ ] **Step 4:** Pages のビルド完了(`gh api repos/wadakatu/tombo/pages --jq .status` が `built`)を待ち、https://www.wadakatu.dev/tombo/ と /ja/ を chrome-devtools で開いて昼夜スクリーンショット・言語往復・テーマ永続・コピーボタンをライブ確認
 - [ ] **Step 5:** メモリ(tombo-overview / tombo-repo-conventions)に Pages URL を追記
