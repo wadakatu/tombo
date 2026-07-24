@@ -60,6 +60,8 @@ touch .nojekyll
 .hero h1 small { display: block; font-family: var(--tombo-font-body); font-weight: 700;
   font-size: clamp(18px, 2vw, 22px); color: var(--tombo-green); margin-top: var(--tombo-space-16); letter-spacing: 0; }
 .hero .tombo-dim { max-inline-size: 320px; }
+/* full-bleed frame: the corners' 1px outdent would poke past the viewport and grow scrollWidth */
+.hero.tombo-corners::after, .hero .tombo-corner-tr { right: 0; }
 .tagline { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); max-width: 50ch; }
 .cta { display: flex; gap: var(--tombo-space-16); align-items: center; flex-wrap: wrap; }
 
