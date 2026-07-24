@@ -1,0 +1,66 @@
+/* TOMBO intro site — consumer-side layout. tombo.css のトークン/クラスだけを参照する。 */
+:root { --tombo-shell: var(--tombo-shell-wide); } /* LP: ページ全体を wide 段に(README の掟どおり :root で) */
+
+/* topbar */
+.tombo-topbar .tombo-themes { margin-inline-start: var(--tombo-space-16); }
+
+/* hero — examples/lp.html のレシピを踏襲 */
+.hero { padding-block: var(--tombo-space-72) var(--tombo-space-48); }
+.hero .tombo-logo { display: block; margin-bottom: var(--tombo-space-16); }
+.hero .cols { display: grid; grid-template-columns: 1.25fr .75fr; gap: 56px; margin-top: var(--tombo-space-24); align-items: start; }
+.hero .cols > .tombo-flow > .tombo-dim { --tombo-flow-space: var(--tombo-space-24); }
+.hero .cols > .tombo-flow > .cta { --tombo-flow-space: var(--tombo-space-24); }
+.hero h1 small { display: block; font-family: var(--tombo-font-body); font-weight: 700;
+  font-size: clamp(18px, 2vw, 22px); color: var(--tombo-green); margin-top: var(--tombo-space-16); letter-spacing: 0; }
+.hero .tombo-dim { max-inline-size: 320px; }
+.tagline { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); max-width: 50ch; }
+.cta { display: flex; gap: var(--tombo-space-16); align-items: center; flex-wrap: wrap; }
+
+/* hero instrument */
+.inst .tombo-fig { position: absolute; top: -20px; left: 0; }
+.inst .v small { font-size: var(--tombo-text-ui); color: var(--tombo-ink-faint); font-weight: 400; }
+.inst .rows { margin-top: var(--tombo-space-16); border-top: 1px solid var(--tombo-hairline); }
+.inst .row { display: flex; justify-content: space-between; gap: var(--tombo-space-16); font-family: var(--tombo-font-mono);
+  font-size: var(--tombo-text-label); padding: var(--tombo-space-8) 0; border-bottom: 1px solid var(--tombo-hairline); color: var(--tombo-ink-sub); }
+.inst .row b { color: var(--tombo-ink); font-weight: 500; }
+.inst .cfoot { margin-top: var(--tombo-space-16); }
+
+/* sections */
+.sec { padding-block: var(--tombo-space-72) 0; }
+.sec:last-of-type { padding-block-end: var(--tombo-space-96); }
+.lede { max-width: var(--tombo-shell-reading); color: var(--tombo-ink-sub); margin-top: var(--tombo-space-16); }
+.s-note { font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); color: var(--tombo-ink-sub); margin-top: var(--tombo-space-16); }
+
+/* 3 枚カード(三原則・volume dial 共用) */
+.cards3 { margin-top: var(--tombo-space-24); display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--tombo-space-16); }
+.fcard { display: flex; flex-direction: column; --tombo-flow-space: var(--tombo-space-8); }
+.fcard p { font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); color: var(--tombo-ink-sub); }
+.fcard > .meta { margin-top: auto; --tombo-flow-space: 0; padding-top: var(--tombo-space-16); }
+.fcard .meta div { border-top: 1px solid var(--tombo-hairline); padding-top: var(--tombo-space-8); }
+a.vol { color: inherit; text-decoration: none; } /* カード全体リンク: base の下線/green を外す */
+a.vol h3 { color: var(--tombo-green); }
+
+/* 署名タイル */
+.sigs { margin-top: var(--tombo-space-24); display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--tombo-space-16); }
+.sig { position: relative; border: 1px solid var(--tombo-hairline); background: var(--tombo-surface); padding: var(--tombo-space-24) var(--tombo-space-16) var(--tombo-space-16); }
+.sig .tombo-fig { margin-bottom: var(--tombo-space-16); }
+.sig .tombo-ruler { margin-top: var(--tombo-space-16); }
+.sig--grid { background-image: linear-gradient(var(--tombo-grid) 1px, transparent 1px), linear-gradient(90deg, var(--tombo-grid) 1px, transparent 1px); background-size: 24px 24px; }
+
+/* トークンスウォッチ(色はクラスで — インライン style を使わない) */
+.swatches { margin-top: var(--tombo-space-24); display: flex; gap: var(--tombo-space-16); flex-wrap: wrap; }
+.sw { display: flex; flex-direction: column; gap: var(--tombo-space-8); }
+.sw i { display: block; inline-size: 96px; block-size: 48px; border: 1px solid var(--tombo-hairline); }
+.sw--paper i { background: var(--tombo-paper); }
+.sw--surface i { background: var(--tombo-surface); }
+.sw--ink i { background: var(--tombo-ink); }
+.sw--ink-sub i { background: var(--tombo-ink-sub); }
+.sw--green i { background: var(--tombo-green); }
+.sw--shu i { background: var(--tombo-shu); }
+
+/* footer */
+.foot { display: flex; align-items: center; gap: var(--tombo-space-16); }
+
+@media (max-width: 840px) {
+  .hero .cols, .cards3, .sigs { grid-template-columns: 1fr; }
+}
