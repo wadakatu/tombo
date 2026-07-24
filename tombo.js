@@ -1,4 +1,4 @@
-/*! TOMBO tombo.js v0.14.0 — wadakatu design system. Optional, zero-dependency. MIT. https://github.com/wadakatu/tombo */
+/*! TOMBO tombo.js v0.14.1 — wadakatu design system. Optional, zero-dependency. MIT. https://github.com/wadakatu/tombo */
 (function () {
   "use strict";
   var KEY = "tombo-theme";
