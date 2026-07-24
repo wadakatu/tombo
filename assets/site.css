@@ -58,7 +58,8 @@ a.vol h3 { color: var(--tombo-green); }
 .sw--ink i { background: var(--tombo-ink); }
 .sw--ink-sub i { background: var(--tombo-ink-sub); }
 .sw--green i { background: var(--tombo-green); }
-.sw--shu i { background: var(--tombo-shu); }
+.sw--shu i { background: var(--tombo-paper); position: relative; } /* 朱は面塗り禁止 — スウォッチも線で示す */
+.sw--shu i::after { content: ""; position: absolute; inset-inline: 8px; top: 50%; border-top: 2px solid var(--tombo-shu); }
 
 /* footer */
 .foot { display: flex; align-items: center; gap: var(--tombo-space-16); }
