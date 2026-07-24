@@ -151,7 +151,7 @@ print 節(unlayered)への追記 2 行:
 ## example(components.html)
 
 - toc に「19 — 図版」を追加、`#c19` 節を印刷(c18)の後に追加。
-- 実演は**静的 SVG**(catalog はページ JS ゼロを維持)。7 本バー・ゼロ値 1 本・ピークの `.val` 1 個・`.now` 1 本・axis 3 本 + base、ツールチップはデモ用に可視化して静置(catalog の `<style>` で `display:block; position:static` に上書き)。数表は 2〜3 行で開いた状態を見せる。
+- 実演は**静的 SVG**(catalog はページ JS ゼロを維持)。7 本バー・ゼロ値 1 本・ピークの `.val` 1 個・`.now` 1 本・axis 3 本 + base、ツールチップはデモ用に可視化して静置(catalog の `<style>` で `display:block; position:static` に上書き)。数表は全 7 日を開いた状態で見せる(参照実装自身が完全なテキスト代替になる)。デモの枠はバーがフォーカス不能なので `role="region"` + `aria-labelledby`(銘)+ `tabindex="0"` を付ける(レビュー指摘の反映)。
 - note に規範 5 項と markup 契約(数表が text alternative であること・ツールチップは JS 表示であること)を書く。
 
 ## README

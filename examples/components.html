@@ -466,8 +466,8 @@
         <p class="note">規範: <b>軸は1本</b>(ink基線のみ、第2軸は作らない)・<b>目盛線はhairline</b>・<b>単系列はgreen一色</b>(多系列の色分けはしない — 系列が増えたら図を分ける)・<b>値ラベルは選択的</b>(ピークだけ。全記入は数表の仕事)・<b>朱は現在地のみ</b>(選択中の週・今日を指す線。データには使わない)。</p>
         <div class="demo">
           <figure>
-            <figcaption class="tombo-fig">FIG. 19 — DAILY CONTRIBUTIONS · W30</figcaption>
-            <div class="tombo-plate" style="margin-top:12px">
+            <figcaption class="tombo-fig" id="c19-cap">FIG. 19 — DAILY CONTRIBUTIONS · W30</figcaption>
+            <div class="tombo-plate" role="region" aria-labelledby="c19-cap" tabindex="0" style="margin-top:12px">
               <svg viewBox="0 0 720 200" role="img" aria-label="日別コントリビューション数の棒グラフ(デモ)">
                 <line class="axis" x1="34" y1="24" x2="710" y2="24"/>
                 <line class="axis" x1="34" y1="98" x2="710" y2="98"/>
@@ -502,8 +502,13 @@ REVIEWS       3</div>
                 <table class="tombo-table">
                   <thead><tr><th>DATE</th><th>COMMITS</th><th>TOTAL</th></tr></thead>
                   <tbody>
+                    <tr><td class="tombo-mono">07/20 MON</td><td class="tombo-mono">3</td><td class="tombo-mono">4</td></tr>
+                    <tr><td class="tombo-mono">07/21 TUE</td><td class="tombo-mono">7</td><td class="tombo-mono">9</td></tr>
                     <tr><td class="tombo-mono">07/22 WED</td><td class="tombo-mono">0</td><td class="tombo-mono">0</td></tr>
                     <tr><td class="tombo-mono">07/23 THU</td><td class="tombo-mono">14</td><td class="tombo-mono">21</td></tr>
+                    <tr><td class="tombo-mono">07/24 FRI</td><td class="tombo-mono">4</td><td class="tombo-mono">6</td></tr>
+                    <tr><td class="tombo-mono">07/25 SAT</td><td class="tombo-mono">9</td><td class="tombo-mono">12</td></tr>
+                    <tr><td class="tombo-mono">07/26 SUN</td><td class="tombo-mono">2</td><td class="tombo-mono">3</td></tr>
                   </tbody>
                 </table>
               </div>

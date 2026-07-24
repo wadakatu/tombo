@@ -442,7 +442,7 @@ Charts are instruments too. `.tombo-plate` frames a figure — hairline border, 
 
 The norms are part of the system: **one axis** (the ink baseline), hairline gridlines, **one green** for a single series (need a second series? split the figure — there is no categorical palette), **selective value labels** (peaks only; the full record belongs to the table), and **shu strictly for "you are here"** (the selected week, today — never a data color).
 
-`text` inside a plate is automatically mono, label-size, ink-faint (銘は等幅). The `<details class="tombo-numbers">` table is the accessible data channel; the tooltip is a visual aid (`role="presentation"`, `pointer-events: none`) that your JS toggles (`display`) and places (`transform: translate(x, y)`) — no JS, no tooltip, and the figure still reads. Interactive bars get `tabindex="0"` + `aria-label`. Override the minimum width in your stylesheet, not inline:
+`text` inside a plate is automatically mono, label-size, ink-faint (銘は等幅). The `<details class="tombo-numbers">` table is the accessible data channel; the tooltip is a visual aid (`role="presentation"`, `pointer-events: none`) that your JS toggles (`display`) and places (`transform: translate(x, y)`) — no JS, no tooltip, and the figure still reads. Interactive bars get `tabindex="0"` + `aria-label`. When the frame can scroll but holds no focusable element, treat the plate like a wide table: `role="region"` + an accessible name + `tabindex="0"`, or a keyboard user cannot scroll it. Override the minimum width in your stylesheet, not inline:
 
 ```css
 .trend .tombo-plate { --tombo-plate-min: 900px; } /* one wide figure */
