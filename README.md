@@ -56,6 +56,9 @@ A vendored copy drifts silently, so pin it: record the tag and the file's sha256
 
 `tombo.js` is optional and independent: theme persistence, the `.tombo-themes` control, and copy buttons — see [docs/tombo-js.md](docs/tombo-js.md) for the two script tags and what each one does.
 
+For existing copies, follow the [upgrade guide](docs/upgrading.md) for behavior
+changes, verification and rollback. Main may contain changes not yet in a release.
+
 ## AI-assisted integration
 
 Start with [the agent guide](docs/ai.md) for task-specific references and integration

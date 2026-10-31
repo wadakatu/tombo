@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parent.parent
 BASE = "https://raw.githubusercontent.com/wadakatu/tombo/main/"
 SOURCES = [
     ("docs/ai.md", "Agent guide", "Integration workflow, constraints and verification"),
+    ("docs/upgrading.md", "Upgrading", "Unreleased behavior changes, consumer verification and rollback"),
     ("docs/recipes.md", "Integration recipes", "Complete settings form and scrollable table compositions"),
     ("README.md", "Getting started", "Vendoring, license and repository checks"),
     ("docs/foundations.md", "Foundations", "Colors, typography and themes"),
