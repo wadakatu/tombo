@@ -57,7 +57,17 @@
       btn.textContent = "COPIED ✓"; announce("Copied");
       setTimeout(function () { btn.textContent = "COPY ⧉"; }, 1500);
     };
-    var fail = function () { announce("Press Ctrl or Cmd + C to copy"); };
+    var fail = function () {
+      var selection = window.getSelection();
+      if (selection) {
+        var range = document.createRange();
+        range.selectNodeContents(pre);
+        pre.focus();
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+      announce("Press Ctrl or Cmd + C to copy");
+    };
     try {
       if (navigator.clipboard && navigator.clipboard.writeText)
         navigator.clipboard.writeText(pre.textContent).then(done, fail);
