@@ -56,6 +56,12 @@ A vendored copy drifts silently, so pin it: record the tag and the file's sha256
 
 `tombo.js` is optional and independent: theme persistence, the `.tombo-themes` control, and copy buttons — see [docs/tombo-js.md](docs/tombo-js.md) for the two script tags and what each one does.
 
+## AI-assisted integration
+
+Start with [the agent guide](docs/ai.md) for task-specific references and integration
+constraints. [llms.txt](llms.txt) is the concise index; [llms-full.txt](llms-full.txt)
+is the generated full reference. Match the documentation to your vendored release.
+
 ## Documentation
 
 The reference lives in `docs/`, one page per concern:
