@@ -8,4 +8,5 @@ echo "── contrast ──";                          python3 scripts/check_co
 echo "── size budget ──";                       python3 scripts/check_size.py
 echo "── banner / tag ──";                      python3 scripts/check_banner.py
 echo "── js syntax ──";                         node --check tombo.js
+node scripts/check_theme.mjs
 echo "✓ all gates passed"
