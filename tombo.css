@@ -364,6 +364,11 @@
   .tombo-logo--glow > .t { border-color: light-dark(var(--tombo-shu), var(--tombo-green));
     box-shadow: 0 0 7px light-dark(transparent, var(--tombo-green)); }
 
+  /* Compact controls keep their type scale while providing a 24px target. */
+  .tombo-themes button, .tombo-copy {
+    min-inline-size: var(--tombo-space-24); min-block-size: var(--tombo-space-24);
+  }
+
   /* theme control — author markup, revealed + wired by tombo.js. Current position = shu underline (S-05) */
   .tombo-themes { display: flex; gap: var(--tombo-space-16); }
   .tombo-themes button { background: none; border: 0; border-bottom: 2px solid transparent;
