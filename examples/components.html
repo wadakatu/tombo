@@ -241,16 +241,16 @@
 
       <section id="c10">
         <h2 class="tombo-sec">テーブル</h2>
-        <p class="note">ヘッダは等幅の大文字 + inkの1.5px罫、行はhairline。数値セルには .tombo-monoを併用する。列が多い表は狭い画面で列に収まらないので、必ず .tombo-table-wrapで包む — データ表はWCAG 2.2のReflow(SC 1.4.10)の例外だが、スクロールさせてよいのは表であってページではない。スクロール領域はフォーカス可能にしないとキーボードで動かせないため、role="region" + アクセシブル名 + tabindex="0" が揃って1セットになる。</p>
+        <p class="note">列見出しは等幅の大文字 + inkの1.5px罫、行見出し(scope="row")は本文の字形・サイズとhairline。数値セルには .tombo-monoを併用する。列が多い表は狭い画面で列に収まらないので、必ず .tombo-table-wrapで包む — データ表はWCAG 2.2のReflow(SC 1.4.10)の例外だが、スクロールさせてよいのは表であってページではない。スクロール領域はフォーカス可能にしないとキーボードで動かせないため、role="region" + アクセシブル名 + tabindex="0" が揃って1セットになる。</p>
         <div class="demo">
           <div class="tombo-table-wrap" role="region" aria-labelledby="c10-cap" tabindex="0">
             <table class="tombo-table">
               <thead>
-                <tr><th>Requirement</th><th>Version</th><th>Notes</th></tr>
+                <tr><th scope="col">Requirement</th><th scope="col">Version</th><th scope="col">Notes</th></tr>
               </thead>
               <tbody>
-                <tr><td>PHP</td><td class="tombo-mono">&ge; 8.2</td><td>OpenSSL, mbstring</td></tr>
-                <tr><td>Laravel</td><td class="tombo-mono">&ge; 11.0</td><td>optional, for adapter</td></tr>
+                <tr><th scope="row">PHP</th><td class="tombo-mono">&ge; 8.2</td><td>OpenSSL, mbstring</td></tr>
+                <tr><th scope="row">Laravel</th><td class="tombo-mono">&ge; 11.0</td><td>optional, for adapter</td></tr>
               </tbody>
             </table>
           </div>
@@ -260,8 +260,8 @@
           <figcaption><span>HTML</span><span>.TOMBO-TABLE / .TOMBO-TABLE-WRAP</span></figcaption>
           <pre tabindex="0">&lt;div class="tombo-table-wrap" role="region" aria-labelledby="cap" tabindex="0"&gt;
   &lt;table class="tombo-table"&gt;
-    &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Requirement&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
-    &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PHP&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;Requirement&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;&lt;tr&gt;&lt;th scope="row"&gt;PHP&lt;/th&gt;&lt;/tr&gt;&lt;/tbody&gt;
   &lt;/table&gt;
 &lt;/div&gt;
 &lt;p class="tombo-dimlab" id="cap"&gt;動作要件&lt;/p&gt;</pre>

@@ -110,3 +110,13 @@ Add `.tombo-flow` to a container to space its direct children apart with a singl
 ```
 
 `.tombo-flow` uses `margin-block-start` on `* + *`, so the first child has no leading margin. Use it for stacked prose/content; keep `gap` for grid and flex layouts.
+
+## Table row headers
+
+Use `th[scope="col"]` for column headers and `th[scope="row"]` for row headers
+in simple two-direction tables, following [WAI guidance](https://www.w3.org/WAI/tutorials/tables/two-headers/).
+TOMBO keeps column headings in the uppercase instrument voice with the heavier
+baseline. Explicit row headings inherit the table's text size, font and color,
+preserve letter case, and share data-cell padding and hairline borders. Wrap
+technical identifiers in `code` when they need monospace. Markup supplies the
+header relationships; CSS alone cannot make ordinary cells into headers.

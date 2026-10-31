@@ -68,12 +68,11 @@ Application tests must separately verify saving and server-side validation.
 Use a named, focusable wrapper so overflow belongs to the table, not the page.
 Retain native table semantics and explicit column/row headers. The minimum table
 width below is a consumer decision for these columns, not a new TOMBO token.
-Place this CSS in the consuming application's stylesheet. Preserve endpoint
-letter case in row headings; the default table header voice uses uppercase.
+Place this CSS in the consuming application's stylesheet. TOMBO preserves
+letter case in `th[scope="row"]`; column headers use the uppercase instrument voice.
 
 ```css
 .endpoint-table { min-inline-size: 40rem; }
-.endpoint-table th[scope="row"] { text-transform: none; }
 ```
 
 ```html
