@@ -68,7 +68,7 @@ Opt a block out with `data-tombo-copy="off"`:
 </figure>
 ```
 
-The button copies the `<pre>`'s text via the Clipboard API, reads "COPIED ✓" for 1.5s, and falls back to an `aria-live` announcement ("Press Ctrl or Cmd + C to copy") if the clipboard call is unavailable or is rejected.
+The button copies the `<pre>`'s text via the Clipboard API, reads "COPIED ✓" for 1.5s, and selects the code for manual copying, focuses the code block, and falls back to an `aria-live` announcement ("Press Ctrl or Cmd + C to copy") if the clipboard call is unavailable or is rejected.
 
 Give every code `<pre>` inside `.tombo-code` a `tabindex="0"`, whether or not `tombo.js` is loaded — it's a horizontally-scrolling region, and one that can't take focus is unreachable by keyboard.
 
