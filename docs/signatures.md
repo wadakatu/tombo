@@ -41,3 +41,12 @@ Two constraints are baked in, and both exist because the mockups got them wrong 
 - **Annotation ink is lifted one step inside the glow.** A lit surface sits ~1.3 contrast points brighter, which drops `--tombo-ink-faint` to 3.93:1 on the wash and 3.68:1 on a lit panel — under the 4.5 floor that `.tombo-dimlab`, `.tombo-fig` and `.tombo-footer` all depend on. `.tombo-glow` rebinds `--tombo-ink-faint`, so every component inside follows without being touched.
 
 The contrast gate flattens the wash onto the background before measuring, so raising `--tombo-glow-wash` past `.23` fails the build instead of the review.
+
+## Current navigation items
+
+For `.tombo-tabs` and `.tombo-toc`, use `aria-current="page"` on the current
+link. Omit the attribute or set `aria-current="false"` on other links; an
+empty value is also inactive. Non-empty values other than `false` keep the
+current-position mark, following [WAI-ARIA](https://www.w3.org/TR/wai-aria/#aria-current).
+Mark only one item in each navigation set as current. These are navigation
+links, not a JavaScript tab widget (`role="tab"` uses `aria-selected` instead).

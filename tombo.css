@@ -294,13 +294,13 @@
 
   .tombo-tabs { display: flex; gap: var(--tombo-space-24); border-bottom: 1px solid var(--tombo-hairline); }
   .tombo-tabs > * { padding: var(--tombo-space-8) 2px var(--tombo-space-8); color: var(--tombo-ink-sub); text-decoration: none; position: relative; font-size: var(--tombo-text-ui); }
-  .tombo-tabs > [aria-current] { color: var(--tombo-ink); font-weight: 500; }
-  .tombo-tabs > [aria-current]::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 100%; border-bottom: 2px solid var(--tombo-shu); }
+  .tombo-tabs > [aria-current]:not(:where([aria-current="false" i], [aria-current=""])) { color: var(--tombo-ink); font-weight: 500; }
+  .tombo-tabs > [aria-current]:not(:where([aria-current="false" i], [aria-current=""]))::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 100%; border-bottom: 2px solid var(--tombo-shu); }
 
   .tombo-toc { font-size: var(--tombo-text-ui); }
   .tombo-toc a { display: block; color: var(--tombo-ink-sub); text-decoration: none; padding: var(--tombo-space-8) 0 var(--tombo-space-8) var(--tombo-space-24); position: relative; }
-  .tombo-toc a[aria-current] { color: var(--tombo-ink); font-weight: 500; }
-  .tombo-toc a[aria-current]::before { content: ""; position: absolute; left: 0; top: 50%; width: 12px; border-top: 2px solid var(--tombo-shu); }
+  .tombo-toc a[aria-current]:not(:where([aria-current="false" i], [aria-current=""])) { color: var(--tombo-ink); font-weight: 500; }
+  .tombo-toc a[aria-current]:not(:where([aria-current="false" i], [aria-current=""]))::before { content: ""; position: absolute; left: 0; top: 50%; width: 12px; border-top: 2px solid var(--tombo-shu); }
 
   .tombo-code { background: var(--tombo-code-bg); color: var(--tombo-code-ink);
     border: 1px solid var(--tombo-code-border); border-radius: 6px; overflow: hidden; }
