@@ -137,6 +137,17 @@
   .tombo-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
     overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 
+  /* First keyboard stop: reveal a direct route past repeated navigation. */
+  .tombo-skip-link {
+    position: fixed; inset-block-start: var(--tombo-space-8); inset-inline-start: var(--tombo-space-16);
+    z-index: 1000; max-inline-size: calc(100% - 2 * var(--tombo-space-16));
+    padding: var(--tombo-space-8) var(--tombo-space-16);
+    background: var(--tombo-paper); color: var(--tombo-green);
+    border: 1px solid currentColor; font-size: var(--tombo-text-ui);
+    transform: translateY(calc(-100% - var(--tombo-space-16)));
+  }
+  .tombo-skip-link:focus { transform: translateY(0); }
+
   /* container scale — one class, four widths. The page runs at --tombo-shell-default;
      reassign --tombo-shell on :root (only there — .tombo-gutters sits on <body> and its
      margin grid will not follow an override made lower down) when a whole page wants
@@ -586,7 +597,7 @@
   :root[data-theme="hotaru"] { color-scheme: light; }
 
   /* screen-only chrome never prints */
-  .tombo-themes, .tombo-copy, .tombo-tip { display: none; }
+  .tombo-themes, .tombo-copy, .tombo-tip, .tombo-skip-link { display: none; }
 
   /* glow + motion off (mirrors the forced-colors guard) */
   .tombo-glow { background-image: none; box-shadow: none; }

@@ -52,6 +52,8 @@ vendored files intact.
 - Give each page a descriptive `h1` and a `main` for its primary content.
   Nest section headings by meaning, not by desired font size; keep navigation
   and the site footer outside the main content when they are shared page chrome.
+  Use the [skip link pattern](layout.md#skip-repeated-navigation) before repeated
+  navigation so keyboard users can reach main content directly.
 - Use native links for navigation and buttons for actions. `aria-current="page"`
   marks a current navigation link; a tab widget needs its own keyboard behavior
   and `aria-selected`. CSS does not implement that behavior.

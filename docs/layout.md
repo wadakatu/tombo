@@ -120,3 +120,26 @@ baseline. Explicit row headings inherit the table's text size, font and color,
 preserve letter case, and share data-cell padding and hairline borders. Wrap
 technical identifiers in `code` when they need monospace. Markup supplies the
 header relationships; CSS alone cannot make ordinary cells into headers.
+
+## Skip repeated navigation
+
+Place `.tombo-skip-link` before navigation as the first interactive element in the
+body. It is hidden off-screen until focused, appears above the page using theme
+colors, and is omitted from print. Keep it outside transformed or clipped wrappers.
+
+```html
+<body>
+  <a class="tombo-skip-link" href="#main-content">Skip to main content</a>
+  <!-- shared header / navigation -->
+  <main id="main-content" tabindex="-1" class="tombo-shell">
+    <h1>Page title</h1>
+    <!-- page content -->
+  </main>
+</body>
+```
+
+The fragment target and `tabindex="-1"` move focus to the main content without
+adding it to the regular Tab sequence. No JavaScript is required. Preserve the
+focus outline on both the link and its target. Verify Tab → Enter → Tab: the
+link appears, focus moves to main, then the next control is inside main rather
+than back in navigation. See [WAI technique G1](https://www.w3.org/WAI/WCAG22/Techniques/general/G1).
