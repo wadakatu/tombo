@@ -71,6 +71,15 @@ PAIRS = [
     ("dark code-faint/code-bg",   "dark",  "code-faint",    "code-bg", 4.5),
 ]
 
+# Supported text and focus combinations beyond the original paper/surface gate.
+# Raised deliberately excludes faint/error: see docs/foundations.md.
+for theme in ("light", "dark"):
+    for bg in ("surface", "raised"):
+        PAIRS.append((f"{theme} green/{bg}", theme, "green", bg, 4.5))
+    for fg, floor in (("ink", 7.0), ("ink-sub", 4.5)):
+        PAIRS.append((f"{theme} {fg}/raised", theme, fg, "raised", floor))
+    PAIRS.append((f"{theme} error/surface", theme, "error", "surface", 4.5))
+
 # --- .tombo-glow ---------------------------------------------------------
 # A lit surface is a COMPOSITE: the wash paints over paper/surface before any
 # text lands on it, so a plain token-vs-token check cannot see it. v0.4 shipped

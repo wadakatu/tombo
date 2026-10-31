@@ -88,3 +88,17 @@ Mixed Japanese/Latin (和欧混植) spacing is CSS-native — you don't hand-typ
 ```
 
 It's progressive enhancement: supporting engines (Chromium today) render the 八分アキ; others render tight — fully legible — and pick it up automatically as they ship `text-autospace`, with no change to your markup. A hand-typed space, if you leave one in, is respected and suppresses autospace at that boundary.
+
+## Supported text on raised surfaces
+
+Use `ink` for body text, `ink-sub` for secondary text, and `green` for links
+on `raised`. These pairs are covered by `scripts/check_contrast.py` in both themes.
+Do not assume every foreground token works on every surface: in hotaru,
+`ink-faint` on `raised` measures 4.36:1 and `error` measures 4.23:1, below the
+4.5:1 floor for normal text. Keep error text on `paper` or `surface`; use
+`ink-sub` for annotations on `raised`. The current CSS does not itself use
+`raised` as a component background.
+
+The floor comes from [WCAG contrast minimum](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html).
+These token checks do not certify a composed page: overlays, overrides and
+interaction states still need browser verification.
