@@ -8,6 +8,7 @@ Exit 1 if any pair is below its floor or references a missing token.
 """
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 CSS_PATH = Path(__file__).resolve().parent.parent / "tombo.css"
@@ -84,21 +85,36 @@ for theme in ("light", "dark"):
 # A lit surface is a COMPOSITE: the wash paints over paper/surface before any
 # text lands on it, so a plain token-vs-token check cannot see it. v0.4 shipped
 # a mock whose annotations measured 3.93:1 and 3.68:1 against exactly this and
-# the gate stayed green. The alphas below must track the --tombo-glow-* tokens.
-GLOW_ALPHAS = {"wash": 0.16, "edge": 0.14}
+# the gate stayed green. Read the overlay colors and alphas from the --tombo-glow-* tokens.
+def load_glow(css_path: Path = CSS_PATH) -> dict:
+    """Read supported transparent-day / rgba-night glow tokens; fail on drift."""
+    text = css_path.read_text()
+    result = {}
+    for name in ("wash", "edge"):
+        match = re.search(
+            rf"--tombo-glow-{name}:\s*light-dark\(\s*transparent\s*,\s*rgba\("
+            r"\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([0-9.]+)\s*\)\s*\)", text)
+        if not match:
+            raise ValueError(f"unsupported or missing --tombo-glow-{name}")
+        r, g, b = map(int, match.groups()[:3])
+        alpha = float(match[4])
+        if max(r, g, b) > 255 or not 0 <= alpha <= 1:
+            raise ValueError(f"invalid --tombo-glow-{name}")
+        result[name] = (f"#{r:02X}{g:02X}{b:02X}", alpha)
+    return result
 
 # (label, fg token, bg token, overlay alpha, floor) — night only; the tokens are
 # transparent by day, so the composite equals the plain background there.
 GLOW_PAIRS = [
-    ("glow hero ink",         "ink",                  "paper",   GLOW_ALPHAS["wash"], 7.0),
-    ("glow hero annotation",  "ink-sub",              "paper",   GLOW_ALPHAS["wash"], 4.5),
-    ("glow hero green",       "green",                "paper",   GLOW_ALPHAS["wash"], 4.5),
-    ("glow hero shu line",    "shu",                  "paper",   GLOW_ALPHAS["wash"], 3.0),
-    ("glow panel ink",        "ink",                  "surface", GLOW_ALPHAS["edge"], 7.0),
-    ("glow panel annotation", "ink-sub",              "surface", GLOW_ALPHAS["edge"], 4.5),
-    ("glow panel shu line",   "shu",                  "surface", GLOW_ALPHAS["edge"], 3.0),
+    ("glow hero ink",         "ink",                  "paper",   "wash", 7.0),
+    ("glow hero annotation",  "ink-sub",              "paper",   "wash", 4.5),
+    ("glow hero green",       "green",                "paper",   "wash", 4.5),
+    ("glow hero shu line",    "shu",                  "paper",   "wash", 3.0),
+    ("glow panel ink",        "ink",                  "surface", "edge", 7.0),
+    ("glow panel annotation", "ink-sub",              "surface", "edge", 4.5),
+    ("glow panel shu line",   "shu",                  "surface", "edge", 3.0),
     # the lift itself: inside .tombo-glow, --tombo-ink-faint becomes this token
-    ("glow lifted faint",     "ink-faint-glow",       "paper",   GLOW_ALPHAS["wash"], 4.5),
+    ("glow lifted faint",     "ink-faint-glow",       "paper",   "wash", 4.5),
 ]
 
 def _hex_to_rgb(h: str) -> tuple:
@@ -119,11 +135,33 @@ def self_test() -> None:
     tokens = load_tokens()
     assert tokens["ink"]["light"] == "#1A211D", "tombo.css parse drift"
     assert {"paper", "surface", "green", "shu"} <= tokens.keys()
+    with tempfile.TemporaryDirectory() as directory:
+        fixture = Path(directory) / "tokens.css"
+        source = CSS_PATH.read_text()
+        original = load_glow()
+        fixture.write_text(source.replace("rgba(79,194,162,.16)", "rgba(255,255,255,.9)"))
+        changed = load_glow(fixture)
+        assert changed["wash"] == ("#FFFFFF", 0.9)
+        assert changed["edge"] == original["edge"]
+        lit = composite(*changed["wash"], tokens["paper"]["dark"])
+        assert ratio(tokens["ink-sub"]["dark"], lit) < 4.5
+        fixture.write_text(source.replace("--tombo-glow-wash:", "--removed-glow-wash:"))
+        try:
+            load_glow(fixture)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("missing overlay must fail closed")
     print("self-test OK")
 
 def main() -> int:
     tokens = load_tokens()
     failed = False
+    try:
+        glow = load_glow()
+    except ValueError as error:
+        print(f"FAIL  {error}")
+        return 1
     for label, theme, fg, bg, floor in PAIRS:
         if fg not in tokens or bg not in tokens:
             missing = fg if fg not in tokens else bg
@@ -145,13 +183,14 @@ def main() -> int:
         print(f"{'PASS' if ok else 'FAIL'}  {'glow lift mirrors tokens':26}        "
               f"({got[0]}/{got[1]} vs {want[0]}/{want[1]})")
 
-    for label, fg, bg, alpha, floor in GLOW_PAIRS:
+    for label, fg, bg, overlay, floor in GLOW_PAIRS:
         if fg not in tokens or bg not in tokens:
             missing = fg if fg not in tokens else bg
             print(f"FAIL  {label:26}   n/a  (token --tombo-{missing} not found)")
             failed = True
             continue
-        lit = composite(tokens["green"]["dark"], alpha, tokens[bg]["dark"])
+        color, alpha = glow[overlay]
+        lit = composite(color, alpha, tokens[bg]["dark"])
         r = ratio(tokens[fg]["dark"], lit)
         ok = r >= floor
         failed |= not ok
