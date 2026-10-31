@@ -33,6 +33,9 @@ the agent: explicitly provide the file or URL when necessary.
 | Theme control and clipboard | [Behavior](tombo-js.md) | [Catalog](../examples/components.html) |
 | Printing | [Print](print.md) | [Docs](../examples/docs.html) |
 
+For complete compositions, start with [integration recipes](recipes.md): a settings
+form with an error-state replacement and a keyboard-scrollable data table.
+
 ## Implementation contract
 
 Reuse the documented HTML and class names before writing custom CSS. Inspect
