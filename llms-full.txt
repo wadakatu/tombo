@@ -320,7 +320,7 @@ Each toggles `tombo` / `hotaru` live and can be opened directly in a browser (no
 
 ## Contrast gate
 
-38 token pairs (light + dark, on paper, surface, and supported raised combinations) are checked against WCAG 2.1 floors — 7:1 for primary body text, 4.5:1 for secondary text and interactive color, 3:1 for non-text (lines, status dots). Token values are parsed from `tombo.css` itself, so editing a token there is automatically re-checked.
+40 token pairs (light + dark, on paper, surface, and supported raised combinations) are checked against WCAG 2.1 floors — 7:1 for primary body text, 4.5:1 for secondary text and interactive color, 3:1 for non-text (lines, status dots). Token values are parsed from `tombo.css` itself, so editing a token there is automatically re-checked.
 
 ```bash
 python3 scripts/check_contrast.py       # runs the gate, exits 1 on any violation
@@ -848,6 +848,11 @@ Opt a block out with `data-tombo-copy="off"`:
 The button copies the `<pre>`'s text via the Clipboard API, reads "COPIED ✓" for 1.5s, and selects the code for manual copying, focuses the code block, and falls back to an `aria-live` announcement ("Press Ctrl or Cmd + C to copy") if the clipboard call is unavailable or is rejected.
 
 Give every code `<pre>` inside `.tombo-code` a `tabindex="0"`, whether or not `tombo.js` is loaded — it's a horizontally-scrolling region, and one that can't take focus is unreachable by keyboard.
+
+The code panel stays dark in both themes. Its focus indicators use
+`--tombo-code-green`; the `pre` indicator is inset so the panel's clipped overflow
+does not hide it. Keep the native outline enabled, including when adding syntax
+highlighting or custom copy controls. These focus styles also work without JS.
 
 ## SSR (optional upgrade)
 

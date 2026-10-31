@@ -72,6 +72,11 @@ The button copies the `<pre>`'s text via the Clipboard API, reads "COPIED ✓" f
 
 Give every code `<pre>` inside `.tombo-code` a `tabindex="0"`, whether or not `tombo.js` is loaded — it's a horizontally-scrolling region, and one that can't take focus is unreachable by keyboard.
 
+The code panel stays dark in both themes. Its focus indicators use
+`--tombo-code-green`; the `pre` indicator is inset so the panel's clipped overflow
+does not hide it. Keep the native outline enabled, including when adding syntax
+highlighting or custom copy controls. These focus styles also work without JS.
+
 ## SSR (optional upgrade)
 
 `localStorage` is the universal default, but a server-rendered consumer (Blade, Astro SSR) can go one step further: store the choice in a cookie instead of — or alongside — `localStorage`, read it on the server, and emit `data-theme` on `<html>` directly in the response HTML. That skips even the inline boot snippet, since there's nothing left to apply client-side before paint. `tombo.js` itself only ever reads `localStorage`; the cookie round-trip is something the consuming app implements on its own.

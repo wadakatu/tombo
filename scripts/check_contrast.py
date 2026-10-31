@@ -81,6 +81,10 @@ for theme in ("light", "dark"):
         PAIRS.append((f"{theme} {fg}/raised", theme, fg, "raised", floor))
     PAIRS.append((f"{theme} error/surface", theme, "error", "surface", 4.5))
 
+# Keyboard focus on the always-dark code panel (WCAG non-text contrast).
+for theme in ("light", "dark"):
+    PAIRS.append((f"{theme} code focus", theme, "code-green", "code-bg", 3.0))
+
 # --- .tombo-glow ---------------------------------------------------------
 # A lit surface is a COMPOSITE: the wash paints over paper/surface before any
 # text lands on it, so a plain token-vs-token check cannot see it. v0.4 shipped

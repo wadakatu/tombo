@@ -309,6 +309,10 @@
     padding: var(--tombo-space-8) var(--tombo-space-16); border-bottom: 1px solid var(--tombo-code-hairline); }
   .tombo-code pre { font-size: var(--tombo-text-code); line-height: var(--tombo-lh-code); font-stretch: 87.5%; padding: var(--tombo-space-16) var(--tombo-space-16); overflow-x: auto; }
 
+  /* Code panels stay dark in both themes; keep focus bright and inside clipping. */
+  .tombo-code :focus-visible { outline-color: var(--tombo-code-green); }
+  .tombo-code pre:focus-visible { outline-offset: -2px; }
+
   .tombo-callout { border: 1px solid var(--tombo-hairline); border-left: 2px solid var(--tombo-shu);
     padding: var(--tombo-space-12) var(--tombo-space-16); font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); color: var(--tombo-ink-sub); }
   .tombo-callout--warn { border-left-color: var(--tombo-warn); }
