@@ -18,11 +18,11 @@
   /* min-inline-size: 0 lets the code block scroll instead of widening the grid track */
   main.tombo-sections { counter-reset: tombo-section 1; min-inline-size: 0; --tombo-flow-space: var(--tombo-space-16); }
   main.tombo-sections > .tombo-sec { --tombo-flow-space: var(--tombo-space-4); }        /* eyebrow → title, tight */
-  main.tombo-sections > :is(h3, .tombo-callout, .tombo-code, .tombo-table-wrap) { --tombo-flow-space: var(--tombo-space-24); }
+  main.tombo-sections > :is(h2, .tombo-callout, .tombo-code, .tombo-table-wrap) { --tombo-flow-space: var(--tombo-space-24); }
   main.tombo-sections > .tombo-dim { --tombo-flow-space: var(--tombo-space-32); }
   main.tombo-sections > .tombo-dimlab { --tombo-flow-space: var(--tombo-space-8); }     /* dim line → caption, tight */
   main p { font-size: var(--tombo-text-body); line-height: var(--tombo-lh-body); color: var(--tombo-ink-sub); max-inline-size: var(--tombo-shell-reading); }
-  main h3, main .tombo-callout { max-inline-size: var(--tombo-shell-reading); }
+  main h2, main .tombo-callout { max-inline-size: var(--tombo-shell-reading); }
   main .tombo-dim { max-inline-size: var(--tombo-shell-reading); }
   @media (max-width: 680px) {
     .layout { grid-template-columns: 1fr; gap: var(--tombo-space-24); }
@@ -46,7 +46,7 @@
 
     <main class="tombo-sections tombo-flow">
       <p class="tombo-fig">DOCS / GETTING-STARTED / 02</p>
-      <h2 class="tombo-sec">インストール</h2>
+      <h1 class="tombo-sec">インストール</h1>
       <p>Composerで導入する。<a href="#">Laravel 11以降</a>に対応し、設定ファイルの公開は任意。導入後は<a href="#">ルート定義から自動で</a>OpenAPIドキュメントが生成される。</p>
 
       <figure class="tombo-code">
@@ -60,7 +60,7 @@
       <div class="tombo-dim"></div>
       <div class="tombo-dimlab">section — 02.1 / requirements</div>
 
-      <h3 id="req">動作要件</h3>
+      <h2 id="req">動作要件</h2>
       <div class="tombo-table-wrap" role="region" aria-labelledby="req" tabindex="0">
         <table class="tombo-table">
         <thead>

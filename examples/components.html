@@ -12,6 +12,7 @@
 <style>
   .layout { display: grid; grid-template-columns: 220px 1fr; gap: var(--tombo-space-48); padding-block: var(--tombo-space-48) var(--tombo-space-72); align-items: start; }
   main.tombo-sections { min-width: 0; --tombo-flow-space: var(--tombo-space-48); }   /* section rhythm */
+  main.tombo-sections > h1 { --tombo-flow-space: var(--tombo-space-8); }
   main.tombo-sections > p.lead { --tombo-flow-space: var(--tombo-space-16); }        /* lead under H1 (first child gets 0 anyway) */
   .side { position: sticky; top: var(--tombo-space-48); }
   .brand { font-family: var(--tombo-font-display); font-weight: 700; font-size: 16px; }
@@ -72,6 +73,7 @@
 
     <main class="tombo-sections tombo-flow">
       <p class="tombo-fig">CATALOG / ALL COMPONENTS / DOCS VOLUME</p>
+      <h1>コンポーネントカタログ</h1>
       <p class="lead">tombo.cssの全コンポーネント。各項は実物とコピペ用マークアップの対。このページ自体がdocs音量の実演になっている — 余白だけの方眼、hr代替の寸法線、見出しの通し番号。</p>
 
       <section id="c01">
