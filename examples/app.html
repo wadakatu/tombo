@@ -13,7 +13,7 @@
   .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--tombo-space-24); margin: var(--tombo-space-32) 0 var(--tombo-space-24); }
   .tombo-metric .v small { font-size: var(--tombo-text-note); color: var(--tombo-ink-faint); font-weight: 400; }
   .tombo-metric .tombo-ruler { margin-top: var(--tombo-space-12); height: 14px; }
-  main { padding-bottom: var(--tombo-space-48); }
+  main { padding-block: var(--tombo-space-24) var(--tombo-space-48); }
   @media (max-width: 640px) {
     .metrics { grid-template-columns: 1fr; }
   }
@@ -40,6 +40,7 @@
   </header>
 
   <main class="tombo-shell">
+    <h1>画面一覧</h1>
     <div class="metrics">
       <div class="tombo-metric tombo-corners">
         <b class="tombo-corner-tr"></b><b class="tombo-corner-bl"></b>
