@@ -812,6 +812,13 @@ You author the `.tombo-themes` markup; `tombo.js` reveals it and wires the click
 
 On load, `tombo.js` un-hides every `.tombo-themes[hidden]` block and sets `aria-pressed` on each button — `true` for whichever matches the current setting, `false` for the rest. Clicking any `[data-tombo-theme]` element calls `setTheme()` with its value: `tombo` and `hotaru` force that theme and persist it; `system` clears the stored choice and returns the page to following the OS.
 
+Theme and copy buttons have a minimum 24 × 24 CSS pixel target without enlarging
+their caption typography. Preserve this minimum when customizing their labels or
+styles. Touch-heavy applications may choose larger targets in consumer styles;
+24px is a floor, not a recommendation to shrink other controls. See
+[WCAG target size guidance](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html)
+for the criterion and its spacing exceptions.
+
 ## `window.Tombo`
 
 ```js
