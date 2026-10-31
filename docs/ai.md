@@ -20,6 +20,9 @@ the agent: explicitly provide the file or URL when necessary.
   Copy `tombo.js` only when theme persistence or copy buttons are needed.
   Do not invent an npm install command, CDN URL, React import or build step.
 
+For an existing integration, read the [upgrade guide](upgrading.md) before
+replacing vendored files or removing consumer overrides.
+
 ## Choose a reference by task
 
 | Task | Read | Working example |

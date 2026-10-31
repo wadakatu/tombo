@@ -8,6 +8,7 @@ For an existing app, use its pinned release, not an automatic upgrade.
 ## Reference
 
 - [Agent guide](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/ai.md): Integration workflow, constraints and verification.
+- [Upgrading](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/upgrading.md): Unreleased behavior changes, consumer verification and rollback.
 - [Integration recipes](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/recipes.md): Complete settings form and scrollable table compositions.
 - [Getting started](https://raw.githubusercontent.com/wadakatu/tombo/main/README.md): Vendoring, license and repository checks.
 - [Foundations](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/foundations.md): Colors, typography and themes.
