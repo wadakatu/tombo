@@ -9,5 +9,6 @@ echo "── size budget ──";                       python3 scripts/check_si
 echo "── banner / tag ──";                      python3 scripts/check_banner.py
 echo "── js syntax ──";                         node --check tombo.js
 node scripts/check_theme.mjs
+python3 scripts/check_agent_docs.py
 python3 scripts/build_agent_docs.py --check
 echo "✓ all gates passed"

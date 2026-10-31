@@ -74,7 +74,9 @@ Example request to an agent:
 
 Edit the source Markdown, then run `python3 scripts/build_agent_docs.py`.
 Commit the updated `llms.txt` and `llms-full.txt`. CI runs the generator with
-`--check` and rejects stale output or missing indexed sources. The full export
+`--check` and rejects stale output, missing indexed sources, or broken local Markdown
+link targets in the exported reference. External URLs and fragment IDs are not
+validated; the local check also accepts existing directories. The full export
 includes only the current reference, not design history or executable source.
 No model API, MCP server, or extra package is required.
 

@@ -3,7 +3,7 @@
 import argparse
 import re
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import unquote, urljoin, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE = "https://raw.githubusercontent.com/wadakatu/tombo/main/"
@@ -19,6 +19,19 @@ SOURCES = [
     ("docs/tombo-js.md", "Behavior", "Optional theme and copy behavior"),
     ("docs/print.md", "Print", "Print styles and trim marks"),
 ]
+
+
+def resolve_link(path, destination):
+    """Validate local file targets before making them absolute for consumers."""
+    parsed = urlsplit(destination)
+    if not parsed.scheme and not parsed.netloc and parsed.path:
+        base = ROOT if parsed.path.startswith("/") else (ROOT / path).parent
+        target = (base / unquote(parsed.path).lstrip("/")).resolve()
+        if not target.is_relative_to(ROOT.resolve()):
+            raise ValueError(f"Link escapes repository in {path}: {destination}")
+        if not target.exists():
+            raise ValueError(f"Missing link target in {path}: {destination}")
+    return urljoin(BASE + path, destination)
 
 
 def render():
@@ -38,7 +51,7 @@ def render():
         parts = re.split(r"(```[\s\S]*?```)", text)
         for i in range(0, len(parts), 2):
             parts[i] = re.sub(r"(?<=\]\()([^\s)]+)(?=\))",
-                              lambda m: urljoin(BASE + path, m[1]), parts[i])
+                              lambda m: resolve_link(path, m[1]), parts[i])
         full.extend([f"<!-- Source: {BASE}{path} -->", "", "".join(parts).rstrip(), "", "---", ""])
     index.extend(["", "## Optional", "",
                   f"- [Full reference]({BASE}llms-full.txt): Combined reference when link traversal is unavailable.",
@@ -52,7 +65,11 @@ def main():
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
     stale = []
-    for name, content in render().items():
+    try:
+        outputs = render()
+    except ValueError as error:
+        parser.exit(1, f"Agent docs: {error}\n")
+    for name, content in outputs.items():
         target = ROOT / name
         if args.check:
             if not target.is_file() or target.read_text(encoding="utf-8") != content:
