@@ -2,7 +2,7 @@
 (function () {
   "use strict";
   var KEY = "tombo-theme";
-  var VALID = { system: 1, tombo: 1, hotaru: 1 };
+  var current = stored();
 
   function stored() {
     try { var t = localStorage.getItem(KEY); return (t === "tombo" || t === "hotaru") ? t : "system"; }
@@ -14,17 +14,18 @@
     else delete root.dataset.theme;
   }
   function reflect() {
-    var cur = stored(), btns = document.querySelectorAll("[data-tombo-theme]");
+    var cur = current, btns = document.querySelectorAll("[data-tombo-theme]");
     for (var i = 0; i < btns.length; i++)
       btns[i].setAttribute("aria-pressed", String(btns[i].getAttribute("data-tombo-theme") === cur));
   }
   function setTheme(setting) {
-    if (!VALID[setting]) return;
+    if (setting !== "system" && setting !== "tombo" && setting !== "hotaru") return;
+    current = setting;
     try { if (setting === "system") localStorage.removeItem(KEY); else localStorage.setItem(KEY, setting); }
     catch (e) {}
     apply(setting); reflect();
   }
-  function getTheme() { return stored(); }
+  function getTheme() { return current; }
 
   var live;
   function ensureLive() {
@@ -74,7 +75,7 @@
 
   function init() {
     ensureLive();
-    apply(stored());
+    apply(current);
     var c = document.querySelectorAll(".tombo-themes[hidden]");
     for (var i = 0; i < c.length; i++) c[i].hidden = false;
     reflect();

@@ -39,10 +39,15 @@ On load, `tombo.js` un-hides every `.tombo-themes[hidden]` block and sets `aria-
 
 ```js
 window.Tombo.setTheme('system' | 'tombo' | 'hotaru');
-window.Tombo.getTheme(); // 'system' | 'tombo' | 'hotaru' — 'system' when nothing is stored
+window.Tombo.getTheme(); // 'system' | 'tombo' | 'hotaru' — the current page setting
 ```
 
 Use these instead of touching `localStorage['tombo-theme']` or `data-theme` by hand — `setTheme()` updates the stored value, `<html data-theme>`, and every `[data-tombo-theme]` button's `aria-pressed` state together in one call; changing only one of those leaves the others stale until the next click.
+
+If storage is unavailable or a write is rejected, the selected theme still applies
+to this page: `getTheme()` and the pressed buttons reflect that selection.
+Persistence across reloads is best-effort; a reload reads the saved setting again.
+Invalid values passed to `setTheme()` are ignored.
 
 ## Copy buttons
 
