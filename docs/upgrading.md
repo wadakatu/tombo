@@ -63,7 +63,9 @@ until the release is ready to be made available.
 - Update both file banners and all three vendoring examples in README.md,
   index.html and ja/index.html together. Update the site's visible REV labels.
   `package.json` is private tooling, not an npm distribution version.
-- Regenerate agent docs with `python3 scripts/build_agent_docs.py`, then run
+- Refresh introduction-page measurements with `python3 scripts/check_size.py --write`
+  after changing the file banners. Regenerate agent docs with
+  `python3 scripts/build_agent_docs.py`, then run
   `npm run check`. Confirm the tag name with the banner check before tagging,
   for example by setting `GITHUB_REF=refs/tags/vX.Y.Z` to the chosen actual version
   when invoking `python3 scripts/check_banner.py`.

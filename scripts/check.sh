@@ -6,6 +6,7 @@ cd "$(dirname "$0")/.."
 echo "── stylelint (use-baseline widely) ──";  npx --no-install stylelint tombo.css
 echo "── contrast ──";                          python3 scripts/check_contrast.py --self-test; python3 scripts/check_contrast.py
 echo "── size budget ──";                       python3 scripts/check_size.py
+python3 scripts/test_check_size.py
 echo "── banner / tag ──";                      python3 scripts/check_banner.py
 echo "── js syntax ──";                         node --check tombo.js
 node scripts/check_theme.mjs
