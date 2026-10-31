@@ -1,0 +1,748 @@
+# TOMBO — full reference
+
+Generated from current repository Markdown. Do not edit directly.
+Main-branch reference; match an existing application's pinned release before use.
+
+<!-- Source: https://raw.githubusercontent.com/wadakatu/tombo/main/docs/ai.md -->
+
+# Using TOMBO with AI agents
+
+TOMBO is a vendored, framework-independent CSS design system, not an npm UI
+package. Start with this guide, then read only the reference needed for the task.
+The repository's `llms.txt` is a small index; `llms-full.txt` combines the current
+reference for clients that cannot follow links. Automatic discovery depends on
+the agent: explicitly provide the file or URL when necessary.
+
+## Source and version
+
+- `tombo.css` is authoritative for tokens, selectors and current behavior.
+- The top-level `docs/*.md` references and `examples/components.html` describe
+  supported usage. `docs/superpowers/` contains historical decisions, not the
+  current API contract; do not implement a historical proposal without checking
+  the current stylesheet.
+- Main-branch documentation can contain unreleased changes. When working on an
+  existing application, inspect its vendored CSS/JS banner and recorded hash,
+  and use the matching release tag. Do not silently upgrade a consuming app.
+- Copy CSS and LICENSE from the same release as described in [README](https://raw.githubusercontent.com/wadakatu/tombo/main/README.md).
+  Copy `tombo.js` only when theme persistence or copy buttons are needed.
+  Do not invent an npm install command, CDN URL, React import or build step.
+
+## Choose a reference by task
+
+| Task | Read | Working example |
+| --- | --- | --- |
+| Colors, typography, themes | [Foundations](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/foundations.md) | [Catalog](https://raw.githubusercontent.com/wadakatu/tombo/main/examples/components.html) |
+| Containers, spacing, responsive content | [Layout](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/layout.md) | [Docs](https://raw.githubusercontent.com/wadakatu/tombo/main/examples/docs.html) |
+| Brand marks and visual intensity | [Signatures](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/signatures.md) | [Landing page](https://raw.githubusercontent.com/wadakatu/tombo/main/examples/lp.html) |
+| Inputs and validation | [Forms](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/forms.md) | [Catalog forms](https://raw.githubusercontent.com/wadakatu/tombo/main/examples/components.html#c17) |
+| Application header and navigation | [Topbar](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/topbar.md) | [App](https://raw.githubusercontent.com/wadakatu/tombo/main/examples/app.html) |
+| Charts and data alternatives | [Charts](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/charts.md) | [Catalog charts](https://raw.githubusercontent.com/wadakatu/tombo/main/examples/components.html#c19) |
+| Theme control and clipboard | [Behavior](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/tombo-js.md) | [Catalog](https://raw.githubusercontent.com/wadakatu/tombo/main/examples/components.html) |
+| Printing | [Print](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/print.md) | [Docs](https://raw.githubusercontent.com/wadakatu/tombo/main/examples/docs.html) |
+
+## Implementation contract
+
+Reuse the documented HTML and class names before writing custom CSS. Inspect
+`tombo.css` for any class or token not shown in a reference; never infer that a
+utility exists from its name. Use consumer styles for page layout and keep
+vendored files intact.
+
+- Keep body text in the body voice and instrument labels/numbers in mono.
+  Use the display voice for Latin display headings, not Japanese headings.
+- Shu is the current-position line, not a filled primary button. Use the existing
+  green primary button. Preserve the docs/app/LP intensity choices in the examples.
+- Reuse space and type tokens. Use `padding-block` rather than a padding shorthand
+  on `.tombo-shell`, so consumer styles do not erase its horizontal gutters.
+- Use native links for navigation and buttons for actions. `aria-current="page"`
+  marks a current navigation link; a tab widget needs its own keyboard behavior
+  and `aria-selected`. CSS does not implement that behavior.
+- Wire labels, required fields, help and errors as shown in the forms reference.
+  Give scrollable tables a focusable, named region; give code `pre` elements
+  `tabindex="0"`. Do not remove focus outlines.
+- Avoid assuming every foreground works on every surface. Read the supported
+  contrast combinations, especially on raised and glowing backgrounds.
+- Keep optional JavaScript optional: the page must remain usable without it.
+
+## Verify the result
+
+For a consuming app, run that app's checks and open its real pages. Check narrow
+and wide screens, both themes, keyboard focus, overflow, and relevant error states.
+Do not treat TOMBO's token contrast gate as certification of a composed page.
+For this repository, run `npm ci` and `npm run check`; inspect changed components
+in the local examples. Report any browser or assistive-technology checks not run.
+
+Example request to an agent:
+
+> Read docs/ai.md and docs/forms.md from the same TOMBO revision as our vendored
+> stylesheet. Build the settings form using native controls and existing tokens.
+> Preserve the vendored files. Verify labels, errors, keyboard focus and both themes.
+
+## Maintaining agent documentation
+
+Edit the source Markdown, then run `python3 scripts/build_agent_docs.py`.
+Commit the updated `llms.txt` and `llms-full.txt`. CI runs the generator with
+`--check` and rejects stale output or missing indexed sources. The full export
+includes only the current reference, not design history or executable source.
+No model API, MCP server, or extra package is required.
+
+The generated files use main-branch source URLs; they describe the checkout used
+to generate them and are not a versioned release service. For a release, fetch
+these files and the references from that tag instead.
+
+## Design rationale and research (2026-11-01)
+
+- [shadcn/ui's actual index](https://ui.shadcn.com/llms.txt) groups links by task.
+  TOMBO adopts selective retrieval so agents need not load the entire history.
+- [Astro's AI guide](https://docs.astro.build/en/guides/build-with-ai/) provides
+  both index and full documentation. TOMBO adopts both access patterns while
+  generating them from existing Markdown to avoid a separate, drifting manual.
+- [The llms.txt proposal](https://llmstxt.org/) describes a concise Markdown entry
+  point with links. It is a documentation convention, not a guarantee that every
+  agent discovers or follows it. TOMBO also links the entry point from its README.
+- TOMBO-specific choice: retain CSS and native HTML as the API. A tool server or
+  framework-specific registry would add maintenance without being necessary to
+  retrieve this small static reference. This decision can be revisited if actual
+  integrations require executable discovery or installation tools.
+
+---
+
+<!-- Source: https://raw.githubusercontent.com/wadakatu/tombo/main/README.md -->
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo/tombo-mark-dark.svg">
+    <img src="assets/logo/tombo-mark.svg" alt="TOMBO mark — a dragonfly drawn as a printer's registration mark" width="92">
+  </picture>
+</p>
+<h1 align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo/tombo-wordmark-dark.svg">
+    <img src="assets/logo/tombo-wordmark.svg" alt="TOMBO" width="320">
+  </picture>
+</h1>
+
+A single-file CSS design system for everything wadakatu ships — OSS docs sites, web apps, LPs, portfolios. Zero dependencies, one `<link>` — an optional `tombo.js` adds theme persistence and copy buttons, but no page needs it.
+
+The goal is not a component library. It's recognition: the same handful of signature marks, repeated without exception across every product, at a "volume" tuned to context — quiet in docs, loud in an LP.
+
+## Name
+
+**トンボ (tombo)** is a printer's registration mark — the small cross drawn on a printing plate so every layer of ink aligns to the same point. It is the mark that measures.
+
+It's also a homophone for **蜻蛉 (tombo)**, the dragonfly: an insect that only flies forward, never backward, which made it a symbol of victory (**勝ち虫**, *kachimushi*) to samurai. *Katu* (勝) — to win — hides inside *wadaKATU*.
+
+The logo is a registration cross with two wing strokes and a tail tick in shu (朱, vermillion) — the same red the system uses everywhere else to mark "you are here."
+
+The dark flavor is named **hotaru** (蛍, firefly): at night, the instruments glow.
+
+## The three rules
+
+1. **すべてを測る — measure everything.** Elements sit next to dimension lines, tick marks, and running numbers. The sense that something was measured before it was placed is what gives the page its air.
+2. **銘は等幅 — inscriptions are monospace.** Numbers, labels, indices, and units are always set in mono. Body copy stays in a quiet sans; only the instrumentation gets to glow in mono.
+3. **朱は現在地 — shu marks the current position.** Red is reserved for a 1–2px line that points at "here" — the current tab, the current TOC entry, the current ruler value. The moment it fills a shape, it stops being shu and becomes plain red.
+
+## Quick start
+
+TOMBO is distributed by vendoring — no npm package, no CDN link to go down or drift. Copy the files out of a release tag:
+
+```bash
+git -C /path/to/tombo show v0.14.1:tombo.css > public/styles/tombo.css
+git -C /path/to/tombo show v0.14.1:LICENSE   > public/styles/tombo.LICENSE
+git -C /path/to/tombo show v0.14.1:tombo.js  > public/scripts/tombo.js   # optional — see docs/tombo-js.md
+```
+
+Then link your copy, alongside the three voices:
+
+```html
+<link rel="stylesheet" href="/styles/tombo.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600;700&family=M+PLUS+2:wght@450;500;700&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
+```
+
+No build step, no framework — it's a single stylesheet, so any templating layer works (Astro, Laravel Blade, Vue, plain HTML). The font `<link>`s are optional: `tombo.css` declares font stacks with system fallbacks (`system-ui`, `ui-monospace`), so the page degrades gracefully without them.
+
+A vendored copy drifts silently, so pin it: record the tag and the file's sha256 in the consuming repo and check it in CI. Then a hand-edit or a stale copy fails the build instead of turning into a mystery months later.
+
+`tombo.js` is optional and independent: theme persistence, the `.tombo-themes` control, and copy buttons — see [docs/tombo-js.md](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/tombo-js.md) for the two script tags and what each one does.
+
+## AI-assisted integration
+
+Start with [the agent guide](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/ai.md) for task-specific references and integration
+constraints. [llms.txt](https://raw.githubusercontent.com/wadakatu/tombo/main/llms.txt) is the concise index; [llms-full.txt](https://raw.githubusercontent.com/wadakatu/tombo/main/llms-full.txt)
+is the generated full reference. Match the documentation to your vendored release.
+
+## Documentation
+
+The reference lives in `docs/`, one page per concern:
+
+| Page | Covers |
+|---|---|
+| [Foundations](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/foundations.md) | the three type voices, `tombo`/`hotaru` themes, the token table, Japanese typography (`text-autospace`) |
+| [Layout](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/layout.md) | `.tombo-shell` containers, the space scale, `.tombo-flow`, migrating off `--tombo-shell-max` |
+| [Signatures](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/signatures.md) | the 6 fingerprint marks, the volume dial, `.tombo-glow` |
+| [Forms](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/forms.md) | native-first fields: `.tombo-field`, `.tombo-check`, `.tombo-fieldset` |
+| [Charts](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/charts.md) | `.tombo-plate` figures and the chart norms |
+| [Topbar](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/topbar.md) | `.tombo-topbar` — how every app-volume page opens |
+| [Behavior (tombo.js)](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/tombo-js.md) | theme persistence, `window.Tombo`, copy buttons, SSR |
+| [Print](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/print.md) | unconditional print hardening and the opt-in trim marks |
+
+The design history — every spec and plan that shaped a release — is under [docs/superpowers/](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/superpowers/).
+
+## Examples
+
+Three volumes of the same language, side by side:
+
+- `examples/docs.html` — documentation site
+- `examples/app.html` — web application
+- `examples/lp.html` — landing page
+- `examples/components.html` — the component catalog: every component as a live demo + copy-paste markup, dogfooded at docs volume
+
+Each toggles `tombo` / `hotaru` live and can be opened directly in a browser (no build step).
+
+## Contrast gate
+
+38 token pairs (light + dark, on paper, surface, and supported raised combinations) are checked against WCAG 2.1 floors — 7:1 for primary body text, 4.5:1 for secondary text and interactive color, 3:1 for non-text (lines, status dots). Token values are parsed from `tombo.css` itself, so editing a token there is automatically re-checked.
+
+```bash
+python3 scripts/check_contrast.py       # runs the gate, exits 1 on any violation
+python3 scripts/check_contrast.py --self-test   # verifies the luminance math itself
+```
+
+## CI
+
+Every push to `main`, every `v*` tag, and every pull request runs one gate —
+the same `npm run check` you can run locally before merging:
+
+1. **stylelint + [`use-baseline`](https://github.com/ryo-manba/stylelint-plugin-use-baseline)** (`available: "widely"`) — keeps `tombo.css` inside Baseline. Deliberately non-widely features (progressive enhancement) are listed, with justification, in `stylelint.config.mjs` — that list is the project's PE ledger.
+2. **Contrast** — `scripts/check_contrast.py` (above).
+3. **Size budget** — `scripts/check_size.py` (gzipped-byte ceilings).
+4. **Banner / tag integrity** — `scripts/check_banner.py` asserts the version agrees across both banners and the three vendoring pins, and matches the tag on a release.
+5. **JS syntax** — `node --check tombo.js`.
+
+There's no build step and nothing is published; CI only verifies. Run the whole
+gate yourself with `npm run check` (Node + Python 3 required for dev only).
+
+## Scope
+
+Zero dependencies — one `tombo.css` file (`@layer tombo.reset, tombo.tokens, tombo.base, tombo.components, tombo.utilities`), plus an **optional** `tombo.js` for theme persistence and copy buttons (see [docs/tombo-js.md](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/tombo-js.md)). It's progressive enhancement, not a requirement: every page renders and works with `tombo.css` alone and no JS at all, following the OS theme; `tombo.js` only makes a chosen theme remember itself across visits and adds the copy buttons. Distributed by vendoring from a tag — there is no CDN and no npm package, deliberately.
+
+Deliberately out of scope for v1: Figma kit, JS components, framework wrappers (React/Vue), an icon set beyond the logo, and **npm publishing** — these are follow-ups once the CSS itself is stable.
+
+## License
+
+MIT — see [LICENSE](https://raw.githubusercontent.com/wadakatu/tombo/main/LICENSE).
+
+---
+
+<!-- Source: https://raw.githubusercontent.com/wadakatu/tombo/main/docs/foundations.md -->
+
+# Foundations
+
+The three voices, the two themes, and the token table everything else is built from.
+
+## Type
+
+Three voices, selected zero-base with the reader first (see `superpowers/specs/2026-07-21-tombo-typography-design.md`):
+
+| Voice | Face | Role |
+|---|---|---|
+| DISPLAY | Instrument Sans 700 | Latin display headings only (tracking -.015em never touches Japanese) |
+| BODY | M PLUS 2 at weight 450 | Japanese body, UI copy, Japanese headings |
+| INSTRUMENT | Martian Mono | labels, numbers, indices, code (code condenses to width 87.5%) |
+
+A 10-step type scale (`--tombo-text-*` / `--tombo-lh-*`, body 15px/30px) replaces all ad-hoc sizes — components may only reference scale tokens.
+
+## Themes
+
+TOMBO ships two flavors, structured like catppuccin's: one umbrella system name, two `data-theme` values.
+
+| Theme | Role |
+|---|---|
+| `tombo` | Day drawing (light, default) |
+| `hotaru` | Night drawing (dark) |
+
+By default the page follows the OS via `color-scheme: light dark` and `light-dark()` token values — no flag needed. To force a theme, set `data-theme` on `<html>`:
+
+```html
+<html data-theme="hotaru">
+```
+
+```js
+document.documentElement.dataset.theme = "hotaru"; // or "tombo"
+```
+
+## Tokens
+
+Prefix: `--tombo-`. Only the values change between themes; the token names don't.
+
+### tombo (day)
+
+| Token | Value | Use |
+|---|---|---|
+| paper | `#F2F4EF` | page background (greenish drafting paper) |
+| surface | `#FAFBF8` | cards / panels (+1 step) |
+| ink | `#1A211D` | body text, primary rules |
+| ink-sub | `#4C5650` | secondary text |
+| ink-faint | `#667069` | annotations, numbers |
+| hairline | `rgba(26,33,29,.16)` | rules |
+| grid | `rgba(26,33,29,.07)` | graph paper |
+| green | `#0E5A47` | brand / interactive (links, buttons, ticks) |
+| shu | `#D8442B` | current-position line only |
+
+Day has no `raised` (+2) step — pure white is forbidden, so there's no headroom above the paper's own lightness. The +2 step is faked with `surface` + a 1.5px `ink` rule instead.
+
+### hotaru (night)
+
+| Token | Value | Use |
+|---|---|---|
+| paper | `#131714` | page background (greenish ink-black) |
+| surface | `#1A201C` | +1 step |
+| raised | `#212824` | +2 step |
+| ink | `#E5EBE6` | body text (moonlight) |
+| ink-sub | `#9AA69F` | secondary text |
+| ink-faint | `#808D86` | annotations, numbers |
+| hairline | `rgba(229,235,230,.14)` | rules |
+| grid | `rgba(229,235,230,.05)` | graph paper (~half of day) |
+| green | `#4FC2A2` | instrument glow — the fireflies |
+| shu | `#E5654C` | current-position line only |
+
+### Status (app volume only)
+
+| State | Day | Night | Note |
+|---|---|---|---|
+| success | `#2C7A4B` | `#57B98A` | distinct from brand green in saturation and role |
+| warn | `#B07818` | `#D9A441` | |
+| error | `#A6301C` (crimson) | `#D06A5A` | **fills are allowed** — distinguished from shu by weight and role: shu = position, crimson = failure |
+
+Forbidden everywhere: pure `#000`/`#FFF`, filled shu, shu body text, and any shadow with an offset — a shadow that implies a light source. The one exception is the offset-zero glow of [`.tombo-glow`](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/signatures.md#glow), which is opt-in and night-only.
+
+## Japanese typography
+
+Mixed Japanese/Latin (和欧混植) spacing is CSS-native — you don't hand-type spaces between the scripts. `tombo.css` opts into [`text-autospace: normal`](https://www.w3.org/TR/css-text-4/#text-autospace-property) on `body`, so the browser inserts the proper 八分アキ (1/8 em) at every Japanese↔Latin/number boundary. Verbatim text (`code`, `kbd`, `samp`, `pre`) is exempt.
+
+```html
+<!-- write it tight; the browser does the spacing -->
+<p>Laravel 11以降に対応し、OpenAPIドキュメントを生成する。</p>
+```
+
+It's progressive enhancement: supporting engines (Chromium today) render the 八分アキ; others render tight — fully legible — and pick it up automatically as they ship `text-autospace`, with no change to your markup. A hand-typed space, if you leave one in, is respected and suppresses autospace at that boundary.
+
+## Supported text on raised surfaces
+
+Use `ink` for body text, `ink-sub` for secondary text, and `green` for links
+on `raised`. These pairs are covered by `scripts/check_contrast.py` in both themes.
+Do not assume every foreground token works on every surface: in hotaru,
+`ink-faint` on `raised` measures 4.36:1 and `error` measures 4.23:1, below the
+4.5:1 floor for normal text. Keep error text on `paper` or `surface`; use
+`ink-sub` for annotations on `raised`. The current CSS does not itself use
+`raised` as a component background.
+
+The floor comes from [WCAG contrast minimum](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html).
+These token checks do not certify a composed page: overlays, overrides and
+interaction states still need browser verification.
+
+---
+
+<!-- Source: https://raw.githubusercontent.com/wadakatu/tombo/main/docs/layout.md -->
+
+# Layout
+
+Containers, the space scale, and vertical rhythm.
+
+## Containers
+
+One class, `.tombo-shell`, and a four-step scale. The step is chosen by what the container holds, not by screen size.
+
+| Token | Value | Holds |
+|---|---|---|
+| `--tombo-shell-reading` | `65ch` | body copy — caps the line at 621px at the body voice, 76 latin / 41 japanese characters |
+| `--tombo-shell-default` | `1280px` | ordinary pages and documentation |
+| `--tombo-shell-wide` | `1792px` | landing pages, card grids, dashboards |
+| `--tombo-shell-gutter` | `clamp(20px, 3.25vw, 64px)` | the inline padding, fluid across the whole range |
+
+`reading` is in `ch` because it *is* a measure — it has to track whatever type it wraps, so the same token is wider on a mono caption than on body copy. `default` and `wide` are structural, so they stay in `px` to match the px type scale: a `rem` container under a `px` type scale lengthens the line without enlarging the text.
+
+```html
+<div class="tombo-shell">                       <!-- the page's width (default) -->
+<div class="tombo-shell tombo-shell--reading">  <!-- body copy -->
+<div class="tombo-shell tombo-shell--wide">     <!-- LP, grids -->
+<div class="tombo-shell tombo-shell--full">     <!-- backgrounds, decoration: no cap, no gutter -->
+```
+
+Markup is the whole API. `.tombo-shell` reads `--tombo-shell`; the modifiers rebind it for one element. `.tombo-gutters` reads the same variable and adds the shell's own gutter, so the margin grid meets the content edge rather than the shell's outer edge. There are no container breakpoints — `max-inline-size` plus the clamp()ed gutter cover every viewport continuously.
+
+`reading` is the only step measured on the text rather than the box: the shell is `border-box`, so `.tombo-shell--reading` sizes itself to `65ch` **plus two gutters**, and the line inside lands on 65ch wherever the viewport affords it. Below that the shell fills the viewport and the line shrinks with it — every step is a ceiling, not a fixed width. `default` and `wide` are frame widths and mean exactly the number they state. Applying `--tombo-shell-reading` directly to a paragraph — which has no gutter — needs no compensation:
+
+```css
+.prose p { max-inline-size: var(--tombo-shell-reading); }
+```
+
+Two things to know:
+
+- **Don't use the `padding` shorthand on a `.tombo-shell` element.** Your rule is unlayered and `.tombo-shell` lives in `@layer tombo.utilities`, so the shorthand wins and silently zeroes the gutter. Use `padding-block`.
+- **Code blocks and tables are not prose.** Cap paragraphs at `--tombo-shell-reading`; let code and tables fill the column. A grid item holding a code block also needs `min-inline-size: 0`, or its longest line widens the track instead of scrolling.
+- **Wrap any table that can outgrow its column** in `.tombo-table-wrap`. A data table is a reflow exception under [WCAG 2.2 SC 1.4.10](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html), but the scroll belongs to the table, not the page. The three attributes are one set — a scroll container that cannot take focus is unreachable by keyboard, and `role="region"` needs a name:
+
+  ```html
+  <div class="tombo-table-wrap" role="region" aria-labelledby="cap" tabindex="0">
+    <table class="tombo-table"> … </table>
+  </div>
+  <p class="tombo-dimlab" id="cap">動作要件</p>
+  ```
+
+## Overriding the page width
+
+The page runs at `--tombo-shell-default`. When a whole page wants a different step — an LP, say — reassign `--tombo-shell` once in your own stylesheet:
+
+```css
+:root { --tombo-shell: var(--tombo-shell-wide); }
+```
+
+**`:root` and nowhere else.** Because `.tombo-gutters` sits on `<body>`, the margin grid will not follow an override made further down — set `--tombo-shell` on `<body>` and it looks like it works while the gutters silently stop meeting the content edge.
+
+When only one container needs another step, use the modifier classes rather than reassigning anything.
+
+The system's one sanctioned inline custom property is `--tombo-ruler-value`; `--tombo-shell` is not one. Keep it in a stylesheet.
+
+## Migrating from `--tombo-shell-max` (removed in v0.7.0)
+
+`--tombo-shell-max` resolved as an alias for `--tombo-shell` from 0.4 through 0.6 — but **its value changed** in 0.4, so a page that read it without migrating shifted:
+
+| | 0.3 | 0.4 |
+|---|---|---|
+| below 1600px | 1100px | 1280px |
+| 1600px and up | 1280px | 1280px |
+| the 1600px step | yes | gone — the scale replaces it |
+
+The alias is **removed as of v0.7.0**. A page still reading `var(--tombo-shell-max, 1100px)` now falls back to its own `1100px` default because the variable is undefined — it can look unchanged while silently diverging from the system, so migrate off it. To migrate, drop your hand-rolled container and pick the step by what it holds:
+
+```css
+/* 0.3 */
+.site-shell { max-width: var(--tombo-shell-max, 1100px); margin: 0 auto; padding: 0 32px; }
+```
+```html
+<!-- 0.4 — no CSS of your own -->
+<div class="tombo-shell">                       <!-- was: the 1280px case -->
+<div class="tombo-shell tombo-shell--reading">  <!-- was: the 1100px prose case -->
+```
+
+If a page was relying on 1100px specifically, that was a measure, and `--tombo-shell-reading` (65ch) is what it wanted — narrower, and it tracks the type instead of guessing at it.
+
+## Space scale
+
+Spacing is tokenised on a 4px base. Steps 24 and up are multiples of the 24px grid cell, so block and section rhythm sit on the same grid the margin marks draw.
+
+| token | px | typical use |
+|---|---|---|
+| `--tombo-space-4` | 4 | hairline gap, eyebrow → title |
+| `--tombo-space-8` | 8 | chip / row padding, tight caption |
+| `--tombo-space-12` | 12 | button padding-y, tight rhythm |
+| `--tombo-space-16` | 16 | callout / code inset, body rhythm, card gap |
+| `--tombo-space-24` | 24 | one grid cell — default block rhythm |
+| `--tombo-space-32` | 32 | medium gap between components |
+| `--tombo-space-48` | 48 | 2 cells — sidebar gap, small section |
+| `--tombo-space-72` | 72 | 3 cells — docs section rhythm |
+| `--tombo-space-96` | 96 | 4 cells — LP section rhythm |
+
+Use tokens for `gap` and `padding` in your own layout CSS: `gap: var(--tombo-space-48)`.
+
+### Vertical rhythm — `.tombo-flow`
+
+Add `.tombo-flow` to a container to space its direct children apart with a single grid cell. Override `--tombo-flow-space` on the container to change the default, or on any child to change the space that precedes it:
+
+```css
+.article { } /* markup: <div class="article tombo-flow"> */
+.article { --tombo-flow-space: var(--tombo-space-16); }   /* body rhythm */
+.article > h2 { --tombo-flow-space: var(--tombo-space-48); } /* more air before headings */
+```
+
+`.tombo-flow` uses `margin-block-start` on `* + *`, so the first child has no leading margin. Use it for stacked prose/content; keep `gap` for grid and flex layouts.
+
+---
+
+<!-- Source: https://raw.githubusercontent.com/wadakatu/tombo/main/docs/signatures.md -->
+
+# Signatures (the 6 fingerprints)
+
+Six marks repeated across every product, "played" at a different volume per context (docs quiet, app functional, LP loud). See `../examples/{docs,app,lp}.html`.
+
+| ID | Name | Classes | What it does |
+|---|---|---|---|
+| S-01 | Registration corners | `.tombo-corners` (+ `.tombo-corner-tr`, `.tombo-corner-bl` for all 4) | 12px corner brackets on cards, figures, hero frames |
+| S-02 | Dimension line | `.tombo-dim`, `.tombo-dimlab` | hr replacement — end rules + center tick + mono caption |
+| S-03 | Tick marks | `.tombo-ticks`, `.tombo-ruler` | list bullets as green ticks; ruler = 10%-grid track + green fill + shu current-value line |
+| S-04 | Running numbers | `.tombo-sections`, `.tombo-sec`, `.tombo-fig` | auto-numbered headings (`02 —`) and mono figure/note captions |
+| S-05 | Shu current position | `.tombo-current`, `.tombo-kicker`, `[aria-current]` | the shu marker on active tabs, TOC entries, kickers |
+| S-06 | Graph paper | `.tombo-vol-lp`, `.tombo-gutters`, `.tombo-glow` | background grid — full-bleed hero on LP, margins only on docs, off on app; the glow lights the grid at night |
+
+## Volume dial
+
+The same six marks, turned up or down per product type:
+
+| Signature | DOCS | APP | LP |
+|---|---|---|---|
+| Graph paper | margins only | none | hero full-bleed |
+| Registration corners | figures only | instrument cards only | hero frame + figures |
+| Dimension line | hr replacement | none | under headings + captions |
+| Running numbers | headings, notes | REV label | FIG. numbers |
+| Shu current position | TOC, tabs | nav, instruments | first stroke of the kicker |
+| Glow (hotaru) | none | none | hero + instruments, opt-in |
+
+## Glow
+
+`hotaru` means firefly: at night the instruments are supposed to glow. Until 0.5 that was one hard-coded exception on the LP logo tail. It is now an opt-in class.
+
+```html
+<header class="hero tombo-vol-lp tombo-glow tombo-corners"> … </header>
+<figure class="tombo-metric tombo-glow"> … </figure>
+```
+
+`.tombo-glow` lights a surface, rings it, and haloes the display type and metric values inside it. Every glow token is `light-dark(transparent, …)`, so **the class is inert by day and needs no theme selector** — it follows the OS and `data-theme` alike through `color-scheme`. Writing the rules as `[data-theme="hotaru"]` instead would miss every page that merely follows a dark OS without forcing a theme.
+
+Two constraints are baked in, and both exist because the mockups got them wrong first:
+
+- **The wash is a background layer, never a pseudo-element.** `.tombo-corners`, `.tombo-dim`, `.tombo-ticks`, `.tombo-ruler`, `.tombo-current` and `.tombo-kicker` all own `::before`/`::after`. A glow built on a pseudo silently eats one of their marks the first time the classes are combined — in our case the hero's bottom-right registration mark vanished and survived two rounds of review.
+- **Annotation ink is lifted one step inside the glow.** A lit surface sits ~1.3 contrast points brighter, which drops `--tombo-ink-faint` to 3.93:1 on the wash and 3.68:1 on a lit panel — under the 4.5 floor that `.tombo-dimlab`, `.tombo-fig` and `.tombo-footer` all depend on. `.tombo-glow` rebinds `--tombo-ink-faint`, so every component inside follows without being touched.
+
+The contrast gate flattens the wash onto the background before measuring, so raising `--tombo-glow-wash` past `.23` fails the build instead of the review.
+
+## Current navigation items
+
+For `.tombo-tabs` and `.tombo-toc`, use `aria-current="page"` on the current
+link. Omit the attribute or set `aria-current="false"` on other links; an
+empty value is also inactive. Non-empty values other than `false` keep the
+current-position mark, following [WAI-ARIA](https://www.w3.org/TR/wai-aria/#aria-current).
+Mark only one item in each navigation set as current. These are navigation
+links, not a JavaScript tab widget (`role="tab"` uses `aria-selected` instead).
+
+---
+
+<!-- Source: https://raw.githubusercontent.com/wadakatu/tombo/main/docs/forms.md -->
+
+# Forms
+
+Native-first: TOMBO styles real `input` / `select` / `textarea` / `checkbox` / `radio` — no JS, no custom widgets. The look only applies inside `.tombo-field` (and `.tombo-check` / `.tombo-fieldset`), so it never hijacks an input elsewhere on the page.
+
+A field is a hairline box with a heavier bottom rule that carries its state — the instrument's reading line: it lights **green** on focus and **crimson** on invalid. Labels use the mono instrument voice; the required marker is an ink `*` (shu stays reserved for current-position lines). Checkbox and radio use the native `accent-color`.
+
+| Class | Role |
+|---|---|
+| `.tombo-field` | one field: label → control → help/error, stacked |
+| `.tombo-req` | the required marker (`*`) inside a label |
+| `.tombo-select` | wrapper that gives a `<select>` a themeable caret |
+| `.tombo-check` | one checkbox/radio row (the `<label>` is the whole target) |
+| `.tombo-fieldset` | a native `<fieldset>` reset, with a mono `<legend>` — for radio/checkbox groups |
+
+```html
+<div class="tombo-field">
+  <label for="cov">COVERAGE THRESHOLD<span class="tombo-req" aria-hidden="true">*</span></label>
+  <input id="cov" type="number" required
+         aria-describedby="cov-help cov-err" aria-invalid="true">
+  <p class="help"  id="cov-help">0–100の整数。</p>
+  <p class="error" id="cov-err">0から100の数値を入力してください。</p>
+</div>
+
+<div class="tombo-field">
+  <label for="fw">FRAMEWORK</label>
+  <div class="tombo-select"><select id="fw"><option>Laravel</option></select></div>
+</div>
+
+<fieldset class="tombo-fieldset">
+  <legend>MODE</legend>
+  <label class="tombo-check"><input type="radio" name="m" checked> Strict</label>
+  <label class="tombo-check"><input type="radio" name="m"> Lenient</label>
+</fieldset>
+```
+
+The CSS styles the states; you own the accessible markup:
+
+- Wire `label[for]` to `control[id]`; point `aria-describedby` at **both** the help and error ids (space-separated).
+- Set `aria-invalid="true"` only when a field is in error; mark required with the native `required` attribute; show a "**\* required**" note once per form.
+- Put radio/checkbox groups in `<fieldset><legend>`.
+- States are pure CSS: `:focus` (baseline green) + the base `:focus-visible` ring, `:user-invalid` **and** `[aria-invalid="true"]` (baseline crimson), `:disabled` (dimmed), `:read-only` (recessed). `:user-invalid` shows validation only after the reader interacts; the `[aria-invalid]` hook covers scripted or server-side validation.
+
+Controls are `width:100%`, so keep the form's container to a comfortable measure (a login form around `380px`, a settings form no wider than the reading measure) rather than the full page width. Deep styling of `range` / `color` / `file` / date pickers is deliberately left native.
+
+---
+
+<!-- Source: https://raw.githubusercontent.com/wadakatu/tombo/main/docs/topbar.md -->
+
+# Topbar (トップバー)
+
+Every app-volume page opens the same way: a full-width hairline rule, the brand in the display voice, mono metadata on the right shoulder. `.tombo-topbar` fixes that recipe so the first 20 lines of every product are the same markup — the brand is locked to `--tombo-text-body` (no more 14px/15px drift), the row aligns on baselines and wraps on narrow screens, and dropping `.tombo-tabs` inside needs no undo CSS (the bar absorbs `border-block-end: 0; flex: auto`).
+
+| Class | Role |
+|---|---|
+| `.tombo-topbar` | the bar — full-width hairline bottom rule, `--tombo-space-16` block padding; put a `.tombo-shell` directly inside |
+| `.brand` | the logo line — display voice, 700, `--tombo-text-body`, `-.015em`; a nested `<a>` inherits ink with no underline |
+| `.meta` | the right shoulder — mono, label-size, ink-faint, `margin-inline-start: auto`; carries case (no uppercase transform) |
+| `.tombo-topbar .tombo-tabs` | tabs drop in as-is — the bar removes their bottom rule and gives them the remaining width |
+
+```html
+<header class="tombo-topbar">
+  <div class="tombo-shell">
+    <span class="brand"><a href="/">SCREENBOOK</a></span>
+    <nav class="tombo-tabs">
+      <a href="/screens" aria-current="page">画面一覧</a>
+      <a href="/deps">依存グラフ</a>
+    </nav>
+    <span class="meta">wadakatu@prod / REV 4.2.1</span>
+  </div>
+</header>
+```
+
+The rule spans the viewport because the border sits on the bar, not the shell — keep `.tombo-shell` as the direct child. Brand-only bars work too: `.meta` stays on the right shoulder via its auto margin. On narrow screens the row wraps; if a page wants `.meta` gone instead, hide it from that page's stylesheet — the component never does.
+
+---
+
+<!-- Source: https://raw.githubusercontent.com/wadakatu/tombo/main/docs/charts.md -->
+
+# Charts (図版)
+
+Charts are instruments too. `.tombo-plate` frames a figure — hairline border, `--tombo-space-24` padding, and overflow that scrolls **inside** the frame, never the page. Everything a bar chart needs is a class scoped under the plate, so the norms live in the vocabulary instead of each consuming page. The caption stays `.tombo-fig` (the existing S-04 mono 銘) on a `<figcaption>` above the frame.
+
+| Class | Role |
+|---|---|
+| `.tombo-plate` | the figure frame; the SVG inside is fluid with `min-inline-size: var(--tombo-plate-min, 560px)` |
+| `.axis` / `.base` | hairline gridlines / the single ink baseline — the only axis |
+| `.bar` / `.bar.is-zero` | green single-series bars / hairline zero stubs (2px) |
+| `.val` | the selective value label (ink, 600) — peaks only |
+| `.now` | the shu current-position line — never a data series |
+| `.tombo-tip` | the tooltip panel (surface, ink border, mono note voice) — your JS shows and positions it |
+| `.tombo-numbers` | the `<details>` disclosure for the figure's data table |
+
+```html
+<figure>
+  <figcaption class="tombo-fig">FIG. 01 — DAILY CONTRIBUTIONS</figcaption>
+  <div class="tombo-plate">
+    <svg viewBox="0 0 720 200" role="img" aria-label="日別コントリビューション数の棒グラフ">
+      <line class="axis" … /><text …>12</text>
+      <rect class="bar" … tabindex="0" aria-label="07/23 THU: 21" />
+      <rect class="bar is-zero" … />
+      <text class="val" …>21</text>
+      <line class="now" … />
+      <line class="base" … />
+    </svg>
+    <div class="tombo-tip" role="presentation"><b>07/23 THU — 21</b>COMMITS 14</div>
+  </div>
+  <details class="tombo-numbers">
+    <summary>NUMBERS — 数表を開く</summary>
+    <div class="tombo-table-wrap" role="region" aria-label="日次の数表" tabindex="0">
+      <table class="tombo-table">…</table>
+    </div>
+  </details>
+</figure>
+```
+
+The norms are part of the system: **one axis** (the ink baseline), hairline gridlines, **one green** for a single series (need a second series? split the figure — there is no categorical palette), **selective value labels** (peaks only; the full record belongs to the table), and **shu strictly for "you are here"** (the selected week, today — never a data color).
+
+`text` inside a plate is automatically mono, label-size, ink-faint (銘は等幅). The `<details class="tombo-numbers">` table is the accessible data channel; the tooltip is a visual aid (`role="presentation"`, `pointer-events: none`) that your JS toggles (`display`) and places (`transform: translate(x, y)`) — no JS, no tooltip, and the figure still reads. Interactive bars get `tabindex="0"` + `aria-label`. When the frame can scroll but holds no focusable element, treat the plate like a wide table: `role="region"` + an accessible name + `tabindex="0"`, or a keyboard user cannot scroll it. Override the minimum width in your stylesheet, not inline:
+
+```css
+.trend .tombo-plate { --tombo-plate-min: 900px; } /* one wide figure */
+```
+
+---
+
+<!-- Source: https://raw.githubusercontent.com/wadakatu/tombo/main/docs/tombo-js.md -->
+
+# Behavior (tombo.js)
+
+`tombo.js` is optional. It's a single dependency-free file that layers three behaviors onto the CSS: theme persistence across visits, wiring for the `.tombo-themes` control, and copy buttons on code blocks. Nothing in `tombo.css` requires it — every page renders and works with the stylesheet alone.
+
+## Loading
+
+Vendor `tombo.js` from a tag alongside `tombo.css`, with the same sha256-pin discipline — the pinned commands live in the README's [Quick start](https://raw.githubusercontent.com/wadakatu/tombo/main/README.md#quick-start).
+
+Then wire two script tags around the page:
+
+```html
+<!-- in <head>, before paint: applies a stored theme with no flash -->
+<script>try{var t=localStorage.getItem('tombo-theme');if(t==='tombo'||t==='hotaru')document.documentElement.dataset.theme=t}catch(e){}</script>
+<!-- once, before </body> -->
+<script src="/path/tombo.js" defer></script>
+```
+
+Both are optional, and independent of each other:
+
+- **Neither** — the page still follows the OS theme (`color-scheme` handles that on its own); the `.tombo-themes` control stays hidden and code blocks get no copy button, since only `tombo.js` reveals and wires those.
+- **The deferred `tombo.js`, no inline snippet** — a previously chosen `tombo`/`hotaru` theme still applies (`tombo.js` reads `localStorage` itself on load), and the theme control and copy buttons both work. But a reader who overrode their OS theme sees the OS-default theme paint first and then swap a moment later — a brief flash. A reader who never overrode it sees nothing, since the OS default and the stored choice already agree.
+- **The inline snippet, no deferred script** — no flash, but nothing else: the `.tombo-themes` block never un-hides, no copy button appears, and `window.Tombo` doesn't exist.
+
+## Theme control
+
+You author the `.tombo-themes` markup; `tombo.js` reveals it and wires the clicks. Ship it `hidden`, since there's nothing to click when JS never runs:
+
+```html
+<div class="tombo-themes tombo-label" hidden>
+  <button type="button" data-tombo-theme="system">system</button>
+  <button type="button" data-tombo-theme="tombo">tombo</button>
+  <button type="button" data-tombo-theme="hotaru">hotaru</button>
+</div>
+```
+
+On load, `tombo.js` un-hides every `.tombo-themes[hidden]` block and sets `aria-pressed` on each button — `true` for whichever matches the current setting, `false` for the rest. Clicking any `[data-tombo-theme]` element calls `setTheme()` with its value: `tombo` and `hotaru` force that theme and persist it; `system` clears the stored choice and returns the page to following the OS.
+
+## `window.Tombo`
+
+```js
+window.Tombo.setTheme('system' | 'tombo' | 'hotaru');
+window.Tombo.getTheme(); // 'system' | 'tombo' | 'hotaru' — the current page setting
+```
+
+Use these instead of touching `localStorage['tombo-theme']` or `data-theme` by hand — `setTheme()` updates the stored value, `<html data-theme>`, and every `[data-tombo-theme]` button's `aria-pressed` state together in one call; changing only one of those leaves the others stale until the next click.
+
+If storage is unavailable or a write is rejected, the selected theme still applies
+to this page: `getTheme()` and the pressed buttons reflect that selection.
+Persistence across reloads is best-effort; a reload reads the saved setting again.
+Invalid values passed to `setTheme()` are ignored.
+
+## Copy buttons
+
+Every `.tombo-code` figure gets a copy button injected into its `figcaption` automatically (one is created if the block doesn't already have one) — no markup required beyond the block itself:
+
+```html
+<figure class="tombo-code">
+  <figcaption><span>SHELL — INSTALL</span></figcaption>
+  <pre tabindex="0">$ composer require wadakatu/laravel-spectrum</pre>
+</figure>
+```
+
+Opt a block out with `data-tombo-copy="off"`:
+
+```html
+<figure class="tombo-code" data-tombo-copy="off">
+  <pre tabindex="0">…</pre>
+</figure>
+```
+
+The button copies the `<pre>`'s text via the Clipboard API, reads "COPIED ✓" for 1.5s, and selects the code for manual copying, focuses the code block, and falls back to an `aria-live` announcement ("Press Ctrl or Cmd + C to copy") if the clipboard call is unavailable or is rejected.
+
+Give every code `<pre>` inside `.tombo-code` a `tabindex="0"`, whether or not `tombo.js` is loaded — it's a horizontally-scrolling region, and one that can't take focus is unreachable by keyboard.
+
+## SSR (optional upgrade)
+
+`localStorage` is the universal default, but a server-rendered consumer (Blade, Astro SSR) can go one step further: store the choice in a cookie instead of — or alongside — `localStorage`, read it on the server, and emit `data-theme` on `<html>` directly in the response HTML. That skips even the inline boot snippet, since there's nothing left to apply client-side before paint. `tombo.js` itself only ever reads `localStorage`; the cookie round-trip is something the consuming app implements on its own.
+
+---
+
+<!-- Source: https://raw.githubusercontent.com/wadakatu/tombo/main/docs/print.md -->
+
+# Print
+
+TOMBO is named after the printer's registration mark, so it prints like one.
+
+**Hardening is unconditional.** Any TOMBO page prints cleanly: a `hotaru` page prints on white paper (not a black rectangle), the dark code panel repaints to ink-on-white so it stays readable, the theme toggle and copy buttons disappear, glow and motion are dropped, and instrument blocks (`.tombo-metric`, `.tombo-callout`, `.tombo-code`, figures, table rows) don't split across a page break. The page margin is a consistent `16mm`.
+
+**Real トンボ are opt-in.** Add `tombo-trim` to `<body>` and every printed sheet gets actual printer's marks in ink: a single 角トンボ (corner crop mark) at each of the four corners, and a センタートンボ (registration ring + crosshair) at each edge center.
+
+```html
+<body class="tombo-trim">
+  <!-- your page — print it (⌘P) to see the トンボ -->
+</body>
+```
+
+The marks are `--tombo-ink` — registration black, the all-plate alignment color — never shu (shu stays reserved for current-position lines). Browser print has no bleed area, so each corner gets a single crop mark at the printable-area corner — an honest homage rather than an imposition-accurate double mark with a fake bleed line.
+
+---

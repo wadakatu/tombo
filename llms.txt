@@ -1,0 +1,25 @@
+# TOMBO
+
+> A single-file, zero-dependency CSS design system with optional JavaScript.
+
+This is main-branch documentation and may include unreleased changes.
+For an existing app, use its pinned release, not an automatic upgrade.
+
+## Reference
+
+- [Agent guide](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/ai.md): Integration workflow, constraints and verification.
+- [Getting started](https://raw.githubusercontent.com/wadakatu/tombo/main/README.md): Vendoring, license and repository checks.
+- [Foundations](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/foundations.md): Colors, typography and themes.
+- [Layout](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/layout.md): Containers, spacing and overflow.
+- [Signatures](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/signatures.md): Brand marks and visual intensity.
+- [Forms](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/forms.md): Native controls and accessible validation.
+- [Topbar](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/topbar.md): Application header and navigation.
+- [Charts](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/charts.md): Figures and accessible data alternatives.
+- [Behavior](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/tombo-js.md): Optional theme and copy behavior.
+- [Print](https://raw.githubusercontent.com/wadakatu/tombo/main/docs/print.md): Print styles and trim marks.
+
+## Optional
+
+- [Full reference](https://raw.githubusercontent.com/wadakatu/tombo/main/llms-full.txt): Combined reference when link traversal is unavailable.
+- [Component catalog](https://raw.githubusercontent.com/wadakatu/tombo/main/examples/components.html): Live HTML examples and copyable markup.
+- [CSS source](https://raw.githubusercontent.com/wadakatu/tombo/main/tombo.css): Authoritative tokens and selectors.
