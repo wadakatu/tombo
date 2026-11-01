@@ -36,19 +36,38 @@ class AgentDocsTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Missing link target"):
             docs.render()
 
+    def test_repository_root_links_keep_repository_prefix(self):
+        self.source.write_text('[Example](/example.html?view=full#form)\n')
+        output = docs.render()["llms-full.txt"]
+        self.assertIn(f'[Example]({docs.BASE}example.html?view=full#form)', output)
+
+    def test_root_link_preserves_encoded_path(self):
+        (self.root / "docs/usage notes.md").write_text("# Notes\n")
+        self.assertEqual(
+            docs.resolve_link("docs/guide.md", "/docs/usage%20notes.md#notes"),
+            docs.BASE + "docs/usage%20notes.md#notes",
+        )
+
+    def test_missing_root_reference_fails(self):
+        with self.assertRaisesRegex(ValueError, "Missing link target"):
+            docs.resolve_link("docs/guide.md", "/missing.md")
+
     def test_missing_indexed_source_fails(self):
         self.source.unlink()
         with self.assertRaisesRegex(ValueError, "Missing indexed source"):
             docs.render()
 
     def test_outside_repository_fails(self):
-        with self.assertRaisesRegex(ValueError, "escapes repository"):
-            docs.resolve_link("docs/guide.md", "../../outside.md")
+        for link in ("../../outside.md", "/../outside.md", "/%2e%2e/outside.md"):
+            with self.subTest(link=link), self.assertRaisesRegex(ValueError, "escapes repository"):
+                docs.resolve_link("docs/guide.md", link)
 
     def test_external_and_directory_links(self):
         for link in ("https://example.com/guide", "mailto:team@example.com"):
             self.assertEqual(docs.resolve_link("docs/guide.md", link), link)
         self.assertEqual(docs.resolve_link("docs/guide.md", "../docs/"), docs.BASE + "docs/")
+        self.assertEqual(docs.resolve_link("docs/guide.md", "/docs/"), docs.BASE + "docs/")
+        self.assertEqual(docs.resolve_link("docs/guide.md", "//example.com/guide"), "https://example.com/guide")
 
 
 if __name__ == "__main__":

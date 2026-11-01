@@ -33,6 +33,9 @@ def resolve_link(path, destination):
             raise ValueError(f"Link escapes repository in {path}: {destination}")
         if not target.exists():
             raise ValueError(f"Missing link target in {path}: {destination}")
+        if parsed.path.startswith("/"):
+            # A local root is the repository, not raw.githubusercontent.com's root.
+            return urljoin(BASE, destination.lstrip("/"))
     return urljoin(BASE + path, destination)
 
 
