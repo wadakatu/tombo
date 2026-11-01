@@ -95,7 +95,12 @@ Each toggles `tombo` / `hotaru` live and can be opened directly in a browser (no
 
 ## Contrast gate
 
-40 token pairs (light + dark, on paper, surface, and supported raised combinations) are checked against WCAG 2.1 floors — 7:1 for primary body text, 4.5:1 for secondary text and interactive color, 3:1 for non-text (lines, status dots). Token values are parsed from `tombo.css` itself, so editing a token there is automatically re-checked.
+Supported token pairs (light + dark, on paper, surface, and supported raised combinations) are checked against WCAG 2.1 floors — 7:1 for primary body text, 4.5:1 for secondary text and interactive color, 3:1 for non-text (lines, status dots). Token values are parsed from `tombo.css` itself, so editing a token there is automatically re-checked.
+
+The [contrast checker](scripts/check_contrast.py) defines the tested pairs,
+including code focus and composited glow surfaces. This gate covers those
+combinations; consuming pages still need checks for their own backgrounds,
+overrides and content. It is not a full-page WCAG conformance test.
 
 ```bash
 python3 scripts/check_contrast.py       # runs the gate, exits 1 on any violation
