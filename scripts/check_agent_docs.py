@@ -36,6 +36,37 @@ class AgentDocsTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Missing link target"):
             docs.render()
 
+    def test_inline_code_is_preserved(self):
+        for sample in ('`[Example](missing.html)`', '`` `[Example](missing.html)` ``',
+                       '`example\n[Example](missing.html)`'):
+            with self.subTest(sample=sample):
+                self.source.write_text(sample + '\n\n[Real](../example.html#form)\n')
+                output = docs.render()["llms-full.txt"]
+                self.assertIn(sample, output)
+                self.assertIn(f'[Real]({docs.BASE}example.html#form)', output)
+
+    def test_fence_variants_preserve_code(self):
+        for sample in ('~~~markdown\n[Example](missing.html)\n~~~~\n',
+                       '````markdown\n```\n[Example](missing.html)\n```\n````\n',
+                       '   ```html\n[Example](missing.html)\n   ```\n'):
+            with self.subTest(sample=sample):
+                self.source.write_text(sample + '\n[Real](../example.html#form)\n')
+                output = docs.render()["llms-full.txt"]
+                self.assertIn(sample, output)
+                self.assertIn(f'[Real]({docs.BASE}example.html#form)', output)
+
+    def test_unclosed_fence_preserves_remaining_code(self):
+        sample = '~~~html\n[Example](missing.html)\n'
+        self.source.write_text(sample)
+        self.assertIn(sample.rstrip(), docs.render()["llms-full.txt"])
+
+    def test_unmatched_or_escaped_backtick_does_not_hide_links(self):
+        for prefix in ('` unmatched ', '\\` escaped '):
+            with self.subTest(prefix=prefix):
+                self.source.write_text(prefix + '[Example](missing.html)\n')
+                with self.assertRaisesRegex(ValueError, 'Missing link target'):
+                    docs.render()
+
     def test_repository_root_links_keep_repository_prefix(self):
         self.source.write_text('[Example](/example.html?view=full#form)\n')
         output = docs.render()["llms-full.txt"]
