@@ -387,7 +387,7 @@
   }
 
   /* theme control — author markup, revealed + wired by tombo.js. Current position = shu underline (S-05) */
-  .tombo-themes { display: flex; gap: var(--tombo-space-16); }
+  .tombo-themes:not([hidden]) { display: flex; gap: var(--tombo-space-16); }
   .tombo-themes button { background: none; border: 0; border-bottom: 2px solid transparent;
     padding: 0 0 2px; cursor: pointer; font: inherit; color: var(--tombo-ink-sub); }
   .tombo-themes button[aria-pressed="true"] { border-bottom-color: var(--tombo-shu); color: var(--tombo-ink); }

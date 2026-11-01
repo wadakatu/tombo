@@ -20,6 +20,7 @@ diff as well as this guide when selecting an update.
 | Code focus | Code controls use code-green for focus; the pre outline is inset to avoid clipping. | Tab to Copy and pre, check both themes, then scroll the code with arrow keys. |
 | Compact controls | Theme and copy controls have a minimum 24×24 CSS pixel target. | Check caption height, alignment and narrow layouts with customized labels. |
 | Status chips | Decorative dots retain a visible border in forced-colors mode and use the user's palette. | Keep an explicit status label; dot color alone must not convey the state. Check with your high-contrast settings. |
+| Theme visibility | `.tombo-themes[hidden]` remains hidden until optional JS reveals it. | Disable page scripts and check that inactive theme buttons are absent; enable JS and verify switching still works. |
 | Theme state | `getTheme()` reports this page's active selection even when storage fails. Invalid setting names are ignored. | Call `Tombo.setTheme()` instead of writing storage directly. Out-of-band storage writes are not a synchronization API; reload to read persisted changes. |
 | Copy failure | A rejected/unavailable clipboard call selects the code and focuses pre before announcing manual-copy instructions. | Check the fallback with your syntax highlighter and focus handling. Keep pre focusable. |
 | Skip link | New optional `.tombo-skip-link` pattern. | Adoption requires a first link and matching focusable main target; copying the CSS alone does not add it. See [layout](layout.md#skip-repeated-navigation). |
