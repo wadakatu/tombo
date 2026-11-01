@@ -1,18 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { readFileSync, readdirSync } from 'node:fs';
-
-// Preserve the site's family names and Martian Mono's width axis, but serve
-// locked font files locally so Google Fonts availability cannot change a run.
-const fonts = [
-  ['instrument-sans', 'index.css'],
-  ['m-plus-2', 'index.css'],
-  ['martian-mono', 'standard.css'],
-].map(([name, file]) => {
-  const path = `node_modules/@fontsource-variable/${name}`;
-  return readFileSync(`${path}/${file}`, 'utf8')
-    .replaceAll(" Variable'", "'")
-    .replaceAll('url(./files/', `url(http://127.0.0.1:4173/${path}/files/`);
-}).join('\n');
+import { readdirSync } from 'node:fs';
+import { useLocalFonts } from './local-fonts.js';
 
 const examples = readdirSync('examples').filter(name => name.endsWith('.html')).sort();
 
@@ -25,14 +13,7 @@ for (const example of examples) {
       page.on('response', response => {
         if (response.status() >= 400) failures.push(`${response.status()}: ${response.url()}`);
       });
-      await page.route('**/*', route => {
-        const url = new URL(route.request().url());
-        if (url.hostname === 'fonts.googleapis.com') {
-          return route.fulfill({ contentType: 'text/css', body: fonts });
-        }
-        if (url.origin === 'http://127.0.0.1:4173') return route.continue();
-        return route.abort();
-      });
+      await useLocalFonts(page);
       await page.addInitScript(value => localStorage.setItem('tombo-theme', value), theme);
       await page.goto(`/examples/${example}`);
       await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
