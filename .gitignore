@@ -3,3 +3,5 @@ node_modules/
 .superpowers/
 __pycache__/
 *.pyc
+playwright-report/
+test-results/
