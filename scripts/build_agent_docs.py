@@ -7,6 +7,7 @@ from urllib.parse import unquote, urljoin, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE = "https://raw.githubusercontent.com/wadakatu/tombo/main/"
+TREE_BASE = "https://github.com/wadakatu/tombo/tree/main/"
 SOURCES = [
     ("docs/ai.md", "Agent guide", "Integration workflow, constraints and verification"),
     ("docs/upgrading.md", "Upgrading", "Unreleased behavior changes, consumer verification and rollback"),
@@ -33,9 +34,12 @@ def resolve_link(path, destination):
             raise ValueError(f"Link escapes repository in {path}: {destination}")
         if not target.exists():
             raise ValueError(f"Missing link target in {path}: {destination}")
+        # Raw URLs serve files, not directory listings.
+        link_base = TREE_BASE if target.is_dir() else BASE
         if parsed.path.startswith("/"):
-            # A local root is the repository, not raw.githubusercontent.com's root.
-            return urljoin(BASE, destination.lstrip("/"))
+            # A local root is the repository, not the host's root.
+            return urljoin(link_base, destination.lstrip("/"))
+        return urljoin(link_base + path, destination)
     return urljoin(BASE + path, destination)
 
 
