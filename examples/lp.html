@@ -39,10 +39,10 @@
   .fcard p { font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); color: var(--tombo-ink-sub); }
   .fcard > .meta { margin-top: auto; --tombo-flow-space: 0; padding-top: var(--tombo-space-16); }
   .fcard .meta div { border-top: 1px solid var(--tombo-hairline); padding-top: var(--tombo-space-8); min-height: 55px; }
-  @media (max-width: 840px) {
+  @media (width <= 840px) {
     .hero .cols, .feat { grid-template-columns: 1fr; }
   }
-  @media (min-width: 841px) and (max-width: 1099px) {
+  @media (840px < width <= 1099px) {
     /* Martian Mono's wider letterforms need more room for .inst .row than
        the default 1.25fr/.75fr split + 56px gap can give in this band.
        Empirically, .inst .row wraps up to 824px viewport with this ratio/gap;
