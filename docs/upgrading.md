@@ -13,6 +13,8 @@ diff as well as this guide when selecting an update.
 
 | Area | Changed behavior | Check in the consuming app |
 | --- | --- | --- |
+| UI typography | Buttons, navigation tabs, TOC and tables explicitly use a 24px line-height. | Check wrapping, control heights and table row density, including column labels that now inherit 24px. |
+| Metric units | `.tombo-metric > .v small` uses the shared 12px/18px note pair in all volumes. | Remove copied app/LP unit-size overrides and inspect units beside values. |
 | Navigation | Empty or `false` aria-current no longer shows a current-position marker. | Use `page`, `step`, or another appropriate current value only on the current item. Remove empty-attribute workarounds. |
 | Row headers | `th[scope="row"]` preserves letter case and uses table text size and data-row borders. | Check row height and identifiers; inspect consumer overrides before removing them. Column headings retain their existing style. |
 | Code focus | Code controls use code-green for focus; the pre outline is inset to avoid clipping. | Tab to Copy and pre, check both themes, then scroll the code with arrow keys. |

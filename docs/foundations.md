@@ -14,6 +14,22 @@ Three voices, selected zero-base with the reader first (see `superpowers/specs/2
 
 A 10-step type scale (`--tombo-text-*` / `--tombo-lh-*`, body 15px/30px) replaces all ad-hoc sizes — components may only reference scale tokens.
 
+Use the size and line-height tokens as a pair. Buttons, navigation tabs, the
+table of contents and data tables explicitly use the UI line-height (24px),
+rather than inheriting body text's unitless line-height. Table column labels
+keep their smaller label font size within that shared 24px line box.
+
+Units inside `.tombo-metric > .v small` use the note pair (12px/18px), weight
+400 and `--tombo-ink-faint` in every volume. Use the same markup in an app or
+LP; no page-specific size override is needed:
+
+```html
+<div class="tombo-metric">
+  <div class="k">COVERAGE</div>
+  <div class="v">96.2<small>%</small></div>
+</div>
+```
+
 ## Themes
 
 TOMBO ships two flavors, structured like catppuccin's: one umbrella system name, two `data-theme` values.

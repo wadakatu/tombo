@@ -60,6 +60,14 @@ v0.1 のタイポグラフィは「書体の選定」で止まっており、組
 
 実装形: 各段は `--tombo-text-<name>`(font-size)と `--tombo-lh-<name>`(line-height)の対トークン(例 `--tombo-text-body: 15px; --tombo-lh-body: 30px;`)。display のみ lh は無単位 1.1。行送りは 6px の倍数に統一し、余白は従来通り 4/8/12/24 の系で方眼と噛み合わせる。
 
+### 2026-11-01 追補 — UI行高と計器の単位
+
+- `.tombo-btn` / `.tombo-tabs > *` / `.tombo-toc` / `.tombo-table` は
+  `--tombo-lh-ui`（24px）を明示する。bodyからのunitless `2`の継承に依存しない。
+- 表の列見出しはlabel段の文字サイズを維持し、行高は表の24pxを継承する。
+- 計器の単位 `.tombo-metric > .v small` は全volumeでnote段（12px/18px）、
+  weight 400、`--tombo-ink-faint`に統一する。app/LP個別の単位サイズ指定は不要。
+
 ## 4. 和欧混植の規則
 
 1. **和文に負の字間を当てない**。-.015em は Instrument Sans の欧文題字専用。和文見出し(M PLUS 2 700)は字間 0

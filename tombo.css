@@ -289,7 +289,7 @@
 }
 
 @layer tombo.components {
-  .tombo-btn { display: inline-block; padding: var(--tombo-space-12) var(--tombo-space-24); font-size: var(--tombo-text-ui); font-family: var(--tombo-font-body);
+  .tombo-btn { display: inline-block; padding: var(--tombo-space-12) var(--tombo-space-24); font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); font-family: var(--tombo-font-body);
     border: 1px solid transparent; cursor: pointer; background: none;
     text-decoration: none; /* a.tombo-btn: cancel the base link underline (--ghost re-declares its own) */
     transition: background var(--tombo-dur) var(--tombo-ease), color var(--tombo-dur) var(--tombo-ease); }
@@ -304,11 +304,11 @@
   .tombo-btn--secondary:disabled:hover { background: none; }
 
   .tombo-tabs { display: flex; gap: var(--tombo-space-24); border-bottom: 1px solid var(--tombo-hairline); }
-  .tombo-tabs > * { padding: var(--tombo-space-8) 2px var(--tombo-space-8); color: var(--tombo-ink-sub); text-decoration: none; position: relative; font-size: var(--tombo-text-ui); }
+  .tombo-tabs > * { padding: var(--tombo-space-8) 2px var(--tombo-space-8); color: var(--tombo-ink-sub); text-decoration: none; position: relative; font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); }
   .tombo-tabs > [aria-current]:not(:where([aria-current="false" i], [aria-current=""])) { color: var(--tombo-ink); font-weight: 500; }
   .tombo-tabs > [aria-current]:not(:where([aria-current="false" i], [aria-current=""]))::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 100%; border-bottom: 2px solid var(--tombo-shu); }
 
-  .tombo-toc { font-size: var(--tombo-text-ui); }
+  .tombo-toc { font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); }
   .tombo-toc a { display: block; color: var(--tombo-ink-sub); text-decoration: none; padding: var(--tombo-space-8) 0 var(--tombo-space-8) var(--tombo-space-24); position: relative; }
   .tombo-toc a[aria-current]:not(:where([aria-current="false" i], [aria-current=""])) { color: var(--tombo-ink); font-weight: 500; }
   .tombo-toc a[aria-current]:not(:where([aria-current="false" i], [aria-current=""]))::before { content: ""; position: absolute; left: 0; top: 50%; width: 12px; border-top: 2px solid var(--tombo-shu); }
@@ -330,7 +330,7 @@
   .tombo-callout > b:first-child { font-family: var(--tombo-font-mono); font-weight: 500; font-size: var(--tombo-text-label);
     letter-spacing: .14em; color: var(--tombo-callout-label); margin-right: var(--tombo-space-8); text-transform: uppercase; }
 
-  .tombo-table { width: 100%; border-collapse: collapse; font-size: var(--tombo-text-ui); }
+  .tombo-table { width: 100%; border-collapse: collapse; font-size: var(--tombo-text-ui); line-height: var(--tombo-lh-ui); }
   .tombo-table th { font-family: var(--tombo-font-mono); font-size: var(--tombo-text-label); letter-spacing: .12em;
     text-transform: uppercase; color: var(--tombo-ink-sub); font-weight: 500; text-align: left;
     padding: var(--tombo-space-12) var(--tombo-space-16); border-bottom: 1.5px solid var(--tombo-ink); }
@@ -361,6 +361,8 @@
   .tombo-metric > .k { font-family: var(--tombo-font-mono); font-size: var(--tombo-text-label); font-weight: 500; letter-spacing: .14em;
     text-transform: uppercase; color: var(--tombo-ink-sub); }
   .tombo-metric > .v { font-family: var(--tombo-font-mono); font-size: var(--tombo-text-metric); line-height: var(--tombo-lh-metric); font-weight: 600; margin: var(--tombo-space-8) 0 var(--tombo-space-12); }
+
+  .tombo-metric > .v small { font-size: var(--tombo-text-note); line-height: var(--tombo-lh-note); color: var(--tombo-ink-faint); font-weight: 400; }
 
   .tombo-footer { border-top: 1px solid var(--tombo-hairline); padding: var(--tombo-space-24) 0 var(--tombo-space-48);
     font-family: var(--tombo-font-mono); font-size: var(--tombo-text-label); font-weight: 400; letter-spacing: .12em; color: var(--tombo-ink-faint); line-height: 1.9; }

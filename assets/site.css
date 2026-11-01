@@ -20,7 +20,6 @@
 
 /* hero instrument */
 .inst .tombo-fig { position: absolute; top: -20px; left: 0; }
-.inst .v small { font-size: var(--tombo-text-ui); color: var(--tombo-ink-faint); font-weight: 400; }
 .inst .rows { margin-top: var(--tombo-space-16); border-top: 1px solid var(--tombo-hairline); }
 .inst .row { display: flex; justify-content: space-between; gap: var(--tombo-space-16); font-family: var(--tombo-font-mono);
   font-size: var(--tombo-text-label); padding: var(--tombo-space-8) 0; border-bottom: 1px solid var(--tombo-hairline); color: var(--tombo-ink-sub); }
