@@ -136,7 +136,10 @@ Playwright image and Linux/amd64 architecture to compare full-page screenshots
 of every `examples/*.html` page in both themes at desktop 1280×900 and mobile
 390×844 (touch enabled): 16 comparisons in total. Both projects also reject
 horizontal page overflow; wide tables and code must scroll within their own
-wrappers. The regular
+wrappers. The same job tests theme persistence, keyboard activation and clipboard
+success/fallback behavior on the component catalog at both widths. Clipboard API
+outcomes are simulated; OS clipboard permissions and screen-reader output still
+need manual verification. The regular
 `npm run check` remains browser-free. On failure, CI uploads the HTML report,
 expected/actual/diff images and traces as the `visual-diff` artifact.
 
