@@ -39,6 +39,60 @@ def resolve_link(path, destination):
     return urljoin(BASE + path, destination)
 
 
+def rewrite_prose(path, text):
+    """Rewrite inline links outside code spans, preserving source formatting."""
+    def links(value):
+        return re.sub(r"(?<=\]\()([^\s)]+)(?=\))",
+                      lambda m: resolve_link(path, m[1]), value)
+
+    output = []
+    # Code spans may contain line breaks, but cannot cross paragraph boundaries.
+    for paragraph in re.split(r"(\n[ \t]*\n)", text):
+        ticks = list(re.finditer(r"`+", paragraph))
+        cursor = 0
+        i = 0
+        while i < len(ticks):
+            opening = ticks[i]
+            prefix = paragraph[:opening.start()]
+            escapes = len(prefix) - len(prefix.rstrip("\\"))
+            if escapes % 2:
+                i += 1
+                continue
+            closing = next((j for j in range(i + 1, len(ticks))
+                            if len(ticks[j][0]) == len(opening[0])), None)
+            if closing is None:
+                i += 1
+                continue
+            output.append(links(paragraph[cursor:opening.start()]))
+            cursor = ticks[closing].end()
+            output.append(paragraph[opening.start():cursor])
+            i = closing + 1
+        output.append(links(paragraph[cursor:]))
+    return "".join(output)
+
+
+def rewrite_links(path, text):
+    """Handle the inline links and top-level code fences used by our docs."""
+    output, prose = [], []
+    fence = None
+    for line in text.splitlines(keepends=True):
+        marker = re.match(r"^ {0,3}(`{3,}|~{3,})([^\r\n]*)", line)
+        if fence:
+            output.append(line)
+            if (marker and marker[1][0] == fence[0] and len(marker[1]) >= len(fence)
+                    and not marker[2].strip()):
+                fence = None
+        elif marker and not (marker[1][0] == "`" and "`" in marker[2]):
+            output.append(rewrite_prose(path, "".join(prose)))
+            prose = []
+            fence = marker[1]
+            output.append(line)
+        else:
+            prose.append(line)
+    output.append(rewrite_prose(path, "".join(prose)))
+    return "".join(output)
+
+
 def render():
     index = ["# TOMBO", "", "> A single-file, zero-dependency CSS design system with optional JavaScript.", "",
              "This is main-branch documentation and may include unreleased changes.",
@@ -52,12 +106,7 @@ def render():
             raise ValueError(f"Missing indexed source: {path}")
         text = source.read_text(encoding="utf-8")
         index.append(f"- [{title}]({BASE}{path}): {description}.")
-        # Rewrite ordinary Markdown link destinations, leaving code samples intact.
-        parts = re.split(r"(```[\s\S]*?```)", text)
-        for i in range(0, len(parts), 2):
-            parts[i] = re.sub(r"(?<=\]\()([^\s)]+)(?=\))",
-                              lambda m: resolve_link(path, m[1]), parts[i])
-        full.extend([f"<!-- Source: {BASE}{path} -->", "", "".join(parts).rstrip(), "", "---", ""])
+        full.extend([f"<!-- Source: {BASE}{path} -->", "", rewrite_links(path, text).rstrip(), "", "---", ""])
     index.extend(["", "## Optional", "",
                   f"- [Full reference]({BASE}llms-full.txt): Combined reference when link traversal is unavailable.",
                   f"- [Component catalog]({BASE}examples/components.html): Live HTML examples and copyable markup.",
