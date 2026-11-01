@@ -6,9 +6,16 @@
   "description": "Dev/CI tooling for the TOMBO design system (not a published package — vendor tombo.css).",
   "scripts": {
     "check": "bash scripts/check.sh",
-    "lint:css": "stylelint tombo.css"
+    "lint:css": "stylelint tombo.css",
+    "test:visual": "bash scripts/test_visual.sh",
+    "test:visual:update": "bash scripts/test_visual.sh --update-snapshots",
+    "test:visual:run": "playwright test"
   },
   "devDependencies": {
+    "@fontsource-variable/instrument-sans": "5.3.0",
+    "@fontsource-variable/m-plus-2": "5.3.1",
+    "@fontsource-variable/martian-mono": "5.3.0",
+    "@playwright/test": "1.64.1",
     "stylelint": "^17.14.1",
     "stylelint-plugin-use-baseline": "^1.4.4"
   }
