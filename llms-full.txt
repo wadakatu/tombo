@@ -136,6 +136,8 @@ diff as well as this guide when selecting an update.
 
 | Area | Changed behavior | Check in the consuming app |
 | --- | --- | --- |
+| UI typography | Buttons, navigation tabs, TOC and tables explicitly use a 24px line-height. | Check wrapping, control heights and table row density, including column labels that now inherit 24px. |
+| Metric units | `.tombo-metric > .v small` uses the shared 12px/18px note pair in all volumes. | Remove copied app/LP unit-size overrides and inspect units beside values. |
 | Navigation | Empty or `false` aria-current no longer shows a current-position marker. | Use `page`, `step`, or another appropriate current value only on the current item. Remove empty-attribute workarounds. |
 | Row headers | `th[scope="row"]` preserves letter case and uses table text size and data-row borders. | Check row height and identifiers; inspect consumer overrides before removing them. Column headings retain their existing style. |
 | Code focus | Code controls use code-green for focus; the pre outline is inset to avoid clipping. | Tab to Copy and pre, check both themes, then scroll the code with arrow keys. |
@@ -501,6 +503,22 @@ Three voices, selected zero-base with the reader first (see `superpowers/specs/2
 | INSTRUMENT | Martian Mono | labels, numbers, indices, code (code condenses to width 87.5%) |
 
 A 10-step type scale (`--tombo-text-*` / `--tombo-lh-*`, body 15px/30px) replaces all ad-hoc sizes — components may only reference scale tokens.
+
+Use the size and line-height tokens as a pair. Buttons, navigation tabs, the
+table of contents and data tables explicitly use the UI line-height (24px),
+rather than inheriting body text's unitless line-height. Table column labels
+keep their smaller label font size within that shared 24px line box.
+
+Units inside `.tombo-metric > .v small` use the note pair (12px/18px), weight
+400 and `--tombo-ink-faint` in every volume. Use the same markup in an app or
+LP; no page-specific size override is needed:
+
+```html
+<div class="tombo-metric">
+  <div class="k">COVERAGE</div>
+  <div class="v">96.2<small>%</small></div>
+</div>
+```
 
 ## Themes
 
