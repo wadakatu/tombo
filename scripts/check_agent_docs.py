@@ -6,6 +6,8 @@ from pathlib import Path
 from unittest.mock import patch
 import build_agent_docs as docs
 
+TREE_BASE = "https://github.com/wadakatu/tombo/tree/main/"
+
 
 class AgentDocsTest(unittest.TestCase):
     def setUp(self):
@@ -96,9 +98,28 @@ class AgentDocsTest(unittest.TestCase):
     def test_external_and_directory_links(self):
         for link in ("https://example.com/guide", "mailto:team@example.com"):
             self.assertEqual(docs.resolve_link("docs/guide.md", link), link)
-        self.assertEqual(docs.resolve_link("docs/guide.md", "../docs/"), docs.BASE + "docs/")
-        self.assertEqual(docs.resolve_link("docs/guide.md", "/docs/"), docs.BASE + "docs/")
+        self.assertEqual(docs.resolve_link("docs/guide.md", "../docs/"), TREE_BASE + "docs/")
+        self.assertEqual(docs.resolve_link("docs/guide.md", "/docs/"), TREE_BASE + "docs/")
         self.assertEqual(docs.resolve_link("docs/guide.md", "//example.com/guide"), "https://example.com/guide")
+
+    def test_directory_links_keep_suffixes_and_encoded_paths(self):
+        (self.root / "docs/usage notes").mkdir()
+        for link in ("usage%20notes?view=all#section", "/docs/usage%20notes?view=all#section"):
+            with self.subTest(link=link):
+                self.assertEqual(
+                    docs.resolve_link("docs/guide.md", link),
+                    TREE_BASE + "docs/usage%20notes?view=all#section",
+                )
+
+    def test_directory_link_is_exported_as_a_tree_url(self):
+        self.source.write_text('[History](../docs/)\n')
+        output = docs.render()["llms-full.txt"]
+        self.assertIn(f'[History]({TREE_BASE}docs/)', output)
+        self.assertNotIn(f'[History]({docs.BASE}docs/)', output)
+
+    def test_missing_directory_fails(self):
+        with self.assertRaisesRegex(ValueError, "Missing link target"):
+            docs.resolve_link("docs/guide.md", "missing/")
 
 
 if __name__ == "__main__":
