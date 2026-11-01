@@ -19,7 +19,6 @@ export default defineConfig({
   },
   use: {
     browserName: 'chromium',
-    viewport: { width: 1280, height: 900 },
     deviceScaleFactor: 1,
     locale: 'en-US',
     timezoneId: 'UTC',
@@ -27,6 +26,14 @@ export default defineConfig({
     baseURL: 'http://127.0.0.1:4173',
     trace: 'retain-on-failure',
   },
+  projects: [
+    { name: 'desktop', use: { viewport: { width: 1280, height: 900 } } },
+    {
+      name: 'mobile',
+      snapshotPathTemplate: '{testDir}/snapshots/mobile/{arg}{ext}',
+      use: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true },
+    },
+  ],
   webServer: {
     command: 'python3 -m http.server 4173 --bind 127.0.0.1',
     url: 'http://127.0.0.1:4173/examples/components.html',

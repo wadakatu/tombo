@@ -133,7 +133,10 @@ Quick start pins continue to point to the published release.
 
 Run `npm run test:visual` (Docker required). A separate CI job uses the same
 Playwright image and Linux/amd64 architecture to compare full-page screenshots
-of every `examples/*.html` page in both themes at 1280×900. The regular
+of every `examples/*.html` page in both themes at desktop 1280×900 and mobile
+390×844 (touch enabled): 16 comparisons in total. Both projects also reject
+horizontal page overflow; wide tables and code must scroll within their own
+wrappers. The regular
 `npm run check` remains browser-free. On failure, CI uploads the HTML report,
 expected/actual/diff images and traces as the `visual-diff` artifact.
 
@@ -149,8 +152,8 @@ requests fail. This stabilizes comparisons without changing the shipped pages.
 Playwright and font upgrades require a reviewed baseline update. The container
 version follows the exact `@playwright/test` version in package.json.
 
-These are desktop Chromium regressions, not a substitute for mobile layouts,
-interaction, accessibility or other-browser checks. Rendering is environment
+These are two fixed Chromium viewports, not a substitute for intermediate
+widths, real-device interaction, accessibility or other-browser checks. Rendering is environment
 dependent; use the wrapper commands above rather than native screenshot runs.
 See [Playwright visual comparisons](https://playwright.dev/docs/test-snapshots)
 and [the official Docker environment](https://playwright.dev/docs/docker).
