@@ -47,6 +47,12 @@ for (const example of examples) {
           if (!loaded.length) throw new Error(`Missing font: ${font}`);
         }
       });
+      const width = await page.evaluate(() => ({
+        viewport: window.innerWidth,
+        content: document.documentElement.scrollWidth,
+      }));
+      expect(width.viewport, 'layout viewport must match the configured width').toBe(page.viewportSize().width);
+      expect(width.content, 'horizontal scrolling belongs inside overflow wrappers').toBeLessThanOrEqual(width.viewport);
       await expect(page).toHaveScreenshot(`${example.replace('.html', '')}-${theme}.png`, { fullPage: true });
       expect(failures).toEqual([]);
     });
