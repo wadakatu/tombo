@@ -139,7 +139,9 @@ horizontal page overflow; wide tables and code must scroll within their own
 wrappers. The same job tests theme persistence, keyboard activation and clipboard
 success/fallback behavior on the component catalog at both widths. Clipboard API
 outcomes are simulated; OS clipboard permissions and screen-reader output still
-need manual verification. The regular
+need manual verification. With page JavaScript disabled, the job also checks all
+examples for OS theme following and hidden enhancement controls, skip links on
+pages with repeated navigation, and native form operation in the catalog. The regular
 `npm run check` remains browser-free. On failure, CI uploads the HTML report,
 expected/actual/diff images and traces as the `visual-diff` artifact.
 
