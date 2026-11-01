@@ -141,7 +141,10 @@ success/fallback behavior on the component catalog at both widths. Clipboard API
 outcomes are simulated; OS clipboard permissions and screen-reader output still
 need manual verification. With page JavaScript disabled, the job also checks all
 examples for OS theme following and hidden enhancement controls, skip links on
-pages with repeated navigation, and native form operation in the catalog. The regular
+pages with repeated navigation, and native form operation in the catalog. Print-media
+checks cover readable code, hidden controls, opt-in trim marks and restoration to
+screen styles in both themes. These do not validate PDF pagination or physical
+printer output. The regular
 `npm run check` remains browser-free. On failure, CI uploads the HTML report,
 expected/actual/diff images and traces as the `visual-diff` artifact.
 
